@@ -1,66 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#F6F6F6"
     android:gravity="center_horizontal">
 
-    <!-- Encabezado -->
+    <!-- Menú hamburguesa -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:gravity="center_vertical|end"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="35dp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:src="@drawable/menuhamburguesa"
+            android:layout_marginEnd="10dp" />
+    </LinearLayout>
+
+    <!-- Hola -->
     <TextView
         android:id="@+id/tvBienvenida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¡Hola, usuario!"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold"
+        android:fontFamily=""
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:textColor="#000000"/>
 
-    <!-- Botones principales  Los íconos (ic_home, ic_pago, etc.) los tienes que agregar en la carpeta res/drawable/.-->
+
+    <!-- Espaciador para empujar la barra al fondo -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+    </View>
 
 
-    <Button
+
+    <!-- Botón Registrar Clientes -->
+
+    <LinearLayout
         android:id="@+id/btnRegistrarCliente"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_margin="10dp"
-        android:drawableLeft="@drawable/ic_registrar"  <!-- tu ícono -->
-    android:text="Registrar Clientes"
-    android:backgroundTint="#B39DDB"
-    android:textColor="#FFFFFF"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:background="@drawable/bg_button_home"
+        android:clickable="true"
+        android:focusable="true">
 
-    <Button
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/nuevo"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrar Clientes"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+    <!-- Botón Listado Clientes -->
+    <LinearLayout
         android:id="@+id/btnListadoClientes"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_margin="10dp"
-        android:drawableLeft="@drawable/ic_clientes" <!-- tu ícono -->
-    android:text="Listado de Clientes"
-    android:backgroundTint="#B39DDB"
-    android:textColor="#FFFFFF"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:background="@drawable/bg_button_home"
+        android:clickable="true"
+        android:focusable="true">
 
-    <Button
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/listadoclientes"
+            android:layout_marginEnd="10dp"
+            android:background="#B39DDB"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Listado de Clientes"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+    <!-- Botón Registro Pago -->
+    <LinearLayout
         android:id="@+id/btnRegistroPago"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_margin="10dp"
-        android:drawableLeft="@drawable/ic_pago" <!-- tu ícono -->
-    android:text="Registro Pago"
-    android:backgroundTint="#B39DDB"
-    android:textColor="#FFFFFF"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:background="@drawable/bg_button_home"
+        android:clickable="true"
+        android:focusable="true">
 
-    <Button
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/registropago"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registro Pago"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+    <!-- Botón Socios Morosos -->
+    <LinearLayout
         android:id="@+id/btnSociosMorosos"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_margin="10dp"
-        android:drawableLeft="@drawable/ic_morosos" <!-- tu ícono -->
-    android:text="Lista de Socios Morosos"
-    android:backgroundTint="#B39DDB"
-    android:textColor="#FFFFFF"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:background="@drawable/bg_button_home"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/morosos"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lista de Socios Morosos"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
 
     <!-- Espaciador para empujar la barra al fondo -->
     <View
@@ -76,6 +167,7 @@
         android:gravity="center"
         android:background="#9575CD">
 
+        <!-- Inicio blanco -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -85,15 +177,16 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_home"/>
+                android:src="@drawable/inicioblanco"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="INICIO"
-                android:textColor="#FFFFFF"
+                android:textColor="#F1F1F1"
                 android:textSize="12sp"/>
         </LinearLayout>
 
+        <!-- Nuevo -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -103,15 +196,16 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_nuevo"/>
+                android:src="@drawable/nuevo"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NUEVO"
-                android:textColor="#FFFFFF"
+                android:textColor="#212121"
                 android:textSize="12sp"/>
         </LinearLayout>
 
+        <!-- Clientes -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -121,15 +215,16 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_clientes"/>
+                android:src="@drawable/listadoclientes"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CLIENTES"
-                android:textColor="#FFFFFF"
+                android:textColor="#212121"
                 android:textSize="12sp"/>
         </LinearLayout>
 
+        <!-- Pagos -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -139,15 +234,16 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_pagos"/>
+                android:src="@drawable/registropago"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PAGOS"
-                android:textColor="#FFFFFF"
+                android:textColor="#212121"
                 android:textSize="12sp"/>
         </LinearLayout>
 
+        <!-- Morosos -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -157,12 +253,12 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_morosos"/>
+                android:src="@drawable/morosos"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MOROSOS"
-                android:textColor="#FFFFFF"
+                android:textColor="#212121"
                 android:textSize="12sp"/>
         </LinearLayout>
 
