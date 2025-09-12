@@ -8,18 +8,12 @@
 
     <!-- Menú hamburguesa -->
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:gravity="center_vertical|end"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="35dp"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:src=""
-            android:layout_marginEnd="10dp" />
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="40dp">
     </LinearLayout>
 
     <!-- Título -->
@@ -41,114 +35,101 @@
     </View>
 
     <!-- VER INPUTS -->
-
+    <!-- Cliente -->
     <LinearLayout
-        android:id="@+id/btnRegistrarCliente"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:background=""
-        android:clickable="true"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src=""
-            android:layout_marginEnd="10dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="#D1CBD6">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registrar Clientes"
-            android:textSize="16sp"
-            android:textColor="#FFFFFF"/>
+            android:paddingStart="10dp"
+            android:text="Cliente"
+            android:textColor="#9882F7"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Escribir cliente"
+            android:backgroundTint="@android:color/transparent"
+            android:padding="10dp"
+            android:inputType="textPersonName"/>
     </LinearLayout>
 
-    <!-- Botón Listado Clientes -->
+    <!-- Cuota pendiente -->
     <LinearLayout
-        android:id="@+id/btnListadoClientes"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:background=""
-        android:clickable="true"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src=""
-            android:layout_marginEnd="10dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="#D1CBD6">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Listado de Clientes"
-            android:textSize="16sp"
-            android:textColor="#FFFFFF"/>
+            android:paddingStart="10dp"
+            android:text="Cuota pendiente"
+            android:textColor="#9882F7"
+            android:textSize="14sp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
     </LinearLayout>
 
-    <!-- Botón Registro Pago -->
+    <!-- Monto -->
     <LinearLayout
-        android:id="@+id/btnRegistroPago"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:background=""
-        android:clickable="true"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src=""
-            android:layout_marginEnd="10dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="#D1CBD6">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registro Pago"
-            android:textSize="16sp"
-            android:textColor="#FFFFFF"/>
+            android:paddingStart="10dp"
+            android:text="Monto $"
+            android:textColor="#9882F7"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="0.00"
+            android:backgroundTint="@android:color/transparent"
+            android:padding="10dp"
+            android:inputType="numberDecimal"/>
     </LinearLayout>
 
-    <!-- Botón Socios Morosos -->
+    <!-- Forma de Pago -->
     <LinearLayout
-        android:id="@+id/btnSociosMorosos"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:background=""
-        android:clickable="true"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src=""
-            android:layout_marginEnd="10dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="35dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="#D1CBD6">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lista de Socios Morosos"
-            android:textSize="16sp"
-            android:textColor="#FFFFFF"/>
-    </LinearLayout>
+            android:paddingStart="10dp"
+            android:text="Forma de Pago"
+            android:textColor="#9882F7"
+            android:textSize="14sp"/>
 
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+    </LinearLayout>
 
     <!-- Botón Aceptar y Limpiar -->
     <LinearLayout
