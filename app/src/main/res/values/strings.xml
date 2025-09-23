@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Club Deportivo Movile</string>
+
+    <string-array name="opciones_pago">
+        <item>Seleccionar...</item>
+        <item>Efectivo</item>
+        <item>Tarjeta de Crédito</item>
+    </string-array>
 </resources>

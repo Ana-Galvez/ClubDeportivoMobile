@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F6F6"
+    android:gravity="center_horizontal">
+
+    <!-- Menú hamburguesa -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="40dp">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/img_flecha_izq"
+            android:layout_gravity="start"/>
+
+        <!-- Para expandir la imagen a la derecha-->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/img_menu_hamburguesa"
+            android:layout_gravity="end"/>
+
+    </LinearLayout>
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvBienvenida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registro de Pago Socio"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="#212121"/>
+
+
+    <!-- Espaciador para empujar la barra al fondo -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+    </View>
+
+    <!-- VER INPUTS -->
+    <!-- Cliente -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="#D1CBD6">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="Cliente"
+            android:textColor="#9882F7"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Escribir cliente"
+            android:backgroundTint="@android:color/transparent"
+            android:padding="10dp"
+            android:inputType="textPersonName"/>
+    </LinearLayout>
+
+    <!-- Cuota pendiente -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="#D1CBD6">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="Cuota pendiente"
+            android:textColor="#9882F7"
+            android:textSize="14sp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+    <!-- Monto -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="#D1CBD6">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="Monto $"
+            android:textColor="#9882F7"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="0.00"
+            android:backgroundTint="@android:color/transparent"
+            android:padding="10dp"
+            android:inputType="numberDecimal"/>
+    </LinearLayout>
+
+    <!-- Forma de Pago -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="35dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="#D1CBD6">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="Forma de Pago"
+            android:textColor="#9882F7"
+            android:textSize="14sp"/>
+
+        <Spinner
+            android:id="@+id/spinner_pago"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+    <!-- Botón Aceptar y Limpiar -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        >
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:text="Aceptar"
+            android:textSize="20dp"
+            android:background="@drawable/botonesredondosregistropagoaceptar"
+            android:layout_marginBottom="10dp">
+        </Button>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="Limpiar"
+            android:textSize="20dp"
+            android:textColor="#5C46BB"
+            android:background="@drawable/botonlimpiar" />
+
+    </LinearLayout>
+
+    <!-- Espaciador para empujar la barra al fondo -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- Barra de navegación inferior -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#9575CD">
+
+        <!-- Inicio blanco -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_inicio_negro"/>
+        </LinearLayout>
+
+        <!-- Nuevo -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_nuevo_negro"/>
+        </LinearLayout>
+
+        <!-- Clientes -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_clientes_negro"/>
+        </LinearLayout>
+
+        <!-- Pagos -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_pagos_blanco"/>
+        </LinearLayout>
+
+        <!-- Morosos -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_morosos_negro"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
