@@ -179,15 +179,9 @@
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/inicionegro"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="INICIO"
-                android:textColor="#212121"
-                android:textSize="12sp"/>
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_inicio_negro"/>
         </LinearLayout>
 
         <!-- Nuevo -->
@@ -198,15 +192,9 @@
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/nuevo"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="NUEVO"
-                android:textColor="#212121"
-                android:textSize="12sp"/>
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_nuevo_negro"/>
         </LinearLayout>
 
         <!-- Clientes -->
@@ -217,15 +205,9 @@
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/listadoclientes"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CLIENTES"
-                android:textColor="#212121"
-                android:textSize="12sp"/>
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_clientes_negro"/>
         </LinearLayout>
 
         <!-- Pagos -->
@@ -236,15 +218,9 @@
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/pagoblanco"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="PAGOS"
-                android:textColor="#F1F1F1"
-                android:textSize="12sp"/>
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_pagos_blanco"/>
         </LinearLayout>
 
         <!-- Morosos -->
@@ -255,15 +231,9 @@
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/morosos"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MOROSOS"
-                android:textColor="#212121"
-                android:textSize="12sp"/>
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_morosos_negro"/>
         </LinearLayout>
 
     </LinearLayout>
