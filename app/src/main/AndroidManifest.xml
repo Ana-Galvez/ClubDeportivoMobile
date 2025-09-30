@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDeportivoMovile">
         <activity
+            android:name=".BarraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditarClienteActivity"
+            android:exported="false" />
+        <activity
             android:name=".cerrarsesion"
             android:exported="false" />
         <activity
