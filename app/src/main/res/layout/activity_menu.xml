@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_container"
+    android:layout_width="245dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#212121"
+    android:paddingTop="40dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp">
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/logo"
+        android:layout_gravity="center"
+        android:contentDescription="Logo" />
+
+    <!-- Nombre completo -->
+    <TextView
+        android:id="@+id/nombreCompleto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre Completo"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center" />
+
+    <!-- Rol -->
+    <TextView
+        android:id="@+id/rol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Administrador"
+        android:textColor="#BDBDBD"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center" />
+
+    <!-- Línea separadora -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FFFFFF"
+        android:alpha="0.4"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Opciones del menú -->
+    <TextView
+        android:id="@+id/txtInicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inicio"
+        android:textColor="#FFFFFF"
+        android:drawableLeft="@drawable/home_menu"
+        android:drawablePadding="12dp"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/txtAppFisico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="App físico"
+        android:textColor="#FFFFFF"
+        android:drawableLeft="@drawable/aptofisico_menu"
+        android:drawablePadding="12dp"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/txtAyuda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ayuda"
+        android:textColor="#FFFFFF"
+        android:drawableLeft="@drawable/help_menu"
+        android:drawablePadding="12dp"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/txtConfiguracion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Configuración"
+        android:textColor="#FFFFFF"
+        android:drawableLeft="@drawable/setting_menu"
+        android:drawablePadding="12dp"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"/>
+
+    <!-- Empuja el item hacia abajo -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Cerrar sesión -->
+    <TextView
+        android:id="@+id/txtCerrarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cerrar sesión"
+        android:textColor="#f1f1f1"
+        android:drawableLeft="@drawable/signout"
+        android:drawablePadding="12dp"
+        android:padding="12dp"
+        android:textSize="16sp" />
+
+</LinearLayout>
+
