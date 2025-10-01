@@ -12,8 +12,7 @@ class EditarClienteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_editar_cliente)
 
         // Si querés manejar el botón atrás
-        findViewById<ImageView>(R.id.ivBack).setOnClickListener {
-            finish()
+        //findViewById<ImageView>(R.id.ivBack).setOnClickListener {
+            //finish()
         }
     }
-}

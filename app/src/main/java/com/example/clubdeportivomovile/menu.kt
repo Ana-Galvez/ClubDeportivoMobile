@@ -40,19 +40,23 @@ class menu : AppCompatActivity() {
 
     private fun mostrarDialogoSalir() {
         val dialog = Dialog(this)
-        dialog.setContentView(R.layout.activity_cerrarsesion) // tu modal custom
+        dialog.setContentView(R.layout.activity_cerrarsesion)
         dialog.setCancelable(false)
 
-        val btnSi = dialog.findViewById<TextView>(R.id.btn_si)
-        val btnNo = dialog.findViewById<TextView>(R.id.btn_no)
+        val btnSi = dialog.findViewById<android.widget.Button>(R.id.btn_si)
+        val btnNo = dialog.findViewById<android.widget.Button>(R.id.btn_no)
 
         btnSi.setOnClickListener {
             dialog.dismiss()
-            finishAffinity() // Cierra toda la app
+            finishAffinity()
+
+            // Para que vaya a la pantalla de Login después de cerrar,
+            // val intentLogin = Intent(this, LoginActivity::class.java)
+            // startActivity(intentLogin)
         }
 
         btnNo.setOnClickListener {
-            dialog.dismiss() // Solo cierra el modal
+            dialog.dismiss()
         }
 
         dialog.show()

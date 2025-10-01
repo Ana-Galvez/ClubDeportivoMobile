@@ -17,7 +17,6 @@
         android:gravity="center_vertical|end">
 
         <!-- Logo -->
-
         <ImageView
             android:id="@+id/img_logo"
             android:layout_width="wrap_content"
