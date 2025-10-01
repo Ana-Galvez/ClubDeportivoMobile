@@ -219,10 +219,10 @@
                     android:background="@drawable/botonesredondosregistropagoaceptar" />
             </LinearLayout>
 
-            <!-- (Opcional) espacio de respiro extra dentro del Scroll -->
+            <!-- espacio -->
             <View
                 android:layout_width="match_parent"
-                android:layout_height="12dp"/>
+                android:layout_height="20dp"/>
         </LinearLayout>
     </ScrollView>
 
