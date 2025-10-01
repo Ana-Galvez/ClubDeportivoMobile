@@ -29,4 +29,4 @@
 - Clonar el proyecto:
 ````
 git clone https://github.com/Ana-Galvez/ClubDeportivoMobile.git
- 
+````
