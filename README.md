@@ -8,6 +8,23 @@
 
 ## **Requisitos** <br/>
 
+Desarrollar la aplicación móvil previamente diseñada en Figma, implementando su interfaz gráfica y funcionalidades en Android Studio.
+
+📌 Puntos importantes
+
+- Convertir las pantallas y flujos definidos en Figma en vistas nativas de Android utilizando XML y/o Jetpack Compose.
+
+- Mantener la fidelidad visual respecto al prototipo (colores, tipografías, iconografía, espaciados y estilos).
+
+- Implementar la navegación entre pantallas tal como se definió en el diseño.
+
+- Garantizar un diseño responsive que se adapte correctamente a distintos tamaños y resoluciones de pantalla.
+
+- Seguir buenas prácticas de arquitectura y organización del código.
+
+- Usar recursos optimizados (imágenes, íconos, assets exportados de Figma).
+
+- Preparar la app para ser ejecutada en dispositivos físicos y emuladores desde Android Studio.
 
 ***
 
