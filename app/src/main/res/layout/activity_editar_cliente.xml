@@ -160,14 +160,14 @@
                         android:text="17/08/1990"
                         android:textColor="@color/textPrimary"
                         android:textSize="14sp" />
-                    <!--
+                    
                     <ImageView
                         android:id="@+id/ivCalendario"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_calendar"
                         android:contentDescription="Seleccionar fecha" />
-               -->
+
                 </LinearLayout>
             </LinearLayout>
 
