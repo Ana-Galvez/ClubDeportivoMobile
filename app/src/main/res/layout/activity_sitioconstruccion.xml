@@ -16,7 +16,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical|end">
 
-        <!-- Logo -->
+        <!-- Logo
         <ImageView
             android:id="@+id/img_logo"
             android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="20dp"
             android:src="@drawable/logo" />
-
+-->
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
@@ -50,7 +50,7 @@
         android:textStyle="bold"
         android:layout_gravity="center" />
 
-    <!-- Imagen principal (Sitio caído) -->
+    <!-- Imagen principal (Sitio caído)
     <ImageView
         android:id="@+id/img_sitio_caido"
         android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
         android:src="@drawable/sitioenconstruccion"
         android:adjustViewBounds="true"
         android:layout_gravity="center" />
-
+-->
 
     <TextView
         android:id="@+id/txt_sitioconst"

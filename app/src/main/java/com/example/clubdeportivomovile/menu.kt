@@ -22,20 +22,21 @@ class menu : AppCompatActivity() {
         }
 
         // Referencias a los TextView
+        /*
         val inicio = findViewById<TextView>(R.id.txtInicio)
         val appFisico = findViewById<TextView>(R.id.txtAppFisico)
         val ayuda = findViewById<TextView>(R.id.txtAyuda)
         val configuracion = findViewById<TextView>(R.id.txtConfiguracion)
 
-
+*/
         // Todos abren Sitio en construcción
         val intentSitio = Intent(this, sitioconstruccion::class.java)
-
+/*
         inicio.setOnClickListener { startActivity(intentSitio) }
         appFisico.setOnClickListener { startActivity(intentSitio) }
         ayuda.setOnClickListener { startActivity(intentSitio) }
         configuracion.setOnClickListener { startActivity(intentSitio) }
-
+*/
     }
 
     private fun mostrarDialogoSalir() {

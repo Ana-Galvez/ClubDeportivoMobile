@@ -65,7 +65,7 @@
         <ImageView
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:src="@drawable/nuevo_negro"
+            android:src="@drawable/img_nuevo_negro"
             android:layout_marginEnd="10dp"/>
 
         <TextView
@@ -146,7 +146,7 @@
         <ImageView
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:src="@drawable/morosos_negro"
+            android:src="@drawable/img_morosos_negro"
             android:layout_marginEnd="10dp"/>
 
         <TextView

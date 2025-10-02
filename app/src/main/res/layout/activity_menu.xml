@@ -9,7 +9,7 @@
     android:paddingStart="20dp"
     android:paddingEnd="20dp">
 
-    <!-- Logo -->
+    <!-- Logo
     <ImageView
         android:id="@+id/logo"
         android:layout_width="80dp"
@@ -17,7 +17,7 @@
         android:src="@drawable/logo"
         android:layout_gravity="center"
         android:contentDescription="Logo" />
-
+    -->
     <!-- Nombre completo -->
     <TextView
         android:id="@+id/nombreCompleto"
@@ -49,7 +49,7 @@
         android:alpha="0.4"
         android:layout_marginBottom="16dp" />
 
-    <!-- Opciones del menú -->
+    <!-- Opciones del menú
     <TextView
         android:id="@+id/txtInicio"
         android:layout_width="match_parent"
@@ -97,14 +97,14 @@
         android:padding="12dp"
         android:textSize="16sp"
         android:layout_marginLeft="20dp"/>
-
+-->
     <!-- Empuja el item hacia abajo -->
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <!-- Cerrar sesión -->
+    <!-- Cerrar sesión
     <TextView
         android:id="@+id/txtCerrarSesion"
         android:layout_width="match_parent"
@@ -115,6 +115,6 @@
         android:drawablePadding="12dp"
         android:padding="12dp"
         android:textSize="16sp" />
-
+-->
 </LinearLayout>
 
