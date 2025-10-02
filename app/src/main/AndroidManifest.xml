@@ -55,14 +55,14 @@
             android:name=".menu"
             android:exported="false" />
         <activity
-            android:name=".ReciboPagoSocio"
+            android:name=".PagoNoSocioActivity"
             android:exported="false" />
-        <activity android:name=".Home"
+        <activity android:name=".ReciboPagoSocio"
             android:exported="false" />
 
 
         <activity
-            android:name=".PagoNoSocioActivity"
+            android:name=".Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

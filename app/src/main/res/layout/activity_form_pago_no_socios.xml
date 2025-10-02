@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    android:gravity="center_horizontal">
-
+    android:gravity="center_horizontal"
+    android:fitsSystemWindows="true">
+    <!-- Barra superior-->
     <!-- Menú hamburguesa -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,9 +22,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/img_flecha_izq"
-            android:layout_gravity="start"
-            android:contentDescription="Volver"
-            tools:ignore="HardcodedText" />
+            android:layout_gravity="start"/>
 
         <!-- Para expandir la imagen a la derecha-->
         <View
@@ -34,15 +34,14 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/img_menu_hamburguesa"
-            android:layout_gravity="end"
-            android:contentDescription="hamburguesa"
-            tools:ignore="HardcodedText"/>
+            android:layout_gravity="end"/>
 
     </LinearLayout>
 
+
     <!-- Título -->
     <TextView
-        android:id="@+id/tvBienvenida"
+        android:id="@+id/tvtituloNoSocio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registro de Pago No Socio"
@@ -166,6 +165,37 @@
             android:inputType="numberDecimal"/>
     </LinearLayout>
 
+    <!-- Advertencia -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginHorizontal="40dp"
+        android:background="@drawable/bg_help_no_socio_form"
+        android:paddingVertical="8dp"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/i_help"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="help"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/tvAdvertenciaNoSocio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Los No Socios abonan en efectivo"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+
 
     <!-- Botón Aceptar y Limpiar -->
     <LinearLayout
@@ -191,7 +221,7 @@
             android:layout_height="48dp"
             android:text="Limpiar"
             android:textSize="20sp"
-            android:background="#00FFFFFF"
+            android:background="@color/background_transparent"
             android:layout_marginBottom="10dp"
             android:textColor="@color/background_primary">
         </Button>
@@ -205,79 +235,6 @@
         android:layout_weight="1"/>
 
     <!-- Barra de navegación inferior -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="#9575CD"
-        android:baselineAligned="false">
-
-        <!-- Inicio -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_inicio_negro"/>
-        </LinearLayout>
-
-        <!-- Nuevo -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_nuevo_negro"/>
-        </LinearLayout>
-
-        <!-- Clientes -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_clientes_negro"/>
-        </LinearLayout>
-
-        <!-- Pagos -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_pagos_blanco"/>
-        </LinearLayout>
-
-        <!-- Morosos -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_morosos_negro"/>
-        </LinearLayout>
-
-    </LinearLayout>
+    <include layout="@layout/activity_barra" />
 
 </LinearLayout>
