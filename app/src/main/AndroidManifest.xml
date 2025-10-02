@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDeportivoMovile">
         <activity
+            android:name=".error_apto_fisico"
+            android:exported="false" />
+        <activity
+            android:name=".apto_fisico"
+            android:exported="false" />
+        <activity
+            android:name=".socio_o_no_socio"
+            android:exported="false" />
+        <activity
+            android:name=".eliminar_cliente"
+            android:exported="false" />
+        <activity
             android:name=".item_cliente"
             android:exported="false" />
         <activity
@@ -57,4 +69,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
