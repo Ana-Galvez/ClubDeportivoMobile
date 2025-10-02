@@ -16,6 +16,5 @@
         android:textStyle="bold"
         android:layout_marginBottom="16dp"
         android:textAlignment="center"
-        android:backgroundTint="#FFFBFE"
-        android:textColor="@android:color/red" />
+        android:backgroundTint="#FFFBFE" />
 </LinearLayout>
