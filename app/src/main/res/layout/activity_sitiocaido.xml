@@ -62,7 +62,6 @@
             android:adjustViewBounds="true"
             android:src="@drawable/sitiocaido" />
 
-
         <TextView
             android:id="@+id/txt_sitiocaido"
             android:layout_width="wrap_content"

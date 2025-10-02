@@ -97,14 +97,14 @@
         android:padding="12dp"
         android:textSize="16sp"
         android:layout_marginLeft="20dp"/>
-
+-->
     <!-- Empuja el item hacia abajo -->
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <!-- Cerrar sesión -->
+    <!-- Cerrar sesión  -->
     <TextView
         android:id="@+id/txtCerrarSesion"
         android:layout_width="match_parent"

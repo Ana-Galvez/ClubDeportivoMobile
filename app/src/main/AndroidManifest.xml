@@ -12,6 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDeportivoMovile">
         <activity
+            android:name=".error_apto_fisico"
+            android:exported="false" />
+        <activity
+            android:name=".socio_o_no_socio"
+            android:exported="false" />
+        <activity
+            android:name=".eliminar_cliente"
+            android:exported="false" />
+        <activity
+            android:name=".item_cliente"
+            android:exported="false" />
+        <activity
+            android:name=".ListadoDeClientes"
+            android:exported="false" />
+        <activity
             android:name=".ReciboSocioActivity"
             android:exported="false" />
         <activity
@@ -39,6 +54,9 @@
             android:name=".menu"
             android:exported="false" />
         <activity
+            android:name=".ReciboPagoSocio"
+            android:exported="false" />
+        <activity
             android:name=".Home"
             android:exported="true">
             <intent-filter>
@@ -47,9 +65,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ReciboPagoSocio"
-            android:exported="false" />
     </application>
 
 </manifest>

@@ -90,7 +90,7 @@
                 <EditText
                     android:id="@+id/etNombre"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:hint="Escribir nombre"
                     android:backgroundTint="@android:color/transparent"
                     android:padding="10dp"
@@ -117,7 +117,7 @@
                 <EditText
                     android:id="@+id/etApellido"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:hint="Escribir apellido"
                     android:backgroundTint="@android:color/transparent"
                     android:padding="10dp"
@@ -144,7 +144,7 @@
                 <LinearLayout
                     android:id="@+id/rowFechaNac"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:paddingStart="10dp"
@@ -160,13 +160,14 @@
                         android:text="17/08/1990"
                         android:textColor="@color/textPrimary"
                         android:textSize="14sp" />
-
+                    <!--
                     <ImageView
                         android:id="@+id/ivCalendario"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_calendar"
                         android:contentDescription="Seleccionar fecha" />
+               -->
                 </LinearLayout>
             </LinearLayout>
 
@@ -190,7 +191,7 @@
                 <EditText
                     android:id="@+id/etDni"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:hint="Escribir DNI"
                     android:backgroundTint="@android:color/transparent"
                     android:padding="10dp"
@@ -217,7 +218,7 @@
                 <EditText
                     android:id="@+id/etDireccion"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:hint="Escribir dirección"
                     android:backgroundTint="@android:color/transparent"
                     android:padding="10dp"
@@ -244,7 +245,7 @@
                 <EditText
                     android:id="@+id/etTelefono"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:hint="Escribir teléfono"
                     android:backgroundTint="@android:color/transparent"
                     android:padding="10dp"
