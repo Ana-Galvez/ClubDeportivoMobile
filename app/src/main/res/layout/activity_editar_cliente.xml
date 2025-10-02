@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg"
+    android:gravity="center_horizontal">
+
+    <!-- Menú hamburguesa -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="40dp">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/img_flecha_izq"
+            android:contentDescription="Volver" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/img_menu_hamburguesa"
+            android:contentDescription="Menú" />
+    </LinearLayout>
+
+    <!-- Título -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tvBienvenida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Cliente"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+
+            android:textColor="@color/textPrimary" />
+
+
+    </LinearLayout>
+    <!-- Espaciador para empujar la barra al fondo -->
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+    </View>-->
+
+    <!-- Contenido -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Nombre -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="#D1CBD6">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="Nombre"
+                    android:textColor="#9882F7"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:hint="Escribir nombre"
+                    android:backgroundTint="@android:color/transparent"
+                    android:padding="10dp"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <!-- Apellido -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="#D1CBD6">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="Apellido"
+                    android:textColor="#9882F7"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etApellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:hint="Escribir apellido"
+                    android:backgroundTint="@android:color/transparent"
+                    android:padding="10dp"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <!-- Fecha de Nacimiento -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="#D1CBD6">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="Fecha de Nacimiento"
+                    android:textColor="#9882F7"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/rowFechaNac"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/tvFechaNac"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="17/08/1990"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/ivCalendario"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_calendar"
+                        android:contentDescription="Seleccionar fecha" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- DNI -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="#D1CBD6">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="DNI"
+                    android:textColor="#9882F7"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etDni"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:hint="Escribir DNI"
+                    android:backgroundTint="@android:color/transparent"
+                    android:padding="10dp"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <!-- Dirección -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="#D1CBD6">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="Dirección"
+                    android:textColor="#9882F7"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etDireccion"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:hint="Escribir dirección"
+                    android:backgroundTint="@android:color/transparent"
+                    android:padding="10dp"
+                    android:inputType="textPostalAddress" />
+            </LinearLayout>
+
+            <!-- Teléfono -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="#D1CBD6">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="Teléfono"
+                    android:textColor="#9882F7"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etTelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:hint="Escribir teléfono"
+                    android:backgroundTint="@android:color/transparent"
+                    android:padding="10dp"
+                    android:inputType="phone" />
+
+            </LinearLayout>
+
+            <!-- Género -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="40dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="Género"
+                    android:textColor="#9882F7"
+                    android:textSize="14sp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <RadioButton android:text="F" />
+                    <RadioButton android:text="M" />
+                    <RadioButton android:text="Prefiero no decirlo" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <!-- Socio -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp"
+                android:layout_marginHorizontal="40dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="Socio"
+                    android:textColor="#9882F7"
+                    android:textSize="14sp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <RadioButton android:text="Sí" />
+                    <RadioButton android:text="No" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <!-- Botones Guardar / Limpiar -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp">
+
+                <Button
+                    android:id="@+id/btnGuardar"
+                    android:layout_width="200dp"
+                    android:layout_height="45dp"
+                    android:text="Aceptar"
+                    android:textSize="20sp"
+                    android:background="@drawable/botonesredondosregistropagoaceptar"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:id="@+id/tvLimpiar"
+                    android:layout_width="200dp"
+                    android:layout_height="45dp"
+                    android:gravity="center"
+                    android:text="Limpiar"
+                    android:textSize="20sp"
+                    android:textColor="#5C46BB"
+                    android:background="@drawable/botonlimpiar" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Barra -->
+    <include layout="@layout/activity_barra" />
+</LinearLayout>

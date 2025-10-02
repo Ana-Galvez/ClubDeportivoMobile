@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    tools:context=".sitiocaido">
+
+    <!-- Menú superior (logo + hamburguesa) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|end">
+
+        <!-- Logo -->
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/logo" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <!-- Botón menú hamburguesa -->
+        <ImageView
+            android:id="@+id/img_menu_hamburguesa"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/img_menu_hamburguesa"
+            android:layout_marginEnd="8dp" />
+    </LinearLayout>
+
+    <!-- Texto principal -->
+    <TextView
+        android:id="@+id/txt_sitio_caido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UPS!!!"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_gravity="center" />
+
+    <!-- Imagen principal (Sitio caído) -->
+    <ImageView
+        android:id="@+id/img_sitio_caido"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:src="@drawable/sitioenconstruccion"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center" />
+
+
+    <TextView
+        android:id="@+id/txt_sitioconst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sitio en Construcción"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="32dp"/>
+
+    <TextView
+        android:id="@+id/txt_regresa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Regresa más tarde"
+        android:textSize="14sp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="32dp" />
+</LinearLayout>

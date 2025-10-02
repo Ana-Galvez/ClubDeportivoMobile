@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg">
+
+    <!-- Top spacing -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="120dp" />
+
+    <!-- Header: logo + título -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="8dp">
+
+        <ImageView
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/logo"
+            android:contentDescription="Logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recibo Socio"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/textPrimary"
+            android:layout_marginTop="6dp" />
+    </LinearLayout>
+
+    <!-- CONTENIDO SCROLLEABLE -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Nombre (chip) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_card"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvNombreSocio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="María Simsons"
+                    android:textStyle="italic"
+                    android:textColor="@color/textPrimary"/>
+            </LinearLayout>
+
+            <!-- Tarjeta con datos del recibo -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="16dp"
+                android:padding="12dp"
+                android:background="@drawable/bg_card">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cuota Septiembre 2025"
+                    android:textStyle="bold"
+                    android:textColor="@color/textPrimary"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E6E6E6"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Fila: Monto -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Monto"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvMonto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$35.000"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- Fila: Forma de Pago -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Forma de Pago"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvFormaPago"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Efectivo"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- Fila: Fecha de insc. -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Fecha de insc:"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvFechaInsc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="01/02/2014"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- Fila: Teléfono -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Teléfono:"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvTelefono"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="22334565"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- Fila: Dirección -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Dirección:"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvDireccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Calle Falsa 123"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Botón Exportar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/btnExportar"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Exportar"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"
+                    android:textAllCaps="false"
+                    android:background="@drawable/botonesredondosregistropagoaceptar" />
+            </LinearLayout>
+
+            <!-- espacio -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Barra inferior fija -->
+    <include layout="@layout/activity_barra" />
+</LinearLayout>

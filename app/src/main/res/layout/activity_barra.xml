@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:background="@color/bg_barra">
+
+
+        <!-- Inicio blanco -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_inicio_negro"/>
+        </LinearLayout>
+
+        <!-- Nuevo -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_nuevo_negro"/>
+        </LinearLayout>
+
+        <!-- Clientes -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_clientes_negro"/>
+        </LinearLayout>
+
+        <!-- Pagos -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_pagos_negro"/>
+        </LinearLayout>
+
+        <!-- Morosos -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:src="@drawable/img_morosos_negro"/>
+        </LinearLayout>
+
+
+</LinearLayout>

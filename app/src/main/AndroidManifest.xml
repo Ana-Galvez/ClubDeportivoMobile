@@ -12,7 +12,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDeportivoMovile">
         <activity
-            android:name=".MainActivity"
+            android:name=".ReciboSocioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MorososActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BarraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditarClienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".cerrarsesion"
+            android:exported="false" />
+        <activity
+            android:name=".configuracion"
+            android:exported="false" />
+        <activity
+            android:name=".sitioconstruccion"
+            android:exported="false" />
+        <activity
+            android:name=".sitiocaido"
+            android:exported="false" />
+        <activity
+            android:name=".menu"
+            android:exported="false" />
+        <activity
+            android:name=".Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +47,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ReciboPagoSocio"
+            android:exported="false" />
     </application>
 
 </manifest>

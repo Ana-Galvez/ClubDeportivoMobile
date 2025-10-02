@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- Menú superior (logo + hamburguesa) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|end"
+            android:orientation="horizontal">
+
+            <!-- Logo -->
+            <ImageView
+                android:id="@+id/img_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="130dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/logo" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!-- Botón menú hamburguesa -->
+            <ImageView
+                android:id="@+id/img_menu_hamburguesa"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="50dp"
+                android:src="@drawable/img_menu_hamburguesa" />
+        </LinearLayout>
+
+        <!-- Texto principal -->
+        <TextView
+            android:id="@+id/txt_sitio_caido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="UPS!!!"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <!-- Imagen principal (Sitio caído) -->
+        <ImageView
+            android:id="@+id/img_sitio_caido"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sitiocaido" />
+
+
+        <TextView
+            android:id="@+id/txt_sitiocaido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:text="Sitio Caído"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txt_regresa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:text="Regresa más tarde"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start">
+
+        <!-- Menú lateral -->
+        <include layout="@layout/activity_menu" />
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="40dp"
+    android:gravity="center">
+
+    <!-- Texto -->
+    <TextView
+        android:id="@+id/txt_mensaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Deseas salir de la aplicación?"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#FFFBFE"
+        android:textColor="@android:color/black" />
+
+    <!-- Botones en fila -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_si"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sí"
+            android:backgroundTint="#5C46BB"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="10dp"/>
+
+        <Button
+            android:id="@+id/btn_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:backgroundTint="#9882F7"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+</LinearLayout>
