@@ -160,14 +160,14 @@
                         android:text="17/08/1990"
                         android:textColor="@color/textPrimary"
                         android:textSize="14sp" />
-                    <!--
+
                     <ImageView
                         android:id="@+id/ivCalendario"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_calendar"
                         android:contentDescription="Seleccionar fecha" />
-               -->
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -273,11 +273,42 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:gravity="center"
                     android:padding="10dp">
 
-                    <RadioButton android:text="F" />
-                    <RadioButton android:text="M" />
-                    <RadioButton android:text="Prefiero no decirlo" />
+                    <RadioButton
+                        android:id="@+id/rbF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="F"
+                        android:textSize="14sp"
+                        android:textColor="@color/textPrimary"
+                        android:layoutDirection="rtl"
+                        android:buttonTint="@color/purple_500"/>
+
+                    <RadioButton
+                        android:id="@+id/rbM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="M"
+                        android:textSize="14sp"
+                        android:textColor="@color/textPrimary"
+                        android:layoutDirection="rtl"
+                        android:buttonTint="@color/purple_500"
+                        android:layout_marginStart="20dp"/>
+
+                    <RadioButton
+                        android:id="@+id/rbNoDecir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Prefiero\nno decirlo"
+                        android:textSize="14sp"
+                        android:textColor="@color/textPrimary"
+                        android:layoutDirection="rtl"
+                        android:buttonTint="@color/purple_500"
+                        android:layout_marginStart="20dp"
+                        android:singleLine="false"
+                        android:lines="2"/>
                 </RadioGroup>
             </LinearLayout>
 
@@ -298,15 +329,41 @@
                     android:textSize="14sp" />
 
                 <RadioGroup
+                    android:id="@+id/rgSocio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:gravity="center"
                     android:padding="10dp">
 
-                    <RadioButton android:text="Sí" />
-                    <RadioButton android:text="No" />
+                    <RadioButton
+                        android:id="@+id/rbSocioSi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sí"
+                        android:textSize="14sp"
+                        android:textColor="@color/textPrimary"
+                        android:layoutDirection="rtl"
+                        android:textDirection="ltr"
+                        android:buttonTint="@color/primary_600"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="16dp"/>
+
+                    <RadioButton
+                        android:id="@+id/rbSocioNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No"
+                        android:textSize="14sp"
+                        android:textColor="@color/textPrimary"
+                        android:layoutDirection="rtl"
+                        android:textDirection="ltr"
+                        android:buttonTint="@color/primary_600"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="0dp"/>
                 </RadioGroup>
             </LinearLayout>
+
 
             <!-- Botones Guardar / Limpiar -->
             <LinearLayout
