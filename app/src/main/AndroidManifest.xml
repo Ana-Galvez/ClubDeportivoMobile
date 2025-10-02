@@ -15,9 +15,6 @@
             android:name=".error_apto_fisico"
             android:exported="false" />
         <activity
-            android:name=".apto_fisico"
-            android:exported="false" />
-        <activity
             android:name=".socio_o_no_socio"
             android:exported="false" />
         <activity
