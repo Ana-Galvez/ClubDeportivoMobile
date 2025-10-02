@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6F6F6"
+    android:background="@color/background_color"
     android:gravity="center_horizontal">
 
     <!-- Menú hamburguesa -->
@@ -135,14 +135,14 @@
         android:orientation="vertical"
         android:layout_marginBottom="35dp"
         android:layout_marginHorizontal="40dp"
-        android:background="#D1CBD6">
+        android:background="@color/background_input">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
             android:text="Forma de Pago"
-            android:textColor="#9882F7"
+            android:textColor="@color/label"
             android:textSize="14sp"/>
 
         <Spinner
@@ -164,16 +164,18 @@
             android:text="Aceptar"
             android:textSize="20dp"
             android:background="@drawable/botonesredondosregistropagoaceptar"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
         </Button>
-        <TextView
+        <Button
             android:layout_width="200dp"
             android:layout_height="45dp"
-            android:gravity="center"
             android:text="Limpiar"
             android:textSize="20dp"
-            android:textColor="#5C46BB"
-            android:background="@drawable/botonlimpiar" />
+            android:background="#00FFFFFF"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/background_primary">
+        </Button>
 
     </LinearLayout>
 

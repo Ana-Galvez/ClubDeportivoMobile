@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:text="Registrar Clientes"
             android:textSize="16sp"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/white_1"/>
     </LinearLayout>
 
     <!-- Botón Listado Clientes -->
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:text="Listado de Clientes"
             android:textSize="16sp"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/white_1"/>
     </LinearLayout>
 
     <!-- Botón Registro Pago -->
@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:text="Registro Pago"
             android:textSize="16sp"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/white_1"/>
     </LinearLayout>
 
     <!-- Botón Socios Morosos -->
@@ -154,7 +154,7 @@
             android:layout_height="wrap_content"
             android:text="Lista de Socios Morosos"
             android:textSize="16sp"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/white_1"/>
     </LinearLayout>
 
     <!-- Espaciador para empujar la barra al fondo -->
