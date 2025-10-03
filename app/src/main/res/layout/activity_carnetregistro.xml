@@ -58,6 +58,7 @@
         app:cardElevation="4dp">
 
         <LinearLayout
+            android:id="@+id/llCarnetRegistro"
             android:layout_width="match_parent"
             android:layout_height="389dp"
             android:orientation="vertical">
@@ -78,7 +79,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="12dp"
-                android:text="María Simpsons"
+                android:text="Pedro Perez"
                 android:textSize="20sp"
                 android:textStyle="italic | bold" />
 

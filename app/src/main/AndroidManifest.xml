@@ -17,9 +17,9 @@
         <activity
             android:name=".error_apto_fisico"
             android:exported="false" />
-        <activity
-            android:name=".eliminar_cliente"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".eliminar_cliente"-->
+<!--            android:exported="true" />-->
         <activity
             android:name=".item_cliente"
             android:exported="false" />

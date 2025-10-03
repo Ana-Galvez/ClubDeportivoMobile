@@ -42,12 +42,16 @@
 
         <!-- Íconos a la derecha -->
         <ImageView
+            android:id="@+id/ivVerCliente"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/img_ver_cliente"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            android:clickable="true"
+            android:focusable="true"/>
 
         <ImageView
+            android:id="@+id/ivRegistrarPago"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/img_ver_pago"
@@ -64,6 +68,7 @@
             android:onClick="onEditarClienteClick"/>
 
         <ImageView
+            android:id="@+id/ivEliminarCliente"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/img_eliminar_cliente"

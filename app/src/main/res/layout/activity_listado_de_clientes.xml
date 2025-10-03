@@ -101,6 +101,18 @@
             <!-- Card -->
             <include layout="@layout/item_cliente" />
 
+            <!-- Card -->
+            <include layout="@layout/item_cliente" />
+
+            <!-- Card -->
+            <include layout="@layout/item_cliente" />
+
+            <!-- Card -->
+            <include layout="@layout/item_cliente" />
+
+            <!-- Card -->
+            <include layout="@layout/item_cliente" />
+
         </LinearLayout>
     </ScrollView>
 

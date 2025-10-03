@@ -12,7 +12,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 
-class CarnetActivity : AppCompatActivity() {
+class CarnetActivity : BaseActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var menuHamburguesa: ImageView
     private lateinit var flechaAtras: ImageView
@@ -45,5 +45,7 @@ class CarnetActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        setupBottomBar("")  //activo botones barra, cadena vacia para q no resalte ningun boton de la barra
     }
 }

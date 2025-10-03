@@ -9,8 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_color"
         android:fitsSystemWindows="true"
+        android:background="@color/background_color"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -93,7 +93,7 @@
                     android:layout_marginBottom="20dp"
                     android:fontFamily="@font/inter_big_semibold"
                     android:gravity="center"
-                    android:text="Homero Simpsons"
+                    android:text="Pedro Perez"
                     android:textColor="@color/textPrimary"
                     android:textSize="20sp" />
 
