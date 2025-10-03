@@ -42,6 +42,9 @@
             android:name=".configuracion"
             android:exported="false" />
         <activity
+            android:name=".ReciboPagoNoSocioActivity"
+            android:exported="false" />
+        <activity
             android:name=".sitioconstruccion"
             android:exported="false" />
         <activity
@@ -56,6 +59,7 @@
             android:exported="true" />
         <activity android:name=".ReciboPagoSocio"
             android:exported="true" />
+        <!--  -->
         <activity
             android:name=".Home"
             android:exported="true">

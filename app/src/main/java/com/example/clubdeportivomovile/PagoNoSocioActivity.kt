@@ -9,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 
@@ -46,6 +48,20 @@ class PagoNoSocioActivity : BaseActivity() {
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
             finish()
+        }
+        val botonAceptar: Button = findViewById(R.id.BotonAceptarPagoNoSocio)
+
+        botonAceptar.setOnClickListener {
+            val intent = Intent(this, ReciboPagoNoSocioActivity::class.java)
+            startActivity(intent)
+        }
+
+        val botonLimpiar: Button = findViewById(R.id.BotonLimpiarPagoNoSocio)
+
+        botonLimpiar.setOnClickListener {
+            //cambiar por borrar formulario
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
         }
     }
 }

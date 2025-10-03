@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_color">
+    android:background="@color/background_color"
+    android:id="@+id/main_recibo_no_socio"
+    android:fitsSystemWindows="true">
 
     <!-- Top spacing -->
     <View
@@ -25,21 +27,19 @@
             android:contentDescription="Logo" />
 
         <TextView
-            android:text="Recibo Socio"
+            android:text="Recibo No Socio"
             android:layout_marginTop="20dp"
             style="@style/TituloRecibo" />
     </LinearLayout>
 
-    <!-- CONTENIDO SCROLLEABLE -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
 
             <!-- Nombre (chip) -->
             <LinearLayout
@@ -48,16 +48,17 @@
                 <TextView
                     android:id="@+id/tvNombreSocio"
                     style="@style/ChipText"
-                    android:text="María Simsons" />
+                    android:text="Homero Simpsons" />
             </LinearLayout>
 
             <!-- Tarjeta con datos del recibo -->
+            <!-- Actividad -->
             <LinearLayout
                 style="@style/CardContainer">
 
                 <TextView
                     style="@style/CardTitle"
-                    android:text="Cuota Septiembre 2025" />
+                    android:text="Natación" />
 
                 <View
                     style="@style/Divider" />
@@ -70,18 +71,18 @@
                     <TextView
                         android:id="@+id/tvMonto"
                         style="@style/RowValue"
-                        android:text="$35.000" />
+                        android:text="$15.000" />
                 </LinearLayout>
 
-                <!-- Fila: Forma de Pago -->
+                <!-- Horario -->
                 <LinearLayout style="@style/RowContainer">
                     <TextView
                         style="@style/RowLabel"
-                        android:text="Forma de Pago" />
+                        android:text="Horario:" />
                     <TextView
-                        android:id="@+id/tvFormaPago"
+                        android:id="@+id/tvhorario"
                         style="@style/RowValue"
-                        android:text="Efectivo" />
+                        android:text="20:00 hs" />
                 </LinearLayout>
 
                 <!-- Fila: Fecha de insc. -->
@@ -137,7 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"/>
         </LinearLayout>
-    </ScrollView>
+
 
     <!-- Barra inferior fija -->
     <include layout="@layout/activity_barra" />
