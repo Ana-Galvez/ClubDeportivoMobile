@@ -6,7 +6,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_1">#FFFFFF</color>
-    <color name="bg">#F6F6F6</color>
+    <color name="bg">#FFFBFE</color> <!-- estaba F6F6F6 -->
     <color name="textPrimary">#212121</color>
     <color name="bg_input">#D1CBD6</color>
     <color name="card_bg_light">#FEF7FF</color>

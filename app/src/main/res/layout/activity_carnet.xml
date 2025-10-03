@@ -14,7 +14,9 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <!-- Barra superior-->
+        <include layout="@layout/activity_header"/>
+
+        <!-- Barra superior
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="35dp"
@@ -43,6 +45,7 @@
                 android:layout_gravity="end"
                 android:src="@drawable/img_menu_hamburguesa" />
         </LinearLayout>
+        -->
 
         <!-- Header: título -->
         <TextView
