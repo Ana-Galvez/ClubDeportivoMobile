@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_color"
-        android:gravity="center_horizontal"
-        android:fitsSystemWindows="true">
+        android:gravity="center_horizontal">
+<!--        android:fitsSystemWindows="true"   ESTO HACE MOSTRAR UN BORDE BLANCO ABAJO DE LA BARRA>-->
 
     <!-- Menú hamburguesa -->
     <LinearLayout
@@ -161,81 +161,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <!-- Barra de navegación inferior
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="@color/purpleLight">
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_inicio_blanco"/>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_nuevo_negro"/>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_clientes_negro"/>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_pagos_negro"/>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_morosos_negro"/>
-        </LinearLayout>
-
-    </LinearLayout>
-    -->
         <!-- Barra inferior -->
         <include layout="@layout/activity_barra" />
     </LinearLayout>
