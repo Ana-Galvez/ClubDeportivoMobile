@@ -16,7 +16,7 @@
         android:textStyle="bold"
         android:layout_marginBottom="16dp"
         android:textAlignment="center"
-        android:backgroundTint="#FFFBFE"
+        android:backgroundTint="@color/background_color"
         android:textColor="@android:color/black" />
 
     <!-- Botones en fila -->
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sí"
-            android:backgroundTint="#5C46BB"
+            android:backgroundTint="@color/background_primary"
             android:textColor="@android:color/white"
             android:layout_marginEnd="10dp"/>
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No"
-            android:backgroundTint="#9882F7"
+            android:backgroundTint="@color/purpleLight"
             android:textColor="@android:color/white"/>
     </LinearLayout>
 </LinearLayout>

@@ -4,7 +4,7 @@
     android:layout_width="245dp"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#212121"
+    android:background="@color/textPrimary"
     android:paddingTop="40dp"
     android:paddingStart="20dp"
     android:paddingEnd="20dp">
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Administrador"
-        android:textColor="#BDBDBD"
+        android:textColor="@color/grayLight"
         android:textSize="16sp"
         android:layout_marginBottom="16dp"
         android:layout_gravity="center" />
@@ -97,7 +97,7 @@
         android:padding="12dp"
         android:textSize="16sp"
         android:layout_marginLeft="20dp"/>
--->
+
     <!-- Empuja el item hacia abajo -->
     <View
         android:layout_width="match_parent"
@@ -110,7 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cerrar sesión"
-        android:textColor="#f1f1f1"
+        android:textColor="@color/grayBackground"
         android:drawableLeft="@drawable/signout"
         android:drawablePadding="12dp"
         android:padding="12dp"

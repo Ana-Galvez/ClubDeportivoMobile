@@ -138,7 +138,7 @@
             android:text="Los No Socios abonan en efectivo"
             android:textSize="16sp"
             android:fontFamily="@font/inter_regular_semibold"
-            android:textColor="#212121"
+            android:textColor="@color/textPrimary"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 

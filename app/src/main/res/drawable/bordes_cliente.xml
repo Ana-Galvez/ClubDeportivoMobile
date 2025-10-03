@@ -2,7 +2,7 @@
     android:shape="rectangle">
 
     <!-- Fondo clarito -->
-    <solid android:color="#F9F5FB"/> <!-- un lila muy claro -->
+    <solid android:color="@color/purpleVeryLight"/> <!-- un lila muy claro -->
 
     <!-- Bordes redondeados -->
     <corners android:radius="12dp" />
@@ -10,5 +10,5 @@
     <!-- Línea/borde -->
     <stroke
         android:width="1dp"
-        android:color="#D1CBD6" />
+        android:color="@color/bg_input" />
 </shape>

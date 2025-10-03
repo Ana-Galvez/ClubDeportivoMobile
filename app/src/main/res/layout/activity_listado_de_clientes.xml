@@ -116,7 +116,7 @@
         android:layout_height="60dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="#9575CD">
+        android:background="@color/bg_barra">
 
         <!-- Inicio -->
         <LinearLayout
