@@ -35,11 +35,11 @@ class ListadoDeClientes : BaseActivity() {
             dialog.show(supportFragmentManager, "SocioDialog")
         }
 
-        val ivEditarCliente = findViewById<ImageView>(R.id.ivEditarCliente)
+       /* val ivEditarCliente = findViewById<ImageView>(R.id.ivEditarCliente)
         ivEditarCliente.setOnClickListener {
             val intent = Intent(this, EditarClienteActivity::class.java)
             startActivity(intent)
-        }
+        }*/
 
         //NO FUNCIONA PARA MOSTRAR MODAL DE ELIMINAR VERRR
 
