@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDeportivoMovile">
         <activity
+            android:name=".carnetregistro"
+            android:exported="false" />
+        <activity
             android:name=".error_apto_fisico"
             android:exported="false" />
         <activity
@@ -52,19 +55,30 @@
             android:exported="false" />
         <activity
             android:name=".menu"
-            android:exported="false" />
-        <!-- true para abrirlo desde el modal -->
+            android:exported="false" /> <!-- true para abrirlo desde el modal -->
         <activity
             android:name=".PagoNoSocioActivity"
             android:exported="true" />
-        <activity android:name=".ReciboPagoSocio"
-            android:exported="true" />
-        <!--  -->
+        <activity
+            android:name=".ReciboPagoSocio"
+            android:exported="true" /> <!--  -->
         <activity
             android:name=".CarnetActivity"
             android:exported="false" />
         <activity
             android:name=".Home"
+            android:exported="false" />
+        <activity
+            android:name=".carnet"
+            android:exported="false" />
+        <activity
+            android:name=".registrar"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".loading"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
