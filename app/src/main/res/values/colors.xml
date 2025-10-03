@@ -45,5 +45,9 @@
     <color name="purpleLight">#9882F7</color>
 
     <!--Botones home-->
-    <color name="btn_nuevo">#9882F7</color>
- </resources>
+    <color name="btn_nuevo">#B35C46BB</color>
+    <color name="btn_listado">#995C46BB</color>
+    <color name="btn_pago">#805C46BB</color>
+    <color name="btn_morosos">#665C46BB</color>
+
+</resources>
