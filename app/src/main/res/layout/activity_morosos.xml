@@ -97,6 +97,9 @@
             <!-- Card -->
             <include layout="@layout/item_moroso" />
 
+            <!-- Card -->
+            <include layout="@layout/item_moroso" />
+
         </LinearLayout>
     </ScrollView>
 
