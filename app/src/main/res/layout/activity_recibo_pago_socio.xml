@@ -37,15 +37,9 @@
 
     <!-- Título -->
     <TextView
-        android:id="@+id/tvBienvenida"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Registro de Pago Socio"
-        android:textSize="24sp"
-        android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:textColor="#212121"/>
-
+        style="@style/Titulo"/>
 
     <!-- Espaciador para empujar la barra al fondo -->
     <View
