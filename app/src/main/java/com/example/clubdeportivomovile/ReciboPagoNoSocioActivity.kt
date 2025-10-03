@@ -8,7 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 
-class ReciboPagoNoSocioActivity : AppCompatActivity() {
+class ReciboPagoNoSocioActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,5 +22,6 @@ class ReciboPagoNoSocioActivity : AppCompatActivity() {
         val root: LinearLayout = findViewById(R.id.main_recibo_no_socio)
         root.setPadding(0, 0, 0, 0)
 
+        setupBottomBar("")
     }
 }
