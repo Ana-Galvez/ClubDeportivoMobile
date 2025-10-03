@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="45dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:id="@+id/modalPago"
+    android:background="@drawable/modal_background">
 
     <!-- Texto -->
     <TextView

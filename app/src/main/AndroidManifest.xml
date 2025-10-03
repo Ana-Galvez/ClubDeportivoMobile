@@ -14,10 +14,6 @@
         <activity
             android:name=".error_apto_fisico"
             android:exported="false" />
-
-        <activity
-            android:name=".socio_o_no_socio"
-            android:exported="false" />
         <activity
             android:name=".eliminar_cliente"
             android:exported="false" />
@@ -54,11 +50,12 @@
         <activity
             android:name=".menu"
             android:exported="false" />
+        <!-- true para abrirlo desde el modal -->
         <activity
             android:name=".PagoNoSocioActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity android:name=".ReciboPagoSocio"
-            android:exported="false" />
+            android:exported="true" />
 
 
         <activity

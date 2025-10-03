@@ -1,7 +1,9 @@
 package com.example.clubdeportivomovile
 
 
+import android.app.Dialog
 import android.content.Intent
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -28,11 +30,10 @@ abstract class BaseActivity : AppCompatActivity() {
             }
         }
         findViewById<LinearLayout>(R.id.llPagos)?.setOnClickListener {
-            /*if (this !is ListadoDeClientes) {
-                startActivity(Intent(this, ListadoDeClientes::class.java))
-                finish()
-            }*/
+            val dialog = SocioONoSocio()
+            dialog.show(supportFragmentManager, "SocioDialog")
         }
+
         findViewById<LinearLayout>(R.id.llMorosos)?.setOnClickListener {
             if (this !is MorososActivity) {
                 startActivity(Intent(this, MorososActivity::class.java))
@@ -44,7 +45,7 @@ abstract class BaseActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.ivInicio)?.setImageResource(R.drawable.img_inicio_negro)
        // findViewById<ImageView>(R.id.ivNuevo)?.setImageResource(R.drawable.img_nuevo_negro)
         findViewById<ImageView>(R.id.ivClientes)?.setImageResource(R.drawable.img_clientes_negro)
-        //findViewById<ImageView>(R.id.ivPagos)?.setImageResource(R.drawable.img_pagos_negro)
+        findViewById<ImageView>(R.id.ivPagos)?.setImageResource(R.drawable.img_pagos_negro)
         findViewById<ImageView>(R.id.ivMorosos)?.setImageResource(R.drawable.img_morosos_negro)
 
         // imagen en blanco en la actual
@@ -52,7 +53,7 @@ abstract class BaseActivity : AppCompatActivity() {
             "inicio"   -> findViewById<ImageView>(R.id.ivInicio)?.setImageResource(R.drawable.img_inicio_blanco)
             //"nuevo"   -> findViewById<ImageView>(R.id.ivNuevo)?.setImageResource(R.drawable.img_inicio_blanco)
             "clientes" -> findViewById<ImageView>(R.id.ivClientes)?.setImageResource(R.drawable.img_clientes_blanco)
-            //"pagos"    -> findViewById<ImageView>(R.id.ivPagos)?.setImageResource(R.drawable.img_pagos_blanco)
+            "pagos"    -> findViewById<ImageView>(R.id.ivPagos)?.setImageResource(R.drawable.img_pagos_blanco)
             "morosos"  -> findViewById<ImageView>(R.id.ivMorosos)?.setImageResource(R.drawable.img_morosos_blanco)
         }
 
