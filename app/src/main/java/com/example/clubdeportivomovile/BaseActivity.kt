@@ -69,7 +69,7 @@ abstract class BaseActivity : AppCompatActivity() {
         // imagen en blanco en la actual
         when (current) {
             "inicio"   -> findViewById<ImageView>(R.id.ivInicio)?.setImageResource(R.drawable.img_inicio_blanco)
-            "nuevo"   -> findViewById<ImageView>(R.id.ivNuevo)?.setImageResource(R.drawable.img_inicio_blanco)
+            "nuevo"   -> findViewById<ImageView>(R.id.ivNuevo)?.setImageResource(R.drawable.img_nuevo_blanco)
             "clientes" -> findViewById<ImageView>(R.id.ivClientes)?.setImageResource(R.drawable.img_clientes_blanco)
             "pagos"    -> findViewById<ImageView>(R.id.ivPagos)?.setImageResource(R.drawable.img_pagos_blanco)
             "morosos"  -> findViewById<ImageView>(R.id.ivMorosos)?.setImageResource(R.drawable.img_morosos_blanco)
