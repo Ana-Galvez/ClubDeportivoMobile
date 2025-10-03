@@ -54,10 +54,14 @@
             android:layout_marginStart="8dp"/>
 
         <ImageView
+            android:id="@+id/ivEditarCliente"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/img_editar_cliente"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            android:contentDescription="Editar cliente"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="onEditarClienteClick"/>
 
         <ImageView
             android:layout_width="24dp"
