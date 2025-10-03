@@ -1,170 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background_color"
-    android:gravity="center_horizontal"
-    android:fitsSystemWindows="true">
-    <!-- Barra superior-->
-    <!-- Menú hamburguesa -->
+    android:layout_height="match_parent">
+
+    <!-- Contenido principal -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="40dp">
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/img_flecha_izq"
-            android:layout_gravity="start"
-            android:contentDescription="Volver"/>
-
-        <!-- Para expandir la imagen a la derecha-->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/img_menu_hamburguesa"
-            android:layout_gravity="end"/>
-
-    </LinearLayout>
-
-
-    <!-- Título -->
-    <TextView
-        android:id="@+id/tvtituloNoSocio"
-        android:text="Registro de Pago No Socio"
-        tools:ignore="HardcodedText"
-        style="@style/Titulo"/>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-    </View>
-
-    <!-- Cliente -->
-    <LinearLayout
-        style="@style/FormularioContainer">
-
-        <TextView
-            android:text="Cliente"
-            style="@style/FormularioLabel"/>
-
-        <EditText
-            android:hint="Nombre"
-            android:inputType="textPersonName"
-            style="@style/FormularioEditText"/>
-    </LinearLayout>
-
-    <!-- Actividad -->
-    <LinearLayout
-       style="@style/DropdownContainer">
-
-        <TextView
-            style="@style/DropdownTextView"
-            tools:ignore="HardcodedText"
-            android:text="Actividad"/>
-
-        <Spinner
-            android:id="@+id/spinner_pago_no_socio"
-            style="@style/DropdownSpinner"
-            />
-    </LinearLayout>
-
-    <!-- Horario -->
-    <LinearLayout
-        style="@style/FormularioContainer">
-
-        <TextView
-            android:text="Horario"
-           style="@style/FormularioLabel"
-            />
-        <EditText
-            android:hint="11:00 hs"
-            android:inputType="time"
-            style="@style/FormularioEditText"/>
-    </LinearLayout>
-
-    <!-- Monto -->
-    <LinearLayout
-        style="@style/FormularioContainer"
-        >
-
-        <TextView
-            android:text="Monto $"
-            style="@style/FormularioLabel"
-            />
-
-        <EditText
-            android:hint="15000"
-            android:inputType="numberDecimal"
-            style="@style/FormularioEditText"/>
-    </LinearLayout>
-
-    <!-- Advertencia -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        android:fitsSystemWindows="true"
         android:gravity="center_horizontal"
-        android:layout_marginHorizontal="40dp"
-        android:background="@drawable/bg_help_no_socio_form"
-        android:paddingVertical="8dp"
-        android:layout_marginBottom="10dp">
+        android:orientation="vertical">
+        <!-- Barra superior-->
+        <!-- Menú hamburguesa -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/i_help"
-            android:layout_marginEnd="8dp"
-            android:contentDescription="help"
-            tools:ignore="HardcodedText" />
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="start"
+                android:contentDescription="Volver"
+                android:src="@drawable/img_flecha_izq"
+                android:id="@+id/back_formNoSocio"/>
 
+            <!-- Para expandir la imagen a la derecha-->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/img_menu_hamburguesa"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="end"
+                android:src="@drawable/img_menu_hamburguesa" />
+
+        </LinearLayout>
+
+
+        <!-- Título -->
         <TextView
-            android:id="@+id/tvAdvertenciaNoSocio"
+            android:id="@+id/tvtituloNoSocio"
+            style="@style/Titulo"
+            android:text="Registro de Pago No Socio"
+            tools:ignore="HardcodedText" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"></View>
+
+        <!-- Cliente -->
+        <LinearLayout style="@style/FormularioContainer">
+
+            <TextView
+                style="@style/FormularioLabel"
+                android:text="Cliente" />
+
+            <EditText
+                style="@style/FormularioEditText"
+                android:hint="Nombre"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <!-- Actividad -->
+        <LinearLayout style="@style/DropdownContainer">
+
+            <TextView
+                style="@style/DropdownTextView"
+                android:text="Actividad"
+                tools:ignore="HardcodedText" />
+
+            <Spinner
+                android:id="@+id/spinner_pago_no_socio"
+                style="@style/DropdownSpinner" />
+        </LinearLayout>
+
+        <!-- Horario -->
+        <LinearLayout style="@style/FormularioContainer">
+
+            <TextView
+                style="@style/FormularioLabel"
+                android:text="Horario" />
+
+            <EditText
+                style="@style/FormularioEditText"
+                android:hint="11:00 hs"
+                android:inputType="time" />
+        </LinearLayout>
+
+        <!-- Monto -->
+        <LinearLayout style="@style/FormularioContainer">
+
+            <TextView
+                style="@style/FormularioLabel"
+                android:text="Monto $" />
+
+            <EditText
+                style="@style/FormularioEditText"
+                android:hint="15000"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <!-- Advertencia -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_help_no_socio_form"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingVertical="8dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="help"
+                android:src="@drawable/i_help"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvAdvertenciaNoSocio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular_semibold"
+                android:text="Los No Socios abonan en efectivo"
+                android:textColor="@color/textPrimary"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+        <!-- Botón Aceptar y Limpiar -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Los No Socios abonan en efectivo"
-            android:textSize="16sp"
-            android:fontFamily="@font/inter_regular_semibold"
-            android:textColor="@color/textPrimary"
-            tools:ignore="HardcodedText" />
-    </LinearLayout>
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-    <!-- Botón Aceptar y Limpiar -->
+            <Button
+                style="@style/BotonAceptar"
+                android:text="Aceptar" />
+
+            <Button
+                style="@style/BotonLimpiar"
+                android:text="Limpiar" />
+        </LinearLayout>
+
+        <!-- Espaciador para empujar la barra al fondo -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Barra de navegación inferior -->
+        <include layout="@layout/activity_barra" />
+
+
+    </LinearLayout>
+    <!-- Menú lateral -->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start">
 
-        <Button
-            style="@style/BotonAceptar"
-            android:text="Aceptar" />
-
-        <Button
-            style="@style/BotonLimpiar"
-            android:text="Limpiar" />
+        <include layout="@layout/activity_menu" />
     </LinearLayout>
 
-    <!-- Espaciador para empujar la barra al fondo -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
-    <!-- Barra de navegación inferior -->
-    <include layout="@layout/activity_barra" />
-
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

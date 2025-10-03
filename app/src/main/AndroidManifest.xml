@@ -56,8 +56,6 @@
             android:exported="true" />
         <activity android:name=".ReciboPagoSocio"
             android:exported="true" />
-
-
         <activity
             android:name=".Home"
             android:exported="true">
