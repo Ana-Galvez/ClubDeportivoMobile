@@ -7,27 +7,38 @@
     android:background="@color/bg_barra">
 
 
-        <!-- Inicio blanco -->
+        <!-- Inicio -->
         <LinearLayout
+            android:id="@+id/llInicio"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless">
             <ImageView
+                android:id="@+id/ivInicio"
                 android:layout_width="68dp"
                 android:layout_height="68dp"
-                android:src="@drawable/img_inicio_negro"/>
+                android:src="@drawable/img_inicio_negro"
+                android:contentDescription="Inicio"/>
         </LinearLayout>
 
         <!-- Nuevo -->
         <LinearLayout
+            android:id="@+id/llNuevo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless">
             <ImageView
+                android:id="@+id/ivNuevo"
                 android:layout_width="68dp"
                 android:layout_height="68dp"
                 android:src="@drawable/img_nuevo_negro"/>
@@ -35,12 +46,17 @@
 
         <!-- Clientes -->
         <LinearLayout
+            android:id="@+id/llClientes"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless">
             <ImageView
+                android:id="@+id/ivClientes"
                 android:layout_width="68dp"
                 android:layout_height="68dp"
                 android:src="@drawable/img_clientes_negro"/>
@@ -48,12 +64,17 @@
 
         <!-- Pagos -->
         <LinearLayout
+            android:id="@+id/llPagos"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless">
             <ImageView
+                android:id="@+id/ivPagos"
                 android:layout_width="68dp"
                 android:layout_height="68dp"
                 android:src="@drawable/img_pagos_negro"/>
@@ -61,12 +82,17 @@
 
         <!-- Morosos -->
         <LinearLayout
+            android:id="@+id/llMorosos"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless">
             <ImageView
+                android:id="@+id/ivMorosos"
                 android:layout_width="68dp"
                 android:layout_height="68dp"
                 android:src="@drawable/img_morosos_negro"/>
