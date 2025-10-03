@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class ReciboPagoSocio : AppCompatActivity() {
+class ReciboPagoSocio : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,5 +27,7 @@ class ReciboPagoSocio : AppCompatActivity() {
             // Aplica el adaptador al spinner
             spinnerPago.adapter = adapter
         }
+
+        setupBottomBar("pagos")  //activo botones barra
     }
 }
