@@ -43,4 +43,7 @@
      <color name="blackAlpha27">#44000000</color>
      <color name="transparent">#00000000</color>
     <color name="purpleLight">#9882F7</color>
+
+    <!--Botones home-->
+    <color name="btn_nuevo">#9882F7</color>
  </resources>

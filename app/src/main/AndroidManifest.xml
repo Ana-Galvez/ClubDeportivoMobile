@@ -61,6 +61,9 @@
             android:exported="true" />
         <!--  -->
         <activity
+            android:name=".CarnetActivity"
+            android:exported="false" />
+        <activity
             android:name=".Home"
             android:exported="true">
             <intent-filter>
