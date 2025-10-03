@@ -130,7 +130,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <!-- Barra de navegación inferior -->
+    <!-- Barra de navegación inferior
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -138,7 +138,6 @@
         android:gravity="center"
         android:background="@color/purpleLight">
 
-        <!-- Inicio blanco -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -151,7 +150,6 @@
                 android:src="@drawable/img_inicio_negro"/>
         </LinearLayout>
 
-        <!-- Nuevo -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -164,7 +162,6 @@
                 android:src="@drawable/img_nuevo_negro"/>
         </LinearLayout>
 
-        <!-- Clientes -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -177,7 +174,6 @@
                 android:src="@drawable/img_clientes_negro"/>
         </LinearLayout>
 
-        <!-- Pagos -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -190,7 +186,6 @@
                 android:src="@drawable/img_pagos_blanco"/>
         </LinearLayout>
 
-        <!-- Morosos -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -203,6 +198,9 @@
                 android:src="@drawable/img_morosos_negro"/>
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout>-->
+
+    <!-- Barra inferior fija -->
+    <include layout="@layout/activity_barra" />
 
 </LinearLayout>
