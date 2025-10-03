@@ -1,7 +1,9 @@
 package com.example.clubdeportivomovile
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -61,6 +63,28 @@ class Home : BaseActivity() {
         })
         findViewById<TextView>(R.id.txtInicio)?.setOnClickListener {
             drawerLayout.closeDrawer(drawerContainer)
+        }
+
+        // Navegación de los botones
+
+        findViewById<LinearLayout>(R.id.btnRegistrarCliente)?.setOnClickListener{
+            val intent= Intent(this,registrar::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<LinearLayout>(R.id.btnListadoClientes)?.setOnClickListener{
+            val intent= Intent(this,ListadoDeClientes::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<LinearLayout>(R.id.btnRegistroPago)?.setOnClickListener {
+            val dialog = SocioONoSocio()
+            dialog.show(supportFragmentManager, "SocioDialog")
+        }
+
+        findViewById<LinearLayout>(R.id.btnSociosMorosos)?.setOnClickListener{
+            val intent= Intent(this, MorososActivity::class.java)
+            startActivity(intent)
         }
     }
 }

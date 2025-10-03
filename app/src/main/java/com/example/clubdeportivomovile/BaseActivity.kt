@@ -35,11 +35,12 @@ abstract class BaseActivity : AppCompatActivity() {
             }
         }
         findViewById<LinearLayout>(R.id.llNuevo)?.setOnClickListener {
-           /* if (this !is ListadoDeClientes) {
-                startActivity(Intent(this, ListadoDeClientes::class.java))
+            if (this !is registrar) {
+                startActivity(Intent(this, registrar::class.java))
                 finish()
-            }*/
+            }
         }
+
         findViewById<LinearLayout>(R.id.llClientes)?.setOnClickListener {
             if (this !is ListadoDeClientes) {
                 startActivity(Intent(this, ListadoDeClientes::class.java))
