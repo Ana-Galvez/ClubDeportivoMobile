@@ -10,37 +10,28 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <!-- Estilo para TextView de label -->
+    <style name="FormularioLabel">
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:textColor">@color/label</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <!-- Estilo para LinearLayout que envuelve cada input -->
     <style name="FormularioContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
         <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:layout_marginEnd">40dp</item>
         <item name="android:background">@color/background_input</item>
     </style>
 
-    <!-- Estilo para TextView de label -->
-    <style name="FormularioLabel">
-        <item name="android:paddingStart">10dp</item>
-        <item name="android:textColor">@color/label</item>
-        <item name="android:textSize">14sp</item>
-    </style>
-
-    //Titulo
+    <!--Titulo-->
     <style name="Titulo">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:backgroundTint">@color/background_primary</item>
-        <item name="android:textColor">@color/textPrimary</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:padding">12dp</item>
-        <item name="android:fontFamily">@font/inter_regular_semibold</item>
-        <item name="android:layout_marginBottom">10dp</item>
-        <item name="android:layout_marginStart">40dp</item>
-        <item name="android:layout_marginEnd">40dp</item>
-    </style>
-    //Titulo Home
-    <style name="Saludo">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:backgroundTint">@color/background_primary</item>
@@ -48,19 +39,78 @@
         <item name="android:textSize">24sp</item>
         <item name="android:padding">12dp</item>
         <item name="android:fontFamily">@font/inter_regular_semibold</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+    <!--Titulo Home-->
+     <style name="Saludo">
+         <item name="android:layout_width">wrap_content</item>
+         <item name="android:layout_height">wrap_content</item>
+         <item name="android:backgroundTint">@color/background_primary</item>
+         <item name="android:textColor">@color/textPrimary</item>
+         <item name="android:textSize">24sp</item>
+         <item name="android:padding">12dp</item>
+         <item name="android:fontFamily">@font/inter_regular_semibold</item>
+         <item name="android:layout_marginStart">40dp</item>
+         <item name="android:layout_marginEnd">40dp</item>
+     </style>
+
+     <!--Titulo recibos-->
+     <style name="TituloRecibo">
+             <item name="android:layout_width">wrap_content</item>
+             <item name="android:layout_height">wrap_content</item>
+             <item name="android:backgroundTint">@color/background_primary</item>
+             <item name="android:textColor">@color/textPrimary</item>
+             <item name="android:textSize">24sp</item>
+             <item name="android:padding">12dp</item>
+             <item name="android:fontFamily">@font/inter_regular_semibold</item>
+             <item name="android:layout_marginBottom">10dp</item>
+             <item name="android:layout_gravity">center_horizontal</item>
+         </style>
+
+    <!--Dropdown-->
+    <style name="DropdownContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginBottom">16dp</item>
         <item name="android:layout_marginStart">40dp</item>
         <item name="android:layout_marginEnd">40dp</item>
+        <item name="android:background">@color/background_input</item>
     </style>
-    //Titulo recibos
-    <style name="TituloRecibo">
-            <item name="android:layout_width">wrap_content</item>
-            <item name="android:layout_height">wrap_content</item>
-            <item name="android:backgroundTint">@color/background_primary</item>
-            <item name="android:textColor">@color/textPrimary</item>
-            <item name="android:textSize">24sp</item>
-            <item name="android:padding">12dp</item>
-            <item name="android:fontFamily">@font/inter_regular_semibold</item>
-            <item name="android:layout_marginBottom">10dp</item>
-            <item name="android:layout_gravity">center_horizontal</item>
-        </style>
-</resources>
+
+    <style name="DropdownTextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:textColor">@color/label</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="DropdownSpinner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+    <!-- Botones aceptar/Limpiar -->
+    <!-- Estilo base para botones -->
+    <style name="BotonFormularioBase">
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+
+    </style>
+
+    <!-- Botón Aceptar -->
+    <style name="BotonAceptar" parent="BotonFormularioBase">
+        <item name="android:background">@drawable/botonesredondosregistropagoaceptar</item>
+        <item name="android:textColor">@color/btn_aceptar_text</item>
+    </style>
+
+    <!-- Botón Limpiar -->
+    <style name="BotonLimpiar" parent="BotonFormularioBase">
+        <item name="android:background">@color/background_transparent</item>
+        <item name="android:textColor">@color/background_primary</item>
+    </style>
+ </resources>

@@ -22,7 +22,8 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/img_flecha_izq"
-            android:layout_gravity="start"/>
+            android:layout_gravity="start"
+            android:contentDescription="Volver"/>
 
         <!-- Para expandir la imagen a la derecha-->
         <View
@@ -43,7 +44,6 @@
     <TextView
         android:id="@+id/tvtituloNoSocio"
         android:text="Registro de Pago No Socio"
-        android:layout_marginTop="20dp"
         tools:ignore="HardcodedText"
         style="@style/Titulo"/>
 
@@ -55,110 +55,61 @@
 
     <!-- Cliente -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="40dp"
-        android:background="@color/background_input">
+        style="@style/FormularioContainer">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
             android:text="Cliente"
-            android:textColor="@color/label"
-            android:textSize="14sp" />
+            style="@style/FormularioLabel"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:backgroundTint="@color/background_transparent"
-            android:hint="Escribir cliente"
+            android:hint="Nombre"
             android:inputType="textPersonName"
-            android:padding="10dp"
-            android:textColor="@color/new_text" />
+            style="@style/FormularioEditText"/>
     </LinearLayout>
 
     <!-- Actividad -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="40dp"
-        android:background="@color/background_input">
+       style="@style/DropdownContainer">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="Actividad"
-            android:textColor="@color/label"
-            android:textSize="14sp"
-            tools:ignore="HardcodedText" />
+            style="@style/DropdownTextView"
+            tools:ignore="HardcodedText"
+            android:text="Actividad"/>
 
         <Spinner
             android:id="@+id/spinner_pago_no_socio"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+            style="@style/DropdownSpinner"
             />
     </LinearLayout>
 
     <!-- Horario -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="40dp"
-        android:background="@color/background_input"
-        >
+        style="@style/FormularioContainer">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
             android:text="Horario"
-            android:textColor="@color/label"
-            android:textSize="14sp"
+           style="@style/FormularioLabel"
             />
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
             android:hint="11:00 hs"
-            android:backgroundTint="@color/background_transparent"
-            android:textColor="@color/new_text"
-            android:padding="10dp"
-            android:inputType="textPersonName"/>
+            android:inputType="time"
+            style="@style/FormularioEditText"/>
     </LinearLayout>
 
     <!-- Monto -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="20dp"
-        android:layout_marginHorizontal="40dp"
-        android:background="@color/background_input">
+        style="@style/FormularioContainer"
+        >
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
             android:text="Monto $"
-            android:textColor="@color/label"
-            android:textSize="14sp"/>
+            style="@style/FormularioLabel"
+            />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
             android:hint="15000"
-            android:backgroundTint="@color/background_transparent"
-            android:textColor="@color/new_text"
-            android:padding="10dp"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal"
+            style="@style/FormularioEditText"/>
     </LinearLayout>
 
     <!-- Advertencia -->
@@ -170,7 +121,7 @@
         android:layout_marginHorizontal="40dp"
         android:background="@drawable/bg_help_no_socio_form"
         android:paddingVertical="8dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="10dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -186,42 +137,25 @@
             android:layout_height="wrap_content"
             android:text="Los No Socios abonan en efectivo"
             android:textSize="16sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/inter_regular_semibold"
             android:textColor="#212121"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
-
-
     <!-- Botón Aceptar y Limpiar -->
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_vertical"
-        >
+        android:gravity="center_vertical">
 
         <Button
-            android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:text="Aceptar"
-            android:textSize="20dp"
-            android:background="@drawable/botonesredondosregistropagoaceptar"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/btn_aceptar_text">
-        </Button>
+            style="@style/BotonAceptar"
+            android:text="Aceptar" />
 
         <Button
-            android:layout_width="200dp"
-            android:layout_height="48dp"
-            android:text="Limpiar"
-            android:textSize="20sp"
-            android:background="@color/background_transparent"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/background_primary">
-        </Button>
-
+            style="@style/BotonLimpiar"
+            android:text="Limpiar" />
     </LinearLayout>
 
     <!-- Espaciador para empujar la barra al fondo -->

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,7 +20,8 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/img_flecha_izq"
-            android:layout_gravity="start"/>
+            android:layout_gravity="start"
+            android:contentDescription="Volver"/>
 
         <!-- Para expandir la imagen a la derecha-->
         <View
@@ -39,7 +41,8 @@
     <TextView
         android:text="Registro de Pago Socio"
         android:layout_marginTop="20dp"
-        style="@style/Titulo"/>
+        style="@style/Titulo"
+        tools:ignore="HardcodedText" />
 
     <!-- Espaciador para empujar la barra al fondo -->
     <View
@@ -50,127 +53,75 @@
     <!-- VER INPUTS -->
     <!-- Cliente -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="40dp"
-        android:background="#D1CBD6">
+        style="@style/FormularioContainer">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:text="Cliente"
-            android:textColor="#9882F7"
-            android:textSize="14sp"/>
+            style="@style/FormularioLabel"
+            android:text="Cliente" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
             android:hint="Escribir cliente"
-            android:backgroundTint="@android:color/transparent"
-            android:padding="10dp"
-            android:inputType="textPersonName"/>
+            android:inputType="textPersonName"
+            style="@style/FormularioEditText"/>
     </LinearLayout>
 
     <!-- Cuota pendiente -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="40dp"
-        android:background="#D1CBD6">
+        style="@style/DropdownContainer">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
+            style="@style/DropdownTextView"
             android:text="Cuota pendiente"
-            android:textColor="#9882F7"
-            android:textSize="14sp"/>
+            />
 
         <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="45dp" />
+            style="@style/DropdownSpinner" />
     </LinearLayout>
 
     <!-- Monto -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="40dp"
-        android:background="#D1CBD6">
+        style="@style/FormularioContainer">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
             android:text="Monto $"
-            android:textColor="#9882F7"
-            android:textSize="14sp"/>
+            style="@style/FormularioLabel"
+            />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
             android:hint="0.00"
-            android:backgroundTint="@android:color/transparent"
-            android:padding="10dp"
+            style="@style/FormularioEditText"
             android:inputType="numberDecimal"/>
     </LinearLayout>
 
     <!-- Forma de Pago -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="35dp"
-        android:layout_marginHorizontal="40dp"
-        android:background="@color/background_input">
+        style="@style/DropdownContainer">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:text="Forma de Pago"
-            android:textColor="@color/label"
-            android:textSize="14sp"/>
+            style="@style/DropdownTextView"
+            tools:ignore="HardcodedText"
+            android:text="Forma de Pago"/>
 
         <Spinner
             android:id="@+id/spinner_pago"
-            android:layout_width="match_parent"
-            android:layout_height="45dp" />
+            style="@style/DropdownSpinner"
+            />
     </LinearLayout>
 
     <!-- Botón Aceptar y Limpiar -->
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_vertical"
-        >
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:text="Aceptar"
-            android:textSize="20dp"
-            android:background="@drawable/botonesredondosregistropagoaceptar"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp">
-        </Button>
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:text="Limpiar"
-            android:textSize="20dp"
-            android:background="#00FFFFFF"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/background_primary">
-        </Button>
+        android:gravity="center_vertical">
 
+        <Button
+            style="@style/BotonAceptar"
+            android:text="Aceptar" />
+
+        <Button
+            style="@style/BotonLimpiar"
+            android:text="Limpiar" />
     </LinearLayout>
 
     <!-- Espaciador para empujar la barra al fondo -->

@@ -2,24 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/bg"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
     <!-- Menú hamburguesa -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:orientation="horizontal"
+        android:layout_marginHorizontal="40dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="40dp">
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/img_flecha_izq"
-            android:contentDescription="Volver" />
+            android:contentDescription="Volver"
+            android:src="@drawable/img_flecha_izq" />
 
         <View
             android:layout_width="0dp"
@@ -29,17 +29,17 @@
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/img_menu_hamburguesa"
-            android:contentDescription="Menú" />
+            android:contentDescription="Menú"
+            android:src="@drawable/img_menu_hamburguesa" />
     </LinearLayout>
 
     <!-- Título -->
 
     <TextView
         android:id="@+id/tvBienvenida"
-        android:text="Editar Cliente"
+        style="@style/Titulo"
         android:layout_marginTop="20dp"
-        style="@style/Titulo"/>
+        android:text="Editar Cliente" />
     <!-- Espaciador para empujar la barra al fondo -->
     <!--<View
         android:layout_width="match_parent"
@@ -58,86 +58,50 @@
             android:orientation="vertical">
 
             <!-- Nombre -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="16dp"
-                android:layout_marginHorizontal="40dp"
-                android:background="#D1CBD6">
+            <LinearLayout style="@style/FormularioContainer">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:text="Nombre"
-                    android:textColor="#9882F7"
-                    android:textSize="14sp" />
+                    style="@style/FormularioLabel"
+                    android:text="Nombre" />
 
                 <EditText
                     android:id="@+id/etNombre"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    style="@style/FormularioEditText"
                     android:hint="Escribir nombre"
-                    android:backgroundTint="@android:color/transparent"
-                    android:padding="10dp"
                     android:inputType="textPersonName" />
             </LinearLayout>
 
             <!-- Apellido -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="16dp"
-                android:layout_marginHorizontal="40dp"
-                android:background="#D1CBD6">
+            <LinearLayout style="@style/FormularioContainer">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:text="Apellido"
-                    android:textColor="#9882F7"
-                    android:textSize="14sp" />
+                    style="@style/FormularioLabel"
+                    android:text="Apellido" />
 
                 <EditText
                     android:id="@+id/etApellido"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    style="@style/FormularioEditText"
                     android:hint="Escribir apellido"
-                    android:backgroundTint="@android:color/transparent"
-                    android:padding="10dp"
                     android:inputType="textPersonName" />
             </LinearLayout>
 
             <!-- Fecha de Nacimiento -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="16dp"
-                android:layout_marginHorizontal="40dp"
-                android:background="#D1CBD6">
+            <LinearLayout style="@style/FormularioContainer">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:text="Fecha de Nacimiento"
-                    android:textColor="#9882F7"
-                    android:textSize="14sp" />
+                    style="@style/FormularioLabel"
+                    android:text="Fecha de Nacimiento" />
 
                 <LinearLayout
                     android:id="@+id/rowFechaNac"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
                     android:clickable="true"
-                    android:focusable="true">
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
 
                     <TextView
                         android:id="@+id/tvFechaNac"
@@ -152,231 +116,171 @@
                         android:id="@+id/ivCalendario"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_calendar"
-                        android:contentDescription="Seleccionar fecha" />
-
+                        android:contentDescription="Seleccionar fecha"
+                        android:src="@drawable/ic_calendar" />
                 </LinearLayout>
             </LinearLayout>
 
             <!-- DNI -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="16dp"
-                android:layout_marginHorizontal="40dp"
-                android:background="#D1CBD6">
+            <LinearLayout style="@style/FormularioContainer">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:text="DNI"
-                    android:textColor="#9882F7"
-                    android:textSize="14sp" />
+                    style="@style/FormularioLabel"
+                    android:text="DNI" />
 
                 <EditText
                     android:id="@+id/etDni"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    style="@style/FormularioEditText"
                     android:hint="Escribir DNI"
-                    android:backgroundTint="@android:color/transparent"
-                    android:padding="10dp"
                     android:inputType="number" />
             </LinearLayout>
 
             <!-- Dirección -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="16dp"
-                android:layout_marginHorizontal="40dp"
-                android:background="#D1CBD6">
+            <LinearLayout style="@style/FormularioContainer">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:text="Dirección"
-                    android:textColor="#9882F7"
-                    android:textSize="14sp" />
+                    style="@style/FormularioLabel"
+                    android:text="Dirección" />
 
                 <EditText
                     android:id="@+id/etDireccion"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    style="@style/FormularioEditText"
                     android:hint="Escribir dirección"
-                    android:backgroundTint="@android:color/transparent"
-                    android:padding="10dp"
                     android:inputType="textPostalAddress" />
             </LinearLayout>
 
             <!-- Teléfono -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="20dp"
-                android:layout_marginHorizontal="40dp"
-                android:background="#D1CBD6">
+            <LinearLayout style="@style/FormularioContainer">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:text="Teléfono"
-                    android:textColor="#9882F7"
-                    android:textSize="14sp" />
+                    style="@style/FormularioLabel"
+                    android:text="Teléfono" />
 
                 <EditText
                     android:id="@+id/etTelefono"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    style="@style/FormularioEditText"
                     android:hint="Escribir teléfono"
-                    android:backgroundTint="@android:color/transparent"
-                    android:padding="10dp"
                     android:inputType="phone" />
-
             </LinearLayout>
 
             <!-- Género -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginHorizontal="40dp"
                 android:layout_marginBottom="20dp"
-                android:layout_marginHorizontal="40dp">
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:text="Género"
-                    android:textColor="#9882F7"
-                    android:textSize="14sp" />
+                    style="@style/FormularioLabel"
+                    android:text="Género" />
 
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:padding="10dp">
 
                     <RadioButton
                         android:id="@+id/rbF"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
                         android:text="F"
-                        android:textSize="14sp"
                         android:textColor="@color/textPrimary"
-                        android:layoutDirection="rtl"/>
+                        android:textSize="14sp" />
 
                     <RadioButton
                         android:id="@+id/rbM"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="M"
-                        android:textSize="14sp"
-                        android:textColor="@color/textPrimary"
+                        android:layout_marginStart="20dp"
                         android:layoutDirection="rtl"
-                        android:layout_marginStart="20dp"/>
+                        android:text="M"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="14sp" />
 
                     <RadioButton
                         android:id="@+id/rbNoDecir"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Prefiero\nno decirlo"
-                        android:textSize="14sp"
-                        android:textColor="@color/textPrimary"
-                        android:layoutDirection="rtl"
                         android:layout_marginStart="20dp"
+                        android:layoutDirection="rtl"
+                        android:lines="2"
                         android:singleLine="false"
-                        android:lines="2"/>
+                        android:text="Prefiero\nno decirlo"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="14sp" />
                 </RadioGroup>
-            </LinearLayout>
-
-            <!-- Socio -->
+            </LinearLayout> <!-- Socio -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginHorizontal="40dp"
                 android:layout_marginBottom="24dp"
-                android:layout_marginHorizontal="40dp">
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:text="Socio"
-                    android:textColor="#9882F7"
-                    android:textSize="14sp" />
+                    style="@style/FormularioLabel"
+                    android:text="Socio" />
 
                 <RadioGroup
                     android:id="@+id/rgSocio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:padding="10dp">
 
                     <RadioButton
                         android:id="@+id/rbSocioSi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sí"
-                        android:textSize="14sp"
-                        android:textColor="@color/textPrimary"
                         android:layoutDirection="rtl"
-                        android:textDirection="ltr"
                         android:paddingStart="12dp"
-                        android:paddingEnd="16dp"/>
+                        android:paddingEnd="16dp"
+                        android:text="Sí"
+                        android:textColor="@color/textPrimary"
+                        android:textDirection="ltr"
+                        android:textSize="14sp" />
 
                     <RadioButton
                         android:id="@+id/rbSocioNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="No"
-                        android:textSize="14sp"
-                        android:textColor="@color/textPrimary"
                         android:layoutDirection="rtl"
-                        android:textDirection="ltr"
                         android:paddingStart="12dp"
-                        android:paddingEnd="0dp"/>
+                        android:paddingEnd="0dp"
+                        android:text="No"
+                        android:textColor="@color/textPrimary"
+                        android:textDirection="ltr"
+                        android:textSize="14sp" />
                 </RadioGroup>
             </LinearLayout>
-
 
             <!-- Botones Guardar / Limpiar -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="24dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btnGuardar"
-                    android:layout_width="200dp"
-                    android:layout_height="45dp"
-                    android:text="Aceptar"
-                    android:textSize="20sp"
-                    android:background="@drawable/botonesredondosregistropagoaceptar"
-                    android:layout_marginBottom="10dp" />
+                    style="@style/BotonAceptar"
+                    android:text="Aceptar" />
 
-                <TextView
-                    android:id="@+id/tvLimpiar"
-                    android:layout_width="200dp"
-                    android:layout_height="45dp"
-                    android:gravity="center"
-                    android:text="Limpiar"
-                    android:textSize="20sp"
-                    android:textColor="#5C46BB"
-                    android:background="@drawable/botonlimpiar" />
+                <Button
+                    android:id="@+id/btnLimpiar"
+                    style="@style/BotonLimpiar"
+                    android:text="Limpiar" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 
     <!-- Barra -->
     <include layout="@layout/activity_barra" />
