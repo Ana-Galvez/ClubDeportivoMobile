@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Club Deportivo Movile</string>
+    <string name="app_name">Sportify</string>
 
     <string-array name="opciones_pago">
         <item>Seleccionar...</item>
