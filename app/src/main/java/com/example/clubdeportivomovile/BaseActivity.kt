@@ -7,8 +7,25 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 
 abstract class BaseActivity : AppCompatActivity() {
+
+    protected fun setupHeader(drawerLayout: DrawerLayout? = null) {
+        val backBtn: ImageView? = findViewById(R.id.ivBack)
+        val menuBtn: ImageView? = findViewById(R.id.ivMenu)
+
+        // Acción del botón atrás
+        backBtn?.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        // Acción del menú hamburguesa
+        menuBtn?.setOnClickListener {
+            drawerLayout?.openDrawer(GravityCompat.START)
+        }
+    }
     protected fun setupBottomBar(current: String) {
     /* current: nombre de pantalla activa*/
         findViewById<LinearLayout>(R.id.llInicio)?.setOnClickListener {
