@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 
-class Home : AppCompatActivity() {
+class Home : BaseActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
 
@@ -15,23 +15,26 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        drawerLayout = findViewById(R.id.drawerLayout)
-        val menuIcon: ImageView = findViewById(R.id.img_menu_hamburguesa)
+        setupBottomBar("inicio")
 
-        // Abrir menú al presionar el ícono
-        menuIcon.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
+        drawerLayout = findViewById(R.id.drawerLayout)
+        val menuIcon: ImageView? = findViewById(R.id.img_menu_hamburguesa)
+
+        menuIcon?.setOnClickListener {
+            drawerLayout?.openDrawer(GravityCompat.START)
         }
 
-        // Manejar botón "atrás" con el nuevo sistema
+        // Back cierra el drawer si está abierto
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                } else {
-                    isEnabled = false
-                    onBackPressedDispatcher.onBackPressed()
+                drawerLayout?.let { dl ->
+                    if (dl.isDrawerOpen(GravityCompat.START)) {
+                        dl.closeDrawer(GravityCompat.START)
+                        return
+                    }
                 }
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
             }
         })
     }
