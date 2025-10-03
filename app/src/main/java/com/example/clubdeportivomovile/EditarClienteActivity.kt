@@ -1,16 +1,18 @@
 package com.example.clubdeportivomovile
 
-import android.content.Intent
+
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 
 class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi tiene la fc de la barra
+    private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editar_cliente)
+        drawerLayout = findViewById(R.id.drawerLayout)
+
+        // Configurar header con botón atrás + hamburguesa
+        setupHeader(drawerLayout)
         setupBottomBar("")  //activo botones barra, cadena vacia para q no resalte ningun boton de la barra
     }
 }
