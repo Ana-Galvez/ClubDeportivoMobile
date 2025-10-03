@@ -164,13 +164,15 @@
         <!-- Barra inferior -->
         <include layout="@layout/activity_barra" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start">
-
     <!-- Menú lateral -->
+    <LinearLayout
+        android:id="@+id/drawerContainer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical">
+
+
         <include layout="@layout/activity_menu"/>
     </LinearLayout>
 
