@@ -63,6 +63,8 @@ class PagoNoSocioActivity : BaseActivity() {
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
         }
+
+        setupBottomBar("pagos")  //activo botones barra
     }
 }
 

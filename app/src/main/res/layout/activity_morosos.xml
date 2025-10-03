@@ -1,36 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <!-- Header -->
+    <!-- CONTENIDO PRINCIPAL -->
     <LinearLayout
+        android:id="@+id/contentLayout"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/bg">
 
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:contentDescription="Volver"
-            android:src="@drawable/img_flecha_izq" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:contentDescription="Menú"
-            android:src="@drawable/img_menu_hamburguesa" />
-    </LinearLayout>
+    <include layout="@layout/activity_header"/>
 
     <!-- Título -->
     <TextView
@@ -106,3 +88,15 @@
     <!-- Barra inferior -->
     <include layout="@layout/activity_barra" />
 </LinearLayout>
+    <!-- MENÚ LATERAL -->
+    <LinearLayout
+        android:id="@+id/drawerContainer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_menu"/>
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

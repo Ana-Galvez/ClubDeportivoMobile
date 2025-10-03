@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_color"
-        android:fitsSystemWindows="true"
         android:gravity="center_horizontal"
         android:orientation="vertical">
+<!--        android:fitsSystemWindows="true"-->
         <!-- Barra superior-->
         <!-- Menú hamburguesa -->
         <LinearLayout
