@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDeportivoMovile">git add
         <activity
-            android:name=".error_apto_fisico"
+            android:name=".Error_apto_fisico"
             android:exported="false" />
 <!--        <activity-->
 <!--            android:name=".eliminar_cliente"-->
 <!--            android:exported="true" />-->
         <activity
-            android:name=".item_cliente"
+            android:name=".Item_cliente"
             android:exported="false" />
         <activity
             android:name=".ListadoDeClientes"
@@ -36,22 +36,22 @@
             android:name=".EditarClienteActivity"
             android:exported="false" />
         <activity
-            android:name=".cerrarsesion"
+            android:name=".Cerrarsesion"
             android:exported="false" />
         <activity
-            android:name=".configuracion"
+            android:name=".Configuracion"
             android:exported="false" />
         <activity
             android:name=".ReciboPagoNoSocioActivity"
             android:exported="false" />
         <activity
-            android:name=".sitioconstruccion"
+            android:name=".Sitioconstruccion"
             android:exported="false" />
         <activity
-            android:name=".sitiocaido"
+            android:name=".Sitiocaido"
             android:exported="false" />
         <activity
-            android:name=".menu"
+            android:name=".Menu"
             android:exported="false" /> <!-- true para abrirlo desde el modal -->
         <activity
             android:name=".PagoNoSocioActivity"
@@ -66,16 +66,13 @@
             android:name=".Home"
             android:exported="false" />
         <activity
-            android:name=".carnet"
-            android:exported="false" />
-        <activity
             android:name=".Registrar"
             android:exported="false" />
         <activity
             android:name=".Login"
             android:exported="false" />
         <activity
-            android:name=".loading"
+            android:name=".Loading"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
