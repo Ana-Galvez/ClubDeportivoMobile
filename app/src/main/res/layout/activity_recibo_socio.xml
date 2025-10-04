@@ -1,144 +1,176 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_color">
+    android:background="@color/background_color">-->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <!-- Top spacing -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="120dp" />
-
-    <!-- Header: logo + título -->
+    <!-- CONTENIDO PRINCIPAL -->
     <LinearLayout
+        android:id="@+id/contentLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="8dp">
+        android:gravity="center"
+        android:background="@color/background_color">
 
-        <ImageView
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:src="@drawable/logo"
-            android:contentDescription="Logo" />
+        <include layout="@layout/activity_header" />
+        <!-- Top spacing -->
+        <!--  <View
+              android:layout_width="match_parent"
+              android:layout_height="120dp" />-->
 
-        <TextView
-            android:text="Recibo Socio"
-            android:layout_marginTop="20dp"
-            style="@style/TituloRecibo" />
-    </LinearLayout>
-
-    <!-- CONTENIDO SCROLLEABLE -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
+        <!-- Header: logo + título -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="8dp">
 
-            <!-- Nombre (chip) -->
-            <LinearLayout
-                style="@style/ChipContainer">
+            <ImageView
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/logo"
+                android:contentDescription="Logo" />
 
-                <TextView
-                    android:id="@+id/tvNombreSocio"
-                    style="@style/ChipText"
-                    android:text="María Simsons" />
-            </LinearLayout>
+            <TextView
+                android:text="Recibo Socio"
+                android:layout_marginTop="20dp"
+                style="@style/TituloRecibo" />
+        </LinearLayout>
 
-            <!-- Tarjeta con datos del recibo -->
-            <LinearLayout
-                style="@style/CardContainer">
+        <!-- CONTENIDO SCROLLEABLE -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-                <TextView
-                    style="@style/CardTitle"
-                    android:text="Cuota Septiembre 2025" />
-
-                <View
-                    style="@style/Divider" />
-
-                <!-- Fila: Monto -->
-                <LinearLayout style="@style/RowContainer">
-                    <TextView
-                        style="@style/RowLabel"
-                        android:text="Monto" />
-                    <TextView
-                        android:id="@+id/tvMonto"
-                        style="@style/RowValue"
-                        android:text="$35.000" />
-                </LinearLayout>
-
-                <!-- Fila: Forma de Pago -->
-                <LinearLayout style="@style/RowContainer">
-                    <TextView
-                        style="@style/RowLabel"
-                        android:text="Forma de Pago" />
-                    <TextView
-                        android:id="@+id/tvFormaPago"
-                        style="@style/RowValue"
-                        android:text="Efectivo" />
-                </LinearLayout>
-
-                <!-- Fila: Fecha de insc. -->
-                <LinearLayout style="@style/RowContainer">
-                    <TextView
-                        style="@style/RowLabel"
-                        android:text="Fecha de insc:" />
-                    <TextView
-                        android:id="@+id/tvFechaInsc"
-                        style="@style/RowValue"
-                        android:text="01/02/2014" />
-                </LinearLayout>
-
-                <!-- Fila: Teléfono -->
-                <LinearLayout style="@style/RowContainer">
-                    <TextView
-                        style="@style/RowLabel"
-                        android:text="Teléfono:" />
-                    <TextView
-                        android:id="@+id/tvTelefono"
-                        style="@style/RowValue"
-                        android:text="22334565" />
-                </LinearLayout>
-
-                <!-- Fila: Dirección -->
-                <LinearLayout style="@style/RowContainerLast">
-                    <TextView
-                        style="@style/RowLabel"
-                        android:text="Dirección:" />
-                    <TextView
-                        android:id="@+id/tvDireccion"
-                        style="@style/RowValue"
-                        android:text="Calle Falsa 123" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Botón Exportar -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center_horizontal">
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btnExportar"
-                    style="@style/PrimaryButton"
-                    android:text="Exportar" />
+                <!-- Nombre (chip) -->
+                <LinearLayout style="@style/ChipContainer">
+
+                    <TextView
+                        android:id="@+id/tvNombreSocio"
+                        style="@style/ChipText"
+                        android:text="María Simsons" />
+                </LinearLayout>
+
+                <!-- Tarjeta con datos del recibo -->
+                <LinearLayout style="@style/CardContainer">
+
+                    <TextView
+                        style="@style/CardTitle"
+                        android:text="Cuota Septiembre 2025" />
+
+                    <View style="@style/Divider" />
+
+                    <!-- Fila: Monto -->
+                    <LinearLayout style="@style/RowContainer">
+
+                        <TextView
+                            style="@style/RowLabel"
+                            android:text="Monto" />
+
+                        <TextView
+                            android:id="@+id/tvMonto"
+                            style="@style/RowValue"
+                            android:text="$35.000" />
+                    </LinearLayout>
+
+                    <!-- Fila: Forma de Pago -->
+                    <LinearLayout style="@style/RowContainer">
+
+                        <TextView
+                            style="@style/RowLabel"
+                            android:text="Forma de Pago" />
+
+                        <TextView
+                            android:id="@+id/tvFormaPago"
+                            style="@style/RowValue"
+                            android:text="Efectivo" />
+                    </LinearLayout>
+
+                    <!-- Fila: Fecha de insc. -->
+                    <LinearLayout style="@style/RowContainer">
+
+                        <TextView
+                            style="@style/RowLabel"
+                            android:text="Fecha de insc:" />
+
+                        <TextView
+                            android:id="@+id/tvFechaInsc"
+                            style="@style/RowValue"
+                            android:text="01/02/2014" />
+                    </LinearLayout>
+
+                    <!-- Fila: Teléfono -->
+                    <LinearLayout style="@style/RowContainer">
+
+                        <TextView
+                            style="@style/RowLabel"
+                            android:text="Teléfono:" />
+
+                        <TextView
+                            android:id="@+id/tvTelefono"
+                            style="@style/RowValue"
+                            android:text="22334565" />
+                    </LinearLayout>
+
+                    <!-- Fila: Dirección -->
+                    <LinearLayout style="@style/RowContainerLast">
+
+                        <TextView
+                            style="@style/RowLabel"
+                            android:text="Dirección:" />
+
+                        <TextView
+                            android:id="@+id/tvDireccion"
+                            style="@style/RowValue"
+                            android:text="Calle Falsa 123" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Botón Exportar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/btnExportar"
+                        style="@style/PrimaryButton"
+                        android:text="Exportar" />
+                </LinearLayout>
+
+                <!-- espacio -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
             </LinearLayout>
+        </ScrollView>
 
-            <!-- espacio -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="20dp"/>
-        </LinearLayout>
-    </ScrollView>
+        <!-- Barra inferior fija -->
+        <include layout="@layout/activity_barra" />
+    </LinearLayout>
+    <!-- MENÚ LATERAL -->
+    <LinearLayout
+        android:id="@+id/drawerContainer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical">
 
-    <!-- Barra inferior fija -->
-    <include layout="@layout/activity_barra" />
-</LinearLayout>
+        <include layout="@layout/activity_menu" />
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

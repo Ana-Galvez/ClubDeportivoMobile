@@ -7,11 +7,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 
 class ReciboPagoSocio : BaseActivity() {
+
+    private lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        /*enableEdgeToEdge()*/
         setContentView(R.layout.activity_recibo_pago_socio)
 
         val spinnerPago: Spinner = findViewById(R.id.spinner_pago)
@@ -27,6 +31,11 @@ class ReciboPagoSocio : BaseActivity() {
             // Aplica el adaptador al spinner
             spinnerPago.adapter = adapter
         }
+
+        drawerLayout = findViewById(R.id.drawerLayout)
+
+        // Configurar header con botón atrás + hamburguesa
+        setupHeader(drawerLayout)
 
         setupBottomBar("pagos")  //activo botones barra
     }

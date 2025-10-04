@@ -13,9 +13,9 @@
         android:layout_height="match_parent"
         android:background="@color/background_color"
         android:gravity="center_horizontal">
-<!--        android:fitsSystemWindows="true"   ESTO HACE MOSTRAR UN BORDE BLANCO ABAJO DE LA BARRA>-->
+<!--        android:fitsSystemWindows="true"   ESTO HACE MOSTRAR UN BORDE BLANCO ABAJO DE LA BARRA-->
 
-    <!-- Menú hamburguesa -->
+    <!-- Menú hamburguesa --><!-- no usamos el import header porque no tenemos boton de flecha -->
     <LinearLayout
         android:id="@+id/btnmenuhamburguesa"
         android:orientation="horizontal"

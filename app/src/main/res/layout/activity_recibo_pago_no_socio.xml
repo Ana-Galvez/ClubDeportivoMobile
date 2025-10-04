@@ -1,49 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background_color"
     android:id="@+id/main_recibo_no_socio"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true">-->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <!-- Top spacing -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="120dp" />
-
-    <!-- Header: logo + título -->
+    <!-- CONTENIDO PRINCIPAL -->
     <LinearLayout
+        android:id="@+id/contentLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="8dp">
+        android:gravity="center"
+        android:background="@color/background_color">
 
-        <ImageView
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:src="@drawable/logo"
-            android:contentDescription="Logo" />
+        <include layout="@layout/activity_header" />
 
-        <TextView
-            android:text="Recibo No Socio"
-            android:layout_marginTop="20dp"
-            style="@style/TituloRecibo" />
-    </LinearLayout>
+        <!-- Top spacing -->
+        <!-- <View
+             android:layout_width="match_parent"
+             android:layout_height="42dp" />-->
 
+        <!-- Header: logo + título -->
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:contentDescription="Logo"
+                android:src="@drawable/logo" />
+
+            <TextView
+                style="@style/TituloRecibo"
+                android:layout_marginTop="20dp"
+                android:text="Recibo No Socio" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
 
             <!-- Nombre (chip) -->
-            <LinearLayout
-                style="@style/ChipContainer">
+            <LinearLayout style="@style/ChipContainer">
 
                 <TextView
                     android:id="@+id/tvNombreSocio"
@@ -53,21 +64,21 @@
 
             <!-- Tarjeta con datos del recibo -->
             <!-- Actividad -->
-            <LinearLayout
-                style="@style/CardContainer">
+            <LinearLayout style="@style/CardContainer">
 
                 <TextView
                     style="@style/CardTitle"
                     android:text="Natación" />
 
-                <View
-                    style="@style/Divider" />
+                <View style="@style/Divider" />
 
                 <!-- Fila: Monto -->
                 <LinearLayout style="@style/RowContainer">
+
                     <TextView
                         style="@style/RowLabel"
                         android:text="Monto" />
+
                     <TextView
                         android:id="@+id/tvMonto"
                         style="@style/RowValue"
@@ -76,9 +87,11 @@
 
                 <!-- Horario -->
                 <LinearLayout style="@style/RowContainer">
+
                     <TextView
                         style="@style/RowLabel"
                         android:text="Horario:" />
+
                     <TextView
                         android:id="@+id/tvhorario"
                         style="@style/RowValue"
@@ -87,9 +100,11 @@
 
                 <!-- Fila: Fecha de insc. -->
                 <LinearLayout style="@style/RowContainer">
+
                     <TextView
                         style="@style/RowLabel"
                         android:text="Fecha de insc:" />
+
                     <TextView
                         android:id="@+id/tvFechaInsc"
                         style="@style/RowValue"
@@ -98,9 +113,11 @@
 
                 <!-- Fila: Teléfono -->
                 <LinearLayout style="@style/RowContainer">
+
                     <TextView
                         style="@style/RowLabel"
                         android:text="Teléfono:" />
+
                     <TextView
                         android:id="@+id/tvTelefono"
                         style="@style/RowValue"
@@ -109,9 +126,11 @@
 
                 <!-- Fila: Dirección -->
                 <LinearLayout style="@style/RowContainerLast">
+
                     <TextView
                         style="@style/RowLabel"
                         android:text="Dirección:" />
+
                     <TextView
                         android:id="@+id/tvDireccion"
                         style="@style/RowValue"
@@ -136,10 +155,22 @@
             <!-- espacio -->
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp" />
         </LinearLayout>
 
 
-    <!-- Barra inferior fija -->
-    <include layout="@layout/activity_barra" />
-</LinearLayout>
+        <!-- Barra inferior fija -->
+        <include layout="@layout/activity_barra" />
+    </LinearLayout>
+    <!-- MENÚ LATERAL -->
+    <LinearLayout
+        android:id="@+id/drawerContainer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_menu" />
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

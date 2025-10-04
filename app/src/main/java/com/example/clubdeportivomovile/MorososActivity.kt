@@ -5,6 +5,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 
 class MorososActivity : BaseActivity() {
     private lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /*enableEdgeToEdge()*/
