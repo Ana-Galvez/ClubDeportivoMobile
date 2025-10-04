@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ClubDeportivoMovile">git add
+        android:theme="@style/Theme.ClubDeportivoMovile">
         <activity
             android:name=".error_apto_fisico"
             android:exported="false" />
@@ -37,7 +37,8 @@
             android:exported="false" />
         <activity
             android:name=".cerrarsesion"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.ClubDeportivoMovile.Dialog"/>
         <activity
             android:name=".configuracion"
             android:exported="false" />

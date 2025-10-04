@@ -9,48 +9,57 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 
+/* clase base para definir funcionalidades comunes a todas las pantallas*/
 abstract class BaseActivity : AppCompatActivity() {
 
+    //Header
     protected fun setupHeader(drawerLayout: DrawerLayout? = null) {
         val backBtn: ImageView? = findViewById(R.id.ivBack)
         val menuBtn: ImageView? = findViewById(R.id.ivMenu)
 
-        // Acción del botón atrás
+        // Botón atrás
         backBtn?.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        // Acción del menú hamburguesa
+        // Menú hamburguesa
         menuBtn?.setOnClickListener {
             drawerLayout?.openDrawer(GravityCompat.START)
         }
     }
+
+    //Barra inferior
+    //current: nombre de pantalla activa, puede estar vacia
     protected fun setupBottomBar(current: String) {
-    /* current: nombre de pantalla activa*/
+
+        //inicio
         findViewById<LinearLayout>(R.id.llInicio)?.setOnClickListener {
             if (this !is Home) {
                 startActivity(Intent(this, Home::class.java))
                 finish()
             }
         }
+        //nuevo
         findViewById<LinearLayout>(R.id.llNuevo)?.setOnClickListener {
             if (this !is Registrar) {
                 startActivity(Intent(this, Registrar::class.java))
                 finish()
             }
         }
-
+        //Clientes
         findViewById<LinearLayout>(R.id.llClientes)?.setOnClickListener {
             if (this !is ListadoDeClientes) {
                 startActivity(Intent(this, ListadoDeClientes::class.java))
                 finish()
             }
         }
+        //pagos
         findViewById<LinearLayout>(R.id.llPagos)?.setOnClickListener {
             val dialog = SocioONoSocio()
             dialog.show(supportFragmentManager, "SocioDialog")
         }
 
+        //Lista de morososo o vencismientos
         findViewById<LinearLayout>(R.id.llMorosos)?.setOnClickListener {
             if (this !is MorososActivity) {
                 startActivity(Intent(this, MorososActivity::class.java))
@@ -65,7 +74,7 @@ abstract class BaseActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.ivPagos)?.setImageResource(R.drawable.img_pagos_negro)
         findViewById<ImageView>(R.id.ivMorosos)?.setImageResource(R.drawable.img_morosos_negro)
 
-        // imagen en blanco en la actual
+        // Cambiamos a la imagen en blanco en la actual
         when (current) {
             "inicio"   -> findViewById<ImageView>(R.id.ivInicio)?.setImageResource(R.drawable.img_inicio_blanco)
             "nuevo"   -> findViewById<ImageView>(R.id.ivNuevo)?.setImageResource(R.drawable.img_nuevo_blanco)
@@ -76,7 +85,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
     }
 
-    // funcionamiento de la barra lateral .. drawerId-> nombre del Drawer de nuestra pantalla
+    // Barra lateral
+    // drawerId: nombre del Drawer de nuestra pantalla
     protected fun setupDrawerMenu(drawerId: Int) {
         val drawer = findViewById<DrawerLayout?>(drawerId)
 
@@ -105,7 +115,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
         // Cerrar sesión
         findViewById<TextView?>(R.id.txtCerrarSesion)?.setOnClickListener {
-            // TODO: lógica de logout
+            startActivity(Intent(this, cerrarsesion::class.java))
             drawer?.closeDrawer(GravityCompat.START)
         }
     }
