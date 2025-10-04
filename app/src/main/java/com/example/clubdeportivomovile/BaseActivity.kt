@@ -85,19 +85,19 @@ abstract class BaseActivity : AppCompatActivity() {
             drawer?.closeDrawer(GravityCompat.START)
         }
 
-        // App físico
+        // App físico -> Sitio en Construcción
         findViewById<TextView?>(R.id.txtAppFisico)?.setOnClickListener {
             startActivity(Intent(this, sitioconstruccion::class.java))
             drawer?.closeDrawer(GravityCompat.START)
         }
 
-        // Ayuda -> Sitio en Construcción
+        // Ayuda -> Sitio Caido
         findViewById<TextView?>(R.id.txtAyuda)?.setOnClickListener {
             startActivity(Intent(this, sitioconstruccion::class.java))
             drawer?.closeDrawer(GravityCompat.START)
         }
 
-        // Configuración
+        // Configuración -> Configuracion
         findViewById<TextView?>(R.id.txtConfiguracion)?.setOnClickListener {
             startActivity(Intent(this, sitioconstruccion::class.java))
             drawer?.closeDrawer(GravityCompat.START)

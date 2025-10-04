@@ -50,6 +50,8 @@
         android:layout_marginBottom="16dp" />
 
     <!-- Opciones del menú -->
+
+    <!--  El Inicio se puede borrar-->
     <TextView
         android:id="@+id/txtInicio"
         android:layout_width="match_parent"
