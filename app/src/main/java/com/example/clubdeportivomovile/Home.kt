@@ -22,6 +22,7 @@ class Home : BaseActivity() {
         setupBottomBar("inicio")
 
         drawerLayout = findViewById(R.id.drawer_layout)
+        setupDrawerMenu(R.id.drawer_layout) ///********** agregue para fc del menu ---va el id como parametro
 
        /* val menuIcon: ImageView? = findViewById(R.id.img_menu_hamburguesa)
 
