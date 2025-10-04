@@ -13,10 +13,10 @@ class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi t
         setContentView(R.layout.activity_editar_cliente)
         drawerLayout = findViewById(R.id.drawerLayout)
 
-        // Configurar header con botón atrás + hamburguesa
+        // header con botón atrás + hamburguesa
         setupHeader(drawerLayout)
-        setupDrawerMenu(R.id.drawerLayout) ///********** agregue para fc del menu ---va el id como parametro
-        setupBottomBar("")  //activo botones barra, cadena vacia para q no resalte ningun boton de la barra
+        setupDrawerMenu(R.id.drawerLayout) /// menu ---va el id como parametro
+        setupBottomBar("")  //barra, cadena vacia para q no resalte ningun boton de la barra
 
         val botonAceptar: Button = findViewById(R.id.btnGuardar)
 

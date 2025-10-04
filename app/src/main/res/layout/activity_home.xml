@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -13,153 +11,150 @@
         android:layout_height="match_parent"
         android:background="@color/background_color"
         android:gravity="center_horizontal">
-<!--        android:fitsSystemWindows="true"   ESTO HACE MOSTRAR UN BORDE BLANCO ABAJO DE LA BARRA-->
+        <!-- Menú hamburguesa --><!-- no usamos el import header porque no tenemos boton de flecha -->
+        <LinearLayout
+            android:id="@+id/btnmenuhamburguesa"
+            android:orientation="horizontal"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:gravity="center_vertical|end"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="35dp">
 
-    <!-- Menú hamburguesa --><!-- no usamos el import header porque no tenemos boton de flecha -->
-    <LinearLayout
-        android:id="@+id/btnmenuhamburguesa"
-        android:orientation="horizontal"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:gravity="center_vertical|end"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="35dp"
-        >
-        <ImageView
-            android:id="@+id/img_menu_hamburguesa"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:src="@drawable/img_menu_hamburguesa"
-            android:layout_marginEnd="10dp" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/img_menu_hamburguesa"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:src="@drawable/img_menu_hamburguesa"
+                android:layout_marginEnd="10dp" />
+        </LinearLayout>
 
-    <!-- Hola -->
+        <!-- Hola -->
         <TextView
             android:id="@+id/tvBienvenida"
             android:text="¡Hola, usuario!"
             android:layout_marginTop="20dp"
-            style="@style/Saludo"/>
+            style="@style/Saludo" />
 
-    <!-- Espaciador para empujar la barra al fondo -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
-    </View>
+        <!-- Espaciador para empujar la barra al fondo -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"></View>
 
-    <!-- Botón Registrar Clientes -->
+        <!-- Botón Registrar Clientes -->
 
-    <LinearLayout
-        android:id="@+id/btnRegistrarCliente"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:background="@drawable/bg_button_home_registrar_cliente"
-        android:clickable="true"
-        android:focusable="true">
+        <LinearLayout
+            android:id="@+id/btnRegistrarCliente"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:background="@drawable/bg_button_home_registrar_cliente"
+            android:clickable="true"
+            android:focusable="true">
 
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/registro_cliente"
-            android:layout_marginEnd="10dp"/>
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/registro_cliente"
+                android:layout_marginEnd="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Registrar Clientes"
-            android:textSize="16sp"
-            android:textColor="@color/white_1"/>
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registrar Clientes"
+                android:textSize="16sp"
+                android:textColor="@color/white_1" />
+        </LinearLayout>
 
-    <!-- Botón Listado Clientes -->
-    <LinearLayout
-        android:id="@+id/btnListadoClientes"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:background="@drawable/bg_button_home_listado_clientes"
-        android:clickable="true"
-        android:focusable="true">
+        <!-- Botón Listado Clientes -->
+        <LinearLayout
+            android:id="@+id/btnListadoClientes"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:background="@drawable/bg_button_home_listado_clientes"
+            android:clickable="true"
+            android:focusable="true">
 
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/clientes_negro"
-            android:layout_marginEnd="10dp" />
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/clientes_negro"
+                android:layout_marginEnd="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Listado de Clientes"
-            android:textSize="16sp"
-            android:textColor="@color/white_1"/>
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Listado de Clientes"
+                android:textSize="16sp"
+                android:textColor="@color/white_1" />
+        </LinearLayout>
 
-    <!-- Botón Registro Pago -->
-    <LinearLayout
-        android:id="@+id/btnRegistroPago"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:background="@drawable/bg_button_home_pago"
-        android:clickable="true"
-        android:focusable="true">
+        <!-- Botón Registro Pago -->
+        <LinearLayout
+            android:id="@+id/btnRegistroPago"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:background="@drawable/bg_button_home_pago"
+            android:clickable="true"
+            android:focusable="true">
 
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/registro_negro"
-            android:layout_marginEnd="10dp"/>
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/registro_negro"
+                android:layout_marginEnd="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Registro Pago"
-            android:textSize="16sp"
-            android:textColor="@color/white_1"/>
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registro Pago"
+                android:textSize="16sp"
+                android:textColor="@color/white_1" />
+        </LinearLayout>
 
-    <!-- Botón Socios Morosos -->
-    <LinearLayout
-        android:id="@+id/btnSociosMorosos"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:background="@drawable/bg_button_home_morosos"
-        android:clickable="true"
-        android:focusable="true">
+        <!-- Botón Socios Morosos -->
+        <LinearLayout
+            android:id="@+id/btnSociosMorosos"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:background="@drawable/bg_button_home_morosos"
+            android:clickable="true"
+            android:focusable="true">
 
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/lista_morosos"
-            android:layout_marginEnd="10dp"/>
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/lista_morosos"
+                android:layout_marginEnd="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lista de Socios Morosos"
-            android:textSize="16sp"
-            android:textColor="@color/white_1"/>
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lista de Socios Morosos"
+                android:textSize="16sp"
+                android:textColor="@color/white_1" />
+        </LinearLayout>
 
-    <!-- Espaciador para empujar la barra al fondo-->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        <!-- Espaciador para empujar la barra al fondo-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <!-- Barra inferior -->
         <include layout="@layout/activity_barra" />
@@ -173,7 +168,7 @@
         android:orientation="vertical">
 
 
-        <include layout="@layout/activity_menu"/>
+        <include layout="@layout/activity_menu" />
     </LinearLayout>
 
 

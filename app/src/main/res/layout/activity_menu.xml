@@ -51,19 +51,6 @@
 
     <!-- Opciones del menú -->
 
-    <!--  El Inicio se puede borrar
-    <TextView
-        android:id="@+id/txtInicio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Inicio"
-        android:textColor="@color/white_1"
-        android:drawableLeft="@drawable/home_menu"
-        android:drawablePadding="12dp"
-        android:padding="12dp"
-        android:textSize="16sp"
-        android:layout_marginLeft="20dp"/>-->
-
     <TextView
         android:id="@+id/txtAppFisico"
         android:layout_width="match_parent"

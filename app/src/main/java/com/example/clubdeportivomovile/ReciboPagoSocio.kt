@@ -17,7 +17,6 @@ class ReciboPagoSocio : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*enableEdgeToEdge()*/
         setContentView(R.layout.activity_recibo_pago_socio)
 
         val spinnerPago: Spinner = findViewById(R.id.spinner_pago)

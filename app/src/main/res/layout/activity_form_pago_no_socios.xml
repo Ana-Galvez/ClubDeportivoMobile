@@ -16,37 +16,6 @@
         <!--        android:fitsSystemWindows="true"-->
         <!-- Barra superior-->
         <include layout="@layout/activity_header" />
-        <!-- Menú hamburguesa
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="start"
-                android:contentDescription="Volver"
-                android:src="@drawable/img_flecha_izq"
-                android:id="@+id/back_formNoSocio"/>
-
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:id="@+id/img_menu_hamburguesa"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="end"
-                android:src="@drawable/img_menu_hamburguesa" />
-
-        </LinearLayout>-->
 
 
         <!-- Título -->

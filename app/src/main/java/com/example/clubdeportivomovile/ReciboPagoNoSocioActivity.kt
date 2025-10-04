@@ -14,14 +14,13 @@ class ReciboPagoNoSocioActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*enableEdgeToEdge()*/
         setContentView(R.layout.activity_recibo_pago_no_socio)
 
         drawerLayout = findViewById(R.id.drawerLayout)
 
-        // Configurar header con botón atrás + hamburguesa
+        //  header con botón atrás + hamburguesa
         setupHeader(drawerLayout)
-        setupDrawerMenu(R.id.drawerLayout) ///********** agregue para fc del menu ---va el id como parametro
-        setupBottomBar("")
+        setupDrawerMenu(R.id.drawerLayout) /// menu ---va el id como parametro
+        setupBottomBar("")//barra
     }
 }

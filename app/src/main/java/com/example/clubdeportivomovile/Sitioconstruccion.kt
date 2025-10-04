@@ -9,7 +9,7 @@ class Sitioconstruccion : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       setContentView(R.layout.activity_sitioconstruccion)
+        setContentView(R.layout.activity_sitioconstruccion)
         drawerLayout = findViewById(R.id.drawerLayout)
         setupHeader(drawerLayout) //header
 

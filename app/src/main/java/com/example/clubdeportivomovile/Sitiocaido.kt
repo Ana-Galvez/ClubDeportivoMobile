@@ -8,11 +8,8 @@ class Sitiocaido : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_sitiocaido)
-
         drawerLayout = findViewById(R.id.drawerLayout)
-
         setupHeader(drawerLayout) //header
     }
 }
