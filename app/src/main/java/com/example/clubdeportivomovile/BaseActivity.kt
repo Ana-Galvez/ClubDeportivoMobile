@@ -42,8 +42,8 @@ abstract class BaseActivity : AppCompatActivity() {
         //nuevo
         findViewById<LinearLayout>(R.id.llNuevo)?.setOnClickListener {
             if (this !is Registrar) {
-                startActivity(Intent(this, Apto_fisico::class.java))
-                finish()
+                val dialog = Apto_fisico()
+                dialog.show(supportFragmentManager, "AptoDialog")
             }
         }
         //Clientes
