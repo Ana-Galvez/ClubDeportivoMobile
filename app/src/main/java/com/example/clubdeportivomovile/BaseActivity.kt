@@ -42,7 +42,7 @@ abstract class BaseActivity : AppCompatActivity() {
         //nuevo
         findViewById<LinearLayout>(R.id.llNuevo)?.setOnClickListener {
             if (this !is Registrar) {
-                val dialog = Apto_fisico()
+                val dialog = AptoFisico()
                 dialog.show(supportFragmentManager, "AptoDialog")
             }
         }

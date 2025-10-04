@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -47,7 +46,7 @@ class Home : BaseActivity() {
         // Navegación de los botones
 
         findViewById<LinearLayout>(R.id.btnRegistrarCliente)?.setOnClickListener{
-            val dialog = Apto_fisico()
+            val dialog = AptoFisico()
             dialog.show(supportFragmentManager, "AptoDialog")
 
         }

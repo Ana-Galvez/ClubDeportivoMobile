@@ -23,6 +23,7 @@ class CarnetActivity : BaseActivity() {
         drawerLayout = findViewById(R.id.drawer_layout_carnet)
         // Configurar header con botón atrás + hamburguesa
         setupHeader(drawerLayout)
-        setupBottomBar("")  //activo botones barra, cadena vacia para q no resalte ningun boton de la barra
+        setupDrawerMenu(R.id.drawer_layout_carnet) ///********** agregue para fc del menu ---va el id como parametro
+        setupBottomBar("nuevo")
     }
 }

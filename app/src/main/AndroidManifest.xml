@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDeportivoMovile">
         <activity
-            android:name=".Error_apto_fisico"
+            android:name=".ErrorAptoFisico"
             android:exported="false" />
 <!--        <activity-->
 <!--            android:name=".eliminar_cliente"-->
 <!--            android:exported="true" />-->
         <activity
-            android:name=".Item_cliente"
+            android:name=".ItemCliente"
             android:exported="false" />
         <activity
             android:name=".ListadoDeClientes"

@@ -55,7 +55,7 @@
         android:id="@+id/txtAppFisico"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="App físico"
+        android:text="Apto físico"
         android:textColor="@color/white_1"
         android:drawableLeft="@drawable/aptofisico_menu"
         android:drawablePadding="12dp"
