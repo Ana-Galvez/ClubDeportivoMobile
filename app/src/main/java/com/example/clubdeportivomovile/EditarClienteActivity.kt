@@ -13,6 +13,7 @@ class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi t
 
         // Configurar header con botón atrás + hamburguesa
         setupHeader(drawerLayout)
+        setupDrawerMenu(R.id.drawerLayout) ///********** agregue para fc del menu ---va el id como parametro
         setupBottomBar("")  //activo botones barra, cadena vacia para q no resalte ningun boton de la barra
     }
 }
