@@ -1,9 +1,7 @@
 package com.example.clubdeportivomovile
 
 
-import android.app.Dialog
 import android.content.Intent
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -36,8 +34,8 @@ abstract class BaseActivity : AppCompatActivity() {
             }
         }
         findViewById<LinearLayout>(R.id.llNuevo)?.setOnClickListener {
-            if (this !is registrar) {
-                startActivity(Intent(this, registrar::class.java))
+            if (this !is Registrar) {
+                startActivity(Intent(this, Registrar::class.java))
                 finish()
             }
         }

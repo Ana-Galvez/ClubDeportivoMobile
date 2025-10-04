@@ -6,7 +6,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 
@@ -69,7 +68,7 @@ class Home : BaseActivity() {
         // Navegación de los botones
 
         findViewById<LinearLayout>(R.id.btnRegistrarCliente)?.setOnClickListener{
-            val intent= Intent(this,registrar::class.java)
+            val intent= Intent(this,Registrar::class.java)
             startActivity(intent)
         }
 

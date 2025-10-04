@@ -38,18 +38,6 @@ class PagoNoSocioActivity : BaseActivity() {
 
         // Drawer y botones
         drawerLayout = findViewById(R.id.drawer_layout_no_socio)
-        /*menuHamburguesa = findViewById(R.id.img_menu_hamburguesa)
-        flechaAtras = findViewById(R.id.back_formNoSocio)
-
-        menuHamburguesa.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-
-        flechaAtras.setOnClickListener {
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
-            finish()
-        }*/
         setupHeader(drawerLayout)
 
         val botonAceptar: Button = findViewById(R.id.BotonAceptarPagoNoSocio)

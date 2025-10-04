@@ -72,7 +72,7 @@
             android:name=".carnet"
             android:exported="false" />
         <activity
-            android:name=".registrar"
+            android:name=".Registrar"
             android:exported="false" />
         <activity
             android:name=".Login"

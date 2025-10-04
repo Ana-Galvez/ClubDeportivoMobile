@@ -1,7 +1,9 @@
 package com.example.clubdeportivomovile
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -38,5 +40,20 @@ class ReciboPagoSocio : BaseActivity() {
         setupHeader(drawerLayout)
         setupDrawerMenu(R.id.drawerLayout) ///********** agregue para fc del menu ---va el id como parametro
         setupBottomBar("pagos")  //activo botones barra
+
+        val botonAceptar: Button = findViewById(R.id.btnAceptarSocio)
+
+        botonAceptar.setOnClickListener {
+            val intent = Intent(this, ReciboSocioActivity::class.java)
+            startActivity(intent)
+        }
+
+        val botonLimpiar: Button = findViewById(R.id.btnLimpiarSocio)
+
+        botonLimpiar.setOnClickListener {
+            //cambiar por borrar formulario
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+        }
     }
 }
