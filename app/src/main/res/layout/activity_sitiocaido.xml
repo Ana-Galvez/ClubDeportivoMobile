@@ -1,82 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/drawerLayout"
+    <!-- CONTENIDO PRINCIPAL -->
+    <LinearLayout
+        android:id="@+id/contentLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <!-- CONTENIDO PRINCIPAL -->
-        <LinearLayout
-            android:id="@+id/contentLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/background_color"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+        <include layout="@layout/activity_header" />
 
-            <include layout="@layout/activity_header" />
-
-            <!-- Logo -->
-            <ImageView
-                android:id="@+id/img_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="24dp"
-                android:src="@drawable/logo" />
-
-            <!-- Texto principal -->
-            <TextView
-                android:id="@+id/tvBienvenida"
-                style="@style/Titulo"
-                android:text="UPS!!!"
-                android:textSize="32sp" />
-
-
-            <!-- Imagen Sitio caido -->
-            <ImageView
-                android:id="@+id/img_sitio_caido"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:src="@drawable/sitiocaido" />
-
-            <TextView
-                android:id="@+id/txt_sitioconst"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="32dp"
-                android:text="Sitio Caído"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/txt_regresa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="32dp"
-                android:text="Regresa más tarde"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <!-- Logo -->
+        <ImageView
+            android:id="@+id/img_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/logo" />
 
-            <!-- Menú lateral -->
-            <include layout="@layout/activity_menu" />
-        </LinearLayout>
-    </androidx.drawerlayout.widget.DrawerLayout>
-</LinearLayout>
+        <!-- Texto principal -->
+        <TextView
+            android:id="@+id/tvBienvenida"
+            style="@style/Titulo"
+            android:text="UPS!!!"
+            android:textSize="32sp" />
+
+
+        <!-- Imagen Sitio caido -->
+        <ImageView
+            android:id="@+id/img_sitio_caido"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sitiocaido" />
+
+        <TextView
+            android:id="@+id/txt_sitioconst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:text="Sitio Caído"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txt_regresa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:text="Regresa más tarde"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/drawerContainer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical">
+
+        <!-- Menú lateral -->
+        <include layout="@layout/activity_menu" />
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
+

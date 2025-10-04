@@ -52,13 +52,13 @@
 
             <TextView
                 style="@style/FormularioLabel"
-                android:text="Usuario" />
+                android:text="Contraseña" />
 
             <EditText
                 android:id="@+id/Contraseña"
                 style="@style/FormularioEditText"
                 android:hint="Ingresa tu contraseña"
-                android:inputType="textPersonName" />
+                android:inputType="textPassword" />
         </LinearLayout>
 
 
