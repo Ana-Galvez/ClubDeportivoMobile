@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,7 +26,7 @@ class Apto_fisico : DialogFragment() {
 
         val btnNo = view.findViewById<Button>(R.id.btn_no)
         btnNo.setOnClickListener {
-            //startActivity(Intent(requireActivity(), PagoNoSocioActivity::class.java))
+            Toast.makeText(requireContext(), "¡Necesita presentar el Apto Físico para registrarse!", Toast.LENGTH_SHORT).show()
             dismiss()
         }
     }
