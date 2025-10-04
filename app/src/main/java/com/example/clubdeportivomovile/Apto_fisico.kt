@@ -1,6 +1,8 @@
 package com.example.clubdeportivomovile
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,6 +17,16 @@ class Apto_fisico : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        findViewById<Button>(R.id.btn_si)?.setOnClickListener{
+            val intent= Intent(this, Registrar::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<Button>(R.id.btn_no)?.setOnClickListener{
+            val intent= Intent(this, Error_apto_fisico::class.java)
+            startActivity(intent)
         }
     }
 }

@@ -47,7 +47,7 @@ class Home : BaseActivity() {
         // Navegación de los botones
 
         findViewById<LinearLayout>(R.id.btnRegistrarCliente)?.setOnClickListener{
-            val intent= Intent(this,Registrar::class.java)
+            val intent= Intent(this, Apto_fisico::class.java)
             startActivity(intent)
         }
 

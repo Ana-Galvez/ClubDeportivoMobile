@@ -42,7 +42,7 @@ abstract class BaseActivity : AppCompatActivity() {
         //nuevo
         findViewById<LinearLayout>(R.id.llNuevo)?.setOnClickListener {
             if (this !is Registrar) {
-                startActivity(Intent(this, Registrar::class.java))
+                startActivity(Intent(this, Apto_fisico::class.java))
                 finish()
             }
         }
