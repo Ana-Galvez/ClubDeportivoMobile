@@ -24,7 +24,7 @@ class PagoNoSocioActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        /*enableEdgeToEdge()*/
         setContentView(R.layout.activity_form_pago_no_socios)
         setupDrawerMenu(R.id.drawer_layout_no_socio) ///********** agregue para fc del menu ---va el id como parametro
         setupBottomBar("pagos")

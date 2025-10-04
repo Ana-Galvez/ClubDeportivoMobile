@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background_color"
-    android:gravity="center_horizontal">-->
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
@@ -21,35 +14,6 @@
         android:background="@color/background_color">
 
         <include layout="@layout/activity_header"/>
-    <!-- Menú hamburguesa -->
-   <!-- <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="40dp">
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/img_flecha_izq"
-            android:layout_gravity="start"
-            android:contentDescription="Volver"/>
-
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/img_menu_hamburguesa"
-            android:layout_gravity="end"/>
-
-    </LinearLayout>-->
 
     <!-- Título -->
     <TextView
