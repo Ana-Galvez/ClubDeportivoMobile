@@ -29,7 +29,7 @@ class ReciboPagoNoSocioActivity : BaseActivity() {
 
         // Configurar header con botón atrás + hamburguesa
         setupHeader(drawerLayout)
-
+        setupDrawerMenu(R.id.drawerLayout) ///********** agregue para fc del menu ---va el id como parametro
         setupBottomBar("")
     }
 }

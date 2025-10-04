@@ -24,6 +24,7 @@ class ReciboSocioActivity : BaseActivity() {
         drawerLayout = findViewById(R.id.drawerLayout)
         // Configurar header con botón atrás + hamburguesa
         setupHeader(drawerLayout)
+        setupDrawerMenu(R.id.drawerLayout) ///********** agregue para fc del menu ---va el id como parametro
 
         setupBottomBar("")
     }
