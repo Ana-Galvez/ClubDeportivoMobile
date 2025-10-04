@@ -6,6 +6,7 @@ import android.content.Intent
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -75,5 +76,39 @@ abstract class BaseActivity : AppCompatActivity() {
             "morosos"  -> findViewById<ImageView>(R.id.ivMorosos)?.setImageResource(R.drawable.img_morosos_blanco)
         }
 
+    }
+
+    // funcionamiento de la barra lateral .. drawerId-> nombre del Drawer de nuestra pantalla
+    protected fun setupDrawerMenu(drawerId: Int) {
+        val drawer = findViewById<DrawerLayout?>(drawerId)
+
+        // Inicio
+        findViewById<TextView?>(R.id.txtInicio)?.setOnClickListener {
+            drawer?.closeDrawer(GravityCompat.START)
+        }
+
+        // App físico
+        findViewById<TextView?>(R.id.txtAppFisico)?.setOnClickListener {
+            startActivity(Intent(this, sitioconstruccion::class.java))
+            drawer?.closeDrawer(GravityCompat.START)
+        }
+
+        // Ayuda -> Sitio en Construcción
+        findViewById<TextView?>(R.id.txtAyuda)?.setOnClickListener {
+            startActivity(Intent(this, sitioconstruccion::class.java))
+            drawer?.closeDrawer(GravityCompat.START)
+        }
+
+        // Configuración
+        findViewById<TextView?>(R.id.txtConfiguracion)?.setOnClickListener {
+            startActivity(Intent(this, sitioconstruccion::class.java))
+            drawer?.closeDrawer(GravityCompat.START)
+        }
+
+        // Cerrar sesión
+        findViewById<TextView?>(R.id.txtCerrarSesion)?.setOnClickListener {
+            // TODO: lógica de logout
+            drawer?.closeDrawer(GravityCompat.START)
+        }
     }
 }
