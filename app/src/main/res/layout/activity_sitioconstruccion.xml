@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    tools:context=".sitiocaido">
+    tools:context=".sitiocaido"
+    android:background="@color/background_color">
 
     <!-- Menú superior (logo + hamburguesa) -->
     <LinearLayout
