@@ -46,21 +46,42 @@
         </LinearLayout>
 
 
+        <!-- Contraseña -->
         <LinearLayout
             style="@style/FormularioContainer"
-            android:layout_marginTop="43dp">
+            android:layout_marginTop="43dp"
+            android:orientation="vertical">
 
             <TextView
                 style="@style/FormularioLabel"
                 android:text="Contraseña" />
 
-            <EditText
-                android:id="@+id/Contraseña"
-                style="@style/FormularioEditText"
-                android:hint="Ingresa tu contraseña"
-                android:inputType="textPassword" />
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
+                <EditText
+                    android:id="@+id/Contraseña"
+                    style="@style/FormularioEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Ingresa tu contraseña"
+                    android:inputType="textPassword" />
+
+                <ImageView
+                    android:id="@+id/ivToggle"
+                    android:layout_width="40dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="10dp"
+                    android:clickable="true"
+                    android:contentDescription="Mostrar contraseña"
+                    android:focusable="true"
+                    android:src="@drawable/ic_visibility_off" />
+            </LinearLayout>
+        </LinearLayout>
 
         <!-- Botón -->
         <LinearLayout
