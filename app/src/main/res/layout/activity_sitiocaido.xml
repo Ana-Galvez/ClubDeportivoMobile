@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="32dp"
-                android:text="Sitio en Construcción"
+                android:text="Sitio Caído"
                 android:textSize="20sp" />
 
             <TextView
