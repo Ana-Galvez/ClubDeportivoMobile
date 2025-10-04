@@ -1,255 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg"
     android:orientation="vertical"
-    tools:context=".registrar">
-<!--    android:fitsSystemWindows="true"-->
+    android:gravity="center_horizontal">
+
+    <!-- Menú hamburguesa -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:contentDescription="Volver"
+            android:src="@drawable/img_flecha_izq" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:contentDescription="Menú"
+            android:src="@drawable/img_menu_hamburguesa" />
+    </LinearLayout>
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvBienvenida"
+        style="@style/Titulo"
+        android:layout_marginTop="20dp"
+        android:text="Registrar Cliente" />
 
     <!-- Contenido con scroll -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingBottom="60dp">
+        android:layout_weight="1">
 
         <LinearLayout
-            android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="30dp">
-
-            <!-- Contenedor del header -->
-            <!-- Menú hamburguesa -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:contentDescription="Volver"
-                    android:src="@drawable/img_flecha_izq" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:contentDescription="Menú"
-                    android:src="@drawable/img_menu_hamburguesa" />
-            </LinearLayout>
-
-            <!-- Texto -->
-            <TextView
-                android:id="@+id/bienvenido"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:text="Registro de Clientes"
-                android:textSize="24dp"
-                android:textStyle="bold" />
+            android:orientation="vertical">
 
             <!-- Nombre -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etNombre"
-                style="?attr/textInputFilledStyle"
-                android:layout_width="280dp"
-                android:layout_height="56dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="43dp"
-                android:hint="Nombre">
+            <LinearLayout style="@style/FormularioContainer">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    style="@style/FormularioLabel"
+                    android:text="Nombre" />
+
+                <EditText
+                    android:id="@+id/etNombre"
+                    style="@style/FormularioEditText"
+                    android:hint="Escribir nombre"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
 
             <!-- Apellido -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etApellido"
-                style="?attr/textInputFilledStyle"
-                android:layout_width="280dp"
-                android:layout_height="56dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="43dp"
-                android:hint="Apellido">
+            <LinearLayout style="@style/FormularioContainer">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
+                    style="@style/FormularioLabel"
+                    android:text="Apellido" />
+
+                <EditText
+                    android:id="@+id/etApellido"
+                    style="@style/FormularioEditText"
+                    android:hint="Escribir apellido"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <!-- Fecha de Nacimiento -->
+            <LinearLayout style="@style/FormularioContainer">
+
+                <TextView
+                    style="@style/FormularioLabel"
+                    android:text="Fecha de Nacimiento" />
+
+                <LinearLayout
+                    android:id="@+id/rowFechaNac"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="48dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
 
-            <!-- Nac. -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="280dp"
-                android:layout_height="56dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="43dp"
-                android:hint="Fecha de Nacimiento"
-                app:endIconDrawable="@drawable/ic_calendar"
-                app:endIconMode="custom">
+                    <TextView
+                        android:id="@+id/tvFechaNac"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="17/08/1990"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="14sp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextFecha"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:inputType="none" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:id="@+id/ivCalendario"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="Seleccionar fecha"
+                        android:src="@drawable/ic_calendar" />
+                </LinearLayout>
+            </LinearLayout>
 
             <!-- DNI -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etDNI"
-                style="?attr/textInputFilledStyle"
-                android:layout_width="280dp"
-                android:layout_height="56dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="43dp"
-                android:hint="DNI">
+            <LinearLayout style="@style/FormularioContainer">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    style="@style/FormularioLabel"
+                    android:text="DNI" />
 
-            <!-- Direccion -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etDireccion"
-                style="?attr/textInputFilledStyle"
-                android:layout_width="280dp"
-                android:layout_height="56dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="43dp"
-                android:hint="Dirección">
+                <EditText
+                    android:id="@+id/etDni"
+                    style="@style/FormularioEditText"
+                    android:hint="Escribir DNI"
+                    android:inputType="number" />
+            </LinearLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <!-- Dirección -->
+            <LinearLayout style="@style/FormularioContainer">
 
-            <!-- Telefono -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etTelefono"
-                style="?attr/textInputFilledStyle"
-                android:layout_width="280dp"
-                android:layout_height="56dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="43dp"
-                android:hint="Teléfono">
+                <TextView
+                    style="@style/FormularioLabel"
+                    android:text="Dirección" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                <EditText
+                    android:id="@+id/etDireccion"
+                    style="@style/FormularioEditText"
+                    android:hint="Escribir dirección"
+                    android:inputType="textPostalAddress" />
+            </LinearLayout>
+
+            <!-- Teléfono -->
+            <LinearLayout style="@style/FormularioContainer">
+
+                <TextView
+                    style="@style/FormularioLabel"
+                    android:text="Teléfono" />
+
+                <EditText
+                    android:id="@+id/etTelefono"
+                    style="@style/FormularioEditText"
+                    android:hint="Escribir teléfono"
+                    android:inputType="phone" />
+            </LinearLayout>
 
             <!-- Género -->
-            <TextView
-                android:id="@+id/textViewGenero"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/FormularioLabel"
+                    android:text="Género" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <RadioButton
+                        android:id="@+id/rbF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layoutDirection="rtl"
+                        android:text="F"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/rbM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layoutDirection="rtl"
+                        android:text="M"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/rbNoDecir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layoutDirection="rtl"
+                        android:lines="2"
+                        android:singleLine="false"
+                        android:text="Prefiero\nno decirlo"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="14sp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="24dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/FormularioLabel"
+                    android:text="Socio" />
+
+                <RadioGroup
+                    android:id="@+id/rgSocio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <RadioButton
+                        android:id="@+id/rbSocioSi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="16dp"
+                        android:text="Sí"
+                        android:textColor="@color/textPrimary"
+                        android:textDirection="ltr"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/rbSocioNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="0dp"
+                        android:text="No"
+                        android:textColor="@color/textPrimary"
+                        android:textDirection="ltr"
+                        android:textSize="14sp"
+                        android:layout_marginEnd="20dp"/>
+                </RadioGroup>
+            </LinearLayout>
+
+            <!-- Botones Guardar / Limpiar -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_marginTop="30dp"
-                android:text="Género" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <RadioGroup
-                android:id="@+id/radioGroupGenero"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnGuardar"
+                    style="@style/BotonAceptar"
+                    android:text="Aceptar" />
 
-                <RadioButton
-                    android:id="@+id/radioF"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text="F" />
-
-                <RadioButton
-                    android:id="@+id/radioM"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text="M" />
-
-                <RadioButton
-                    android:id="@+id/radioNoDecir"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Prefiero no decirlo" />
-            </RadioGroup>
-
-            <!-- Socio -->
-            <TextView
-                android:id="@+id/textViewSocio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_marginTop="30dp"
-                android:text="Socio" />
-
-            <RadioGroup
-                android:id="@+id/radioGroupSocio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radioSi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text="Si" />
-
-                <RadioButton
-                    android:id="@+id/radioNo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text="No" />
-            </RadioGroup>
-
-            <!-- Botón -->
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="43dp"
-                android:text="Aceptar" />
-
-            <!-- Texto debajo del botón -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="Limpiar"
-                android:textColor="#5C46BB"
-                android:textSize="20dp" />
-
+                <Button
+                    android:id="@+id/btnLimpiar"
+                    style="@style/BotonLimpiar"
+                    android:text="Limpiar" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 
     <!-- Barra -->
     <include layout="@layout/activity_barra" />
 </LinearLayout>
-
 
