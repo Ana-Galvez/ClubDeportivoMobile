@@ -3,6 +3,7 @@ package com.example.clubdeportivomovile
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -10,11 +11,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import limpiarFormulario
 
 class PagoNoSocioActivity : BaseActivity() {
 
@@ -47,11 +50,14 @@ class PagoNoSocioActivity : BaseActivity() {
         }
 
         val botonLimpiar: Button = findViewById(R.id.BotonLimpiarPagoNoSocio)
+        val etNombre: EditText = findViewById(R.id.cliente)
 
         botonLimpiar.setOnClickListener {
-            //cambiar por borrar formulario
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
+            val rootLayout = findViewById<ViewGroup>(R.id.content_Layout) // el layout principal del form
+            limpiarFormulario(rootLayout)
+
+            // foco al primer campo
+            etNombre.requestFocus()
         }
 
         setupBottomBar("pagos")  //activo botones barra

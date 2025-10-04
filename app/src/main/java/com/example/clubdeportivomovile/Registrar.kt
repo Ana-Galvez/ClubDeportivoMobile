@@ -2,8 +2,11 @@ package com.example.clubdeportivomovile
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import androidx.drawerlayout.widget.DrawerLayout
+import limpiarFormulario
 
 class Registrar : BaseActivity() {
     private lateinit var drawerLayout: DrawerLayout
@@ -26,10 +29,14 @@ class Registrar : BaseActivity() {
         }
 
         val botonLimpiar: Button = findViewById(R.id.btnLimpiar)
+        val etNombre: EditText = findViewById(R.id.etNombre)
+
         botonLimpiar.setOnClickListener {
-            //cambiar por borrar formulario
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
+            val rootLayout = findViewById<ViewGroup>(R.id.contentLayout) // el layout principal del form
+            limpiarFormulario(rootLayout)
+
+            // foco al primer campo
+            etNombre.requestFocus()
         }
     }
 }

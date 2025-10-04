@@ -37,6 +37,7 @@
             android:text="Cliente" />
 
         <EditText
+            android:id="@+id/cliente"
             android:hint="Escribir cliente"
             android:inputType="textPersonName"
             style="@style/FormularioEditText"/>

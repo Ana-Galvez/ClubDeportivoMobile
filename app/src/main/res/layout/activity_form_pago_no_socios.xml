@@ -8,6 +8,7 @@
     <!-- Contenido principal -->
     <!-- Menú lateral -->
     <LinearLayout
+        android:id="@+id/content_Layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_color"
@@ -38,6 +39,7 @@
                 android:text="Cliente" />
 
             <EditText
+                android:id="@+id/cliente"
                 style="@style/FormularioEditText"
                 android:hint="Nombre"
                 android:inputType="textPersonName" />
