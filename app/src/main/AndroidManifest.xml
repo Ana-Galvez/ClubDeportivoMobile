@@ -37,7 +37,8 @@
             android:exported="false" />
         <activity
             android:name=".Cerrarsesion"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.ClubDeportivoMovile.Dialog"/>/>
         <activity
             android:name=".Configuracion"
             android:exported="false" />

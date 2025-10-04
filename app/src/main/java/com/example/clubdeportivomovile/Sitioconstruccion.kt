@@ -11,7 +11,6 @@ class Sitioconstruccion : BaseActivity() {
         super.onCreate(savedInstanceState)
        setContentView(R.layout.activity_sitioconstruccion)
         drawerLayout = findViewById(R.id.drawerLayout)
-
         setupHeader(drawerLayout) //header
 
     }
