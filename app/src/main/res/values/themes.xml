@@ -4,6 +4,12 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
-
     <style name="Theme.ClubDeportivoMovile" parent="Base.Theme.ClubDeportivoMovile" />
+    <style name="Theme.ClubDeportivoMovile.Dialog" parent="Theme.Material3.DayNight.Dialog.Alert">
+        <!-- Evita ocupar toda la pantalla -->
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
+        <!-- Fondo redondeado (si usás Material3) -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Material3.Corner.Medium</item>
+    </style>
 </resources>
