@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="40dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@color/background_color">
 
     <!-- Texto -->
     <TextView
@@ -15,7 +16,6 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/background_color"
         android:textColor="@android:color/black" />
 
     <!-- Botones en fila -->
