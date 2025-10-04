@@ -9,8 +9,12 @@ import android.view.View
 import android.content.Intent
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.drawerlayout.widget.DrawerLayout
 
 class ListadoDeClientes : BaseActivity() {
+
+    private lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        // enableEdgeToEdge()
@@ -20,6 +24,11 @@ class ListadoDeClientes : BaseActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }*/
+        drawerLayout = findViewById(R.id.drawerLayout)
+
+        // Configurar header con botón atrás + hamburguesa
+        setupHeader(drawerLayout)
+        
         setupBottomBar("clientes")  //activo botones barra
 
         // Navegación botones derecha del cliente
