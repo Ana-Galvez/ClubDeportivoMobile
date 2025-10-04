@@ -19,10 +19,10 @@ class CarnetActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        /*enableEdgeToEdge()*/
         setContentView(R.layout.activity_carnet)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawer_layout_carnet)) { v, insets ->
+        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawer_layout_carnet)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -45,6 +45,11 @@ class CarnetActivity : BaseActivity() {
             startActivity(intent)
             finish()
         }
+        */
+        drawerLayout = findViewById(R.id.drawer_layout_carnet)
+
+        // Configurar header con botón atrás + hamburguesa
+        setupHeader(drawerLayout)
 
         setupBottomBar("")  //activo botones barra, cadena vacia para q no resalte ningun boton de la barra
     }

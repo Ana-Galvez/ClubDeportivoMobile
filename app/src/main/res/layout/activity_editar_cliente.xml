@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
     android:gravity="center_horizontal"
     android:orientation="vertical">
+-->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <!-- Menú hamburguesa -->
+    <!-- CONTENIDO PRINCIPAL -->
     <LinearLayout
+        android:id="@+id/contentLayout"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/bg">
 
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:contentDescription="Volver"
-            android:src="@drawable/img_flecha_izq" />
+        <include layout="@layout/activity_header"/>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:contentDescription="Menú"
-            android:src="@drawable/img_menu_hamburguesa" />
-    </LinearLayout>
 
     <!-- Título -->
 
@@ -289,3 +279,15 @@
     <!-- Barra -->
     <include layout="@layout/activity_barra" />
 </LinearLayout>
+    <!-- MENÚ LATERAL -->
+    <LinearLayout
+        android:id="@+id/drawerContainer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_menu"/>
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
