@@ -21,34 +21,6 @@
 
         <include layout="@layout/activity_header" />
 
-
-        <!-- Flecha y menú hamburguesa
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginHorizontal="40dp">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/img_flecha_izq"
-                android:contentDescription="Volver" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/img_menu_hamburguesa"
-                android:contentDescription="Menú" />
-        </LinearLayout>
-     -->
         <!-- Título -->
         <TextView
             android:text="Listado de Clientes"

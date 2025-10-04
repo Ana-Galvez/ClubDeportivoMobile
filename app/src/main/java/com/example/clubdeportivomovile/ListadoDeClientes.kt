@@ -7,9 +7,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.view.View
 import android.content.Intent
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.drawerlayout.widget.DrawerLayout
+import android.widget.TextView
 
 class ListadoDeClientes : BaseActivity() {
 
@@ -31,34 +33,24 @@ class ListadoDeClientes : BaseActivity() {
         setupDrawerMenu(R.id.drawerLayout) ///********** agregue para fc del menu ---va el id como parametro
         setupBottomBar("clientes")  //activo botones barra
 
-        // Navegación botones derecha del cliente
-
-        val ivVerCliente = findViewById<ImageView>(R.id.ivVerCliente)
-        ivVerCliente.setOnClickListener {
-            val intent = Intent(this, CarnetActivity::class.java)
-            startActivity(intent)
-        }
-
-        findViewById<ImageView>(R.id.ivRegistrarPago)?.setOnClickListener {
-            val dialog = SocioONoSocio()
-            dialog.show(supportFragmentManager, "SocioDialog")
-        }
-
-       /* val ivEditarCliente = findViewById<ImageView>(R.id.ivEditarCliente)
-        ivEditarCliente.setOnClickListener {
-            val intent = Intent(this, EditarClienteActivity::class.java)
-            startActivity(intent)
-        }*/
-
-        //NO FUNCIONA PARA MOSTRAR MODAL DE ELIMINAR VERRR
-
-//        findViewById<ImageView>(R.id.ivEliminarCliente)?.setOnClickListener {
-//            val dialog = eliminar_cliente()
-//            dialog.show(supportFragmentManager, "EliminarDialog")
-//        }
     }
+    // Navegación botones derecha del cliente
     fun onEditarClienteClick(view: View) {
         val i = Intent(this, EditarClienteActivity::class.java)
         startActivity(i)
+    }
+    fun onMostrarCarnetClick(view: View) {
+        val i = Intent(this, CarnetActivity::class.java)
+        startActivity(i)
+    }
+    fun onEliminarClienteClick(view: View) {
+        val modal = EliminarCliente()
+        modal.show(supportFragmentManager, "modalEliminar")
+    }
+
+    fun onRegistrarPagoClick(view: View) {
+        //Cuando esté el debe dirigir al formulario de pago correspondiente al tipo de cliente
+            val i = Intent(this, ReciboPagoSocio::class.java)
+            startActivity(i)
     }
 }

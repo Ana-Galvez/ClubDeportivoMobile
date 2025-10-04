@@ -37,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:text="Socio"
                 android:textSize="14sp"
-                android:textColor="@color/gray_1"/>
+                android:textColor="@color/gray_1"
+                android:id="@+id/tvClienteTipo"/>
         </LinearLayout>
 
         <!-- Íconos a la derecha -->
@@ -48,14 +49,16 @@
             android:src="@drawable/img_ver_cliente"
             android:layout_marginStart="8dp"
             android:clickable="true"
-            android:focusable="true"/>
+            android:focusable="true"
+            android:onClick="onMostrarCarnetClick"/>
 
         <ImageView
             android:id="@+id/ivRegistrarPago"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/img_ver_pago"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            android:onClick="onRegistrarPagoClick"/>
 
         <ImageView
             android:id="@+id/ivEditarCliente"
@@ -72,6 +75,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/img_eliminar_cliente"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            android:onClick="onEliminarClienteClick"/>
     </LinearLayout>
 </LinearLayout>
