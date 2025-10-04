@@ -51,7 +51,7 @@
 
     <!-- Opciones del menú -->
 
-    <!--  El Inicio se puede borrar-->
+    <!--  El Inicio se puede borrar
     <TextView
         android:id="@+id/txtInicio"
         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
         android:drawablePadding="12dp"
         android:padding="12dp"
         android:textSize="16sp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="20dp"/>-->
 
     <TextView
         android:id="@+id/txtAppFisico"

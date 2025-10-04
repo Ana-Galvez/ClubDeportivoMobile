@@ -61,9 +61,10 @@ class Home : BaseActivity() {
                 }
             }
         })
-        findViewById<TextView>(R.id.txtInicio)?.setOnClickListener {
-            drawerLayout.closeDrawer(drawerContainer)
-        }
+
+        //findViewById<TextView>(R.id.txtInicio)?.setOnClickListener {
+        //    drawerLayout.closeDrawer(drawerContainer)
+        //}
 
         // Navegación de los botones
 

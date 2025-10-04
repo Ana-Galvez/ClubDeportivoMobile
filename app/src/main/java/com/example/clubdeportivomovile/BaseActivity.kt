@@ -81,9 +81,9 @@ abstract class BaseActivity : AppCompatActivity() {
         val drawer = findViewById<DrawerLayout?>(drawerId)
 
         // Inicio
-        findViewById<TextView?>(R.id.txtInicio)?.setOnClickListener {
-            drawer?.closeDrawer(GravityCompat.START)
-        }
+        //findViewById<TextView?>(R.id.txtInicio)?.setOnClickListener {
+        //    drawer?.closeDrawer(GravityCompat.START)
+        //}
 
         // App físico -> Sitio en Construcción
         findViewById<TextView?>(R.id.txtAppFisico)?.setOnClickListener {
@@ -93,13 +93,13 @@ abstract class BaseActivity : AppCompatActivity() {
 
         // Ayuda -> Sitio Caido
         findViewById<TextView?>(R.id.txtAyuda)?.setOnClickListener {
-            startActivity(Intent(this, sitioconstruccion::class.java))
+            startActivity(Intent(this, sitiocaido::class.java))
             drawer?.closeDrawer(GravityCompat.START)
         }
 
         // Configuración -> Configuracion
         findViewById<TextView?>(R.id.txtConfiguracion)?.setOnClickListener {
-            startActivity(Intent(this, sitioconstruccion::class.java))
+            startActivity(Intent(this, configuracion::class.java))
             drawer?.closeDrawer(GravityCompat.START)
         }
 

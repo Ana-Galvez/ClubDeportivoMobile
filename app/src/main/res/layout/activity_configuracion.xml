@@ -1,79 +1,82 @@
-<?xml version="1.0" encoding="utf-8"?><!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
-    -->
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawerLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <LinearLayout
-        android:id="@+id/contentLayout"
+    <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_color"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include layout="@layout/activity_header" />
-
-        <!-- Título -->
-        <TextView
-            android:id="@+id/tvBienvenida"
-            style="@style/Titulo"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="24dp"
-            android:text="Configuración" />
-
+        <!-- CONTENIDO PRINCIPAL -->
         <LinearLayout
+            android:id="@+id/contentLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingHorizontal="40dp">
+            android:layout_height="match_parent"
+            android:background="@color/background_color"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <!-- Fila: Activar Sonido -->
+            <include layout="@layout/activity_header" />
+
+            <!-- Título -->
+            <TextView
+                android:id="@+id/tvBienvenida"
+                style="@style/Titulo"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="24dp"
+                android:text="Configuración" />
+
             <LinearLayout
-                style="@style/RowContainerCarnet"
-                android:layout_marginBottom="20dp">
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingHorizontal="40dp">
 
-                <TextView
-                    style="@style/RowLabel"
-                    android:text="Activar Sonido" />
+                <!-- Fila: Activar Sonido -->
+                <LinearLayout
+                    style="@style/RowContainerCarnet"
+                    android:layout_marginBottom="20dp">
 
-                <Switch
-                    android:id="@+id/switchSonido"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
-            </LinearLayout>
+                    <TextView
+                        style="@style/RowLabel"
+                        android:text="Activar Sonido" />
 
-            <!-- Fila: Enviar Notificaciones -->
-            <LinearLayout
-                style="@style/RowContainerCarnet"
-                android:orientation="horizontal">
+                    <Switch
+                        android:id="@+id/switchSonido"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                </LinearLayout>
 
-                <TextView
-                    style="@style/RowLabel"
-                    android:text="Enviar Notificaciones" />
+                <!-- Fila: Enviar Notificaciones -->
+                <LinearLayout
+                    style="@style/RowContainerCarnet"
+                    android:orientation="horizontal">
 
-                <Switch
-                    android:id="@+id/switchNotificaciones"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+                    <TextView
+                        style="@style/RowLabel"
+                        android:text="Enviar Notificaciones" />
+
+                    <Switch
+                        android:id="@+id/switchNotificaciones"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
-</androidx.drawerlayout.widget.DrawerLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>
