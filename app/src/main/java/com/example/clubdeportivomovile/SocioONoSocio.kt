@@ -23,14 +23,12 @@ class SocioONoSocio : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val btnSi = view.findViewById<Button>(R.id.btn_si)
         btnSi.setOnClickListener {
-            Toast.makeText(requireContext(), "Botón Sí tocado", Toast.LENGTH_SHORT).show()
             startActivity(Intent(requireActivity(), ReciboPagoSocio::class.java))
             dismiss()
         }
 
         val btnNo = view.findViewById<Button>(R.id.btn_no)
         btnNo.setOnClickListener {
-            Toast.makeText(requireContext(), "Botón No tocado", Toast.LENGTH_SHORT).show()
             startActivity(Intent(requireActivity(), PagoNoSocioActivity::class.java))
             dismiss()
         }
