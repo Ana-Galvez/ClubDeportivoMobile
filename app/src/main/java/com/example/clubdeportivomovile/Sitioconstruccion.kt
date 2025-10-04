@@ -4,7 +4,7 @@ package com.example.clubdeportivomovile
 import android.os.Bundle
 import androidx.drawerlayout.widget.DrawerLayout
 
-class sitioconstruccion : BaseActivity() {
+class Sitioconstruccion : BaseActivity() {
     private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
