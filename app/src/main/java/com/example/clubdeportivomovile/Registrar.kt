@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioGroup
+import android.widget.*
 import androidx.drawerlayout.widget.DrawerLayout
 import limpiarFormulario
 
@@ -21,21 +23,51 @@ class Registrar : BaseActivity() {
         setupDrawerMenu(R.id.drawerLayout) ///* menu ---va el id como parametro
         setupBottomBar("nuevo")  // barra
 
+        // Referencias a los campos
+        val etNombre: EditText = findViewById(R.id.etNombre)
+        val etApellido: EditText = findViewById(R.id.etApellido)
+        //val tvFechaNac: TextView = findViewById(R.id.tvFechaNac)
+        val etDni: EditText = findViewById(R.id.etDni)
+        val etDireccion: EditText = findViewById(R.id.etDireccion)
+        val etTelefono: EditText = findViewById(R.id.etTelefono)
+        val rbg: RadioGroup = findViewById(R.id.rbg)
+        val rgSocio: RadioGroup = findViewById(R.id.rgSocio)
+
         val botonAceptar: Button = findViewById(R.id.btnGuardar)
+        val botonLimpiar: Button = findViewById(R.id.btnLimpiar)
 
         botonAceptar.setOnClickListener {
-            val intent = Intent(this, CarnetActivity::class.java)
-            startActivity(intent)
+            val nombre = etNombre.text.toString().trim()
+            val apellido = etApellido.text.toString().trim()
+            //val fechaNac = tvFechaNac.text.toString().trim()
+            val dni = etDni.text.toString().trim()
+            val direccion = etDireccion.text.toString().trim()
+            val telefono = etTelefono.text.toString().trim()
+            val generoSeleccionado = rbg.checkedRadioButtonId
+            val socioSeleccionado = rgSocio.checkedRadioButtonId
+
+            when {
+                nombre.isEmpty() -> Toast.makeText(this, "Ingrese el nombre", Toast.LENGTH_SHORT).show()
+                apellido.isEmpty() -> Toast.makeText(this, "Ingrese el apellido", Toast.LENGTH_SHORT).show()
+                //fechaNac.isEmpty() || fechaNac == "DD/MM/YYYY" -> Toast.makeText(this, "Seleccione la fecha de nacimiento", Toast.LENGTH_SHORT).show()
+                dni.isEmpty() -> Toast.makeText(this, "Ingrese el DNI", Toast.LENGTH_SHORT).show()
+                dni.length < 7 -> Toast.makeText(this, "El DNI debe tener al menos 7 dígitos", Toast.LENGTH_SHORT).show()
+                direccion.isEmpty() -> Toast.makeText(this, "Ingrese la dirección", Toast.LENGTH_SHORT).show()
+                telefono.isEmpty() -> Toast.makeText(this, "Ingrese el teléfono", Toast.LENGTH_SHORT).show()
+                !telefono.matches(Regex("^[0-9]{8,15}$")) -> Toast.makeText(this, "Teléfono inválido", Toast.LENGTH_SHORT).show()
+                generoSeleccionado == -1 -> Toast.makeText(this, "Seleccione un género", Toast.LENGTH_SHORT).show()
+                socioSeleccionado == -1 -> Toast.makeText(this, "Seleccione tipo de socio", Toast.LENGTH_SHORT).show()
+                else -> {
+                    Toast.makeText(this, "Datos validados correctamente", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, CarnetActivity::class.java)
+                    startActivity(intent)
+                }
+            }
         }
 
-        val botonLimpiar: Button = findViewById(R.id.btnLimpiar)
-        val etNombre: EditText = findViewById(R.id.etNombre)
-
         botonLimpiar.setOnClickListener {
-            val rootLayout = findViewById<ViewGroup>(R.id.contentLayout) // el layout principal del form
+            val rootLayout = findViewById<ViewGroup>(R.id.contentLayout)
             limpiarFormulario(rootLayout)
-
-            // foco al primer campo
             etNombre.requestFocus()
         }
     }
