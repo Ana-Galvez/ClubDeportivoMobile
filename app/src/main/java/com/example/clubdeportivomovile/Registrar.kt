@@ -9,6 +9,8 @@ import android.widget.RadioGroup
 import android.widget.*
 import androidx.drawerlayout.widget.DrawerLayout
 import limpiarFormulario
+import android.app.DatePickerDialog
+import java.util.Calendar
 
 class Registrar : BaseActivity() {
     private lateinit var drawerLayout: DrawerLayout
@@ -26,7 +28,10 @@ class Registrar : BaseActivity() {
         // Referencias a los campos
         val etNombre: EditText = findViewById(R.id.etNombre)
         val etApellido: EditText = findViewById(R.id.etApellido)
-        //val tvFechaNac: TextView = findViewById(R.id.tvFechaNac)
+
+        val rowFechaNac = findViewById<LinearLayout>(R.id.rowFechaNac)
+        val tvFechaNac: TextView = findViewById(R.id.tvFechaNac)
+
         val etDni: EditText = findViewById(R.id.etDni)
         val etDireccion: EditText = findViewById(R.id.etDireccion)
         val etTelefono: EditText = findViewById(R.id.etTelefono)
@@ -36,10 +41,28 @@ class Registrar : BaseActivity() {
         val botonAceptar: Button = findViewById(R.id.btnGuardar)
         val botonLimpiar: Button = findViewById(R.id.btnLimpiar)
 
+        rowFechaNac.setOnClickListener {
+            val calendario = Calendar.getInstance()
+            val anio = calendario.get(Calendar.YEAR)
+            val mes = calendario.get(Calendar.MONTH)
+            val dia = calendario.get(Calendar.DAY_OF_MONTH)
+
+        val datePicker = DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth ->
+                // Cuando el usuario selecciona la fecha:
+                val fechaSeleccionada = "%02d/%02d/%04d".format(dayOfMonth, month + 1, year)
+                tvFechaNac.text = fechaSeleccionada
+            },
+            anio, mes, dia
+        )
+        datePicker.show()
+        }
+
         botonAceptar.setOnClickListener {
             val nombre = etNombre.text.toString().trim()
             val apellido = etApellido.text.toString().trim()
-            //val fechaNac = tvFechaNac.text.toString().trim()
+            val fechaNac = tvFechaNac.text.toString().trim()
             val dni = etDni.text.toString().trim()
             val direccion = etDireccion.text.toString().trim()
             val telefono = etTelefono.text.toString().trim()
@@ -49,7 +72,7 @@ class Registrar : BaseActivity() {
             when {
                 nombre.isEmpty() -> Toast.makeText(this, "Ingrese el nombre", Toast.LENGTH_SHORT).show()
                 apellido.isEmpty() -> Toast.makeText(this, "Ingrese el apellido", Toast.LENGTH_SHORT).show()
-                //fechaNac.isEmpty() || fechaNac == "DD/MM/YYYY" -> Toast.makeText(this, "Seleccione la fecha de nacimiento", Toast.LENGTH_SHORT).show()
+                fechaNac.isEmpty() || fechaNac == "DD/MM/YYYY" -> Toast.makeText(this, "Seleccione la fecha de nacimiento", Toast.LENGTH_SHORT).show()
                 dni.isEmpty() -> Toast.makeText(this, "Ingrese el DNI", Toast.LENGTH_SHORT).show()
                 dni.length < 7 -> Toast.makeText(this, "El DNI debe tener al menos 7 dígitos", Toast.LENGTH_SHORT).show()
                 direccion.isEmpty() -> Toast.makeText(this, "Ingrese la dirección", Toast.LENGTH_SHORT).show()
