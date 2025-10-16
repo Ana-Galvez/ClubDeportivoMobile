@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
 import limpiarFormulario
 
 class PagoNoSocioActivity : BaseActivity() {
@@ -30,14 +29,32 @@ class PagoNoSocioActivity : BaseActivity() {
             val id: Int,
             val nombre: String,
             val apellido: String,
-            val socio: Boolean
+            val socio: Boolean,
+            val telefono: String,
+            val ins: String,
+            val direccion:String
         )
+
         val clientes = listOf(
-            Cliente(1, "María", "Golden", false),
-            Cliente(2, "Juan", "Chavo", true),
-            Cliente(3, "Lorena", "Simpsons", false)
+            Cliente(1, "María", "Golden", false, "09012345", "02/07/2024", "Calle Falsa 01"),
+            Cliente(1, "María", "Silver", false, "523112345", "30/10/2024", "Callejón New"),
+            Cliente(2, "Juan", "Chavo", true, "01112345", "15/04/2025", "Calle NoHay 10"),
+            Cliente(3, "Lorena", "Sim", false, "04662345", "22/12/2024", "Calle S/N"),
+            Cliente(3, "Armando", "Perez Gomez", false, "222662345", "13/12/2024", "Calle Nueva")
         )
-        val clienteEditText: EditText = findViewById(R.id.formNoSocioCliente)
+
+        val clienteEditText: AutoCompleteTextView= findViewById(R.id.formNoSocioCliente)
+
+        val nombresClientes = clientes.map { "${it.nombre} ${it.apellido}" }
+
+        val adapterClientes = ArrayAdapter(
+            this,
+            android.R.layout.simple_dropdown_item_1line,
+            nombresClientes
+        )
+
+        // Para mostrar sugerencia de busqueda de nombres
+        clienteEditText.setAdapter(adapterClientes)
 
         //actividades
         data class Actividad(
@@ -76,7 +93,12 @@ class PagoNoSocioActivity : BaseActivity() {
         spinnerActividad.adapter = adapter
 
         spinnerActividad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 if (position == 0) {
                     horarioEditText.text.clear()
                     montoEditText.text.clear()
@@ -125,7 +147,7 @@ class PagoNoSocioActivity : BaseActivity() {
         setupHeader(drawerLayout)
 
         //Validaciones del formulario
-       fun validarFormulario(
+        fun validarFormulario(
             spinnerActividad: Spinner,
             clienteEditText: EditText,
             clientes: List<Cliente>
@@ -137,10 +159,15 @@ class PagoNoSocioActivity : BaseActivity() {
 
             // campos vacíos
             if (!clienteIngresado && !actividadSeleccionada) {
-                Toast.makeText(this, "Campos incompletos. Complete cliente y actividad.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Campos incompletos. Complete cliente y actividad.",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return false
             } else if (!clienteIngresado) {
-                Toast.makeText(this, "Debe ingresar el nombre del cliente.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Debe ingresar el nombre del cliente.", Toast.LENGTH_SHORT)
+                    .show()
                 return false
             } else if (!actividadSeleccionada) {
                 Toast.makeText(this, "Debe seleccionar una actividad.", Toast.LENGTH_SHORT).show()
@@ -150,7 +177,11 @@ class PagoNoSocioActivity : BaseActivity() {
             // Validar que el nombre tenga solo letras y espacios
             val regexNombre = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+\$")
             if (!regexNombre.matches(nombreIngresado)) {
-                Toast.makeText(this, "El nombre del cliente contiene caracteres inválidos.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "El nombre del cliente contiene caracteres inválidos.",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return false
             }
 
@@ -166,7 +197,11 @@ class PagoNoSocioActivity : BaseActivity() {
 
             // Verificar si es no socio
             if (clienteEncontrado.socio) {
-                Toast.makeText(this, "El cliente es socio no se puede registrar el pago.", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this,
+                    "El cliente es socio no se puede registrar el pago.",
+                    Toast.LENGTH_LONG
+                ).show()
                 return false
             }
             return true
@@ -176,8 +211,26 @@ class PagoNoSocioActivity : BaseActivity() {
         val botonAceptar: Button = findViewById(R.id.BotonAceptarPagoNoSocio)
 
         botonAceptar.setOnClickListener {
-            if (validarFormulario(spinnerActividad, clienteEditText, clientes)) {
-                val intent = Intent(this, ReciboPagoNoSocioActivity::class.java)
+            if (validarFormulario(spinnerActividad, clienteEditText, clientes = clientes)) {
+                val actividadSeleccionada = spinnerActividad.selectedItem.toString()
+                val clienteNombre = clienteEditText.text.toString().trim()
+                val horario = horarioEditText.text.toString().trim()
+                val monto = montoEditText.text.toString().trim()
+                //Para pasar los datos del cliente no socio encontrado
+                val clienteEncontrado = clientes.find {
+                    "${it.nombre} ${it.apellido}".equals(clienteNombre, ignoreCase = true)
+                }!!
+                //Paso la info al comprobante
+                val intent = Intent(this, ReciboPagoNoSocioActivity::class.java).apply {
+                    putExtra("nombreCliente", clienteNombre)
+                    putExtra("actividad", actividadSeleccionada)
+                    putExtra("horario", horario)
+                    putExtra("monto", monto)
+                    putExtra("telefono", clienteEncontrado.telefono)
+                    putExtra("ins", clienteEncontrado.ins)
+                    putExtra("direccion", clienteEncontrado.direccion)
+                }
+
                 startActivity(intent)
             }
         }
@@ -193,7 +246,8 @@ class PagoNoSocioActivity : BaseActivity() {
             etNombre.requestFocus()
         }
 
-        setupBottomBar("pagos")  //activo botones barra
+        //activo botones barra
+        setupBottomBar("pagos")
     }
 }
 

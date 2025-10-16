@@ -120,7 +120,7 @@
     <!-- Contenedor del chip con nombre -->
     <style name="ChipContainer">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:layout_marginStart">40dp</item>
         <item name="android:layout_marginEnd">40dp</item>
         <item name="android:layout_marginTop">8dp</item>
@@ -136,7 +136,6 @@
         <item name="android:fontFamily">@font/inter_big_semibold</item>
         <item name="android:textColor">@color/textPrimary</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textStyle">italic</item>
     </style>
 
     <!-- Contenedor de la tarjeta -->

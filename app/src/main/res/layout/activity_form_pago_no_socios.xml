@@ -33,11 +33,14 @@
                 style="@style/FormularioLabel"
                 android:text="Cliente" />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/formNoSocioCliente"
                 style="@style/FormularioEditText"
                 android:hint="Ingrese un nombre"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:completionThreshold="1"
+                android:drawableEnd="@drawable/ic_search"
+                android:drawablePadding="12dp"/>
         </LinearLayout>
 
         <!-- Actividad -->
