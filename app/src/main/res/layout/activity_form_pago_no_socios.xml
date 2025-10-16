@@ -14,22 +14,17 @@
         android:background="@color/background_color"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-        <!--        android:fitsSystemWindows="true"-->
+
         <!-- Barra superior-->
         <include layout="@layout/activity_header" />
-
 
         <!-- Título -->
         <TextView
             android:id="@+id/tvtituloNoSocio"
             style="@style/Titulo"
             android:text="Registro de Pago No Socio"
-            tools:ignore="HardcodedText" />
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="50dp"></View>
+            tools:ignore="HardcodedText"
+            android:layout_marginBottom="50dp"/>
 
         <!-- Cliente -->
         <LinearLayout style="@style/FormularioContainer">
@@ -39,9 +34,9 @@
                 android:text="Cliente" />
 
             <EditText
-                android:id="@+id/cliente"
+                android:id="@+id/formNoSocioCliente"
                 style="@style/FormularioEditText"
-                android:hint="Nombre"
+                android:hint="Ingrese un nombre"
                 android:inputType="textPersonName" />
         </LinearLayout>
 
@@ -58,7 +53,7 @@
                 style="@style/DropdownSpinner" />
         </LinearLayout>
 
-        <!-- Horario -->
+        <!-- Horario no editable, viene de la db-->
         <LinearLayout style="@style/FormularioContainer">
 
             <TextView
@@ -67,11 +62,15 @@
 
             <EditText
                 style="@style/FormularioEditText"
-                android:hint="11:00 hs"
-                android:inputType="time" />
+                android:hint="00:00 hs"
+                android:inputType="time"
+                android:focusable="false"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:id="@+id/formNoSocioHorario"/>
         </LinearLayout>
 
-        <!-- Monto -->
+        <!-- Monto no editable, viene de la db-->
         <LinearLayout style="@style/FormularioContainer">
 
             <TextView
@@ -80,13 +79,16 @@
 
             <EditText
                 style="@style/FormularioEditText"
-                android:hint="15000"
-                android:inputType="numberDecimal" />
+                android:hint="$0"
+                android:inputType="numberDecimal"
+                android:focusable="false"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:id="@+id/formNoSocioMonto"/>
         </LinearLayout>
 
         <!-- Advertencia -->
 
-        <!-- Botón Aceptar y Limpiar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -116,6 +118,7 @@
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
+        <!-- Botón Aceptar y Limpiar -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

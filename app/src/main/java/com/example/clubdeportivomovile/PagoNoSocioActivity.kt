@@ -5,25 +5,19 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import limpiarFormulario
 
 class PagoNoSocioActivity : BaseActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var menuHamburguesa: ImageView
-    private lateinit var flechaAtras: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,29 +25,168 @@ class PagoNoSocioActivity : BaseActivity() {
         setupDrawerMenu(R.id.drawer_layout_no_socio) ///********** agregue para fc del menu ---va el id como parametro
         setupBottomBar("pagos")
 
-        // Spinner
+        //clientes
+        data class Cliente(
+            val id: Int,
+            val nombre: String,
+            val apellido: String,
+            val socio: Boolean
+        )
+        val clientes = listOf(
+            Cliente(1, "María", "Golden", false),
+            Cliente(2, "Juan", "Chavo", true),
+            Cliente(3, "Lorena", "Simpsons", false)
+        )
+        val clienteEditText: EditText = findViewById(R.id.formNoSocioCliente)
+
+        //actividades
+        data class Actividad(
+            val id: Int,
+            val nombre: String,
+            val precio: Int,
+            val diaSemana: String,
+            val hora: String
+        )
+
+        val actividades = listOf(
+            Actividad(1, "Yoga", 15000, "Lunes", "11:00 hs"),
+            Actividad(2, "Tenis", 18000, "Martes", "14:00 hs"),
+            Actividad(3, "Natación", 20000, "Miércoles", "16:30 hs")
+        )
+
         val spinnerActividad: Spinner = findViewById(R.id.spinner_pago_no_socio)
-        val items = resources.getStringArray(R.array.actividades).toList()
-        val adapter = ArrayAdapter(this, R.layout.spinner_item_custom, items)
+        val horarioEditText: EditText = findViewById(R.id.formNoSocioHorario)
+        val montoEditText: EditText = findViewById(R.id.formNoSocioMonto)
+
+        val nombresActividades = mutableListOf("Seleccionar...")
+        nombresActividades.addAll(actividades.map { it.nombre })
+
+        val adapter = object : ArrayAdapter<String>(
+            this,
+            R.layout.spinner_item_custom,
+            nombresActividades
+        ) {
+            override fun isEnabled(position: Int): Boolean {
+                // placeholder
+                return position != 0
+            }
+        }
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerActividad.adapter = adapter
+
+        spinnerActividad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                if (position == 0) {
+                    horarioEditText.text.clear()
+                    montoEditText.text.clear()
+                    return
+                }
+
+                val actividadSeleccionada = actividades[position - 1] // -1 por el placeholder
+                horarioEditText.setText(actividadSeleccionada.hora)
+                montoEditText.setText(actividadSeleccionada.precio.toString())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+        spinnerActividad.setSelection(0)
+
         adapter.setDropDownViewResource(R.layout.spinner_item_custom)
         spinnerActividad.adapter = adapter
 
-        // Drawer y botones
+        spinnerActividad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (position == 0) {
+                    horarioEditText.text.clear()
+                    montoEditText.text.clear()
+                    return
+                }
+
+                val actividadSeleccionada = actividades[position - 1] // -1 por el placeholder
+                horarioEditText.setText(actividadSeleccionada.hora)
+                montoEditText.setText(actividadSeleccionada.precio.toString())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+        // Mostrar el placeholder
+        spinnerActividad.setSelection(0)
+
+        // Drawer
         drawerLayout = findViewById(R.id.drawer_layout_no_socio)
         setupHeader(drawerLayout)
 
+        //Validaciones del formulario
+       fun validarFormulario(
+            spinnerActividad: Spinner,
+            clienteEditText: EditText,
+            clientes: List<Cliente>
+        ): Boolean {
+            val nombreIngresado = clienteEditText.text.toString().trim()
+
+            val actividadSeleccionada = spinnerActividad.selectedItemPosition != 0
+            val clienteIngresado = nombreIngresado.isNotEmpty()
+
+            // campos vacíos
+            if (!clienteIngresado && !actividadSeleccionada) {
+                Toast.makeText(this, "Campos incompletos. Complete cliente y actividad.", Toast.LENGTH_SHORT).show()
+                return false
+            } else if (!clienteIngresado) {
+                Toast.makeText(this, "Debe ingresar el nombre del cliente.", Toast.LENGTH_SHORT).show()
+                return false
+            } else if (!actividadSeleccionada) {
+                Toast.makeText(this, "Debe seleccionar una actividad.", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
+            // Validar que el nombre tenga solo letras y espacios
+            val regexNombre = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+\$")
+            if (!regexNombre.matches(nombreIngresado)) {
+                Toast.makeText(this, "El nombre del cliente contiene caracteres inválidos.", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
+            // Buscar cliente en la base de datos
+            val clienteEncontrado = clientes.find {
+                "${it.nombre} ${it.apellido}".equals(nombreIngresado, ignoreCase = true)
+            }
+
+            if (clienteEncontrado == null) {
+                Toast.makeText(this, "El cliente no existe.", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
+            // Verificar si es no socio
+            if (clienteEncontrado.socio) {
+                Toast.makeText(this, "El cliente es socio no se puede registrar el pago.", Toast.LENGTH_LONG).show()
+                return false
+            }
+            return true
+        }
+
+        //Botones
         val botonAceptar: Button = findViewById(R.id.BotonAceptarPagoNoSocio)
 
         botonAceptar.setOnClickListener {
-            val intent = Intent(this, ReciboPagoNoSocioActivity::class.java)
-            startActivity(intent)
+            if (validarFormulario(spinnerActividad, clienteEditText, clientes)) {
+                val intent = Intent(this, ReciboPagoNoSocioActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         val botonLimpiar: Button = findViewById(R.id.BotonLimpiarPagoNoSocio)
-        val etNombre: EditText = findViewById(R.id.cliente)
+        val etNombre: EditText = findViewById(R.id.formNoSocioCliente)
 
         botonLimpiar.setOnClickListener {
-            val rootLayout = findViewById<ViewGroup>(R.id.content_Layout) // el layout principal del form
+            val rootLayout = findViewById<ViewGroup>(R.id.content_Layout)
             limpiarFormulario(rootLayout)
 
             // foco al primer campo
