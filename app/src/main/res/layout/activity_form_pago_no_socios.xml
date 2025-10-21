@@ -96,15 +96,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/bg_help_no_socio_form"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:paddingVertical="8dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginEnd="8dp"
                 android:contentDescription="help"
                 android:src="@drawable/i_help"
@@ -117,7 +117,7 @@
                 android:fontFamily="@font/inter_regular_semibold"
                 android:text="Los No Socios abonan en efectivo"
                 android:textColor="@color/textPrimary"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
