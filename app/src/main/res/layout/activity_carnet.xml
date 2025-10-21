@@ -16,12 +16,25 @@
 
         <include layout="@layout/activity_header"/>
 
-        <!-- Header: título -->
-        <TextView
-            style="@style/TituloRecibo"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="24dp"
-            android:text="Carnet" />
+        <!-- Header: Logo y título -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:contentDescription="@string/logo"
+                android:src="@drawable/logo" />
+
+            <TextView
+                style="@style/TituloRecibo"
+                android:layout_marginTop="20dp"
+                android:text="Carnet" />
+        </LinearLayout>
 
 
         <LinearLayout
@@ -163,7 +176,9 @@
     <LinearLayout
         android:layout_width="280dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start">
+        android:layout_gravity="start"
+        android:clickable="true"
+        android:focusable="true">
 
         <include layout="@layout/activity_menu" />
     </LinearLayout>

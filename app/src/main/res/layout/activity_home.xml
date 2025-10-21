@@ -171,7 +171,9 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true">
 
 
         <include layout="@layout/activity_menu" />

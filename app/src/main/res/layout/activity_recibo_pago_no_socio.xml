@@ -26,7 +26,7 @@
             <ImageView
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:contentDescription="Logo"
+                android:contentDescription="@string/logo"
                 android:src="@drawable/logo" />
 
             <TextView
@@ -157,7 +157,9 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true">
 
         <include layout="@layout/activity_menu" />
     </LinearLayout>
