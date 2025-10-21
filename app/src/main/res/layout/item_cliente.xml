@@ -46,6 +46,7 @@
             android:id="@+id/ivVerCliente"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:contentDescription="Ver carnet"
             android:src="@drawable/img_ver_cliente"
             android:layout_marginStart="8dp"
             android:clickable="true"
@@ -56,6 +57,7 @@
             android:id="@+id/ivRegistrarPago"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:contentDescription="Formulario pago"
             android:src="@drawable/img_ver_pago"
             android:layout_marginStart="8dp"
             android:onClick="onRegistrarPagoClick"/>
@@ -74,6 +76,7 @@
             android:id="@+id/ivEliminarCliente"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:contentDescription="Eliminar"
             android:src="@drawable/img_eliminar_cliente"
             android:layout_marginStart="8dp"
             android:onClick="onEliminarClienteClick"/>

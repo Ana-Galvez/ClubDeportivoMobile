@@ -5,6 +5,11 @@
     <string name="clientes">CLIENTES</string>
     <string name="pagos">PAGOS</string>
     <string name="morosos">MOROSOS</string>
+    <string name="registro_pago">Registro Pago</string>
+    <string name="lista_de_socios_morosos">Lista de Socios Morosos</string>
+    <string name="listado_de_clientes">Listado de Clientes</string>
+    <string name="registrar_clientes">Registrar Clientes</string>
+    <string name="logo">Logo</string>
 
     <string-array name="opciones_pago">
         <item>Seleccionar…</item>

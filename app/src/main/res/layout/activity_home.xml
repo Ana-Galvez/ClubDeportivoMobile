@@ -58,13 +58,14 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/registro_cliente"
+                android:contentDescription="@string/registrar_clientes"
+                android:src="@drawable/img_nuevo_negro"
                 android:layout_marginEnd="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registrar Clientes"
+                android:text="@string/registrar_clientes"
                 android:textSize="16sp"
                 android:textColor="@color/white_1" />
         </LinearLayout>
@@ -85,13 +86,15 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/clientes_negro"
-                android:layout_marginEnd="10dp" />
+                android:contentDescription="@string/listado_de_clientes"
+                android:src="@drawable/img_clientes_negro"
+                android:layout_marginEnd="10dp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Listado de Clientes"
+                android:text="@string/listado_de_clientes"
                 android:textSize="16sp"
                 android:textColor="@color/white_1" />
         </LinearLayout>
@@ -112,13 +115,15 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/registro_negro"
-                android:layout_marginEnd="10dp" />
+                android:contentDescription="@string/registro_pago"
+                android:src="@drawable/img_pagos_negro"
+                android:layout_marginEnd="10dp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registro Pago"
+                android:text="@string/registro_pago"
                 android:textSize="16sp"
                 android:textColor="@color/white_1" />
         </LinearLayout>
@@ -139,13 +144,14 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/lista_morosos"
+                android:contentDescription="@string/lista_de_socios_morosos"
+                android:src="@drawable/img_morosos_negro"
                 android:layout_marginEnd="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lista de Socios Morosos"
+                android:text="@string/lista_de_socios_morosos"
                 android:textSize="16sp"
                 android:textColor="@color/white_1" />
         </LinearLayout>

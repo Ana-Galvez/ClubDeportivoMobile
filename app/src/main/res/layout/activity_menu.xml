@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/menu_container"
     android:layout_width="245dp"
     android:layout_height="match_parent"
@@ -55,13 +56,13 @@
         android:id="@+id/txtAppFisico"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Apto físico"
-        android:textColor="@color/white_1"
-        android:drawableLeft="@drawable/aptofisico_menu"
+        android:layout_marginStart="20dp"
         android:drawablePadding="12dp"
         android:padding="12dp"
+        android:text="Apto físico"
+        android:textColor="@color/white_1"
         android:textSize="16sp"
-        android:layout_marginLeft="20dp"/>
+        app:drawableStartCompat="@drawable/aptofisico_menu_24dp" />
 
     <TextView
         android:id="@+id/txtAyuda"
@@ -69,11 +70,11 @@
         android:layout_height="wrap_content"
         android:text="Ayuda"
         android:textColor="@color/white_1"
-        android:drawableLeft="@drawable/help_menu"
         android:drawablePadding="12dp"
         android:padding="12dp"
         android:textSize="16sp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginStart="20dp"
+        app:drawableStartCompat="@drawable/help_menu_24dp" />
 
     <TextView
         android:id="@+id/txtConfiguracion"
@@ -81,11 +82,11 @@
         android:layout_height="wrap_content"
         android:text="Configuración"
         android:textColor="@color/white_1"
-        android:drawableLeft="@drawable/setting_menu"
         android:drawablePadding="12dp"
         android:padding="12dp"
         android:textSize="16sp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginStart="20dp"
+        app:drawableStartCompat="@drawable/setting_menu_24dp" />
 
     <!-- Empuja el item hacia abajo -->
     <View
@@ -100,10 +101,10 @@
         android:layout_height="wrap_content"
         android:text="Cerrar sesión"
         android:textColor="@color/grayBackground"
-        android:drawableLeft="@drawable/signout"
         android:drawablePadding="12dp"
         android:padding="12dp"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        app:drawableStartCompat="@drawable/signout_24dp" />
 
 </LinearLayout>
 
