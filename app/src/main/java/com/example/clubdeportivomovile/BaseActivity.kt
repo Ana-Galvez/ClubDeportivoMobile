@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 
@@ -76,11 +77,26 @@ abstract class BaseActivity : AppCompatActivity() {
 
         // Cambiamos a la imagen en blanco en la actual
         when (current) {
-            "inicio"   -> findViewById<ImageView>(R.id.ivInicio)?.setImageResource(R.drawable.img_inicio_blanco)
-            "nuevo"   -> findViewById<ImageView>(R.id.ivNuevo)?.setImageResource(R.drawable.img_nuevo_blanco)
-            "clientes" -> findViewById<ImageView>(R.id.ivClientes)?.setImageResource(R.drawable.img_clientes_blanco)
-            "pagos"    -> findViewById<ImageView>(R.id.ivPagos)?.setImageResource(R.drawable.img_pagos_blanco)
-            "morosos"  -> findViewById<ImageView>(R.id.ivMorosos)?.setImageResource(R.drawable.img_morosos_blanco)
+            "inicio" -> {
+                findViewById<ImageView>(R.id.ivInicio)?.setImageResource(R.drawable.img_inicio_blanco)
+                findViewById<TextView>(R.id.tvInicio)?.setTextColor(ContextCompat.getColor(this, R.color.white))
+            }
+            "nuevo" -> {
+                findViewById<ImageView>(R.id.ivNuevo)?.setImageResource(R.drawable.img_nuevo_blanco)
+                findViewById<TextView>(R.id.tvNuevo)?.setTextColor(ContextCompat.getColor(this, R.color.white))
+            }
+            "clientes" -> {
+                findViewById<ImageView>(R.id.ivClientes)?.setImageResource(R.drawable.img_clientes_blanco)
+                findViewById<TextView>(R.id.tvClientes)?.setTextColor(ContextCompat.getColor(this, R.color.white))
+            }
+            "pagos" -> {
+                findViewById<ImageView>(R.id.ivPagos)?.setImageResource(R.drawable.img_pagos_blanco)
+                findViewById<TextView>(R.id.tvPagos)?.setTextColor(ContextCompat.getColor(this, R.color.white))
+            }
+            "morosos" -> {
+                findViewById<ImageView>(R.id.ivMorosos)?.setImageResource(R.drawable.img_morosos_blanco)
+                findViewById<TextView>(R.id.tvMorosos)?.setTextColor(ContextCompat.getColor(this, R.color.white))
+            }
         }
 
     }

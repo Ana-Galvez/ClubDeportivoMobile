@@ -8,95 +8,166 @@
 
 
         <!-- Inicio -->
-        <LinearLayout
-            android:id="@+id/llInicio"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackgroundBorderless">
-            <ImageView
-                android:id="@+id/ivInicio"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_inicio_negro"
-                android:contentDescription="Inicio"/>
-        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/llInicio"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:paddingTop="6dp"
+        android:paddingBottom="4dp">
 
-        <!-- Nuevo -->
-        <LinearLayout
-            android:id="@+id/llNuevo"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackgroundBorderless">
-            <ImageView
-                android:id="@+id/ivNuevo"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_nuevo_negro"/>
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/ivInicio"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/img_inicio_negro"
+            android:contentDescription="@string/inicio"/>
 
-        <!-- Clientes -->
-        <LinearLayout
-            android:id="@+id/llClientes"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackgroundBorderless">
-            <ImageView
-                android:id="@+id/ivClientes"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_clientes_negro"/>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tvInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inicio"
+            android:textSize="11sp"
+            android:textColor="@color/textPrimary"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
 
-        <!-- Pagos -->
-        <LinearLayout
-            android:id="@+id/llPagos"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackgroundBorderless">
-            <ImageView
-                android:id="@+id/ivPagos"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_pagos_negro"/>
-        </LinearLayout>
 
-        <!-- Morosos -->
-        <LinearLayout
-            android:id="@+id/llMorosos"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackgroundBorderless">
-            <ImageView
-                android:id="@+id/ivMorosos"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:src="@drawable/img_morosos_negro"/>
-        </LinearLayout>
+    <!-- Nuevo -->
+    <LinearLayout
+        android:id="@+id/llNuevo"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:paddingTop="6dp"
+        android:paddingBottom="4dp">
+
+        <ImageView
+            android:id="@+id/ivNuevo"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/nuevo"
+            android:src="@drawable/img_nuevo_negro"/>
+
+        <TextView
+            android:id="@+id/tvNuevo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nuevo"
+            android:textSize="11sp"
+            android:textColor="@color/textPrimary"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+    <!-- Clientes -->
+    <LinearLayout
+        android:id="@+id/llClientes"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:paddingTop="6dp"
+        android:paddingBottom="4dp">
+
+        <ImageView
+            android:id="@+id/ivClientes"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/clientes"
+            android:src="@drawable/img_clientes_negro"/>
+
+        <TextView
+            android:id="@+id/tvClientes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clientes"
+            android:textSize="11sp"
+            android:textColor="@color/textPrimary"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+    <!-- Pagos -->
+    <LinearLayout
+        android:id="@+id/llPagos"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:paddingTop="6dp"
+        android:paddingBottom="4dp">
+
+        <ImageView
+            android:id="@+id/ivPagos"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/pagos"
+            android:src="@drawable/img_pagos_negro"/>
+
+        <TextView
+            android:id="@+id/tvPagos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pagos"
+            android:textSize="11sp"
+            android:textColor="@color/textPrimary"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+    <!-- Morosos -->
+    <LinearLayout
+        android:id="@+id/llMorosos"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:paddingTop="6dp"
+        android:paddingBottom="4dp">
+
+        <ImageView
+            android:id="@+id/ivMorosos"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/morosos"
+            android:src="@drawable/img_morosos_negro"/>
+
+        <TextView
+            android:id="@+id/tvMorosos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/morosos"
+            android:textSize="11sp"
+            android:textColor="@color/textPrimary"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
 
 
 </LinearLayout>

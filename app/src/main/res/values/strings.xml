@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">SportifyClub</string>
+    <string name="inicio">INICIO</string>
+    <string name="nuevo">NUEVO</string>
+    <string name="clientes">CLIENTES</string>
+    <string name="pagos">PAGOS</string>
+    <string name="morosos">MOROSOS</string>
 
     <string-array name="opciones_pago">
-        <item>Seleccionar...</item>
+        <item>Seleccionar…</item>
         <item>Efectivo</item>
         <item>Tarjeta de Crédito</item>
     </string-array>
