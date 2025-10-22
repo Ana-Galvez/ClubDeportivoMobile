@@ -63,6 +63,7 @@
                 <LinearLayout style="@style/CardContainer">
 
                     <TextView
+                        android:id="@+id/tvCuotaSocio"
                         style="@style/CardTitle"
                         android:text="Cuota Septiembre 2025" />
 

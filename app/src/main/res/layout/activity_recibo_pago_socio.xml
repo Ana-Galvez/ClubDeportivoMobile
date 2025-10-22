@@ -36,10 +36,13 @@
             style="@style/FormularioLabel"
             android:text="Cliente" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/cliente"
-            android:hint="Escribir cliente"
+            android:hint="Ingrese un nombre"
             android:inputType="textPersonName"
+            android:completionThreshold="1"
+            android:drawableEnd="@drawable/ic_search"
+            android:drawablePadding="12dp"
             style="@style/FormularioEditText"/>
     </LinearLayout>
 
@@ -53,6 +56,7 @@
             />
 
         <Spinner
+            android:id="@+id/spinner_cuota_pendiente"
             style="@style/DropdownSpinner" />
     </LinearLayout>
 
@@ -66,6 +70,7 @@
             />
 
         <EditText
+            android:id="@+id/monto"
             android:hint="0.00"
             style="@style/FormularioEditText"
             android:inputType="numberDecimal"/>
