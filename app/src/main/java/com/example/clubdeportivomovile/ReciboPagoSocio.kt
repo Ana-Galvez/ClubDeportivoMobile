@@ -185,19 +185,20 @@ class ReciboPagoSocio : BaseActivity() {
         //Validaciones del formulario
         fun validarFormulario(
             spinnerCuota: Spinner,
+            spinnerFormaPago: Spinner,
             clienteEditText: EditText,
             clientes: List<Cliente>
         ): Boolean {
             val nombreIngresado = clienteEditText.text.toString().trim()
-
+            val formaPago = spinnerFormaPago.selectedItemPosition !=0
             val cuotaSeleccionada = spinnerCuota.selectedItemPosition != 0
             val clienteIngresado = nombreIngresado.isNotEmpty()
 
             // campos vacíos
-            if (!clienteIngresado && !cuotaSeleccionada) {
+            if (!clienteIngresado && !cuotaSeleccionada && !formaPago) {
                 Toast.makeText(
                     this,
-                    "Campos incompletos. Complete cliente y cuota.",
+                    "Campos incompletos. Complete cliente, cuota y forma de pago.",
                     Toast.LENGTH_SHORT
                 ).show()
                 return false
@@ -207,6 +208,9 @@ class ReciboPagoSocio : BaseActivity() {
                 return false
             } else if (!cuotaSeleccionada) {
                 Toast.makeText(this, "Debe seleccionar una cuota.", Toast.LENGTH_SHORT).show()
+                return false
+            } else if (!formaPago){
+                Toast.makeText(this, "Debe seleccionar una forma de pago.", Toast.LENGTH_SHORT).show()
                 return false
             }
 
@@ -247,8 +251,9 @@ class ReciboPagoSocio : BaseActivity() {
         val botonAceptar: Button = findViewById(R.id.btnAceptarSocio)
 
         botonAceptar.setOnClickListener {
-            if (validarFormulario(spinnerCuota, clienteEditText, clientes = clientes)) {
+            if (validarFormulario(spinnerCuota, spinnerPago,clienteEditText, clientes = clientes)) {
                 val cuotaSeleccionada = spinnerCuota.selectedItem.toString()
+                val formaPago = spinnerPago.selectedItem.toString()
                 val clienteNombre = clienteEditText.text.toString().trim()
                 val monto = montoEditText.text.toString().trim()
                 //Para pasar los datos del cliente socio encontrado
