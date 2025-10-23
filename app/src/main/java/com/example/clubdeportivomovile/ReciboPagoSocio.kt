@@ -28,7 +28,6 @@ class ReciboPagoSocio : BaseActivity() {
         setContentView(R.layout.activity_recibo_pago_socio)
 
         // Configurar header con botón atrás + hamburguesa
-        setupHeader(drawerLayout)
         setupDrawerMenu(R.id.drawerLayout) ///********** agregue para fc del menu ---va el id como parametro
         setupBottomBar("pagos")  //activo botones barra
 
@@ -166,21 +165,25 @@ class ReciboPagoSocio : BaseActivity() {
         val nombresPago = mutableListOf("Seleccionar...")
         nombresPago.addAll(formasPagos.map { it.medioPago })
 
-/*        val spinnerPago: Spinner = findViewById(R.id.spinner_pago)
-
-        // Crea un ArrayAdapter usando el string-array y un layout simple
-        ArrayAdapter.createFromResource(
+        // Crear el adapter para mostrar las opciones en el Spinner
+        val adapterPago = object : ArrayAdapter<String>(
             this,
-            R.array.opciones_pago,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Especifica el layout para usar cuando la lista de opciones aparece
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Aplica el adaptador al spinner
-            spinnerPago.adapter = adapter
+            R.layout.spinner_item_custom,
+            nombresPago
+        ) {
+            override fun isEnabled(position: Int): Boolean {
+                // deshabilita el placeholder
+                return position != 0
+            }
         }
 
-        drawerLayout = findViewById(R.id.drawerLayout)*/
+        // Vista desplegable
+        adapterPago.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Asignar el adapter al Spinner
+        spinnerPago.adapter = adapterPago
+        // Mostrar el placeholder por defecto
+        spinnerPago.setSelection(0)
+
 
         //Validaciones del formulario
         fun validarFormulario(
@@ -274,8 +277,6 @@ class ReciboPagoSocio : BaseActivity() {
                 startActivity(intent)
             }
         }
-
-
 
         val botonLimpiar: Button = findViewById(R.id.btnLimpiarSocio)
         val etNombre: EditText = findViewById(R.id.cliente)

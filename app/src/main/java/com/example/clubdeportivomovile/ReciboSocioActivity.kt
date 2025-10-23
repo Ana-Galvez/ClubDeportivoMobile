@@ -20,7 +20,7 @@ class ReciboSocioActivity : BaseActivity() {
         setupHeader(drawerLayout)
         setupDrawerMenu(R.id.drawerLayout) // menu ---va el id como parametro
 
-        setupBottomBar("")//barra
+        setupBottomBar("pagos")//barra
 
         // Datos del formulario
         val nombreCliente = intent.getStringExtra("nombreCliente")
