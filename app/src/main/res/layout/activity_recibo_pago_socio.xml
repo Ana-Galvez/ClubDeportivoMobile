@@ -27,6 +27,17 @@
         android:layout_height="50dp">
     </View>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
     <!-- VER INPUTS -->
     <!-- Cliente -->
     <LinearLayout
@@ -126,7 +137,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:layout_gravity="center_horizontal"
+        android:gravity="center">
 
         <Button
             style="@style/BotonAceptar"
@@ -144,12 +156,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-
-
+            </LinearLayout>
+</ScrollView>
     <!-- Barra inferior fija -->
     <include layout="@layout/activity_barra" />
 
-</LinearLayout>
+    </LinearLayout>
     <!-- MENÚ LATERAL -->
     <LinearLayout
         android:id="@+id/drawerContainer"
