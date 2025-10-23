@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -65,28 +66,28 @@ class ReciboPagoSocio : BaseActivity() {
 
 
         // Cuota pendiente
-        data class Cuota(
+        data class CuotaPendiente(
             val id: Int,
             val mesAnio: String,
             val monto: Int
         )
 
-        val cuotas = listOf(
-            Cuota(1, "Septiembre 2025", 35000),
-            Cuota(2, "Julio 2025", 35000),
-            Cuota(3, "Agosto 2025", 35000)
+        val cuotasPendientes = listOf(
+            CuotaPendiente(1, "Septiembre 2025", 35000),
+            CuotaPendiente(2, "Julio 2025", 35000),
+            CuotaPendiente(3, "Agosto 2025", 35000)
         )
 
-        val spinnerCuota: Spinner = findViewById(R.id.spinner_cuota_pendiente)
+        val spinnerCuotaPendiente: Spinner = findViewById(R.id.spinner_cuota_pendiente)
         val montoEditText: EditText = findViewById(R.id.monto)
 
-        val nombresCuotas = mutableListOf("Seleccionar...")
-        nombresCuotas.addAll(cuotas.map { it.mesAnio })
+        val nombresCuotasPendientes = mutableListOf("Seleccionar...")
+        nombresCuotasPendientes.addAll(cuotasPendientes.map { it.mesAnio })
 
         val adapter = object : ArrayAdapter<String>(
             this,
             R.layout.spinner_item_custom,
-            nombresCuotas
+            nombresCuotasPendientes
         ) {
             override fun isEnabled(position: Int): Boolean {
                 // placeholder
@@ -96,9 +97,9 @@ class ReciboPagoSocio : BaseActivity() {
 
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerCuota.adapter = adapter
+        spinnerCuotaPendiente.adapter = adapter
 
-        spinnerCuota.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spinnerCuotaPendiente.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View?,
@@ -110,19 +111,19 @@ class ReciboPagoSocio : BaseActivity() {
                     return
                 }
 
-                val cuotaSeleccionada = cuotas[position - 1] // -1 por el placeholder
-                montoEditText.setText(cuotaSeleccionada.monto.toString())
+                val cuotaPendienteSeleccionada = cuotasPendientes[position - 1] // -1 por el placeholder
+                montoEditText.setText(cuotaPendienteSeleccionada.monto.toString())
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        spinnerCuota.setSelection(0)
+        spinnerCuotaPendiente.setSelection(0)
 
         adapter.setDropDownViewResource(R.layout.spinner_item_custom)
-        spinnerCuota.adapter = adapter
+        spinnerCuotaPendiente.adapter = adapter
 
-        spinnerCuota.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spinnerCuotaPendiente.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View?,
@@ -134,15 +135,15 @@ class ReciboPagoSocio : BaseActivity() {
                     return
                 }
 
-                val cuotaSeleccionada = cuotas[position - 1] // -1 por el placeholder
-                montoEditText.setText(cuotaSeleccionada.monto.toString())
+                val cuotaPendienteSeleccionada = cuotasPendientes[position - 1] // -1 por el placeholder
+                montoEditText.setText(cuotaPendienteSeleccionada.monto.toString())
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
         // Mostrar el placeholder
-        spinnerCuota.setSelection(0)
+        spinnerCuotaPendiente.setSelection(0)
 
         // Drawer
         drawerLayout = findViewById(R.id.drawerLayout)
@@ -176,29 +177,68 @@ class ReciboPagoSocio : BaseActivity() {
                 return position != 0
             }
         }
-
-        // Vista desplegable
         adapterPago.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // Asignar el adapter al Spinner
         spinnerPago.adapter = adapterPago
-        // Mostrar el placeholder por defecto
         spinnerPago.setSelection(0)
+
+        // Cantidad de cuotas si se elige tarjeta de crédito
+        val spinnerCuotasTarjeta: Spinner = findViewById(R.id.spinner_cuotas)
+        val tituloCuotasTarjeta: TextView = findViewById(R.id.titulo_cuotas)
+
+        // Configuramos las opciones de cuotas
+        val opcionesCuotasTarjeta = listOf("Seleccionar...", "3 cuotas", "6 cuotas")
+
+        val adapterCuotasTarjeta = object : ArrayAdapter<String>(
+            this,
+            R.layout.spinner_item_custom,
+            opcionesCuotasTarjeta
+        ) {
+            override fun isEnabled(position: Int): Boolean {
+                return position != 0
+            }
+        }
+        adapterCuotasTarjeta.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCuotasTarjeta.adapter = adapterCuotasTarjeta
+
+        // Controlamos la visibilidad según forma de pago
+        spinnerPago.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val seleccion = spinnerPago.selectedItem.toString()
+
+                if (seleccion == "Tarjeta de crédito") {
+                    spinnerCuotasTarjeta.visibility = View.VISIBLE
+                    tituloCuotasTarjeta.visibility = View.VISIBLE
+                } else {
+                    spinnerCuotasTarjeta.visibility = View.GONE
+                    tituloCuotasTarjeta.visibility = View.GONE
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
 
 
         //Validaciones del formulario
         fun validarFormulario(
-            spinnerCuota: Spinner,
+            spinnerCuotaPendiente: Spinner,
             spinnerFormaPago: Spinner,
+            spinnerCuotasTarjeta: Spinner,
             clienteEditText: EditText,
             clientes: List<Cliente>
         ): Boolean {
             val nombreIngresado = clienteEditText.text.toString().trim()
-            val formaPago = spinnerFormaPago.selectedItemPosition !=0
-            val cuotaSeleccionada = spinnerCuota.selectedItemPosition != 0
+            val formaPago = spinnerFormaPago.selectedItem.toString()
+            val cantCuotasTarjeta = spinnerCuotasTarjeta.selectedItemPosition !=0
+            val cuotaPendienteSeleccionada = spinnerCuotaPendiente.selectedItemPosition != 0
             val clienteIngresado = nombreIngresado.isNotEmpty()
 
             // campos vacíos
-            if (!clienteIngresado && !cuotaSeleccionada && !formaPago) {
+            if (!clienteIngresado && !cuotaPendienteSeleccionada && formaPago=="") {
                 Toast.makeText(
                     this,
                     "Campos incompletos. Complete cliente, cuota y forma de pago.",
@@ -209,11 +249,14 @@ class ReciboPagoSocio : BaseActivity() {
                 Toast.makeText(this, "Debe ingresar el nombre del cliente.", Toast.LENGTH_SHORT)
                     .show()
                 return false
-            } else if (!cuotaSeleccionada) {
-                Toast.makeText(this, "Debe seleccionar una cuota.", Toast.LENGTH_SHORT).show()
+            } else if (!cuotaPendienteSeleccionada) {
+                Toast.makeText(this, "Debe seleccionar una de las cuotas.", Toast.LENGTH_SHORT).show()
                 return false
-            } else if (!formaPago){
+            } else if (formaPago==""){
                 Toast.makeText(this, "Debe seleccionar una forma de pago.", Toast.LENGTH_SHORT).show()
+                return false
+            } else if (formaPago=="Tarjeta de crédito" && !cantCuotasTarjeta){
+                Toast.makeText(this, "Debe seleccionar la cantidad de cuotas.", Toast.LENGTH_SHORT).show()
                 return false
             }
 
@@ -254,9 +297,10 @@ class ReciboPagoSocio : BaseActivity() {
         val botonAceptar: Button = findViewById(R.id.btnAceptarSocio)
 
         botonAceptar.setOnClickListener {
-            if (validarFormulario(spinnerCuota, spinnerPago,clienteEditText, clientes = clientes)) {
-                val cuotaSeleccionada = spinnerCuota.selectedItem.toString()
+            if (validarFormulario(spinnerCuotaPendiente, spinnerPago,spinnerCuotasTarjeta,clienteEditText, clientes = clientes)) {
+                val cuotaPendienteSeleccionada = spinnerCuotaPendiente.selectedItem.toString()
                 val formaPago = spinnerPago.selectedItem.toString()
+                val cantCuotasTarjeta = spinnerCuotasTarjeta.selectedItem.toString()
                 val clienteNombre = clienteEditText.text.toString().trim()
                 val monto = montoEditText.text.toString().trim()
                 //Para pasar los datos del cliente socio encontrado
@@ -266,9 +310,10 @@ class ReciboPagoSocio : BaseActivity() {
                 //Paso la info al comprobante
                 val intent = Intent(this, ReciboSocioActivity::class.java).apply {
                     putExtra("nombreCliente", clienteNombre)
-                    putExtra("cuota", cuotaSeleccionada)
+                    putExtra("cuotaPendiente", cuotaPendienteSeleccionada)
                     putExtra("monto", monto)
                     putExtra("formaPago",formaPago)
+                    putExtra("cantCuotasTarjeta",cantCuotasTarjeta)
                     putExtra("telefono", clienteEncontrado.telefono)
                     putExtra("ins", clienteEncontrado.ins)
                     putExtra("direccion", clienteEncontrado.direccion)

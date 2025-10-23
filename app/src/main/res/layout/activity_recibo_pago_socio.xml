@@ -90,6 +90,35 @@
             />
     </LinearLayout>
 
+    <!-- Cantidad de cuotas -->
+    <LinearLayout
+        style="@style/DropdownContainer">
+
+        <TextView
+            android:id="@+id/titulo_cuotas"
+            style="@style/DropdownTextView"
+            android:text="Cantidad de cuotas"/>
+
+        <Spinner
+            android:id="@+id/spinner_cuotas"
+            style="@style/DropdownSpinner"
+            />
+    </LinearLayout>
+
+<!--    &lt;!&ndash; Número de tarjeta &ndash;&gt;
+    <LinearLayout
+        style="@style/DropdownContainer">
+
+        <TextView
+            style="@style/DropdownTextView"
+            android:text="Número de tarjeta"/>
+
+        <Spinner
+            android:id="@+id/spinner_num_tarjeta"
+            style="@style/DropdownSpinner"
+            />
+    </LinearLayout>-->
+
     <!-- Botón Aceptar y Limpiar -->
     <LinearLayout
         android:layout_width="wrap_content"
