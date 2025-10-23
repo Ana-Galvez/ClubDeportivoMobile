@@ -105,19 +105,21 @@
             />
     </LinearLayout>
 
-<!--    &lt;!&ndash; Número de tarjeta &ndash;&gt;
+    <!-- Número de tarjeta -->
     <LinearLayout
         style="@style/DropdownContainer">
 
         <TextView
+            android:id="@+id/titulo_num_tarjeta"
             style="@style/DropdownTextView"
             android:text="Número de tarjeta"/>
 
-        <Spinner
-            android:id="@+id/spinner_num_tarjeta"
-            style="@style/DropdownSpinner"
-            />
-    </LinearLayout>-->
+        <EditText
+            android:id="@+id/num_tarjeta"
+            android:hint="Ingrese el número de la tarjeta"
+            android:inputType="number"
+            style="@style/FormularioEditText"/>
+    </LinearLayout>
 
     <!-- Botón Aceptar y Limpiar -->
     <LinearLayout

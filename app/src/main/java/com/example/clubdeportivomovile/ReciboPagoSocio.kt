@@ -201,6 +201,8 @@ class ReciboPagoSocio : BaseActivity() {
         spinnerCuotasTarjeta.adapter = adapterCuotasTarjeta
 
         // Controlamos la visibilidad según forma de pago
+        val etNumeroTarjeta: EditText = findViewById(R.id.num_tarjeta)
+        val tituloNumeroTarjeta: TextView = findViewById(R.id.titulo_num_tarjeta)
         spinnerPago.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -216,18 +218,43 @@ class ReciboPagoSocio : BaseActivity() {
                 } else {
                     spinnerCuotasTarjeta.visibility = View.GONE
                     tituloCuotasTarjeta.visibility = View.GONE
+                    etNumeroTarjeta.visibility = View.GONE
+                    tituloNumeroTarjeta.visibility = View.GONE
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
+        // Número de tarjeta
+        // Controlamos la visibilidad si se eligió la cantidad de cuotas
+        spinnerCuotasTarjeta.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val seleccion = spinnerCuotasTarjeta.selectedItem.toString()
+
+                if (seleccion == "3 cuotas" || seleccion == "6 cuotas") {
+                    etNumeroTarjeta.visibility = View.VISIBLE
+                    tituloNumeroTarjeta.visibility = View.VISIBLE
+                } else {
+                    etNumeroTarjeta.visibility = View.GONE
+                    tituloNumeroTarjeta.visibility = View.GONE
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
 
         //Validaciones del formulario
         fun validarFormulario(
             spinnerCuotaPendiente: Spinner,
             spinnerFormaPago: Spinner,
             spinnerCuotasTarjeta: Spinner,
+            etNumTarjeta: EditText,
             clienteEditText: EditText,
             clientes: List<Cliente>
         ): Boolean {
@@ -236,6 +263,7 @@ class ReciboPagoSocio : BaseActivity() {
             val cantCuotasTarjeta = spinnerCuotasTarjeta.selectedItemPosition !=0
             val cuotaPendienteSeleccionada = spinnerCuotaPendiente.selectedItemPosition != 0
             val clienteIngresado = nombreIngresado.isNotEmpty()
+            val numTarjeta = etNumTarjeta.text.toString().trim()
 
             // campos vacíos
             if (!clienteIngresado && !cuotaPendienteSeleccionada && formaPago=="") {
@@ -257,6 +285,9 @@ class ReciboPagoSocio : BaseActivity() {
                 return false
             } else if (formaPago=="Tarjeta de crédito" && !cantCuotasTarjeta){
                 Toast.makeText(this, "Debe seleccionar la cantidad de cuotas.", Toast.LENGTH_SHORT).show()
+                return false
+            } else if (numTarjeta==""){
+                Toast.makeText(this, "Debe ingresar el número de tarjeta del socio.", Toast.LENGTH_SHORT).show()
                 return false
             }
 
@@ -297,9 +328,10 @@ class ReciboPagoSocio : BaseActivity() {
         val botonAceptar: Button = findViewById(R.id.btnAceptarSocio)
 
         botonAceptar.setOnClickListener {
-            if (validarFormulario(spinnerCuotaPendiente, spinnerPago,spinnerCuotasTarjeta,clienteEditText, clientes = clientes)) {
+            if (validarFormulario(spinnerCuotaPendiente, spinnerPago,spinnerCuotasTarjeta,etNumeroTarjeta,clienteEditText, clientes = clientes)) {
                 val cuotaPendienteSeleccionada = spinnerCuotaPendiente.selectedItem.toString()
                 val formaPago = spinnerPago.selectedItem.toString()
+                val numTarjeta = etNumeroTarjeta.text.toString().trim()
                 val cantCuotasTarjeta = spinnerCuotasTarjeta.selectedItem.toString()
                 val clienteNombre = clienteEditText.text.toString().trim()
                 val monto = montoEditText.text.toString().trim()
