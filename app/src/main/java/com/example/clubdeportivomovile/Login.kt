@@ -55,6 +55,7 @@ class Login : AppCompatActivity() {
             else if (usuario == "admin" && pass == "1234") {
                 Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, Home::class.java)
+                intent.putExtra("usuario",usuario)
                 startActivity(intent)
             }
         }

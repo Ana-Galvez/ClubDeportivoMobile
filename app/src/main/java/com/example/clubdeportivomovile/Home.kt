@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -42,6 +43,11 @@ class Home : BaseActivity() {
                 }
             }
         })
+
+        //Manejo del nombre del usuario
+        val tvBienvenida : TextView = findViewById(R.id.tvBienvenida)
+        val usuario = intent.getStringExtra("usuario") ?: "Usuario"
+        tvBienvenida.text = "Bienvenido $usuario"
 
         // Navegación de los botones
 
