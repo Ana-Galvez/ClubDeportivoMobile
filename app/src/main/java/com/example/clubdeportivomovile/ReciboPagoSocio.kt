@@ -177,7 +177,7 @@ class ReciboPagoSocio : BaseActivity() {
                 return position != 0
             }
         }
-        adapterPago.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapterPago.setDropDownViewResource(R.layout.spinner_item_custom)
         spinnerPago.adapter = adapterPago
         spinnerPago.setSelection(0)
 
@@ -197,7 +197,7 @@ class ReciboPagoSocio : BaseActivity() {
                 return position != 0
             }
         }
-        adapterCuotasTarjeta.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapterCuotasTarjeta.setDropDownViewResource(R.layout.spinner_item_custom)
         spinnerCuotasTarjeta.adapter = adapterCuotasTarjeta
 
         // Controlamos la visibilidad según forma de pago
