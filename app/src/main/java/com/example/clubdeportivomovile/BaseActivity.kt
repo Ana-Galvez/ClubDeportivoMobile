@@ -125,7 +125,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
         // Configuración -> Configuracion
         findViewById<TextView?>(R.id.txtConfiguracion)?.setOnClickListener {
-            startActivity(Intent(this, Configuracion::class.java))
+            startActivity(Intent(this, Sitiocaido::class.java))
             drawer?.closeDrawer(GravityCompat.START)
         }
 

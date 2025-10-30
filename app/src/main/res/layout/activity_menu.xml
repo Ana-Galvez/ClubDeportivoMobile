@@ -17,7 +17,7 @@
         android:layout_height="80dp"
         android:src="@drawable/logo"
         android:layout_gravity="center"
-        android:contentDescription="Logo" />
+        android:contentDescription="@string/logo" />
 
     <!-- Nombre completo -->
     <TextView

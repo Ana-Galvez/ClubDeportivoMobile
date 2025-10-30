@@ -10,8 +10,10 @@ class Sitioconstruccion : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sitioconstruccion)
-        drawerLayout = findViewById(R.id.drawerLayout)
-        setupHeader(drawerLayout) //header
+        drawerLayout = findViewById(R.id.drawerLayout_sitioConstruccion)
+        // Configurar header con botón atrás + hamburguesa
+        setupHeader(drawerLayout)
+        setupDrawerMenu(R.id.drawerLayout_sitioCaido) ///********** agregue para fc del menu ---va el id como parametro
 
     }
 }
