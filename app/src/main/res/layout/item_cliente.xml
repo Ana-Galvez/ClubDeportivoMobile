@@ -5,14 +5,14 @@
     android:gravity="center_horizontal"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:padding="12dp"
         android:background="@drawable/bordes_cliente"
         android:gravity="center_vertical">
@@ -25,20 +25,19 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvClienteNombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pedro Perez"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="@color/black_1"/>
 
             <TextView
+                android:id="@+id/tvClienteTipo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Socio"
                 android:textSize="14sp"
-                android:textColor="@color/gray_1"
-                android:id="@+id/tvClienteTipo"/>
+                android:textColor="@color/gray_1"/>
         </LinearLayout>
 
         <!-- Íconos a la derecha -->
@@ -46,39 +45,40 @@
             android:id="@+id/ivVerCliente"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:contentDescription="Ver carnet"
-            android:src="@drawable/img_ver_cliente"
             android:layout_marginStart="8dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="onMostrarCarnetClick"/>
+            android:contentDescription="Carnet"
+            android:src="@drawable/img_ver_cliente"
+            android:onClick="onMostrarCarnetClick"
+            tools:ignore="HardcodedText" />
 
         <ImageView
             android:id="@+id/ivRegistrarPago"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:contentDescription="Formulario pago"
-            android:src="@drawable/img_ver_pago"
             android:layout_marginStart="8dp"
-            android:onClick="onRegistrarPagoClick"/>
+            android:contentDescription="Pago"
+            android:src="@drawable/img_ver_pago"
+            android:onClick="onRegistrarPagoClick"
+            tools:ignore="HardcodedText" />
 
         <ImageView
             android:id="@+id/ivEditarCliente"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/img_editar_cliente"
             android:layout_marginStart="8dp"
-            android:contentDescription="Editar cliente"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="onEditarClienteClick"/>
+            android:contentDescription="Editar Cliente"
+            android:src="@drawable/img_editar_cliente"
+            android:onClick="onEditarClienteClick"
+            tools:ignore="HardcodedText" />
 
         <ImageView
             android:id="@+id/ivEliminarCliente"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:contentDescription="Eliminar"
-            android:src="@drawable/img_eliminar_cliente"
             android:layout_marginStart="8dp"
-            android:onClick="onEliminarClienteClick"/>
+            android:contentDescription="Eliminar Cliente"
+            android:src="@drawable/img_eliminar_cliente"
+            android:onClick="onEliminarClienteClick"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 </LinearLayout>

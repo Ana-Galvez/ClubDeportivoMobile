@@ -12,39 +12,79 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
 
 class ListadoDeClientes : BaseActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var recyclerClientes: RecyclerView
+    private lateinit var adapter: ClienteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       setContentView(R.layout.activity_listado_de_clientes)
-       drawerLayout = findViewById(R.id.drawerLayout)
+        setContentView(R.layout.activity_listado_de_clientes)
+
+        drawerLayout = findViewById(R.id.drawerLayout)
+        recyclerClientes = findViewById(R.id.recyclerClientes)
 
         // Configurar header con botón atrás + hamburguesa
         setupHeader(drawerLayout)
-        setupDrawerMenu(R.id.drawerLayout) ///********** agregue para fc del menu ---va el id como parametro
-        setupBottomBar("clientes")  //activo botones barra
+        setupDrawerMenu(R.id.drawerLayout)
+        setupBottomBar("clientes")
 
+        // Datos
+        val listaClientes = listOf(
+            Cliente("Pedro Pérez", "Socio"),
+            Cliente("María López", "No socio"),
+            Cliente("Carlos Gómez", "Socio"),
+            Cliente("Pedro Pérez", "Socio"),
+            Cliente("María López", "No socio"),
+            Cliente("Carlos Gómez", "Socio"),
+            Cliente("Pedro Pérez", "Socio"),
+            Cliente("María López", "No socio"),
+            Cliente("Carlos Gómez", "Socio"),
+            Cliente("Pedro Pérez", "Socio"),
+            Cliente("María López", "No socio"),
+            Cliente("Carlos Gómez", "Socio"),
+        )
+
+        adapter = ClienteAdapter(
+            clientes = listaClientes,
+            onEditar = { onEditarClienteClick(it) },
+            onMostrarCarnet = { onMostrarCarnetClick(it) },
+            onEliminar = { onEliminarClienteClick(it) },
+            onRegistrarPago = { onRegistrarPagoClick(it) }
+        )
+
+        recyclerClientes.layoutManager = LinearLayoutManager(this)
+        recyclerClientes.adapter = adapter
     }
-    // Navegación botones derecha del cliente
-    fun onEditarClienteClick(view: View) {
-        val i = Intent(this, EditarClienteActivity::class.java)
-        startActivity(i)
+
+    private fun onEditarClienteClick(cliente: Cliente) {
+        startActivity(Intent(this, EditarClienteActivity::class.java))
     }
-    fun onMostrarCarnetClick(view: View) {
-        val i = Intent(this, CarnetActivity::class.java)
-        startActivity(i)
+
+    private fun onMostrarCarnetClick(cliente: Cliente) {
+        startActivity(Intent(this, CarnetActivity::class.java))
     }
-    fun onEliminarClienteClick(view: View) {
+
+    private fun onEliminarClienteClick(cliente: Cliente) {
         val modal = EliminarCliente()
         modal.show(supportFragmentManager, "modalEliminar")
     }
 
-    fun onRegistrarPagoClick(view: View) {
-        //Cuando esté el debe dirigir al formulario de pago correspondiente al tipo de cliente
-            val i = Intent(this, ReciboPagoSocio::class.java)
-            startActivity(i)
+    private fun onRegistrarPagoClick(cliente: Cliente) {
+        if (cliente.tipo.equals("Socio", ignoreCase = true)) {
+            // socio, lo lleva al formulario de pago de socios
+            val intent = Intent(this, ReciboPagoSocio::class.java)
+            startActivity(intent)
+        } else {
+            // no socio, lo lleva al formulario de pago de no socios
+            val intent = Intent(this, PagoNoSocioActivity::class.java)
+            startActivity(intent)
+        }
     }
+
 }

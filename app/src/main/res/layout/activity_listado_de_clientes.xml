@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ListadoDeClientes"
+    >
 
     <!-- CONTENIDO PRINCIPAL -->
     <LinearLayout
@@ -53,53 +56,15 @@
         </LinearLayout>
 
 
-        <!-- Lista (scroll) -->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="373dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="16dp">
-
-                <!-- Card -->
-                <include layout="@layout/item_cliente" />
-
-                <!-- Card -->
-                <include layout="@layout/item_cliente" />
-
-                <!-- Card -->
-                <include layout="@layout/item_cliente" />
-
-                <!-- Card -->
-                <include layout="@layout/item_cliente" />
-
-                <!-- Card -->
-                <include layout="@layout/item_cliente" />
-
-                <!-- Card -->
-                <include layout="@layout/item_cliente" />
-
-                <!-- Card -->
-                <include layout="@layout/item_cliente" />
-
-                <!-- Card -->
-                <include layout="@layout/item_cliente" />
-
-                <!-- Card -->
-                <include layout="@layout/item_cliente" />
-
-            </LinearLayout>
-        </ScrollView>
-
-        <!-- Espaciador para empujar la barra al fondo -->
-        <View
+        <!-- Lista -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerClientes"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:paddingBottom="16dp"
+            android:clipToPadding="false"
+            tools:listitem="@layout/item_cliente" />
 
         <!-- Barra de navegación inferior -->
         <include layout="@layout/activity_barra" />
