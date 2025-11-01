@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.*
 import androidx.drawerlayout.widget.DrawerLayout
-import limpiarFormulario
+import com.example.clubdeportivomovile.limpiarFormulario
 import android.app.DatePickerDialog
 import java.util.Calendar
 

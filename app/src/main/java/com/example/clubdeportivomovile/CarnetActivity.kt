@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -16,7 +17,7 @@ class CarnetActivity : BaseActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var menuHamburguesa: ImageView
     private lateinit var flechaAtras: ImageView
-
+//TODO: Conectar carnet
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carnet)
@@ -25,5 +26,30 @@ class CarnetActivity : BaseActivity() {
         setupHeader(drawerLayout)
         setupDrawerMenu(R.id.drawer_layout_carnet) ///********** agregue para fc del menu ---va el id como parametro
         setupBottomBar("nuevo")
+
+    // Datos del carnet
+    val tvNombreSocio = findViewById<TextView>(R.id.tvNombreSocio)
+    val tvId = findViewById<TextView>(R.id.tvId)
+    val tvDni = findViewById<TextView>(R.id.tvDni)
+    val tvSocio = findViewById<TextView>(R.id.tvSocio)
+    val tvDireccion = findViewById<TextView>(R.id.tvDireccion)
+    val tvTelefono = findViewById<TextView>(R.id.tvTelefono)
+    val tvInsc = findViewById<TextView>(R.id.tvFechaInsc)
+
+    val nombreCliente = intent.getStringExtra("nombreCompleto")
+    val id = intent.getIntExtra("id", -1)
+    val dni = intent.getIntExtra("dni", -1)
+    val socio = intent.getBooleanExtra("socio", false)
+    val direccion = intent.getStringExtra("direccion")
+    val telefono = intent.getStringExtra("telefono")
+    val inscrip = intent.getStringExtra("fechaInscripcion")
+
+    tvNombreSocio.text = nombreCliente
+    tvId.text = id.toString()
+    tvDni.text = dni.toString()
+    tvSocio.text = if(socio) "Sí" else "No"
+    tvDireccion.text = direccion
+    tvTelefono.text = telefono
+    tvInsc.text = inscrip
     }
 }

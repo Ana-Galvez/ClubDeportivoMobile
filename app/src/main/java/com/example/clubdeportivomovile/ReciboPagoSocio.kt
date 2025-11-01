@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import limpiarFormulario
+import com.example.clubdeportivomovile.limpiarFormulario
 
 class ReciboPagoSocio : BaseActivity() {
 

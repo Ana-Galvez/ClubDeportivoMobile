@@ -40,7 +40,8 @@
 
                 <TextView
                     style="@style/FormularioLabel"
-                    android:text="Nombre" />
+                    android:text="Nombre"
+                    android:id="@+id/tvLabelNombreEditar"/>
 
                 <EditText
                     android:id="@+id/etNombre"
