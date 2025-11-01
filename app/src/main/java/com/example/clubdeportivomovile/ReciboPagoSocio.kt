@@ -265,43 +265,6 @@ class ReciboPagoSocio : BaseActivity() {
             val clienteIngresado = nombreIngresado.isNotEmpty()
             val numTarjeta = etNumTarjeta.text.toString().trim()
 
-            // campos vacíos
-            if (!clienteIngresado && !cuotaPendienteSeleccionada && formaPago=="") {
-                Toast.makeText(
-                    this,
-                    "Campos incompletos. Complete cliente, cuota y forma de pago.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return false
-            } else if (!clienteIngresado) {
-                Toast.makeText(this, "Debe ingresar el nombre del cliente.", Toast.LENGTH_SHORT)
-                    .show()
-                return false
-            } else if (!cuotaPendienteSeleccionada) {
-                Toast.makeText(this, "Debe seleccionar una de las cuotas.", Toast.LENGTH_SHORT).show()
-                return false
-            } else if (formaPago==""){
-                Toast.makeText(this, "Debe seleccionar una forma de pago.", Toast.LENGTH_SHORT).show()
-                return false
-            } else if (formaPago=="Tarjeta de crédito" && !cantCuotasTarjeta){
-                Toast.makeText(this, "Debe seleccionar la cantidad de cuotas.", Toast.LENGTH_SHORT).show()
-                return false
-            } else if (numTarjeta==""){
-                Toast.makeText(this, "Debe ingresar el número de tarjeta del socio.", Toast.LENGTH_SHORT).show()
-                return false
-            }
-
-            // Validar que el nombre tenga solo letras y espacios
-            val regexNombre = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+\$")
-            if (!regexNombre.matches(nombreIngresado)) {
-                Toast.makeText(
-                    this,
-                    "El nombre del cliente contiene caracteres inválidos.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return false
-            }
-
             // Buscar cliente en la base de datos
             val clienteEncontrado = clientes.find {
                 "${it.nombre} ${it.apellido}".equals(nombreIngresado, ignoreCase = true)
@@ -321,6 +284,64 @@ class ReciboPagoSocio : BaseActivity() {
                 ).show()
                 return false
             }
+            // campos vacíos
+            if (!clienteIngresado && !cuotaPendienteSeleccionada && formaPago=="") {
+                Toast.makeText(
+                    this,
+                    "Campos incompletos. Complete cliente, cuota y forma de pago.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            } else if (!clienteIngresado) {
+                Toast.makeText(this, "Debe ingresar el nombre del cliente.", Toast.LENGTH_SHORT)
+                    .show()
+                return false
+            } else if (!cuotaPendienteSeleccionada) {
+                Toast.makeText(this, "Debe seleccionar una de las cuotas.", Toast.LENGTH_SHORT).show()
+                return false
+            } else if (formaPago=="Seleccionar..."){
+                Toast.makeText(this, "Debe seleccionar una forma de pago.", Toast.LENGTH_SHORT).show()
+                return false
+            } else if (formaPago=="Efectivo"){
+                return true
+            } else if (formaPago=="Tarjeta de crédito" && !cantCuotasTarjeta){
+                Toast.makeText(this, "Debe seleccionar la cantidad de cuotas.", Toast.LENGTH_SHORT).show()
+                return false
+            } else if (numTarjeta==""){
+                Toast.makeText(this, "Debe ingresar el número de tarjeta del socio.", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
+            // Validar que el nombre tenga solo letras y espacios
+            val regexNombre = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+\$")
+            if (!regexNombre.matches(nombreIngresado)) {
+                Toast.makeText(
+                    this,
+                    "El nombre del cliente contiene caracteres inválidos.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            }
+
+           /* // Buscar cliente en la base de datos
+            val clienteEncontrado = clientes.find {
+                "${it.nombre} ${it.apellido}".equals(nombreIngresado, ignoreCase = true)
+            }
+
+            if (clienteEncontrado == null) {
+                Toast.makeText(this, "El cliente no existe.", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
+            // Verificar si es no socio
+            if (!clienteEncontrado.socio) {
+                Toast.makeText(
+                    this,
+                    "El cliente es NO socio no se puede registrar el pago.",
+                    Toast.LENGTH_LONG
+                ).show()
+                return false
+            }*/
             return true
         }
 
