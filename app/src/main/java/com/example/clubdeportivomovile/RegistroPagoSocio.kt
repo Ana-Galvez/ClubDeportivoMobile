@@ -9,24 +9,18 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.clubdeportivomovile.limpiarFormulario
 
-class ReciboPagoSocio : BaseActivity() {
+class RegistroPagoSocio : BaseActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recibo_pago_socio)
+        setContentView(R.layout.activity_registro_pago_socio)
 
         // Configurar header con botón atrás + hamburguesa
         setupDrawerMenu(R.id.drawerLayout) ///********** agregue para fc del menu ---va el id como parametro
@@ -63,6 +57,17 @@ class ReciboPagoSocio : BaseActivity() {
 
         // Para mostrar sugerencia de busqueda de nombres
         clienteEditText.setAdapter(adapterClientes)
+
+        //Para no mostrar sugerencia de busqueda de nombres, ya que viene del listado de cliente
+        val clienteSeleccionado = intent.getStringExtra("clienteSeleccionado")
+
+        if (clienteSeleccionado != null) {
+            // Mostrar nombre directamente
+            clienteEditText.setText(clienteSeleccionado)
+            clienteEditText.isEnabled = false
+            //Saca icono de busqueda
+            clienteEditText.setCompoundDrawables(null, null, null, null)
+        }
 
 
         // Cuota pendiente
@@ -323,25 +328,6 @@ class ReciboPagoSocio : BaseActivity() {
                 return false
             }
 
-           /* // Buscar cliente en la base de datos
-            val clienteEncontrado = clientes.find {
-                "${it.nombre} ${it.apellido}".equals(nombreIngresado, ignoreCase = true)
-            }
-
-            if (clienteEncontrado == null) {
-                Toast.makeText(this, "El cliente no existe.", Toast.LENGTH_SHORT).show()
-                return false
-            }
-
-            // Verificar si es no socio
-            if (!clienteEncontrado.socio) {
-                Toast.makeText(
-                    this,
-                    "El cliente es NO socio no se puede registrar el pago.",
-                    Toast.LENGTH_LONG
-                ).show()
-                return false
-            }*/
             return true
         }
 
@@ -377,14 +363,13 @@ class ReciboPagoSocio : BaseActivity() {
         }
 
         val botonLimpiar: Button = findViewById(R.id.btnLimpiarSocio)
-        val etNombre: EditText = findViewById(R.id.cliente)
 
         botonLimpiar.setOnClickListener {
             val rootLayout = findViewById<ViewGroup>(R.id.contentLayout) // el layout principal del form
             limpiarFormulario(rootLayout)
 
             // foco al primer campo
-            etNombre.requestFocus()
+            clienteEditText.requestFocus()
         }
     }
 }

@@ -60,7 +60,7 @@ abstract class BaseActivity : AppCompatActivity() {
             dialog.show(supportFragmentManager, "SocioDialog")
         }
 
-        //Lista de morososo o vencismientos
+        //Lista de morososo o vencimientos
         findViewById<LinearLayout>(R.id.llMorosos)?.setOnClickListener {
             if (this !is MorososActivity) {
                 startActivity(Intent(this, MorososActivity::class.java))

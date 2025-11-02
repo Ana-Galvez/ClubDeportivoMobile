@@ -45,6 +45,7 @@ class PagoNoSocioActivity : BaseActivity() {
 
         val clienteEditText: AutoCompleteTextView= findViewById(R.id.formNoSocioCliente)
 
+        //Buscador
         val nombresClientes = clientes.map { "${it.nombre} ${it.apellido}" }
 
         val adapterClientes = ArrayAdapter(
@@ -55,6 +56,17 @@ class PagoNoSocioActivity : BaseActivity() {
 
         // Para mostrar sugerencia de busqueda de nombres
         clienteEditText.setAdapter(adapterClientes)
+
+        //Para no mostrar sugerencia de busqueda de nombres, ya que viene del listado de cliente
+        val clienteSeleccionado = intent.getStringExtra("clienteSeleccionado")
+
+        if (clienteSeleccionado != null) {
+            // Mostrar nombre directamente
+            clienteEditText.setText(clienteSeleccionado)
+            clienteEditText.isEnabled = false
+            //Saca icono de busqueda
+            clienteEditText.setCompoundDrawables(null, null, null, null)
+        }
 
         //actividades
         data class Actividad(
@@ -236,14 +248,13 @@ class PagoNoSocioActivity : BaseActivity() {
         }
 
         val botonLimpiar: Button = findViewById(R.id.BotonLimpiarPagoNoSocio)
-        val etNombre: EditText = findViewById(R.id.formNoSocioCliente)
 
         botonLimpiar.setOnClickListener {
             val rootLayout = findViewById<ViewGroup>(R.id.content_Layout)
             limpiarFormulario(rootLayout)
 
             // foco al primer campo
-            etNombre.requestFocus()
+            clienteEditText.requestFocus()
         }
 
         //activo botones barra

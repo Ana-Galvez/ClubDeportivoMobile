@@ -38,8 +38,11 @@ class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi t
         //Formulario
         //REcibo datos del cliente
         val id = intent.getIntExtra("id", -1)
+        //Formulario editar necesita nombre y apellido separado
         val nombre = intent.getStringExtra("nombre") ?: ""
         val apellido = intent.getStringExtra("apellido") ?: ""
+        //Carnet necesita nombre completo
+        val nombreCompleto = intent.getStringExtra("nombreCompleto") ?: ""
         val dni = intent.getIntExtra("dni", 0)
         val fechaNacimiento = intent.getStringExtra("fechaNacimiento")
         val direccion = intent.getStringExtra("direccion")
@@ -104,7 +107,7 @@ class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi t
 
             // Pasar los datos al carnet
             val intent = Intent(this, CarnetActivity::class.java)
-            intent.putExtra("nombreCompleto", "$nombre $apellido")
+            intent.putExtra("nombreCompleto", nombreCompleto)
             intent.putExtra("id", id) // el id del cliente
             intent.putExtra("dni", dni)
             intent.putExtra("fechaInscripcion", fechaInscripcion)

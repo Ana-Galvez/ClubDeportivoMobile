@@ -14,4 +14,7 @@ data class Cliente(
     val fechaInscripcion: String,//TODO:cambiar por Date
     val aptoFisico: Boolean,
     val socio: Boolean
-): Serializable
+): Serializable{
+    val nombreCompleto: String
+        get() = "$nombre $apellido"
+}

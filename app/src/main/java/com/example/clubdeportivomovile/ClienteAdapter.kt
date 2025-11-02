@@ -8,12 +8,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class ClienteAdapter(
-    private val clientes: List<Cliente>,
+    clientes: List<Cliente>,
     private val onEditar: (Cliente) -> Unit,
     private val onMostrarCarnet: (Cliente) -> Unit,
     private val onEliminar: (Cliente) -> Unit,
     private val onRegistrarPago: (Cliente) -> Unit
 ) : RecyclerView.Adapter<ClienteAdapter.ClienteViewHolder>() {
+
+    private val clientes: MutableList<Cliente> = clientes.toMutableList()
+    fun updateList(nuevaLista: List<Cliente>) {
+        clientes.clear()
+        clientes.addAll(nuevaLista)
+        notifyDataSetChanged()
+    }
 
     inner class ClienteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNombre: TextView = itemView.findViewById(R.id.tvClienteNombre)
@@ -32,7 +39,7 @@ class ClienteAdapter(
 
     override fun onBindViewHolder(holder: ClienteViewHolder, position: Int) {
         val cliente = clientes[position]
-        holder.tvNombre.text = cliente.nombre+ " " + cliente.apellido
+        holder.tvNombre.text = cliente.nombreCompleto
         holder.tvTipo.text = if (cliente.socio) "Socio" else "No Socio"
 
         holder.ivEditar.setOnClickListener { onEditar(cliente) }

@@ -17,7 +17,7 @@ class CarnetActivity : BaseActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var menuHamburguesa: ImageView
     private lateinit var flechaAtras: ImageView
-//TODO: Conectar carnet
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carnet)

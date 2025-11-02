@@ -1,19 +1,12 @@
 package com.example.clubdeportivomovile
 
-import android.app.Dialog
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.DialogFragment
 import android.widget.Button
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 
 class SocioONoSocio : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -23,7 +16,7 @@ class SocioONoSocio : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val btnSi = view.findViewById<Button>(R.id.btn_si)
         btnSi.setOnClickListener {
-            startActivity(Intent(requireActivity(), ReciboPagoSocio::class.java))
+            startActivity(Intent(requireActivity(), RegistroPagoSocio::class.java))
             dismiss()
         }
 

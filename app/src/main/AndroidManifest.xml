@@ -58,7 +58,7 @@
             android:name=".PagoNoSocioActivity"
             android:exported="true" />
         <activity
-            android:name=".ReciboPagoSocio"
+            android:name=".RegistroPagoSocio"
             android:exported="true" /> <!--  -->
         <activity
             android:name=".CarnetActivity"

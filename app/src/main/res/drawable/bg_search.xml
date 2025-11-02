@@ -1,4 +1,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/bg_input"/>
+    <solid android:color="@color/btn_aceptar_text"/>
     <corners android:radius="8dp"/>
 </shape>
