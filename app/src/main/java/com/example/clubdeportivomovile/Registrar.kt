@@ -82,7 +82,31 @@ class Registrar : BaseActivity() {
                 socioSeleccionado == -1 -> Toast.makeText(this, "Seleccione tipo de socio", Toast.LENGTH_SHORT).show()
                 else -> {
                     Toast.makeText(this, "Datos validados correctamente", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, CarnetActivity::class.java)
+
+                    val nombreCompleto = "$nombre $apellido"
+                    val dniInt = dni.toIntOrNull() ?: 0
+                    val esSocio = rgSocio.checkedRadioButtonId == R.id.rbSocioSi
+
+                    // Generar ID temporal (cambiarlo por base de datos)
+                    val idGenerado = (1000..9999).random()
+
+                    val calendario = Calendar.getInstance()
+                    val fechaInscripcion = "%02d/%02d/%04d".format(
+                        calendario.get(Calendar.DAY_OF_MONTH),
+                        calendario.get(Calendar.MONTH) + 1,
+                        calendario.get(Calendar.YEAR)
+                    )
+
+                    val intent = Intent(this, CarnetActivity::class.java).apply {
+                        putExtra("nombreCompleto", nombreCompleto)
+                        putExtra("id", idGenerado)
+                        putExtra("dni", dniInt)
+                        putExtra("socio", esSocio)
+                        putExtra("direccion", direccion)
+                        putExtra("telefono", telefono)
+                        putExtra("fechaInscripcion", fechaInscripcion)
+                    }
+
                     startActivity(intent)
                 }
             }
