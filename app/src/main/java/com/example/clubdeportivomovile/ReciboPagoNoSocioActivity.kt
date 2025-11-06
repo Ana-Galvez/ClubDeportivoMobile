@@ -1,17 +1,16 @@
 package com.example.clubdeportivomovile
 
 import android.os.Bundle
-import android.widget.LinearLayout
+import android.widget.Button
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.appcompat.app.AlertDialog
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.clubdeportivomovile.utils.DescargarRecibo
+
 
 class ReciboPagoNoSocioActivity : BaseActivity() {
     private lateinit var drawerLayout: DrawerLayout
+    val descargarRecibo = DescargarRecibo(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +47,30 @@ class ReciboPagoNoSocioActivity : BaseActivity() {
         tvDireccion.text = direccion
         tvTelefono.text = telefono
         tvInsc.text = inscrip
-    }
 
+        // Mostrar alerta de éxito
+        fun mostrarAlertaExito() {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Descarga completada")
+            builder.setMessage("Se descargó el recibo con éxito.")
+            builder.setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
+            builder.show()
+        }
+
+        //Descargar rebibo btnExportar
+        val btnExportar = findViewById<Button>(R.id.btnExportar)
+
+        btnExportar.setOnClickListener {
+            descargarRecibo.exportarRecibo(
+                monto = monto!!,
+                nombreCliente = nombreCliente!!,
+                horario = horario!!,
+                inscrip = inscrip!!,
+                telefono = telefono!!,
+                direccion = direccion!!,
+                actividad=actividad!!,
+                onSuccess = { mostrarAlertaExito() }
+            )
+        }
+    }
 }
