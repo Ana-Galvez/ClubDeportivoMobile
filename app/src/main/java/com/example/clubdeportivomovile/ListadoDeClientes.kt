@@ -40,8 +40,8 @@ class ListadoDeClientes : BaseActivity() {
                 "Calle Falsa 01",
                 "09012345",
                 "02/07/2024",
-                true,
-                false
+                1,
+                0
             ),
             Cliente(
                 2,
@@ -53,8 +53,8 @@ class ListadoDeClientes : BaseActivity() {
                 "Callejón New",
                 "523112345",
                 "30/10/2024",
-                false,
-                false
+                0,
+                0
             ),
             Cliente(
                 3,
@@ -62,12 +62,12 @@ class ListadoDeClientes : BaseActivity() {
                 "Chavo",
                 "15/03/1985",
                 23456789,
-                "Calle NoHay 10",
                 "M",
+                "Calle NoHay 10",
                 "01112345",
                 "15/04/2025",
-                true,
-                true
+                1,
+                1
             ),
             Cliente(
                 4,
@@ -79,8 +79,8 @@ class ListadoDeClientes : BaseActivity() {
                 "Calle S/N",
                 "04662345",
                 "22/12/2024",
-                true,
-                false
+                1,
+                0
             ),
             Cliente(
                 5,
@@ -92,8 +92,8 @@ class ListadoDeClientes : BaseActivity() {
                 "Calle Nueva",
                 "222662345",
                 "13/12/2024",
-                false,
-                false
+                0,
+                0
             ),
             Cliente(
                 6,
@@ -105,10 +105,11 @@ class ListadoDeClientes : BaseActivity() {
                 "Calle Nueva",
                 "222662345",
                 "13/12/2024",
-                false,
-                false
+                0,
+                0
             )
         )
+
 
         adapter = ClienteAdapter(
             clientes = listaClientes,
@@ -122,7 +123,7 @@ class ListadoDeClientes : BaseActivity() {
 
         //Buscador
         val buscador: AutoCompleteTextView = findViewById(R.id.etBuscar)
-        val nombresClientes = listaClientes.map { it.nombre + " " + it.apellido }
+        val nombresClientes = listaClientes.map { it.Nombre + " " + it.Apellido }
 
         val adapterClientes = ArrayAdapter(
             this,
@@ -147,7 +148,7 @@ class ListadoDeClientes : BaseActivity() {
             val nombreSeleccionado = parent.getItemAtPosition(position) as String
 
             val clienteEncontrado =
-                listaClientes.find { "${it.nombre} ${it.apellido}" == nombreSeleccionado }
+                listaClientes.find { "${it.Nombre} ${it.Apellido}" == nombreSeleccionado }
 
             if (clienteEncontrado != null) {
                 adapter.updateList(listOf(clienteEncontrado))
@@ -157,17 +158,17 @@ class ListadoDeClientes : BaseActivity() {
 
 private fun onEditarClienteClick(cliente: Cliente) {
     val intent = Intent(this, EditarClienteActivity::class.java)
-    intent.putExtra("nombre", cliente.nombre)
-    intent.putExtra("apellido", cliente.apellido)
+    intent.putExtra("nombre", cliente.Nombre)
+    intent.putExtra("apellido", cliente.Apellido)
     intent.putExtra("nombreCompleto", cliente.nombreCompleto)
     intent.putExtra("id", cliente.id)
-    intent.putExtra("fechaNacimiento", cliente.fechaNacimiento)
-    intent.putExtra("fechaInscripcion", cliente.fechaInscripcion)
-    intent.putExtra("direccion", cliente.direccion)
-    intent.putExtra("dni", cliente.dni)
-    intent.putExtra("telefono", cliente.telefono)
-    intent.putExtra("genero", cliente.genero)
-    intent.putExtra("socio", cliente.socio)
+    intent.putExtra("fechaNacimiento", cliente.FechaInscripcion)
+    intent.putExtra("fechaInscripcion", cliente.FechaInscripcion)
+    intent.putExtra("direccion", cliente.Direccion)
+    intent.putExtra("dni", cliente.DNI)
+    intent.putExtra("telefono", cliente.Telefono)
+    intent.putExtra("genero", cliente.Genero)
+    intent.putExtra("socio", cliente.esSocio)
     startActivity(intent)
 }
 
@@ -175,11 +176,11 @@ private fun onMostrarCarnetClick(cliente: Cliente) {
     val intent = Intent(this, CarnetActivity::class.java)
     intent.putExtra("nombreCompleto", cliente.nombreCompleto)
     intent.putExtra("id", cliente.id)
-    intent.putExtra("direccion", cliente.direccion)
-    intent.putExtra("dni", cliente.dni)
-    intent.putExtra("telefono", cliente.telefono)
-    intent.putExtra("socio", cliente.socio)
-    intent.putExtra("fechaInscripcion", cliente.fechaInscripcion)
+    intent.putExtra("direccion", cliente.Direccion)
+    intent.putExtra("dni", cliente.DNI)
+    intent.putExtra("telefono", cliente.Telefono)
+    intent.putExtra("socio", cliente.esSocio)
+    intent.putExtra("fechaInscripcion", cliente.FechaInscripcion)
     startActivity(intent)
 }
 
@@ -190,7 +191,7 @@ private fun onEliminarClienteClick(cliente: Cliente) {
 }
 
 private fun onRegistrarPagoClick(cliente: Cliente) {
-    if (cliente.socio.equals(true)) {
+    if (cliente.esSocio.equals(true)) {
         // socio, lo lleva al formulario de pago de socios con el nombre y id
         val intent = Intent(this, RegistroPagoSocio::class.java)
         intent.putExtra("clienteSeleccionado", cliente.nombreCompleto)

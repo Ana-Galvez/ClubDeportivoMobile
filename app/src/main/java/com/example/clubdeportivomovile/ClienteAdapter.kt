@@ -40,7 +40,7 @@ class ClienteAdapter(
     override fun onBindViewHolder(holder: ClienteViewHolder, position: Int) {
         val cliente = clientes[position]
         holder.tvNombre.text = cliente.nombreCompleto
-        holder.tvTipo.text = if (cliente.socio) "Socio" else "No Socio"
+        holder.tvTipo.text = if (cliente.esSocio) "Socio" else "No Socio"
 
         holder.ivEditar.setOnClickListener { onEditar(cliente) }
         holder.ivEliminar.setOnClickListener { onEliminar(cliente) }

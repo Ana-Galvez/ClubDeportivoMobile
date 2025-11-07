@@ -4,17 +4,20 @@ import java.io.Serializable
 
 data class Cliente(
     val id: Int,
-    val nombre: String,
-    val apellido: String,
-    val fechaNacimiento: String,//TODO:cambiar por Date
-    val dni: Int,
-    val genero: String,
-    val direccion: String,
-    val telefono: String,
-    val fechaInscripcion: String,//TODO:cambiar por Date
-    val aptoFisico: Boolean,
-    val socio: Boolean
+    val Nombre: String,
+    val Apellido: String,
+    val FechaNacimiento: String,
+    val DNI: Int,
+    val Genero: String,
+    val Direccion: String,
+    val Telefono: String,
+    val FechaInscripcion: String,
+    val AptoFisico: Int,
+    val Socio: Int
 ): Serializable{
     val nombreCompleto: String
-        get() = "$nombre $apellido"
+        get() = "$Nombre $Apellido"
+
+    val esSocio: Boolean
+        get() = Socio == 1
 }
