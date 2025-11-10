@@ -53,8 +53,16 @@
                 android:src="@drawable/ic_search" />
         </LinearLayout>
 
-        <!-- Lista (scroll) -->
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvListaMorosos"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="16dp"/>
+
+<!--         Lista (scroll)-->
+<!--        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
@@ -66,26 +74,26 @@
                 android:paddingHorizontal="24dp"
                 android:paddingBottom="16dp">
 
-                <!-- Card -->
+                &lt;!&ndash; Card &ndash;&gt;
                 <include layout="@layout/item_moroso" />
 
-                <!-- Card -->
+                &lt;!&ndash; Card &ndash;&gt;
                 <include layout="@layout/item_moroso" />
 
-                <!-- Card -->
+                &lt;!&ndash; Card &ndash;&gt;
                 <include layout="@layout/item_moroso" />
 
-                <!-- Card -->
+                &lt;!&ndash; Card &ndash;&gt;
                 <include layout="@layout/item_moroso" />
 
-                <!-- Card -->
+                &lt;!&ndash; Card &ndash;&gt;
                 <include layout="@layout/item_moroso" />
 
-                <!-- Card -->
+                &lt;!&ndash; Card &ndash;&gt;
                 <include layout="@layout/item_moroso" />
 
             </LinearLayout>
-        </ScrollView>
+        </ScrollView>-->
 
         <!-- Barra inferior -->
         <include layout="@layout/activity_barra" />
