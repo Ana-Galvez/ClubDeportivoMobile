@@ -1,6 +1,8 @@
 package com.example.clubdeportivomovile
 
 import java.io.Serializable
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 data class Cliente(
     val id: Int,
@@ -20,4 +22,29 @@ data class Cliente(
 
     val esSocio: Boolean
         get() = Socio == 1
+
+    //Formatear fecha de la DB
+    private val formatoDb = "yyyy-MM-dd"
+    private val formatoUi = "dd/MM/yyyy"
+    private fun formatearFecha(fechaStr: String): String {
+        if (fechaStr.isEmpty() || fechaStr == "Sin fecha") {
+            return fechaStr
+        }
+
+        return try {
+            val parser = SimpleDateFormat(formatoDb, Locale.getDefault())
+            val formatter = SimpleDateFormat(formatoUi, Locale.getDefault())
+
+            formatter.format(parser.parse(fechaStr))
+
+        } catch (e: Exception) {
+            fechaStr
+        }
+    }
+    //Propiedades a utilizar con fecha formateada
+    val fechaInscripcionUI: String
+        get() = formatearFecha(FechaInscripcion)
+
+    val fechaNacimientoUI: String
+        get() = formatearFecha(FechaNacimiento)
 }

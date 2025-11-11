@@ -26,6 +26,7 @@
 
         <!-- Buscador -->
         <LinearLayout
+            android:id="@+id/layout_buscador"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:orientation="horizontal"
@@ -56,6 +57,22 @@
                 android:contentDescription="Buscar" />
         </LinearLayout>
 
+        <!-- MEnsaje de Lista vacia -->
+        <TextView
+            android:id="@+id/tv_sin_clientes"
+            android:layout_width="309dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:paddingBottom="16dp"
+            android:text="No hay clientes cargados."
+            android:textColor="@color/textPrimary"
+            android:textSize="18sp"
+            android:visibility="gone"/>
 
         <!-- Lista -->
         <androidx.recyclerview.widget.RecyclerView

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 class ClienteAdapter(
@@ -17,11 +18,11 @@ class ClienteAdapter(
 
     private val clientes: MutableList<Cliente> = clientes.toMutableList()
     fun updateList(nuevaLista: List<Cliente>) {
+        val diffResult = DiffUtil.calculateDiff(ClienteDiffCallback(clientes, nuevaLista))
         clientes.clear()
         clientes.addAll(nuevaLista)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
-
     inner class ClienteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNombre: TextView = itemView.findViewById(R.id.tvClienteNombre)
         val tvTipo: TextView = itemView.findViewById(R.id.tvClienteTipo)
@@ -51,3 +52,20 @@ class ClienteAdapter(
     override fun getItemCount() = clientes.size
 }
 
+class ClienteDiffCallback(
+    private val oldList: List<Cliente>,
+    private val newList: List<Cliente>
+) : DiffUtil.Callback() {
+
+    override fun getOldListSize(): Int = oldList.size
+
+    override fun getNewListSize(): Int = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition].id == newList[newItemPosition].id
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition] == newList[newItemPosition]
+    }
+}

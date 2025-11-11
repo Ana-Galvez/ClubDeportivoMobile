@@ -2,19 +2,30 @@ package com.example.clubdeportivomovile
 
 import android.os.Bundle
 import android.content.Intent
+import android.os.Looper
+import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.clubdeportivomovile.data.DBHelper
+import com.example.clubdeportivomovile.data.DBHelper.Companion.RESULT_HAS_DEBT
 
 
-class ListadoDeClientes : BaseActivity() {
+class ListadoDeClientes : BaseActivity(), EliminacionClienteListener {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var recyclerClientes: RecyclerView
     private lateinit var adapter: ClienteAdapter
+    private lateinit var layoutBuscador: LinearLayout
+    private lateinit var tvSinClientes: TextView
+    private lateinit var listaClientes: MutableList<Cliente>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +33,8 @@ class ListadoDeClientes : BaseActivity() {
 
         drawerLayout = findViewById(R.id.drawerLayout)
         recyclerClientes = findViewById(R.id.recyclerClientes)
+        layoutBuscador = findViewById(R.id.layout_buscador)
+        tvSinClientes = findViewById(R.id.tv_sin_clientes)
 
         // Configurar header con botón atrás + hamburguesa
         setupHeader(drawerLayout)
@@ -29,87 +42,18 @@ class ListadoDeClientes : BaseActivity() {
         setupBottomBar("clientes")
 
         // Datos
-        val listaClientes = listOf(
-            Cliente(
-                1,
-                "María",
-                "Golden",
-                "10/05/1990",
-                12345678,
-                "F",
-                "Calle Falsa 01",
-                "09012345",
-                "02/07/2024",
-                1,
-                0
-            ),
-            Cliente(
-                2,
-                "María",
-                "Silver",
-                "10/05/1990",
-                12345679,
-                "F",
-                "Callejón New",
-                "523112345",
-                "30/10/2024",
-                0,
-                0
-            ),
-            Cliente(
-                3,
-                "Juan",
-                "Chavo",
-                "15/03/1985",
-                23456789,
-                "M",
-                "Calle NoHay 10",
-                "01112345",
-                "15/04/2025",
-                1,
-                1
-            ),
-            Cliente(
-                4,
-                "Lorena",
-                "Sim",
-                "22/11/1992",
-                34567890,
-                "F",
-                "Calle S/N",
-                "04662345",
-                "22/12/2024",
-                1,
-                0
-            ),
-            Cliente(
-                5,
-                "Armando",
-                "Perez Gomez",
-                "01/08/1978",
-                45678901,
-                "M",
-                "Calle Nueva",
-                "222662345",
-                "13/12/2024",
-                0,
-                0
-            ),
-            Cliente(
-                6,
-                "José",
-                "Midsomer",
-                "01/08/1978",
-                45678901,
-                "M",
-                "Calle Nueva",
-                "222662345",
-                "13/12/2024",
-                0,
-                0
-            )
-        )
+        val dbHelper = DBHelper(this)
 
+        listaClientes = dbHelper.obtenerClientes().toMutableList()
+
+        //MEnsaje lista de clientes vacia
+        if (listaClientes.isEmpty()) {
+            recyclerClientes.visibility = View.GONE
+            tvSinClientes.visibility = View.VISIBLE
+            //Deshabilito el buscador
+            layoutBuscador.visibility = View.GONE
+            return
+        }
 
         adapter = ClienteAdapter(
             clientes = listaClientes,
@@ -162,8 +106,8 @@ private fun onEditarClienteClick(cliente: Cliente) {
     intent.putExtra("apellido", cliente.Apellido)
     intent.putExtra("nombreCompleto", cliente.nombreCompleto)
     intent.putExtra("id", cliente.id)
-    intent.putExtra("fechaNacimiento", cliente.FechaInscripcion)
-    intent.putExtra("fechaInscripcion", cliente.FechaInscripcion)
+    intent.putExtra("fechaNacimiento", cliente.fechaInscripcionUI)
+    intent.putExtra("fechaInscripcion", cliente.fechaInscripcionUI)
     intent.putExtra("direccion", cliente.Direccion)
     intent.putExtra("dni", cliente.DNI)
     intent.putExtra("telefono", cliente.Telefono)
@@ -180,10 +124,52 @@ private fun onMostrarCarnetClick(cliente: Cliente) {
     intent.putExtra("dni", cliente.DNI)
     intent.putExtra("telefono", cliente.Telefono)
     intent.putExtra("socio", cliente.esSocio)
-    intent.putExtra("fechaInscripcion", cliente.FechaInscripcion)
+    intent.putExtra("fechaInscripcion", cliente.fechaInscripcionUI)
     startActivity(intent)
 }
+//Eliminar clientes (socios solo con todas las cuotas pagadas)
+override fun onClienteEliminado(idCliente: Int, nombreCliente: String) {
+    val dbHelper = DBHelper(this)
+    val resultado = dbHelper.eliminarClientePorId(idCliente)
 
+    when (resultado) {
+        DBHelper.RESULT_OK -> {
+            Toast.makeText(this, "Cliente eliminado correctamente", Toast.LENGTH_SHORT).show()
+
+            listaClientes.removeAll { it.id == idCliente }
+            adapter.updateList(listaClientes)
+        }
+        DBHelper.RESULT_HAS_DEBT -> {
+            Toast.makeText(this, "No se puede eliminar: el cliente tiene cuotas pendientes", Toast.LENGTH_LONG).show()
+        }
+        DBHelper.RESULT_ERROR -> {
+            Toast.makeText(this, "Error al eliminar el cliente", Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+
+   override fun onEliminacionCancelada() {
+        Toast.makeText(this, "Eliminación cancelada.", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun recargarListaClientes() {
+        val dbHelper = DBHelper(this)
+        listaClientes.clear()
+        listaClientes.addAll(dbHelper.obtenerClientes())
+
+        adapter.updateList(listaClientes)
+
+        if (listaClientes.isEmpty()) {
+            recyclerClientes.visibility = View.GONE
+            tvSinClientes.visibility = View.VISIBLE
+            layoutBuscador.visibility = View.GONE
+        } else {
+            recyclerClientes.visibility = View.VISIBLE
+            tvSinClientes.visibility = View.GONE
+            layoutBuscador.visibility = View.VISIBLE
+        }
+        Log.d("DEBUG_LISTA", "Lista actualizada: ${listaClientes.size} clientes.")
+    }
 private fun onEliminarClienteClick(cliente: Cliente) {
     //PAso los datos a eliminar
     val modal = EliminarCliente.newInstance(cliente.id, cliente.nombreCompleto)
@@ -191,7 +177,7 @@ private fun onEliminarClienteClick(cliente: Cliente) {
 }
 
 private fun onRegistrarPagoClick(cliente: Cliente) {
-    if (cliente.esSocio.equals(true)) {
+    if (cliente.esSocio) {
         // socio, lo lleva al formulario de pago de socios con el nombre y id
         val intent = Intent(this, RegistroPagoSocio::class.java)
         intent.putExtra("clienteSeleccionado", cliente.nombreCompleto)

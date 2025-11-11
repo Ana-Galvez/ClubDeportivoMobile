@@ -1,5 +1,6 @@
 package com.example.clubdeportivomovile
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -25,6 +26,7 @@ class EliminarCliente : DialogFragment() {
             return modal
         }
     }
+    private var listener: EliminacionClienteListener? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //PAso datos del cliente a eliminar
@@ -33,16 +35,30 @@ class EliminarCliente : DialogFragment() {
 
         val txtMensaje = view.findViewById<TextView>(R.id.txt_mensaje_eliminar)
         txtMensaje.text = "¿Seguro que quieres eliminar al cliente $nombre?"
-
         val btnSi = view.findViewById<Button>(R.id.btn_si_eliminar)
 
         btnSi.setOnClickListener {
-            Toast.makeText(requireContext(), "Se eliminó con exito al cliente $nombre", Toast.LENGTH_SHORT).show()
+            if (id != -1) {
+                listener?.onClienteEliminado(id, nombre)
+            } else {
+                Toast.makeText(requireContext(), "Error: ID de cliente no válido.", Toast.LENGTH_SHORT).show()
+            }
             dismiss()
         }
 
         val btnNo = view.findViewById<Button>(R.id.btn_no_eliminar)
-        btnNo.setOnClickListener { dismiss() }//Solo cierra el modal
+        btnNo.setOnClickListener {
+            listener?.onEliminacionCancelada()
+            dismiss() }//Solo cierra el modal
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is EliminacionClienteListener) {
+            listener = context
+        } else {
+            throw RuntimeException("${context.toString()} must implement EliminacionClienteListener")
+        }
     }
 
     override fun onStart() {
