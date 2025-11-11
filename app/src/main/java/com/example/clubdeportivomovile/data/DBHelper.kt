@@ -148,6 +148,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
             "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
                     "VALUES ('Javier', 'Rodriguez', '1985-03-01', 28987654, 'M', 'Blvd de los Sueños 50', '555-0003', '2023-11-05', 0, 1)"
         )
+        db.execSQL(
+            "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
+                    "VALUES ('Marcos', 'Juarez', '1993-12-13', 40256321, 'M', 'Av Luna 444', '444-1002', '2023-03-14', 1, 0)"
+        )
 
         db.execSQL("INSERT INTO socios (idCliente, FechaAltaSocio) VALUES (1, '2024-01-10')")
         db.execSQL("INSERT INTO socios (idCliente, FechaAltaSocio) VALUES (3, '2023-11-05')")
@@ -372,6 +376,117 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         return lista
     }
 
+    // Nombre y Apellido de Socios para Registro Pago Socio
+    fun obtenerSociosClientes(): List<Cliente> {
+        val db = readableDatabase
+        Log.d("DBHelper", "Iniciando consulta de clientes SOCIOS...")
+        val listaClientesDB = mutableListOf<Cliente>()
+
+        // La única diferencia es "WHERE Socio = 1"
+        val cursor = db.rawQuery("SELECT * FROM clientes WHERE Socio = 1", null)
+
+        val id = "id"
+        val nombre = "Nombre"
+        val apellido = "Apellido"
+        val fechaNacimiento = "FechaNacimiento"
+        val dni = "DNI"
+        val genero = "Genero"
+        val direccion = "Direccion"
+        val telefono = "Telefono"
+        val fechaInscripcion = "FechaInscripcion"
+        val aptoFisico = "AptoFisico"
+        val socio = "Socio"
+
+        if (cursor.moveToFirst()) {
+            do {
+                try {
+                    val id = cursor.getInt(cursor.getColumnIndexOrThrow(id))
+                    val dni = cursor.getInt(cursor.getColumnIndexOrThrow(dni))
+                    val aptoFisico = cursor.getInt(cursor.getColumnIndexOrThrow(aptoFisico))
+                    val socio = cursor.getInt(cursor.getColumnIndexOrThrow(socio))
+                    val nombre = cursor.getString(cursor.getColumnIndexOrThrow(nombre))
+                    val apellido = cursor.getString(cursor.getColumnIndexOrThrow(apellido))
+                    val fechaNacimiento =
+                        cursor.getString(cursor.getColumnIndexOrThrow(fechaNacimiento))
+                    val genero = cursor.getString(cursor.getColumnIndexOrThrow(genero))
+                    val direccion = cursor.getString(cursor.getColumnIndexOrThrow(direccion))
+                    val telefono = cursor.getString(cursor.getColumnIndexOrThrow(telefono))
+                    val fechaInscripcion =
+                        cursor.getString(cursor.getColumnIndexOrThrow(fechaInscripcion))
+
+                    val cliente = Cliente(
+                        id, nombre, apellido, fechaNacimiento, dni, genero,
+                        direccion, telefono, fechaInscripcion, aptoFisico, socio
+                    )
+                    listaClientesDB.add(cliente)
+                } catch (e: Exception) {
+                    Log.e("DBHelper", "Error al cargar cliente socio: ${e.message}")
+                }
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        Log.d("DBHelper", "Se encontraron ${listaClientesDB.size} clientes socios.")
+        return listaClientesDB
+    }
+
+    // Nombre y Apellido de No Socios para Registro Pago No Socio
+    fun obtenerNoSociosClientes(): List<Cliente> {
+        val db = readableDatabase
+        Log.d("DBHelper", "Iniciando consulta de clientes NO SOCIOS...")
+        val listaClientesDB = mutableListOf<Cliente>()
+
+        val cursor = db.rawQuery("SELECT * FROM clientes WHERE Socio = 0", null)
+
+        val id = "id"
+        val nombre = "Nombre"
+        val apellido = "Apellido"
+        val fechaNacimiento = "FechaNacimiento"
+        val dni = "DNI"
+        val genero = "Genero"
+        val direccion = "Direccion"
+        val telefono = "Telefono"
+        val fechaInscripcion = "FechaInscripcion"
+        val aptoFisico = "AptoFisico"
+        val socio = "Socio"
+
+        if (cursor.moveToFirst()) {
+            do {
+                try {
+                    val id = cursor.getInt(cursor.getColumnIndexOrThrow(id))
+                    val dni = cursor.getInt(cursor.getColumnIndexOrThrow(dni))
+                    val aptoFisico = cursor.getInt(cursor.getColumnIndexOrThrow(aptoFisico))
+                    val socio = cursor.getInt(cursor.getColumnIndexOrThrow(socio))
+                    val nombre = cursor.getString(cursor.getColumnIndexOrThrow(nombre))
+                    val apellido = cursor.getString(cursor.getColumnIndexOrThrow(apellido))
+                    val fechaNacimiento =
+                        cursor.getString(cursor.getColumnIndexOrThrow(fechaNacimiento))
+                    val genero = cursor.getString(cursor.getColumnIndexOrThrow(genero))
+                    val direccion = cursor.getString(cursor.getColumnIndexOrThrow(direccion))
+                    val telefono = cursor.getString(cursor.getColumnIndexOrThrow(telefono))
+                    val fechaInscripcion =
+                        cursor.getString(cursor.getColumnIndexOrThrow(fechaInscripcion))
+
+                    val cliente = Cliente(
+                        id, nombre, apellido, fechaNacimiento, dni, genero,
+                        direccion, telefono, fechaInscripcion, aptoFisico, socio
+                    )
+                    listaClientesDB.add(cliente)
+                } catch (e: Exception) {
+                    Log.e("DBHelper", "Error al obtener cliente: ${e.message}")
+                }
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        Log.d("DBHelper", "Se encontraron ${listaClientesDB.size} clientes no socios.")
+        return listaClientesDB
+    }
+
     //Registrar pAgo de socios
     //TODO: Falta crear próxima cuota (vencimiento un mes después de la fecha de pago)
     fun insertarCuota(
@@ -467,7 +582,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
     }
 
 
-    //TODO: Listado de actividades (Para dropdown en pago no socios)
+    //Listado Actividades Registro Pago NO socio
     @SuppressLint("Range")
     fun obtenerActividades(): List<Actividad> {
         val actividadesList = mutableListOf<Actividad>()

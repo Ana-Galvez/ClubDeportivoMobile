@@ -6,17 +6,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.clubdeportivomovile.data.DBHelper
 
 class RegistroPagoSocio : BaseActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var dbHelper: DBHelper
+    private var listaSociosDB: List<Cliente> = listOf()
+
+    private lateinit var spinnerCliente: Spinner
+    private lateinit var spinnerCuotaPendiente: Spinner
+
+    private lateinit var spinnerPago: Spinner
+    private lateinit var spinnerCuotasTarjeta: Spinner
+    private lateinit var etNumeroTarjeta: EditText
+    private lateinit var montoEditText: EditText
+    private lateinit var tituloCuotasTarjeta: TextView
+    private lateinit var tituloNumeroTarjeta: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +38,9 @@ class RegistroPagoSocio : BaseActivity() {
         setupDrawerMenu(R.id.drawerLayout) ///********** agregue para fc del menu ---va el id como parametro
         setupBottomBar("pagos")  //activo botones barra
 
+        dbHelper = DBHelper(this)
         //clientes
-        data class Cliente(
+        /*        data class Cliente(
             val id: Int,
             val nombre: String,
             val apellido: String,
@@ -35,40 +48,41 @@ class RegistroPagoSocio : BaseActivity() {
             val telefono: String,
             val ins: String,
             val direccion:String
-        )
+        )*/
 
-        val clientes = listOf(
+        /*        val clientes = listOf(
             Cliente(1, "María", "Golden", false, "09012345", "02/07/2024", "Calle Falsa 01"),
             Cliente(1, "María", "Silver", true, "523112345", "30/10/2024", "Callejón New"),
             Cliente(2, "Juan", "Chavo", true, "01112345", "15/04/2025", "Calle NoHay 10"),
             Cliente(3, "Lorena", "Sim", false, "04662345", "22/12/2024", "Calle S/N"),
             Cliente(3, "Armando", "Perez Gomez", false, "222662345", "13/12/2024", "Calle Nueva")
-        )
+        )*/
 
-        val clienteEditText: AutoCompleteTextView= findViewById(R.id.cliente)
-
-        val nombresClientes = clientes.map { "${it.nombre} ${it.apellido}" }
+        listaSociosDB = dbHelper.obtenerSociosClientes()
+        spinnerCliente = findViewById(R.id.spinner_cliente_socio)
+        val nombresClientesSpinner = mutableListOf("Seleccionar cliente...")
+        nombresClientesSpinner.addAll(listaSociosDB.map { it.nombreCompleto })
 
         val adapterClientes = ArrayAdapter(
             this,
-            android.R.layout.simple_dropdown_item_1line,
-            nombresClientes
+            R.layout.spinner_item_custom,
+            nombresClientesSpinner
         )
-
-        // Para mostrar sugerencia de busqueda de nombres
-        clienteEditText.setAdapter(adapterClientes)
+        adapterClientes.setDropDownViewResource(R.layout.spinner_item_custom)
+        spinnerCliente.adapter = adapterClientes
 
         //Para no mostrar sugerencia de busqueda de nombres, ya que viene del listado de cliente
         val clienteSeleccionado = intent.getStringExtra("clienteSeleccionado")
 
         if (clienteSeleccionado != null) {
-            // Mostrar nombre directamente
-            clienteEditText.setText(clienteSeleccionado)
-            clienteEditText.isEnabled = false
-            //Saca icono de busqueda
-            clienteEditText.setCompoundDrawables(null, null, null, null)
+            val posicion = nombresClientesSpinner.indexOf(clienteSeleccionado)
+            if (posicion >= 0) {
+                spinnerCliente.setSelection(posicion)
+                spinnerCliente.isEnabled = false
+            }
+        } else {
+            spinnerCliente.setSelection(0) // Mostrar "Seleccionar cliente..."
         }
-
 
         // Cuota pendiente
         data class CuotaPendiente(
@@ -83,13 +97,13 @@ class RegistroPagoSocio : BaseActivity() {
             CuotaPendiente(3, "Agosto 2025", 35000)
         )
 
-        val spinnerCuotaPendiente: Spinner = findViewById(R.id.spinner_cuota_pendiente)
-        val montoEditText: EditText = findViewById(R.id.monto)
+        spinnerCuotaPendiente = findViewById(R.id.spinner_cuota_pendiente)
+        montoEditText = findViewById(R.id.monto)
 
-        val nombresCuotasPendientes = mutableListOf("Seleccionar...")
+        val nombresCuotasPendientes = mutableListOf("Seleccionar cuota a pagar...")
         nombresCuotasPendientes.addAll(cuotasPendientes.map { it.mesAnio })
 
-        val adapter = object : ArrayAdapter<String>(
+        val adapterCuotas = object : ArrayAdapter<String>(
             this,
             R.layout.spinner_item_custom,
             nombresCuotasPendientes
@@ -101,8 +115,8 @@ class RegistroPagoSocio : BaseActivity() {
         }
 
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerCuotaPendiente.adapter = adapter
+        adapterCuotas.setDropDownViewResource(R.layout.spinner_item_custom)
+        spinnerCuotaPendiente.adapter = adapterCuotas
 
         spinnerCuotaPendiente.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -116,7 +130,8 @@ class RegistroPagoSocio : BaseActivity() {
                     return
                 }
 
-                val cuotaPendienteSeleccionada = cuotasPendientes[position - 1] // -1 por el placeholder
+                val cuotaPendienteSeleccionada =
+                    cuotasPendientes[position - 1] // -1 por el placeholder
                 montoEditText.setText(cuotaPendienteSeleccionada.monto.toString())
             }
 
@@ -125,8 +140,8 @@ class RegistroPagoSocio : BaseActivity() {
 
         spinnerCuotaPendiente.setSelection(0)
 
-        adapter.setDropDownViewResource(R.layout.spinner_item_custom)
-        spinnerCuotaPendiente.adapter = adapter
+        adapterCuotas.setDropDownViewResource(R.layout.spinner_item_custom)
+        spinnerCuotaPendiente.adapter = adapterCuotas
 
         spinnerCuotaPendiente.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -140,7 +155,8 @@ class RegistroPagoSocio : BaseActivity() {
                     return
                 }
 
-                val cuotaPendienteSeleccionada = cuotasPendientes[position - 1] // -1 por el placeholder
+                val cuotaPendienteSeleccionada =
+                    cuotasPendientes[position - 1] // -1 por el placeholder
                 montoEditText.setText(cuotaPendienteSeleccionada.monto.toString())
             }
 
@@ -168,7 +184,7 @@ class RegistroPagoSocio : BaseActivity() {
 
         val spinnerPago: Spinner = findViewById(R.id.spinner_pago)
 
-        val nombresPago = mutableListOf("Seleccionar...")
+        val nombresPago = mutableListOf("Seleccionar forma de pago...")
         nombresPago.addAll(formasPagos.map { it.medioPago })
 
         // Crear el adapter para mostrar las opciones en el Spinner
@@ -189,6 +205,8 @@ class RegistroPagoSocio : BaseActivity() {
         // Cantidad de cuotas si se elige tarjeta de crédito
         val spinnerCuotasTarjeta: Spinner = findViewById(R.id.spinner_cuotas)
         val tituloCuotasTarjeta: TextView = findViewById(R.id.titulo_cuotas)
+        etNumeroTarjeta = findViewById(R.id.num_tarjeta)
+        val tituloNumeroTarjeta: TextView = findViewById(R.id.titulo_num_tarjeta)
 
         // Configuramos las opciones de cuotas
         val opcionesCuotasTarjeta = listOf("Seleccionar...", "3 cuotas", "6 cuotas")
@@ -204,10 +222,14 @@ class RegistroPagoSocio : BaseActivity() {
         }
         adapterCuotasTarjeta.setDropDownViewResource(R.layout.spinner_item_custom)
         spinnerCuotasTarjeta.adapter = adapterCuotasTarjeta
+        spinnerCuotasTarjeta.setSelection(0)
+
+        spinnerCuotasTarjeta.visibility = View.GONE
+        tituloCuotasTarjeta.visibility = View.GONE
+        etNumeroTarjeta.visibility = View.GONE
+        tituloNumeroTarjeta.visibility = View.GONE
 
         // Controlamos la visibilidad según forma de pago
-        val etNumeroTarjeta: EditText = findViewById(R.id.num_tarjeta)
-        val tituloNumeroTarjeta: TextView = findViewById(R.id.titulo_num_tarjeta)
         spinnerPago.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -217,7 +239,7 @@ class RegistroPagoSocio : BaseActivity() {
             ) {
                 val seleccion = spinnerPago.selectedItem.toString()
 
-                if (seleccion == "Tarjeta de crédito") {
+                if (position==2) {
                     spinnerCuotasTarjeta.visibility = View.VISIBLE
                     tituloCuotasTarjeta.visibility = View.VISIBLE
                 } else {
@@ -225,6 +247,7 @@ class RegistroPagoSocio : BaseActivity() {
                     tituloCuotasTarjeta.visibility = View.GONE
                     etNumeroTarjeta.visibility = View.GONE
                     tituloNumeroTarjeta.visibility = View.GONE
+                    spinnerCuotasTarjeta.setSelection(0)
                 }
             }
 
@@ -240,9 +263,9 @@ class RegistroPagoSocio : BaseActivity() {
                 position: Int,
                 id: Long
             ) {
-                val seleccion = spinnerCuotasTarjeta.selectedItem.toString()
+                /*               val seleccion = spinnerCuotasTarjeta.selectedItem.toString()*/
 
-                if (seleccion == "3 cuotas" || seleccion == "6 cuotas") {
+                if (position > 0) {
                     etNumeroTarjeta.visibility = View.VISIBLE
                     tituloNumeroTarjeta.visibility = View.VISIBLE
                 } else {
@@ -256,31 +279,31 @@ class RegistroPagoSocio : BaseActivity() {
 
         //Validaciones del formulario
         fun validarFormulario(
-            spinnerCuotaPendiente: Spinner,
-            spinnerFormaPago: Spinner,
-            spinnerCuotasTarjeta: Spinner,
-            etNumTarjeta: EditText,
-            clienteEditText: EditText,
-            clientes: List<Cliente>
-        ): Boolean {
-            val nombreIngresado = clienteEditText.text.toString().trim()
-            val formaPago = spinnerFormaPago.selectedItem.toString()
+        ): Cliente? {
+
+            val clientePosicion = spinnerCliente.selectedItemPosition
+            val cuotaPosicion = spinnerCuotaPendiente.selectedItemPosition
+            val pagoPosicion = spinnerPago.selectedItemPosition
+            val cuotasTarjetaPosicion = spinnerCuotasTarjeta.selectedItemPosition
+
+            val formaPago = spinnerPago.getItemAtPosition(pagoPosicion).toString()
+            val numTarjeta = etNumeroTarjeta.text.toString().trim()
+            /*            val nombreIngresado = clienteEditText.text.toString().trim()
             val cantCuotasTarjeta = spinnerCuotasTarjeta.selectedItemPosition !=0
             val cuotaPendienteSeleccionada = spinnerCuotaPendiente.selectedItemPosition != 0
             val clienteIngresado = nombreIngresado.isNotEmpty()
-            val numTarjeta = etNumTarjeta.text.toString().trim()
 
             // Buscar cliente en la base de datos
             val clienteEncontrado = clientes.find {
                 "${it.nombre} ${it.apellido}".equals(nombreIngresado, ignoreCase = true)
+            }*/
+
+            if (clientePosicion == 0) {
+                Toast.makeText(this, "Debe seleccionar un cliente.", Toast.LENGTH_SHORT).show()
+                return null
             }
 
-            if (clienteEncontrado == null) {
-                Toast.makeText(this, "El cliente no existe.", Toast.LENGTH_SHORT).show()
-                return false
-            }
-
-            // Verificar si es no socio
+            /*            // Verificar si es no socio
             if (!clienteEncontrado.socio) {
                 Toast.makeText(
                     this,
@@ -288,15 +311,15 @@ class RegistroPagoSocio : BaseActivity() {
                     Toast.LENGTH_LONG
                 ).show()
                 return false
-            }
-            // campos vacíos
+            }*/
+            /*            // campos vacíos
             if (!clienteIngresado && !cuotaPendienteSeleccionada && formaPago=="") {
                 Toast.makeText(
                     this,
                     "Campos incompletos. Complete cliente, cuota y forma de pago.",
                     Toast.LENGTH_SHORT
                 ).show()
-                return false
+                return null
             } else if (!clienteIngresado) {
                 Toast.makeText(this, "Debe ingresar el nombre del cliente.", Toast.LENGTH_SHORT)
                     .show()
@@ -315,9 +338,46 @@ class RegistroPagoSocio : BaseActivity() {
             } else if (numTarjeta==""){
                 Toast.makeText(this, "Debe ingresar el número de tarjeta del socio.", Toast.LENGTH_SHORT).show()
                 return false
+            }*/
+
+            if (cuotaPosicion == 0) {
+                Toast.makeText(this, "Debe seleccionar una de las cuotas.", Toast.LENGTH_SHORT)
+                    .show()
+                return null
+            }
+            if (pagoPosicion == 0) {
+                Toast.makeText(this, "Debe seleccionar una forma de pago.", Toast.LENGTH_SHORT)
+                    .show()
+                return null
             }
 
-            // Validar que el nombre tenga solo letras y espacios
+            if (formaPago == "Tarjeta de crédito") {
+                if (cuotasTarjetaPosicion == 0) {
+                    Toast.makeText(
+                        this,
+                        "Debe seleccionar la cantidad de cuotas.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return null
+                }
+                if (numTarjeta.isEmpty()) {
+                    Toast.makeText(this, "Debe ingresar el número de tarjeta.", Toast.LENGTH_SHORT)
+                        .show()
+                    return null
+                }
+            }
+            val clienteEncontrado = listaSociosDB[clientePosicion - 1]
+
+            // Doble chequeo
+            if (!clienteEncontrado.esSocio) {
+                Toast.makeText(this, "El cliente no es socio.", Toast.LENGTH_LONG).show()
+                return null
+            }
+
+            return clienteEncontrado
+        }
+
+            /*            // Validar que el nombre tenga solo letras y espacios
             val regexNombre = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+\$")
             if (!regexNombre.matches(nombreIngresado)) {
                 Toast.makeText(
@@ -328,34 +388,42 @@ class RegistroPagoSocio : BaseActivity() {
                 return false
             }
 
-            return true
-        }
+            return true*/
+
 
         //Botones
         val botonAceptar: Button = findViewById(R.id.btnAceptarSocio)
 
         botonAceptar.setOnClickListener {
-            if (validarFormulario(spinnerCuotaPendiente, spinnerPago,spinnerCuotasTarjeta,etNumeroTarjeta,clienteEditText, clientes = clientes)) {
+            val clienteEncontrado = validarFormulario()
+            if (clienteEncontrado != null) {
                 val cuotaPendienteSeleccionada = spinnerCuotaPendiente.selectedItem.toString()
                 val formaPago = spinnerPago.selectedItem.toString()
                 val numTarjeta = etNumeroTarjeta.text.toString().trim()
                 val cantCuotasTarjeta = spinnerCuotasTarjeta.selectedItem.toString()
-                val clienteNombre = clienteEditText.text.toString().trim()
+                val clienteNombre = spinnerCliente.selectedItem.toString()
                 val monto = montoEditText.text.toString().trim()
-                //Para pasar los datos del cliente socio encontrado
-                val clienteEncontrado = clientes.find {
-                    "${it.nombre} ${it.apellido}".equals(clienteNombre, ignoreCase = true)
-                }!!
+
+                /*                val cuotaPendienteSeleccionada = spinnerCuotaPendiente.selectedItem.toString()
+            val formaPago = spinnerPago.selectedItem.toString()
+            val numTarjeta = etNumeroTarjeta.text.toString().trim()
+            val cantCuotasTarjeta = spinnerCuotasTarjeta.selectedItem.toString()
+            val clienteNombre = clienteEditText.text.toString().trim()
+            val monto = montoEditText.text.toString().trim()
+            //Para pasar los datos del cliente socio encontrado
+            val clienteEncontrado = clientes.find {
+                "${it.nombre} ${it.apellido}".equals(clienteNombre, ignoreCase = true)
+            }!!*/
                 //Paso la info al comprobante
                 val intent = Intent(this, ReciboSocioActivity::class.java).apply {
                     putExtra("nombreCliente", clienteNombre)
                     putExtra("cuotaPendiente", cuotaPendienteSeleccionada)
                     putExtra("monto", monto)
-                    putExtra("formaPago",formaPago)
-                    putExtra("cantCuotasTarjeta",cantCuotasTarjeta)
-                    putExtra("telefono", clienteEncontrado.telefono)
-                    putExtra("ins", clienteEncontrado.ins)
-                    putExtra("direccion", clienteEncontrado.direccion)
+                    putExtra("formaPago", formaPago)
+                    putExtra("cantCuotasTarjeta", cantCuotasTarjeta)
+                    putExtra("telefono", clienteEncontrado.Telefono)
+                    putExtra("ins", clienteEncontrado.fechaInscripcionUI)
+                    putExtra("direccion", clienteEncontrado.Direccion)
                 }
 
                 startActivity(intent)
@@ -365,11 +433,12 @@ class RegistroPagoSocio : BaseActivity() {
         val botonLimpiar: Button = findViewById(R.id.btnLimpiarSocio)
 
         botonLimpiar.setOnClickListener {
-            val rootLayout = findViewById<ViewGroup>(R.id.contentLayout) // el layout principal del form
+            val rootLayout =
+                findViewById<ViewGroup>(R.id.contentLayout) // el layout principal del form
             limpiarFormulario(rootLayout)
-
-            // foco al primer campo
-            clienteEditText.requestFocus()
+            spinnerCliente.setSelection(0)
+            spinnerCuotaPendiente.setSelection(0)
+            spinnerPago.setSelection(0)
         }
     }
 }

@@ -47,14 +47,9 @@
             style="@style/FormularioLabel"
             android:text="Cliente" />
 
-        <AutoCompleteTextView
-            android:id="@+id/cliente"
-            android:hint="Ingrese un nombre"
-            android:inputType="textPersonName"
-            android:completionThreshold="1"
-            android:drawableEnd="@drawable/ic_search"
-            android:drawablePadding="12dp"
-            style="@style/FormularioEditText"/>
+        <Spinner
+            android:id="@+id/spinner_cliente_socio"
+            style="@style/DropdownSpinner" />
     </LinearLayout>
 
     <!-- Cuota pendiente -->
