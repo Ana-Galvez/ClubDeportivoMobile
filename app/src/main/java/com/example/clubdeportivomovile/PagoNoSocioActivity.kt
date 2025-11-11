@@ -12,17 +12,22 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.clubdeportivomovile.data.DBHelper
 import com.example.clubdeportivomovile.limpiarFormulario
 
 class PagoNoSocioActivity : BaseActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var dbHelper: DBHelper
+    private var listaDeActividadesDB: List<Actividad> = listOf() // Va a guardar las actividades ingresadas en la DB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_pago_no_socios)
         setupDrawerMenu(R.id.drawer_layout_no_socio) ///********** agregue para fc del menu ---va el id como parametro
         setupBottomBar("pagos")
+
+        dbHelper = DBHelper(this)
 
         //clientes
         data class Cliente(
@@ -69,26 +74,28 @@ class PagoNoSocioActivity : BaseActivity() {
         }
 
         //actividades
-        data class Actividad(
+/*        data class Actividad(
             val id: Int,
             val nombre: String,
             val precio: Int,
             val diaSemana: String,
             val hora: String
-        )
+        )*/
 
-        val actividades = listOf(
+/*        val actividades = listOf(
             Actividad(1, "Yoga", 15000, "Lunes", "11:00 hs"),
             Actividad(2, "Tenis", 18000, "Martes", "14:00 hs"),
             Actividad(3, "Natación", 20000, "Miércoles", "16:30 hs")
-        )
+        )*/
+
+        listaDeActividadesDB = dbHelper.obtenerActividades()
 
         val spinnerActividad: Spinner = findViewById(R.id.spinner_pago_no_socio)
         val horarioEditText: EditText = findViewById(R.id.formNoSocioHorario)
         val montoEditText: EditText = findViewById(R.id.formNoSocioMonto)
 
         val nombresActividades = mutableListOf("Seleccionar...")
-        nombresActividades.addAll(actividades.map { it.nombre })
+        nombresActividades.addAll(listaDeActividadesDB.map { it.nombre })
 
         val adapter = object : ArrayAdapter<String>(
             this,
@@ -117,41 +124,14 @@ class PagoNoSocioActivity : BaseActivity() {
                     return
                 }
 
-                val actividadSeleccionada = actividades[position - 1] // -1 por el placeholder
+                val actividadSeleccionada = listaDeActividadesDB[position - 1] // -1 por el placeholder
                 horarioEditText.setText(actividadSeleccionada.hora)
-                montoEditText.setText(actividadSeleccionada.precio.toString())
+                montoEditText.setText(actividadSeleccionada.monto.toString())
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        spinnerActividad.setSelection(0)
-
-        adapter.setDropDownViewResource(R.layout.spinner_item_custom)
-        spinnerActividad.adapter = adapter
-
-        spinnerActividad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if (position == 0) {
-                    horarioEditText.text.clear()
-                    montoEditText.text.clear()
-                    return
-                }
-
-                val actividadSeleccionada = actividades[position - 1] // -1 por el placeholder
-                horarioEditText.setText(actividadSeleccionada.hora)
-                montoEditText.setText(actividadSeleccionada.precio.toString())
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
-
-        // Mostrar el placeholder
         spinnerActividad.setSelection(0)
 
         // Drawer

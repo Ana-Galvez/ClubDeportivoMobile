@@ -1,10 +1,13 @@
 package com.example.clubdeportivomovile.data
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import com.example.clubdeportivomovile.Actividad
 import com.example.clubdeportivomovile.Cliente
 import com.example.clubdeportivomovile.Cuotas
 import com.example.clubdeportivomovile.PagoActividad
@@ -39,13 +42,13 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
                     "Nombre TEXT NOT NULL, " +
                     "DiaSemana TEXT NOT NULL, " +
                     "Hora TEXT NOT NULL, " +
-                    "Precio REAL NOT NULL)"
+                    "Monto REAL NOT NULL)"
         )
 
         // Ingreso los datos establecidos por el sistema
         db.execSQL(
             """
-        INSERT INTO actividades (Nombre, DiaSemana, Hora, Precio) VALUES
+        INSERT INTO actividades (Nombre, DiaSemana, Hora, Monto) VALUES
             ('Natación', 'Lunes', '11:00:00', 5000.00),
             ('Pilates', 'Lunes', '18:00:00', 8000.00),
             ('Tenis', 'Miércoles', '18:00:00', 10000.00),
@@ -462,6 +465,43 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         cursor.close()
         return lista
     }
+
+
     //TODO: Listado de actividades (Para dropdown en pago no socios)
+    @SuppressLint("Range")
+    fun obtenerActividades(): List<Actividad> {
+        val actividadesList = mutableListOf<Actividad>()
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+
+        try {
+            cursor = db.rawQuery(
+                "SELECT id, Nombre, DiaSemana, Hora, Monto FROM actividades ORDER BY Nombre ASC",
+                null
+            )
+
+        } catch (e: Exception) {
+            Log.e("DBHelper", "Error al leer actividades", e)
+            db.close()
+            return actividadesList
+        }
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndex("id"))
+                val nombre = cursor.getString(cursor.getColumnIndex("Nombre"))
+                val diaSemana = cursor.getString(cursor.getColumnIndex("DiaSemana"))
+                val hora = cursor.getString(cursor.getColumnIndex("Hora"))
+                val monto = cursor.getDouble(cursor.getColumnIndex("Monto"))
+
+                val actividad = Actividad(id, nombre, diaSemana, hora, monto)
+                actividadesList.add(actividad)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return actividadesList
+    }
+
     //TODO: Listado de clientes a los que se les vence la cuota (morosos)
 }
