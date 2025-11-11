@@ -67,7 +67,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
                     "IdCuota INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "id_cliente INTEGER NOT NULL, " +
                     "Monto REAL NOT NULL, " +
-                    "ModoPago TEXT CHECK (ModoPago IN ('Efectivo','Tarjeta','Transferencia')), " +
+                    "ModoPago TEXT CHECK (ModoPago IN ('Efectivo','Tarjeta')), " +
                     "Estado TEXT NOT NULL CHECK (Estado IN ('Pagada','Pendiente')), " +
                     "FechaPago TEXT, " +
                     "FechaVencimiento TEXT NOT NULL, " +
@@ -83,7 +83,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
                     "id_cliente INTEGER NOT NULL, " +
                     "IdActividad INTEGER NOT NULL, " +
                     "FechaPago TEXT NOT NULL, " +
-                    "ModoPago TEXT NOT NULL CHECK (ModoPago IN ('Efectivo','Tarjeta','Transferencia')) DEFAULT 'Efectivo', " +
+                    "ModoPago TEXT NOT NULL CHECK (ModoPago IN ('Efectivo','Tarjeta')) DEFAULT 'Efectivo', " +
                     "Monto REAL NOT NULL, " +
                     "Estado TEXT NOT NULL CHECK (Estado IN ('Pagada','Pendiente')) DEFAULT 'Pendiente', " +
                     "FOREIGN KEY (id_cliente) REFERENCES clientes(id) ON DELETE CASCADE, " +
