@@ -39,24 +39,6 @@ class RegistroPagoSocio : BaseActivity() {
         setupBottomBar("pagos")  //activo botones barra
 
         dbHelper = DBHelper(this)
-        //clientes
-        /*        data class Cliente(
-            val id: Int,
-            val nombre: String,
-            val apellido: String,
-            val socio: Boolean,
-            val telefono: String,
-            val ins: String,
-            val direccion:String
-        )*/
-
-        /*        val clientes = listOf(
-            Cliente(1, "María", "Golden", false, "09012345", "02/07/2024", "Calle Falsa 01"),
-            Cliente(1, "María", "Silver", true, "523112345", "30/10/2024", "Callejón New"),
-            Cliente(2, "Juan", "Chavo", true, "01112345", "15/04/2025", "Calle NoHay 10"),
-            Cliente(3, "Lorena", "Sim", false, "04662345", "22/12/2024", "Calle S/N"),
-            Cliente(3, "Armando", "Perez Gomez", false, "222662345", "13/12/2024", "Calle Nueva")
-        )*/
 
         listaSociosDB = dbHelper.obtenerSociosClientes()
         spinnerCliente = findViewById(R.id.spinner_cliente_socio)
@@ -288,57 +270,11 @@ class RegistroPagoSocio : BaseActivity() {
 
             val formaPago = spinnerPago.getItemAtPosition(pagoPosicion).toString()
             val numTarjeta = etNumeroTarjeta.text.toString().trim()
-            /*            val nombreIngresado = clienteEditText.text.toString().trim()
-            val cantCuotasTarjeta = spinnerCuotasTarjeta.selectedItemPosition !=0
-            val cuotaPendienteSeleccionada = spinnerCuotaPendiente.selectedItemPosition != 0
-            val clienteIngresado = nombreIngresado.isNotEmpty()
-
-            // Buscar cliente en la base de datos
-            val clienteEncontrado = clientes.find {
-                "${it.nombre} ${it.apellido}".equals(nombreIngresado, ignoreCase = true)
-            }*/
 
             if (clientePosicion == 0) {
                 Toast.makeText(this, "Debe seleccionar un cliente.", Toast.LENGTH_SHORT).show()
                 return null
             }
-
-            /*            // Verificar si es no socio
-            if (!clienteEncontrado.socio) {
-                Toast.makeText(
-                    this,
-                    "El cliente es NO socio no se puede registrar el pago.",
-                    Toast.LENGTH_LONG
-                ).show()
-                return false
-            }*/
-            /*            // campos vacíos
-            if (!clienteIngresado && !cuotaPendienteSeleccionada && formaPago=="") {
-                Toast.makeText(
-                    this,
-                    "Campos incompletos. Complete cliente, cuota y forma de pago.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return null
-            } else if (!clienteIngresado) {
-                Toast.makeText(this, "Debe ingresar el nombre del cliente.", Toast.LENGTH_SHORT)
-                    .show()
-                return false
-            } else if (!cuotaPendienteSeleccionada) {
-                Toast.makeText(this, "Debe seleccionar una de las cuotas.", Toast.LENGTH_SHORT).show()
-                return false
-            } else if (formaPago=="Seleccionar..."){
-                Toast.makeText(this, "Debe seleccionar una forma de pago.", Toast.LENGTH_SHORT).show()
-                return false
-            } else if (formaPago=="Efectivo"){
-                return true
-            } else if (formaPago=="Tarjeta de crédito" && !cantCuotasTarjeta){
-                Toast.makeText(this, "Debe seleccionar la cantidad de cuotas.", Toast.LENGTH_SHORT).show()
-                return false
-            } else if (numTarjeta==""){
-                Toast.makeText(this, "Debe ingresar el número de tarjeta del socio.", Toast.LENGTH_SHORT).show()
-                return false
-            }*/
 
             if (cuotaPosicion == 0) {
                 Toast.makeText(this, "Debe seleccionar una de las cuotas.", Toast.LENGTH_SHORT)
@@ -377,20 +313,6 @@ class RegistroPagoSocio : BaseActivity() {
             return clienteEncontrado
         }
 
-            /*            // Validar que el nombre tenga solo letras y espacios
-            val regexNombre = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+\$")
-            if (!regexNombre.matches(nombreIngresado)) {
-                Toast.makeText(
-                    this,
-                    "El nombre del cliente contiene caracteres inválidos.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return false
-            }
-
-            return true*/
-
-
         //Botones
         val botonAceptar: Button = findViewById(R.id.btnAceptarSocio)
 
@@ -404,16 +326,6 @@ class RegistroPagoSocio : BaseActivity() {
                 val clienteNombre = spinnerCliente.selectedItem.toString()
                 val monto = montoEditText.text.toString().trim()
 
-                /*                val cuotaPendienteSeleccionada = spinnerCuotaPendiente.selectedItem.toString()
-            val formaPago = spinnerPago.selectedItem.toString()
-            val numTarjeta = etNumeroTarjeta.text.toString().trim()
-            val cantCuotasTarjeta = spinnerCuotasTarjeta.selectedItem.toString()
-            val clienteNombre = clienteEditText.text.toString().trim()
-            val monto = montoEditText.text.toString().trim()
-            //Para pasar los datos del cliente socio encontrado
-            val clienteEncontrado = clientes.find {
-                "${it.nombre} ${it.apellido}".equals(clienteNombre, ignoreCase = true)
-            }!!*/
                 //Paso la info al comprobante
                 val intent = Intent(this, ReciboSocioActivity::class.java).apply {
                     putExtra("nombreCliente", clienteNombre)
