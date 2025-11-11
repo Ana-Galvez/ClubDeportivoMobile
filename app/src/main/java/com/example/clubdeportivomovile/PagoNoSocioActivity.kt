@@ -134,6 +134,33 @@ class PagoNoSocioActivity : BaseActivity() {
 
         spinnerActividad.setSelection(0)
 
+        adapter.setDropDownViewResource(R.layout.spinner_item_custom)
+        spinnerActividad.adapter = adapter
+
+        spinnerActividad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (position == 0) {
+                    horarioEditText.text.clear()
+                    montoEditText.text.clear()
+                    return
+                }
+
+                val actividadSeleccionada = listaDeActividadesDB[position - 1] // -1 por el placeholder
+                horarioEditText.setText(actividadSeleccionada.hora)
+                montoEditText.setText(actividadSeleccionada.monto.toString())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+        // Mostrar el placeholder
+        spinnerActividad.setSelection(0)
+
         // Drawer
         drawerLayout = findViewById(R.id.drawer_layout_no_socio)
         setupHeader(drawerLayout)
