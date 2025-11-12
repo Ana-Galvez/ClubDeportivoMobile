@@ -43,7 +43,8 @@ class CarnetActivity : BaseActivity() {
         val nombreCliente = intent.getStringExtra("nombreCompleto") ?: "Sin nombre"
         val id = intent.getIntExtra("id", 0)
         val dni = intent.getIntExtra("dni", 0)
-        val socio = intent.getBooleanExtra("socio", false)
+        val socioInt = intent.getIntExtra("socio", 0)
+        val socio = socioInt == 1
         val direccion = intent.getStringExtra("direccion") ?: "Sin dirección"
         val telefono = intent.getStringExtra("telefono") ?: "Sin teléfono"
         val inscrip = intent.getStringExtra("fechaInscripcion") ?: "Sin fecha"
@@ -85,7 +86,7 @@ class CarnetActivity : BaseActivity() {
 
         paint.textSize = 12f
         paint.isFakeBoldText = true
-        canvas.drawText("Comprobante de Inscripción", 50f, 40f, paint)
+        canvas.drawText("Carnet", 50f, 40f, paint)
 
         paint.textSize = 10f
         paint.isFakeBoldText = false
@@ -104,7 +105,7 @@ class CarnetActivity : BaseActivity() {
                 // 📱 Android 10 en adelante → usa MediaStore (sin permisos)
                 val resolver = contentResolver
                 val contentValues = ContentValues().apply {
-                    put(MediaStore.MediaColumns.DISPLAY_NAME, "Comprobante_${nombre.replace(" ", "_")}.pdf")
+                    put(MediaStore.MediaColumns.DISPLAY_NAME, "Carnet_${nombre.replace(" ", "_")}.pdf")
                     put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf")
                     put(MediaStore.MediaColumns.RELATIVE_PATH, "Download/ClubDeportivo")
                 }
@@ -121,7 +122,7 @@ class CarnetActivity : BaseActivity() {
                 val carpeta = File(downloadsDir, "ClubDeportivo")
                 if (!carpeta.exists()) carpeta.mkdirs()
 
-                val filePath = File(carpeta, "Comprobante_${nombre.replace(" ", "_")}.pdf")
+                val filePath = File(carpeta, "Carnet_${nombre.replace(" ", "_")}.pdf")
                 val outputStream = FileOutputStream(filePath)
                 pdfDocument.writeTo(outputStream)
                 outputStream.close()
@@ -141,7 +142,7 @@ class CarnetActivity : BaseActivity() {
     private fun mostrarAlertaExito() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Descarga completada")
-        builder.setMessage("Se descargó el comprobante con éxito. 📄")
+        builder.setMessage("Se descargó el carnet con éxito. 📄")
         builder.setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
         builder.show()
     }

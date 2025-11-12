@@ -117,7 +117,7 @@ class Registrar : BaseActivity() {
 
                     val nombreCompleto = "$nombre $apellido"
                     val dniInt = dni.toIntOrNull() ?: 0
-                    val esSocio = rgSocio.checkedRadioButtonId == R.id.rbSocioSi
+                    val esSocio = if (rgSocio.checkedRadioButtonId == R.id.rbSocioSi) 1 else 0
 
                     // Generar ID temporal (cambiarlo por base de datos)
                     val idGenerado = (1000..9999).random()

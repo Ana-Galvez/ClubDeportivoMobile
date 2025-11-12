@@ -106,13 +106,13 @@ private fun onEditarClienteClick(cliente: Cliente) {
     intent.putExtra("apellido", cliente.Apellido)
     intent.putExtra("nombreCompleto", cliente.nombreCompleto)
     intent.putExtra("id", cliente.id)
-    intent.putExtra("fechaNacimiento", cliente.fechaInscripcionUI)
+    intent.putExtra("fechaNacimiento", cliente.fechaNacimientoUI)
     intent.putExtra("fechaInscripcion", cliente.fechaInscripcionUI)
     intent.putExtra("direccion", cliente.Direccion)
     intent.putExtra("dni", cliente.DNI)
     intent.putExtra("telefono", cliente.Telefono)
     intent.putExtra("genero", cliente.Genero)
-    intent.putExtra("socio", cliente.esSocio)
+    intent.putExtra("socio", cliente.Socio)
     startActivity(intent)
 }
 

@@ -28,7 +28,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
                     "Apellido TEXT NOT NULL, " +
                     "FechaNacimiento TEXT NOT NULL, " +
                     "DNI INTEGER NOT NULL UNIQUE, " +
-                    "Genero TEXT NOT NULL CHECK (Genero IN ('F', 'M', 'Prefiero no decir')), " +
+                    "Genero TEXT NOT NULL CHECK (Genero IN ('F', 'M', 'Prefiero no decirlo')), " +
                     "Direccion  TEXT NOT NULL, " +
                     "Telefono TEXT NOT NULL, " +
                     "FechaInscripcion TEXT NOT NULL, " +
@@ -138,23 +138,23 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         // Inserción en 'clientes'
         db.execSQL(
             "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
-                    "VALUES ('Ana', 'Gomez', '1995-05-15', 38123456, 'F', 'Calle Falsa 123', '555-0001', '2024-01-10', 1, 1)"
+                    "VALUES ('Ana', 'Gomez', '1995-05-15', 38123456, 'F', 'Calle Falsa 123', '05550001', '2024-01-10', 1, 1)"
         )
         db.execSQL(
             "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
-                    "VALUES ('Lorena', 'Lolenita', '2000-11-20', 43654321, 'M', 'Av Siempreviva 742', '555-0002', '2024-02-20', 1, 0)"
+                    "VALUES ('Lorena', 'Lolenita', '2000-11-20', 43654321, 'M', 'Av Siempreviva 742', '05550002', '2024-02-20', 1, 0)"
         )
         db.execSQL(
             "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
-                    "VALUES ('Javier', 'Rodriguez', '1985-03-01', 28987654, 'M', 'Blvd de los Sueños 50', '555-0003', '2023-11-05', 0, 1)"
+                    "VALUES ('Javier', 'Rodriguez', '1985-03-01', 28987654, 'M', 'Blvd de los Sueños 50', '05550003', '2023-11-05', 0, 1)"
         )
         db.execSQL(
             "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
-                    "VALUES ('Marcos', 'Juarez', '1993-12-13', 40256321, 'M', 'Av Luna 444', '444-1002', '2023-03-14', 1, 0)"
+                    "VALUES ('Marcos', 'Juarez', '1993-12-13', 40256321, 'M', 'Av Luna 444', '04441002', '2023-03-14', 1, 0)"
         )
         db.execSQL(
                 "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
-                        "VALUES ('Nicolas', 'Mora', '1970-10-15', 20652325, 'M', 'Calle Sol 123', '333-0001', '2022-01-10', 1, 1)"
+                        "VALUES ('Nicolas', 'Mora', '1970-10-15', 20652325, 'M', 'Calle Sol 123', '03330001', '2022-01-10', 1, 1)"
                 )
 
         db.execSQL("INSERT INTO socios (idCliente, FechaAltaSocio) VALUES (1, '2024-01-10')")
@@ -333,56 +333,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
             db.close()
         }
     }
-
-/*    //Diferenciar cliente como socio
-    fun insertarSocio(idCliente: Int, fechaAltaSoc: String) {
-        val db = writableDatabase
-        val values = ContentValues()
-        values.put("idCliente", idCliente)
-        values.put("FechaAltaSocio", fechaAltaSoc)
-        db.insert("socios", null, values)
-    }
-
-    //Listado de socios
-    fun obtenerSocios(): List<String> {
-        val db = readableDatabase
-        val lista = mutableListOf<String>()
-        val cursor = db.rawQuery("SELECT * FROM socios", null)
-        if (cursor.moveToFirst()) {
-            do {
-                val idCliente = cursor.getInt(0)
-                val fechaAlta = cursor.getString(1)
-                lista.add("Cliente ID: $idCliente - Alta: $fechaAlta")
-            } while (cursor.moveToNext())
-        }
-        cursor.close()
-        return lista
-    }
-
-    //Diferenciar cliente como no socio
-    fun insertarNoSocio(idCliente: Int, fechaAltaNoSoc: String) {
-        val db = writableDatabase
-        val values = ContentValues()
-        values.put("idCliente", idCliente)
-        values.put("FechaAltaNoSocio", fechaAltaNoSoc)
-        db.insert("nosocios", null, values)
-    }
-
-    //Listado de no socios
-    fun obtenerNoSocios(): List<String> {
-        val db = readableDatabase
-        val lista = mutableListOf<String>()
-        val cursor = db.rawQuery("SELECT * FROM nosocios", null)
-        if (cursor.moveToFirst()) {
-            do {
-                val idCliente = cursor.getInt(0)
-                val fechaAlta = cursor.getString(1)
-                lista.add("Cliente ID: $idCliente - Alta No Socio: $fechaAlta")
-            } while (cursor.moveToNext())
-        }
-        cursor.close()
-        return lista
-    }*/
 
     // Nombre y Apellido de Socios para Registro Pago Socio
     fun obtenerSociosClientes(): List<Cliente> {
@@ -682,8 +632,8 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         direccion: String,
         telefono: String,
         fechaInsc: String,
-        aptoFisico: Boolean,
-        socio: Boolean
+        aptoFisico: Int,
+        socio: Int
     ): Boolean {
         val db = writableDatabase
         val values = ContentValues()
@@ -695,8 +645,8 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         values.put("Direccion", direccion)
         values.put("Telefono", telefono)
         values.put("FechaInscripcion", fechaInsc)
-        values.put("AptoFisico", if (aptoFisico) 1 else 0)
-        values.put("Socio", if (socio) 1 else 0)
+        values.put("AptoFisico", aptoFisico)
+        values.put("Socio", socio)
 
         val filasAfectadas = db.update("clientes", values, "id = ?", arrayOf(idCliente.toString()))
         db.close()

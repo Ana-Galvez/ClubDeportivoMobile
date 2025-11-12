@@ -1,6 +1,5 @@
 package com.example.clubdeportivomovile
 
-
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -13,21 +12,31 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.clubdeportivomovile.limpiarFormulario
+import com.example.clubdeportivomovile.data.DBHelper
 import java.util.Calendar
 import kotlin.text.isEmpty
 
-class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi tiene la fc de la barra
+class EditarClienteActivity : BaseActivity() {
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var botonAceptar: Button
+
+    // Variables para almacenar valores originales
+    private var nombreOriginal = ""
+    private var apellidoOriginal = ""
+    private var dniOriginal = 0
+    private var fechaNacOriginal = ""
+    private var direccionOriginal = ""
+    private var telefonoOriginal = ""
+    private var generoOriginal = ""
+    private var socioOriginal = false
 
     private fun validarFechaNacNoFutura(fecha: String): String? {
-        // Devuelve un String con el mensaje de error, o null si está OK
         return try {
             val parts = fecha.split("/")
             if (parts.size != 3) return "Fecha de nacimiento inválida"
 
             val dia = parts[0].toInt()
-            val mes = parts[1].toInt() - 1   // Calendar: meses 0..11
+            val mes = parts[1].toInt() - 1
             val anio = parts[2].toInt()
 
             val calNac = java.util.Calendar.getInstance().apply {
@@ -52,14 +61,62 @@ class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi t
         setContentView(R.layout.activity_editar_cliente)
         drawerLayout = findViewById(R.id.drawerLayout)
 
-        // header con botón atrás + hamburguesa
         setupHeader(drawerLayout)
-        setupDrawerMenu(R.id.drawerLayout) /// menu ---va el id como parametro
-        setupBottomBar("")  //barra, cadena vacia para q no resalte ningun boton de la barra
-        //Editar fecha de nacimiento
-        val rowFechaNac = findViewById<LinearLayout>(R.id.rowFechaNac)
-        val tvFechaNac: TextView = findViewById(R.id.tvFechaNac)
+        setupDrawerMenu(R.id.drawerLayout)
+        setupBottomBar("")
 
+        // Obtener referencias a los campos
+        val etNombre = findViewById<EditText>(R.id.etNombre)
+        val etApellido = findViewById<EditText>(R.id.etApellido)
+        val etDni = findViewById<EditText>(R.id.etDni)
+        val tvFechaNac: TextView = findViewById(R.id.tvFechaNac)
+        val etDireccion = findViewById<EditText>(R.id.etDireccion)
+        val etTelefono = findViewById<EditText>(R.id.etTelefono)
+        val rbF = findViewById<RadioButton>(R.id.rbF)
+        val rbM = findViewById<RadioButton>(R.id.rbM)
+        val rbNoDecir = findViewById<RadioButton>(R.id.rbNoDecir)
+        val rbSocioSi = findViewById<RadioButton>(R.id.rbSocioSi)
+        val rbSocioNo = findViewById<RadioButton>(R.id.rbSocioNo)
+        val rbg: RadioGroup = findViewById(R.id.rbg)
+        val rgSocio: RadioGroup = findViewById(R.id.rgSocio)
+
+        botonAceptar = findViewById(R.id.btnGuardar)
+
+        // Recibir datos originales del cliente
+        val id = intent.getIntExtra("id", -1)
+        nombreOriginal = intent.getStringExtra("nombre") ?: ""
+        apellidoOriginal = intent.getStringExtra("apellido") ?: ""
+        dniOriginal = intent.getIntExtra("dni", 0)
+        fechaNacOriginal = intent.getStringExtra("fechaNacimiento") ?: ""
+        direccionOriginal = intent.getStringExtra("direccion") ?: ""
+        telefonoOriginal = intent.getStringExtra("telefono") ?: ""
+        generoOriginal = intent.getStringExtra("genero") ?: ""
+        socioOriginal = intent.getIntExtra("socio", 0) == 1
+        val fechaInscripcion = intent.getStringExtra("fechaInscripcion")?: ""
+
+        // Cargar datos en el formulario
+        etNombre.setText(nombreOriginal)
+        etApellido.setText(apellidoOriginal)
+        etDni.setText(dniOriginal.toString())
+        tvFechaNac.text = fechaNacOriginal
+        etDireccion.setText(direccionOriginal)
+        etTelefono.setText(telefonoOriginal)
+
+        when (generoOriginal) {
+            "F" -> rbF.isChecked = true
+            "M" -> rbM.isChecked = true
+            "Prefiero no decirlo" -> rbNoDecir.isChecked = true
+        }
+
+        rgSocio.clearCheck()
+        if (socioOriginal) {
+            rbSocioSi.isChecked = true
+        } else {
+            rbSocioNo.isChecked = true
+        }
+
+        // Editar fecha de nacimiento
+        val rowFechaNac = findViewById<LinearLayout>(R.id.rowFechaNac)
         rowFechaNac.setOnClickListener {
             val calendario = Calendar.getInstance()
             val anio = calendario.get(Calendar.YEAR)
@@ -69,7 +126,6 @@ class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi t
             val datePicker = DatePickerDialog(
                 this,
                 { _, year, month, dayOfMonth ->
-                    // Cuando el usuario selecciona la fecha:
                     val fechaSeleccionada = "%02d/%02d/%04d".format(dayOfMonth, month + 1, year)
                     tvFechaNac.text = fechaSeleccionada
                 },
@@ -78,165 +134,106 @@ class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi t
             datePicker.show()
         }
 
-        //Botones Limpiar
+        // Botón Limpiar
         val botonLimpiar: Button = findViewById(R.id.btnLimpiar)
-        val etNombre = findViewById<EditText>(R.id.etNombre)
-
         botonLimpiar.setOnClickListener {
-            val rootLayout =
-                findViewById<ViewGroup>(R.id.contentLayout) // el layout principal del form
+            val rootLayout = findViewById<ViewGroup>(R.id.contentLayout)
             limpiarFormulario(rootLayout)
-
-            // foco al primer campo
             etNombre.requestFocus()
         }
 
-        //Formulario
-        //Recibo datos del cliente
-        val id = intent.getIntExtra("id", -1)
-        //Formulario editar necesita nombre y apellido separado
-        val nombre = intent.getStringExtra("nombre") ?: ""
-        val apellido = intent.getStringExtra("apellido") ?: ""
-        val dni = intent.getIntExtra("dni", 0)
-        val fechaNacimientoEditada = intent.getStringExtra("fechaNacimiento")
-        val direccion = intent.getStringExtra("direccion")
-        val telefono = intent.getStringExtra("telefono")
-        val genero = intent.getStringExtra("genero")
-        val fechaInscripcion = intent.getStringExtra("fechaInscripcion")
-
-        //Agrego los datos al formulario
-        val etApellido = findViewById<EditText>(R.id.etApellido)
-        val etDni = findViewById<EditText>(R.id.etDni)
-        val etDireccion = findViewById<EditText>(R.id.etDireccion)
-        val etTelefono = findViewById<EditText>(R.id.etTelefono)
-        //Genero (radio buttons)
-        val rbF = findViewById<RadioButton>(R.id.rbF)
-        val rbM = findViewById<RadioButton>(R.id.rbM)
-        val rbNoDecir = findViewById<RadioButton>(R.id.rbNoDecir)
-        //Socio (radio buttons)
-        val rbSocioSi = findViewById<RadioButton>(R.id.rbSocioSi)
-        val rbSocioNo = findViewById<RadioButton>(R.id.rbSocioNo)
-        val socio = intent.getBooleanExtra("socio", false)
-
-        etNombre.setText(nombre)
-        etApellido.setText(apellido)
-        etDni.setText(dni.toString())
-        tvFechaNac.text = fechaNacimientoEditada
-        etDireccion.setText(direccion)
-        etTelefono.setText(telefono)
-        //Genero (radio buttons)
-        when (genero) {
-            "F" -> rbF.isChecked = true
-            "M" -> rbM.isChecked = true
-            "Prefiero no decirlo" -> rbNoDecir.isChecked = true
-        }
-        //Socio (radio buttons)
-        if (socio) {
-            rbSocioSi.isChecked = true
-        } else {
-            rbSocioNo.isChecked = true
-        }
-
-        //Boton aceptar
-        val botonAceptar: Button = findViewById(R.id.btnGuardar)
-
+        // Botón Aceptar
         botonAceptar.setOnClickListener {
             val nombre = etNombre.text.toString().trim()
             val apellido = etApellido.text.toString().trim()
-            //Envio el nombre completo editado si se modifico
             val nombreCompletoEditado = "$nombre $apellido"
             val dniString = etDni.text.toString().trim()
             val direccion = etDireccion.text.toString().trim()
             val telefono = etTelefono.text.toString().trim()
-            //Este dato no se edita
-            val fechaInscripcion = fechaInscripcion
             val fechaNac = tvFechaNac.text.toString().trim()
-            val rbg: RadioGroup = findViewById(R.id.rbg)
-            val rgSocio: RadioGroup = findViewById(R.id.rgSocio)
             val generoSeleccionado = rbg.checkedRadioButtonId
             val socioSeleccionado = rgSocio.checkedRadioButtonId
+
+            // Verificar si hubo cambios
+            val generoActual = when {
+                rbF.isChecked -> "F"
+                rbM.isChecked -> "M"
+                rbNoDecir.isChecked -> "Prefiero no decirlo"
+                else -> ""
+            }
+
+            val socioActual = rbSocioSi.isChecked
+
+            val hayCambios = nombre != nombreOriginal ||
+                    apellido != apellidoOriginal ||
+                    dniString != dniOriginal.toString() ||
+                    fechaNac != fechaNacOriginal ||
+                    direccion != direccionOriginal ||
+                    telefono != telefonoOriginal ||
+                    generoActual != generoOriginal ||
+                    socioActual != socioOriginal
+
+            if (!hayCambios) {
+                Toast.makeText(this, "No hay cambios para guardar", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val errorFecha = if (fechaNac.isNotEmpty() && fechaNac != "DD/MM/YYYY")
                 validarFechaNacNoFutura(fechaNac)
             else null
-
+            //Validación
             when {
-                nombre.isEmpty() -> Toast.makeText(this, "Ingrese el nombre", Toast.LENGTH_SHORT)
-                    .show()
-
-                apellido.isEmpty() -> Toast.makeText(
-                    this,
-                    "Ingrese el apellido",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                fechaNac.isEmpty() || fechaNac == "DD/MM/YYYY" -> Toast.makeText(
-                    this,
-                    "Seleccione la fecha de nacimiento",
-                    Toast.LENGTH_SHORT
-                ).show()
-
+                nombre.isEmpty() -> Toast.makeText(this, "Ingrese el nombre", Toast.LENGTH_SHORT).show()
+                apellido.isEmpty() -> Toast.makeText(this, "Ingrese el apellido", Toast.LENGTH_SHORT).show()
+                fechaNac.isEmpty() || fechaNac == "DD/MM/YYYY" -> Toast.makeText(this, "Seleccione la fecha de nacimiento", Toast.LENGTH_SHORT).show()
                 errorFecha != null -> Toast.makeText(this, errorFecha, Toast.LENGTH_SHORT).show()
-                dniString.isEmpty() -> {
-                    Toast.makeText(this, "Ingrese el DNI", Toast.LENGTH_SHORT).show()
-                }
-                dniString.length < 7 -> {
-                    Toast.makeText(this, "El DNI debe tener al menos 7 dígitos", Toast.LENGTH_SHORT).show()
-                }
-
-                direccion.isEmpty() -> Toast.makeText(
-                    this,
-                    "Ingrese la dirección",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                telefono.isEmpty() -> Toast.makeText(
-                    this,
-                    "Ingrese el teléfono",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                !telefono.matches(Regex("^[0-9]{8,15}$")) -> Toast.makeText(
-                    this,
-                    "Teléfono inválido",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                generoSeleccionado == -1 -> Toast.makeText(
-                    this,
-                    "Seleccione un género",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                socioSeleccionado == -1 -> Toast.makeText(
-                    this,
-                    "Seleccione tipo de socio",
-                    Toast.LENGTH_SHORT
-                ).show()
-
+                dniString.isEmpty() -> Toast.makeText(this, "Ingrese el DNI", Toast.LENGTH_SHORT).show()
+                dniString.length < 7 -> Toast.makeText(this, "El DNI debe tener al menos 7 dígitos", Toast.LENGTH_SHORT).show()
+                direccion.isEmpty() -> Toast.makeText(this, "Ingrese la dirección", Toast.LENGTH_SHORT).show()
+                telefono.isEmpty() -> Toast.makeText(this, "Ingrese el teléfono", Toast.LENGTH_SHORT).show()
+                !telefono.matches(Regex("^[0-9]{8,15}$")) -> Toast.makeText(this, "Teléfono inválido", Toast.LENGTH_SHORT).show()
+                generoSeleccionado == -1 -> Toast.makeText(this, "Seleccione un género", Toast.LENGTH_SHORT).show()
+                socioSeleccionado == -1 -> Toast.makeText(this, "Seleccione tipo de socio", Toast.LENGTH_SHORT).show()
                 else -> {
                     Toast.makeText(this, "Datos validados correctamente", Toast.LENGTH_SHORT).show()
-                    // Socio
-                    val socio = rbSocioSi.isChecked
+                    //Envio datos a la DB
                     val dniEditado = dniString.toIntOrNull()!!
-                    // Pasar los datos al carnet
-                    val intent = Intent(this, CarnetActivity::class.java)
-                    intent.putExtra("nombreCompleto", nombreCompletoEditado)
-                    intent.putExtra("id", id)
-                    intent.putExtra("dni", dniEditado)
-                    intent.putExtra("fechaInscripcion", fechaInscripcion)
-                    intent.putExtra("direccion", direccion)
-                    intent.putExtra("telefono", telefono)
-                    intent.putExtra("genero", generoSeleccionado)
-                    intent.putExtra("socio", socioSeleccionado)
+                    val socioEditado = if (rbSocioSi.isChecked) 1 else 0
+                    val aptoFisico = 1
+                    val dbHelper = DBHelper(this)
+                    val actualizado = dbHelper.actualizarCliente(
+                        idCliente = id,
+                        nombre = nombre,
+                        apellido = apellido,
+                        fechaNac = fechaNac,
+                        dni = dniEditado,
+                        genero = generoActual,
+                        direccion = direccion,
+                        telefono = telefono,
+                        fechaInsc = fechaInscripcion,
+                        aptoFisico = aptoFisico,
+                        socio = socioEditado
+                    )
+                    if (actualizado) {
+                        Toast.makeText(this, "Cliente actualizado correctamente", Toast.LENGTH_SHORT).show()
+                        // Paso los datos al carnet
+                        val intent = Intent(this, CarnetActivity::class.java)
+                        intent.putExtra("nombreCompleto", nombreCompletoEditado)
+                        intent.putExtra("id", id)
+                        intent.putExtra("dni", dniEditado)
+                        intent.putExtra("fechaInscripcion", fechaInscripcion)
+                        intent.putExtra("direccion", direccion)
+                        intent.putExtra("telefono", telefono)
+                        intent.putExtra("genero", generoActual)
+                        intent.putExtra("socio", socioEditado)
 
-                    startActivity(intent)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this, "Error al actualizar cliente", Toast.LENGTH_SHORT).show()
+                    }
                 }
 
-
+                }
             }
-
         }
     }
-
-}
