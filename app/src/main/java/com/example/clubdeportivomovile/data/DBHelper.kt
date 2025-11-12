@@ -671,5 +671,38 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         return actividadesList
     }
 
+    //Editar cliente
+    fun actualizarCliente(
+        idCliente: Int,
+        nombre: String,
+        apellido: String,
+        fechaNac: String,
+        dni: Int,
+        genero: String,
+        direccion: String,
+        telefono: String,
+        fechaInsc: String,
+        aptoFisico: Boolean,
+        socio: Boolean
+    ): Boolean {
+        val db = writableDatabase
+        val values = ContentValues()
+        values.put("Nombre", nombre)
+        values.put("Apellido", apellido)
+        values.put("FechaNacimiento", fechaNac)
+        values.put("DNI", dni)
+        values.put("Genero", genero)
+        values.put("Direccion", direccion)
+        values.put("Telefono", telefono)
+        values.put("FechaInscripcion", fechaInsc)
+        values.put("AptoFisico", if (aptoFisico) 1 else 0)
+        values.put("Socio", if (socio) 1 else 0)
+
+        val filasAfectadas = db.update("clientes", values, "id = ?", arrayOf(idCliente.toString()))
+        db.close()
+
+        return filasAfectadas > 0
+    }
+
     //TODO: Listado de clientes a los que se les vence la cuota (morosos)
 }

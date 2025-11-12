@@ -145,7 +145,7 @@ class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi t
             val apellido = etApellido.text.toString().trim()
             //Envio el nombre completo editado si se modifico
             val nombreCompletoEditado = "$nombre $apellido"
-            val dni = etDni.text.toString().trim()
+            val dniString = etDni.text.toString().trim()
             val direccion = etDireccion.text.toString().trim()
             val telefono = etTelefono.text.toString().trim()
             //Este dato no se edita
@@ -159,13 +159,6 @@ class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi t
             val errorFecha = if (fechaNac.isNotEmpty() && fechaNac != "DD/MM/YYYY")
                 validarFechaNacNoFutura(fechaNac)
             else null
-
-            // Género
-            /* val genero = when {
-                rbF.isChecked -> "F"
-                rbM.isChecked -> "M"
-                else -> "Prefiero no decirlo"
-            }*/
 
             when {
                 nombre.isEmpty() -> Toast.makeText(this, "Ingrese el nombre", Toast.LENGTH_SHORT)
@@ -184,12 +177,12 @@ class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi t
                 ).show()
 
                 errorFecha != null -> Toast.makeText(this, errorFecha, Toast.LENGTH_SHORT).show()
-                dni.isEmpty() -> Toast.makeText(this, "Ingrese el DNI", Toast.LENGTH_SHORT).show()
-                dni.length < 7 -> Toast.makeText(
-                    this,
-                    "El DNI debe tener al menos 7 dígitos",
-                    Toast.LENGTH_SHORT
-                ).show()
+                dniString.isEmpty() -> {
+                    Toast.makeText(this, "Ingrese el DNI", Toast.LENGTH_SHORT).show()
+                }
+                dniString.length < 7 -> {
+                    Toast.makeText(this, "El DNI debe tener al menos 7 dígitos", Toast.LENGTH_SHORT).show()
+                }
 
                 direccion.isEmpty() -> Toast.makeText(
                     this,
@@ -225,12 +218,12 @@ class EditarClienteActivity : BaseActivity() { //cambiamos de quien hereda asi t
                     Toast.makeText(this, "Datos validados correctamente", Toast.LENGTH_SHORT).show()
                     // Socio
                     val socio = rbSocioSi.isChecked
-
+                    val dniEditado = dniString.toIntOrNull()!!
                     // Pasar los datos al carnet
                     val intent = Intent(this, CarnetActivity::class.java)
                     intent.putExtra("nombreCompleto", nombreCompletoEditado)
                     intent.putExtra("id", id)
-                    intent.putExtra("dni", dni)
+                    intent.putExtra("dni", dniEditado)
                     intent.putExtra("fechaInscripcion", fechaInscripcion)
                     intent.putExtra("direccion", direccion)
                     intent.putExtra("telefono", telefono)
