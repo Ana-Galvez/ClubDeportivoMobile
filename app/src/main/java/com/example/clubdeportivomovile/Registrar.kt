@@ -15,6 +15,33 @@ import java.util.Calendar
 class Registrar : BaseActivity() {
     private lateinit var drawerLayout: DrawerLayout
 
+    private fun validarFechaNacNoFutura(fecha: String): String? {
+        // Devuelve un String con el mensaje de error, o null si está OK
+        return try {
+            val parts = fecha.split("/")
+            if (parts.size != 3) return "Fecha de nacimiento inválida"
+
+            val dia = parts[0].toInt()
+            val mes = parts[1].toInt() - 1   // Calendar: meses 0..11
+            val anio = parts[2].toInt()
+
+            val calNac = java.util.Calendar.getInstance().apply {
+                set(anio, mes, dia, 0, 0, 0)
+                set(java.util.Calendar.MILLISECOND, 0)
+            }
+            val hoy = java.util.Calendar.getInstance().apply {
+                set(java.util.Calendar.HOUR_OF_DAY, 0)
+                set(java.util.Calendar.MINUTE, 0)
+                set(java.util.Calendar.SECOND, 0)
+                set(java.util.Calendar.MILLISECOND, 0)
+            }
+
+            if (calNac.after(hoy)) "La fecha de nacimiento no puede ser futura" else null
+        } catch (e: Exception) {
+            "Fecha de nacimiento inválida"
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrar)
@@ -69,10 +96,15 @@ class Registrar : BaseActivity() {
             val generoSeleccionado = rbg.checkedRadioButtonId
             val socioSeleccionado = rgSocio.checkedRadioButtonId
 
+            val errorFecha = if (fechaNac.isNotEmpty() && fechaNac != "DD/MM/YYYY")
+                validarFechaNacNoFutura(fechaNac)
+            else null
+
             when {
                 nombre.isEmpty() -> Toast.makeText(this, "Ingrese el nombre", Toast.LENGTH_SHORT).show()
                 apellido.isEmpty() -> Toast.makeText(this, "Ingrese el apellido", Toast.LENGTH_SHORT).show()
                 fechaNac.isEmpty() || fechaNac == "DD/MM/YYYY" -> Toast.makeText(this, "Seleccione la fecha de nacimiento", Toast.LENGTH_SHORT).show()
+                errorFecha != null -> Toast.makeText(this, errorFecha, Toast.LENGTH_SHORT).show()
                 dni.isEmpty() -> Toast.makeText(this, "Ingrese el DNI", Toast.LENGTH_SHORT).show()
                 dni.length < 7 -> Toast.makeText(this, "El DNI debe tener al menos 7 dígitos", Toast.LENGTH_SHORT).show()
                 direccion.isEmpty() -> Toast.makeText(this, "Ingrese la dirección", Toast.LENGTH_SHORT).show()
