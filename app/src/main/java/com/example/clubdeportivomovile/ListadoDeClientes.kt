@@ -123,7 +123,7 @@ private fun onMostrarCarnetClick(cliente: Cliente) {
     intent.putExtra("direccion", cliente.Direccion)
     intent.putExtra("dni", cliente.DNI)
     intent.putExtra("telefono", cliente.Telefono)
-    intent.putExtra("socio", cliente.esSocio)
+    intent.putExtra("socio", cliente.Socio)
     intent.putExtra("fechaInscripcion", cliente.fechaInscripcionUI)
     startActivity(intent)
 }
