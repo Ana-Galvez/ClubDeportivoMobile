@@ -69,7 +69,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
             """
         INSERT INTO roles (RolUsu, NomRol) VALUES
             (120, 'Administrador'),
-            (121, 'Empleado');
+            (121, 'Personal');
         """.trimIndent()
         )
 
@@ -89,7 +89,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         INSERT INTO usuarios (Nombre, Pass, RolUsu, Activo) VALUES
             ('Ana', '123456', 120, 1),
             ('Juan', '123456', 120, 0),
-            ('Maria', '654321', 120, 1);
+            ('Maria', '654321', 121, 1);
         """.trimIndent()
         )
 
