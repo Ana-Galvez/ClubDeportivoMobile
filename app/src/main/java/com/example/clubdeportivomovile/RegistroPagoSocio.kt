@@ -19,6 +19,7 @@ class RegistroPagoSocio : BaseActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var dbHelper: DBHelper
     private var listaSociosDB: List<Cliente> = listOf()
+    private var listaCuotasPendientesDB: List<Cuotas> = listOf()
 
     private lateinit var spinnerCliente: Spinner
     private lateinit var spinnerCuotaPendiente: Spinner
@@ -29,6 +30,8 @@ class RegistroPagoSocio : BaseActivity() {
     private lateinit var montoEditText: EditText
     private lateinit var tituloCuotasTarjeta: TextView
     private lateinit var tituloNumeroTarjeta: TextView
+
+    private lateinit var adapterCuotas: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,29 +69,37 @@ class RegistroPagoSocio : BaseActivity() {
             spinnerCliente.setSelection(0) // Mostrar "Seleccionar cliente..."
         }
 
-        // Cuota pendiente
-        data class CuotaPendiente(
-            val id: Int,
-            val mesAnio: String,
-            val monto: Int
-        )
-
-        val cuotasPendientes = listOf(
-            CuotaPendiente(1, "Septiembre 2025", 35000),
-            CuotaPendiente(2, "Julio 2025", 35000),
-            CuotaPendiente(3, "Agosto 2025", 35000)
-        )
+        spinnerCliente.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (position == 0) {
+                    // Si seleccionan "Seleccionar cliente", limpiamos las cuotas
+                    listaCuotasPendientesDB = listOf()
+                    actualizarSpinnerCuotas(listOf())
+                    montoEditText.text.clear()
+                } else {
+                    // Un cliente fue seleccionado, buscamos sus cuotas
+                    val cliente = listaSociosDB[position - 1] // -1 por el placeholder
+                    // Llamamos a la nueva función de DBHelper
+                    listaCuotasPendientesDB = dbHelper.obtenerCuotasPendientes(cliente.id)
+                    // Actualizamos el spinner de cuotas con los resultados
+                    actualizarSpinnerCuotas(listaCuotasPendientesDB)
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Limpiar si no hay nada seleccionado
+                listaCuotasPendientesDB = listOf()
+                actualizarSpinnerCuotas(listOf())
+                montoEditText.text.clear()
+            }
+        }
 
         spinnerCuotaPendiente = findViewById(R.id.spinner_cuota_pendiente)
         montoEditText = findViewById(R.id.monto)
 
-        val nombresCuotasPendientes = mutableListOf("Seleccionar cuota a pagar...")
-        nombresCuotasPendientes.addAll(cuotasPendientes.map { it.mesAnio })
-
-        val adapterCuotas = object : ArrayAdapter<String>(
+        adapterCuotas = object : ArrayAdapter<String>(
             this,
             R.layout.spinner_item_custom,
-            nombresCuotasPendientes
+            mutableListOf("Seleccionar cuota a pagar...")
         ) {
             override fun isEnabled(position: Int): Boolean {
                 // placeholder
@@ -100,30 +111,7 @@ class RegistroPagoSocio : BaseActivity() {
         adapterCuotas.setDropDownViewResource(R.layout.spinner_item_custom)
         spinnerCuotaPendiente.adapter = adapterCuotas
 
-        spinnerCuotaPendiente.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if (position == 0) {
-                    montoEditText.text.clear()
-                    return
-                }
-
-                val cuotaPendienteSeleccionada =
-                    cuotasPendientes[position - 1] // -1 por el placeholder
-                montoEditText.setText(cuotaPendienteSeleccionada.monto.toString())
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
-
-        spinnerCuotaPendiente.setSelection(0)
-
-        adapterCuotas.setDropDownViewResource(R.layout.spinner_item_custom)
-        spinnerCuotaPendiente.adapter = adapterCuotas
+        spinnerCuotaPendiente.isEnabled = false
 
         spinnerCuotaPendiente.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -132,20 +120,19 @@ class RegistroPagoSocio : BaseActivity() {
                 position: Int,
                 id: Long
             ) {
-                if (position == 0) {
+                if (position == 0 || listaCuotasPendientesDB.isEmpty()) {
                     montoEditText.text.clear()
                     return
                 }
 
-                val cuotaPendienteSeleccionada =
-                    cuotasPendientes[position - 1] // -1 por el placeholder
-                montoEditText.setText(cuotaPendienteSeleccionada.monto.toString())
+                val cuotaSeleccionada =
+                    listaCuotasPendientesDB[position - 1] // -1 por el placeholder
+                montoEditText.setText(cuotaSeleccionada.Monto.toString())
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        // Mostrar el placeholder
         spinnerCuotaPendiente.setSelection(0)
 
         // Drawer
@@ -245,7 +232,6 @@ class RegistroPagoSocio : BaseActivity() {
                 position: Int,
                 id: Long
             ) {
-                /*               val seleccion = spinnerCuotasTarjeta.selectedItem.toString()*/
 
                 if (position > 0) {
                     etNumeroTarjeta.visibility = View.VISIBLE
@@ -260,14 +246,11 @@ class RegistroPagoSocio : BaseActivity() {
         }
 
         //Validaciones del formulario
-        fun validarFormulario(
-        ): Cliente? {
-
+        fun validarFormulario(): Cliente? {
             val clientePosicion = spinnerCliente.selectedItemPosition
             val cuotaPosicion = spinnerCuotaPendiente.selectedItemPosition
             val pagoPosicion = spinnerPago.selectedItemPosition
             val cuotasTarjetaPosicion = spinnerCuotasTarjeta.selectedItemPosition
-
             val formaPago = spinnerPago.getItemAtPosition(pagoPosicion).toString()
             val numTarjeta = etNumeroTarjeta.text.toString().trim()
 
@@ -276,40 +259,35 @@ class RegistroPagoSocio : BaseActivity() {
                 return null
             }
 
-            if (cuotaPosicion == 0) {
-                Toast.makeText(this, "Debe seleccionar una de las cuotas.", Toast.LENGTH_SHORT)
-                    .show()
-                return null
-            }
-            if (pagoPosicion == 0) {
-                Toast.makeText(this, "Debe seleccionar una forma de pago.", Toast.LENGTH_SHORT)
-                    .show()
+            // Revisar si hay cuotas para pagar
+            if (listaCuotasPendientesDB.isEmpty()) {
+                Toast.makeText(this, "El cliente no tiene cuotas pendientes.", Toast.LENGTH_SHORT).show()
                 return null
             }
 
+            if (cuotaPosicion == 0) {
+                Toast.makeText(this, "Debe seleccionar una de las cuotas.", Toast.LENGTH_SHORT).show()
+                return null
+            }
+            if (pagoPosicion == 0) {
+                Toast.makeText(this, "Debe seleccionar una forma de pago.", Toast.LENGTH_SHORT).show()
+                return null
+            }
             if (formaPago == "Tarjeta de crédito") {
                 if (cuotasTarjetaPosicion == 0) {
-                    Toast.makeText(
-                        this,
-                        "Debe seleccionar la cantidad de cuotas.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, "Debe seleccionar la cantidad de cuotas.", Toast.LENGTH_SHORT).show()
                     return null
                 }
                 if (numTarjeta.isEmpty()) {
-                    Toast.makeText(this, "Debe ingresar el número de tarjeta.", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this, "Debe ingresar el número de tarjeta.", Toast.LENGTH_SHORT).show()
                     return null
                 }
             }
             val clienteEncontrado = listaSociosDB[clientePosicion - 1]
-
-            // Doble chequeo
             if (!clienteEncontrado.esSocio) {
                 Toast.makeText(this, "El cliente no es socio.", Toast.LENGTH_LONG).show()
                 return null
             }
-
             return clienteEncontrado
         }
 
@@ -321,7 +299,7 @@ class RegistroPagoSocio : BaseActivity() {
             if (clienteEncontrado != null) {
                 val cuotaPendienteSeleccionada = spinnerCuotaPendiente.selectedItem.toString()
                 val formaPago = spinnerPago.selectedItem.toString()
-                val numTarjeta = etNumeroTarjeta.text.toString().trim()
+                etNumeroTarjeta.text.toString().trim()
                 val cantCuotasTarjeta = spinnerCuotasTarjeta.selectedItem.toString()
                 val clienteNombre = spinnerCliente.selectedItem.toString()
                 val monto = montoEditText.text.toString().trim()
@@ -353,4 +331,29 @@ class RegistroPagoSocio : BaseActivity() {
             spinnerPago.setSelection(0)
         }
     }
+
+    // Cuando se elige un cliente, se actualiza el spinner con las cuotas pendientes de ese cliente
+    private fun actualizarSpinnerCuotas(cuotas: List<Cuotas>) {
+        adapterCuotas.clear()
+
+        if (cuotas.isEmpty()) {
+            adapterCuotas.add("Sin cuotas pendientes")
+            spinnerCuotaPendiente.isEnabled = false
+        } else {
+            // Si hay cuotas, las formateamos y las agregamos
+            adapterCuotas.add("Seleccionar cuota a pagar...")
+            // Formateamos la cuota para que sea legible (ej: "Vto: 2024-03-10 - $5000")
+            val nombresCuotas = cuotas.map {
+                // Asumimos que Cuotas.kt tiene "FechaVencimiento" y "Monto"
+                "Vto: ${it.fechaVencimientoUI} - $${it.Monto.toInt()}"
+            }
+            adapterCuotas.addAll(nombresCuotas)
+            spinnerCuotaPendiente.isEnabled = true
+        }
+
+        adapterCuotas.notifyDataSetChanged()
+        spinnerCuotaPendiente.setSelection(0)
+    }
+
+
 }

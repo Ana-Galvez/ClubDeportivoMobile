@@ -152,6 +152,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
             "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
                     "VALUES ('Marcos', 'Juarez', '1993-12-13', 40256321, 'M', 'Av Luna 444', '444-1002', '2023-03-14', 1, 0)"
         )
+        db.execSQL(
+                "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
+                        "VALUES ('Nicolas', 'Mora', '1970-10-15', 20652325, 'M', 'Calle Sol 123', '333-0001', '2022-01-10', 1, 1)"
+                )
 
         db.execSQL("INSERT INTO socios (idCliente, FechaAltaSocio) VALUES (1, '2024-01-10')")
         db.execSQL("INSERT INTO socios (idCliente, FechaAltaSocio) VALUES (3, '2023-11-05')")
@@ -165,6 +169,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         db.execSQL(
             "INSERT INTO cuotas (idCliente, monto, ModoPago, Estado, FechaPago, FechaVencimiento, CantCuotas, UltDigitosTarj) " +
                     "VALUES (3, 5000, 'Efectivo', 'Pendiente', '1900-01-01', '2024-03-10', 0, 0)"
+        )
+        db.execSQL(
+            "INSERT INTO cuotas (idCliente, monto, ModoPago, Estado, FechaPago, FechaVencimiento, CantCuotas, UltDigitosTarj) " +
+                    "VALUES (5, 8000, 'Efectivo', 'Pendiente', '1900-01-01', '2024-03-10', 0, 0)"
         )
     }
 
@@ -487,6 +495,50 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         return listaClientesDB
     }
 
+
+    // Obtener cuotas pendientes de un cliente
+    @SuppressLint("Range")
+    fun obtenerCuotasPendientes(idCliente: Int): List<Cuotas> {
+        val listaCuotas = mutableListOf<Cuotas>()
+        val db = readableDatabase
+        Log.d("DBHelper", "Buscando cuotas pendientes para cliente ID: $idCliente")
+
+        // Consulta filtrada por idCliente y Estado='Pendiente'
+        val query = "SELECT * FROM cuotas WHERE idCliente = ? AND Estado = 'Pendiente' ORDER BY FechaVencimiento ASC"
+        val cursor = db.rawQuery(query, arrayOf(idCliente.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                try {
+                    // (IdCuota, idCliente, Monto, ModoPago, Estado, FechaPago, FechaVencimiento, CantCuotas, UltDigitosTarj)
+
+                    val idCuota = cursor.getInt(cursor.getColumnIndexOrThrow("IdCuota"))
+                    val idClienteDB = cursor.getInt(cursor.getColumnIndexOrThrow("idCliente"))
+                    val monto = cursor.getDouble(cursor.getColumnIndexOrThrow("Monto"))
+                    val modoPago = cursor.getString(cursor.getColumnIndexOrThrow("ModoPago"))
+                    val estado = cursor.getString(cursor.getColumnIndexOrThrow("Estado"))
+                    val fechaPago = cursor.getString(cursor.getColumnIndexOrThrow("FechaPago"))
+                    val fechaVencimiento = cursor.getString(cursor.getColumnIndexOrThrow("FechaVencimiento"))
+                    val cantCuotas = cursor.getInt(cursor.getColumnIndexOrThrow("CantCuotas"))
+                    val ultDigitosTarj = cursor.getInt(cursor.getColumnIndexOrThrow("UltDigitosTarj"))
+
+                    val cuota = Cuotas(
+                        idCuota, idClienteDB, monto, modoPago, estado,
+                        fechaPago, fechaVencimiento, cantCuotas, ultDigitosTarj
+                    )
+                    listaCuotas.add(cuota)
+                } catch (e: Exception) {
+                    Log.e("DBHelper", "Error al mapear cuota: ${e.message}")
+                }
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        Log.d("DBHelper", "Se encontraron ${listaCuotas.size} cuotas pendientes.")
+        return listaCuotas
+    }
+
     //Registrar pAgo de socios
     //TODO: Falta crear próxima cuota (vencimiento un mes después de la fecha de pago)
     fun insertarCuota(
@@ -522,13 +574,14 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
                 lista.add(
                     Cuotas(
                         cursor.getInt(0),
-                        cursor.getDouble(1),
-                        cursor.getString(2),
+                        cursor.getInt(1),
+                        cursor.getDouble(2),
                         cursor.getString(3),
                         cursor.getString(4),
                         cursor.getString(5),
-                        cursor.getInt(6),
-                        cursor.getInt(7)
+                        cursor.getString(6),
+                        cursor.getInt(7),
+                        cursor.getInt(8)
                     )
                 )
             } while (cursor.moveToNext())
