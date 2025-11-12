@@ -334,7 +334,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         }
     }
 
-    //Diferenciar cliente como socio
+/*    //Diferenciar cliente como socio
     fun insertarSocio(idCliente: Int, fechaAltaSoc: String) {
         val db = writableDatabase
         val values = ContentValues()
@@ -382,7 +382,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         }
         cursor.close()
         return lista
-    }
+    }*/
 
     // Nombre y Apellido de Socios para Registro Pago Socio
     fun obtenerSociosClientes(): List<Cliente> {
