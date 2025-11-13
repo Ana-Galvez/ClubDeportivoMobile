@@ -25,6 +25,7 @@ class ReciboSocioActivity : BaseActivity() {
         // Datos del formulario
         val nombreCliente = intent.getStringExtra("nombreCliente")
         val cuota = intent.getStringExtra("cuotaPendiente")
+        val cuotaFormateada = intent.getStringExtra("cuotaFormateada")
         val monto = intent.getStringExtra("monto")
         val formaPago = intent.getStringExtra("formaPago")
         val cuotaTarjeta = intent.getStringExtra("cantCuotasTarjeta")
@@ -41,7 +42,7 @@ class ReciboSocioActivity : BaseActivity() {
         val tvInsc = findViewById<TextView>(R.id.tvFechaInsc)
 
         tvNombreSocio.text = nombreCliente
-        tvCuota.text = cuota
+        tvCuota.text = cuotaFormateada
         tvMonto.text = "$$monto"
         tvFormaPago.text = if (!cuotaTarjeta.isNullOrEmpty() && cuotaTarjeta != "Seleccionar...") {
             "$formaPago $cuotaTarjeta"

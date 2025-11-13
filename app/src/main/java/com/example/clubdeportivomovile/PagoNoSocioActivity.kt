@@ -12,7 +12,6 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.clubdeportivomovile.data.DBHelper
-import com.example.clubdeportivomovile.limpiarFormulario
 
 class PagoNoSocioActivity : BaseActivity() {
 
@@ -20,7 +19,7 @@ class PagoNoSocioActivity : BaseActivity() {
     private lateinit var dbHelper: DBHelper
     private var listaDeActividadesDB: List<Actividad> = listOf() // Va a guardar las actividades ingresadas en la DB
     private var listaNoSociosDB: List<Cliente> = listOf() // Guarda los NO SOCIOS de la DB
-    private lateinit var spinnerCliente: Spinner
+    //private lateinit var spinnerCliente: Spinner
     private lateinit var spinnerActividad: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +44,7 @@ class PagoNoSocioActivity : BaseActivity() {
             nombresClientesSpinner
         ) {
             override fun isEnabled(position: Int): Boolean {
-                return position != 0 // Deshabilita el placeholder
+                return position != 0
             }
         }
 

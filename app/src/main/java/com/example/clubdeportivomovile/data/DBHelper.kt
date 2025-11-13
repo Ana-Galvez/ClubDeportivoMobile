@@ -173,7 +173,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         )
         db.execSQL(
             "INSERT INTO cuotas (idCliente, monto, ModoPago, Estado, FechaPago, FechaVencimiento, CantCuotas, UltDigitosTarj) " +
-                    "VALUES (4, 8000, 'Efectivo', 'Pendiente', null, '2025-11-12', 0, 0)"
+                    "VALUES (5, 8000, 'Efectivo', 'Pendiente', null, '2025-11-12', 0, 0)"
         )
     }
 

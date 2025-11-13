@@ -36,6 +36,29 @@ data class Cuotas(
     //Propiedades a utilizar con fecha formateada
     val fechaVencimientoUI: String
         get() = formatearFecha(FechaVencimiento)
+
+    //Devuelve la fecha en formato "Cuota Mes Año" (ej: "Cuota Noviembre 2025")
+    val cuotaMesAnoUI: String
+        get() {
+            if (FechaVencimiento.isEmpty()) {
+                return "Cuota"
+            }
+
+            return try {
+                val parser = SimpleDateFormat(formatoDb, Locale.getDefault())
+                val fecha = parser.parse(FechaVencimiento)
+
+                // Usamos "MMMM" para el nombre completo del mes
+                val formatoMesAno = SimpleDateFormat("MMMM yyyy", Locale("es", "ES"))
+
+                val mesAnoFormateado = formatoMesAno.format(fecha)
+
+                "Cuota ${mesAnoFormateado.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}"
+
+            } catch (e: Exception) {
+                "Cuota"
+            }
+        }
 }
 
 

@@ -28,8 +28,8 @@ class RegistroPagoSocio : BaseActivity() {
     private lateinit var spinnerCuotasTarjeta: Spinner
     private lateinit var etNumeroTarjeta: EditText
     private lateinit var montoEditText: EditText
-    private lateinit var tituloCuotasTarjeta: TextView
-    private lateinit var tituloNumeroTarjeta: TextView
+    //private lateinit var tituloCuotasTarjeta: TextView
+    //private lateinit var tituloNumeroTarjeta: TextView
 
     private lateinit var adapterCuotas: ArrayAdapter<String>
 
@@ -66,22 +66,20 @@ class RegistroPagoSocio : BaseActivity() {
                 spinnerCliente.isEnabled = false
             }
         } else {
-            spinnerCliente.setSelection(0) // Mostrar "Seleccionar cliente..."
+            spinnerCliente.setSelection(0)
         }
 
         spinnerCliente.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if (position == 0) {
-                    // Si seleccionan "Seleccionar cliente", limpiamos las cuotas
                     listaCuotasPendientesDB = listOf()
                     actualizarSpinnerCuotas(listOf())
                     montoEditText.text.clear()
                 } else {
                     // Un cliente fue seleccionado, buscamos sus cuotas
-                    val cliente = listaSociosDB[position - 1] // -1 por el placeholder
+                    val cliente = listaSociosDB[position - 1]
                     // Llamamos a la nueva función de DBHelper
                     listaCuotasPendientesDB = dbHelper.obtenerCuotasPendientes(cliente.id)
-                    // Actualizamos el spinner de cuotas con los resultados
                     actualizarSpinnerCuotas(listaCuotasPendientesDB)
                 }
             }
@@ -206,7 +204,7 @@ class RegistroPagoSocio : BaseActivity() {
                 position: Int,
                 id: Long
             ) {
-                val seleccion = spinnerPago.selectedItem.toString()
+                //val seleccion = spinnerPago.selectedItem.toString()
 
                 if (position==2) {
                     spinnerCuotasTarjeta.visibility = View.VISIBLE
@@ -298,6 +296,9 @@ class RegistroPagoSocio : BaseActivity() {
             val clienteEncontrado = validarFormulario()
             if (clienteEncontrado != null) {
                 val cuotaPendienteSeleccionada = spinnerCuotaPendiente.selectedItem.toString()
+                val cuotaPosicion = spinnerCuotaPendiente.selectedItemPosition
+                val cuotaObjetoSeleccionado = listaCuotasPendientesDB[cuotaPosicion - 1]
+                val cuotaFormateada = cuotaObjetoSeleccionado.cuotaMesAnoUI
                 val formaPago = spinnerPago.selectedItem.toString()
                 etNumeroTarjeta.text.toString().trim()
                 val cantCuotasTarjeta = spinnerCuotasTarjeta.selectedItem.toString()
@@ -308,6 +309,7 @@ class RegistroPagoSocio : BaseActivity() {
                 val intent = Intent(this, ReciboSocioActivity::class.java).apply {
                     putExtra("nombreCliente", clienteNombre)
                     putExtra("cuotaPendiente", cuotaPendienteSeleccionada)
+                    putExtra("cuotaFormateada", cuotaFormateada)
                     putExtra("monto", monto)
                     putExtra("formaPago", formaPago)
                     putExtra("cantCuotasTarjeta", cantCuotasTarjeta)
