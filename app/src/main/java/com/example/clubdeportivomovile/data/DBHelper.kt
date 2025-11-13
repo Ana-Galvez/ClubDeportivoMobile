@@ -214,8 +214,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
 
 
     // Insertar datos que se obtienen desde los Form (Integración de la db)
-    //REgistro
-    //TODO: Falta crear la primera cuota al socio
+    //Registro
     fun insertarCliente(
         nombre: String,
         apellido: String,
@@ -240,7 +239,46 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         values.put("FechaInscripcion", fechaInsc)
         values.put("AptoFisico", if (aptoFisico) 1 else 0)
         values.put("Socio", if (socio) 1 else 0)
-        db.insert("clientes", null, values)
+
+        // Insertar cliente y se recupera por el ID
+        val idCliente = db.insert("clientes", null, values)
+
+        // Si es socio, la primera cuota se crea automáticamente
+        if (socio && idCliente != -1L) {
+            crearPrimerCuota(db, idCliente, 5000.0)
+        }
+        db.close()
+    }
+
+    fun crearPrimerCuota(db: SQLiteDatabase, idCliente: Long, monto: Double) {
+        try {
+            // Calcular la fecha de vencimiento = hoy + 1 mes
+            val fechaVencimiento = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                java.time.LocalDate.now().plusMonths(1).toString()
+            } else {
+                val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US)
+                val cal = java.util.Calendar.getInstance()
+                cal.add(java.util.Calendar.MONTH, 1)
+                sdf.format(cal.time)
+            }
+
+            // Crear los valores de la cuota
+            val values = ContentValues()
+            values.put("idCliente", idCliente)
+            values.put("Monto", monto)
+            values.put("Estado", "Pendiente")
+            values.putNull("ModoPago")
+            values.putNull("FechaPago")
+            values.put("FechaVencimiento", fechaVencimiento)
+            values.put("CantCuotas", 0)
+            values.put("UltDigitosTarj", 0)
+
+            db.insert("cuotas", null, values)
+            Log.d("DBHelper", "Primera cuota creada correctamente para el cliente con ID $idCliente")
+
+        } catch (e: Exception) {
+            Log.e("DBHelper", "Error al crear la primera cuota del cliente con ID $idCliente : ${e.message}")
+        }
     }
 
     //Listado de clientes
@@ -514,7 +552,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         return listaCuotas
     }
 
-    //Registrar pAgo de socios
+    //Registrar pago de socios
     //TODO: Falta crear próxima cuota (vencimiento un mes después de la fecha de pago)
     fun insertarCuota(
         idCliente: Int,
@@ -608,7 +646,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         cursor.close()
         return lista
     }
-
 
     //Listado Actividades Registro Pago NO socio
     @SuppressLint("Range")
@@ -737,7 +774,4 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         db.close()
         return lista
     }
-
-
-
 }
