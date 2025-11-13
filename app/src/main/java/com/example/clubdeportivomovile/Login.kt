@@ -40,7 +40,7 @@ class Login : AppCompatActivity() {
             val usuario = usuarioEditText.text.toString().trim()
             val pass = contraseñaEditText.text.toString().trim()
 
-            // 1️⃣ Validación campos vacíos
+            // Validación campos vacíos
             if (usuario.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -53,14 +53,14 @@ class Login : AppCompatActivity() {
 
             val usuarioExiste = existeUsuario(usuario)
             if (!usuarioExiste) {
-                // 2️⃣ Usuario incorrecto
+                // Usuario incorrecto
                 Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val contraseñaValida = validarContraseña(usuario, pass)
             if (!contraseñaValida) {
-                // 3️⃣ Contraseña incorrecta
+                // Contraseña incorrecta
                 Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
