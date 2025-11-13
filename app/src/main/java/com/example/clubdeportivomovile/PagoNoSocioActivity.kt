@@ -200,7 +200,6 @@ class PagoNoSocioActivity : BaseActivity() {
                 val montoDouble = actividadObjeto.monto
                 val fechaDeHoy = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     java.time.LocalDate.now().toString()
-
                 } else {
                     val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                     sdf.format(Date())
@@ -212,7 +211,16 @@ class PagoNoSocioActivity : BaseActivity() {
                 val actividadSeleccionada = spinnerActividad.selectedItem.toString()
                 val horario = horarioEditText.text.toString().trim()
                 val montoString = montoEditText.text.toString().trim()
-
+                //Para recibo
+                val fechaFormateada = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    val localDate = java.time.LocalDate.parse(fechaDeHoy) // parsea yyyy-MM-dd
+                    localDate.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                } else {
+                    val sdfEntrada = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    val sdfSalida = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    val date = sdfEntrada.parse(fechaDeHoy)
+                    sdfSalida.format(date!!)
+                }
                 try{
                     dbHelper.insertarPagoActividad(
                         clienteId,
@@ -232,7 +240,7 @@ class PagoNoSocioActivity : BaseActivity() {
                                 putExtra("horario", horario)
                                 putExtra("monto", montoString)
                                 putExtra("telefono", clienteEncontrado.Telefono)
-                                putExtra("ins", clienteEncontrado.fechaInscripcionUI)
+                                putExtra("ins", fechaFormateada)
                                 putExtra("direccion", clienteEncontrado.Direccion)
                             }
                             startActivity(intent)

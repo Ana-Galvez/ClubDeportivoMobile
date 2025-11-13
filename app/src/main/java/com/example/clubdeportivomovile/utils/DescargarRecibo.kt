@@ -47,7 +47,7 @@ class DescargarRecibo(private val context: Context) {
         paint.isFakeBoldText = false
         canvas.drawText("Nombre: $nombreCliente", 20f, 80f, paint)
         canvas.drawText("Monto: $monto", 20f, 100f, paint)
-        canvas.drawText("Fecha de inscripción: $inscrip", 20f, 140f, paint)
+        canvas.drawText("Fecha de pago: $inscrip", 20f, 140f, paint)
         canvas.drawText("Teléfono: $telefono", 20f, 160f, paint)
         canvas.drawText("Dirección: $direccion", 20f, 180f, paint)
         if (horario != null) {

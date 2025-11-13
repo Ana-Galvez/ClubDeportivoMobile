@@ -326,7 +326,16 @@ class RegistroPagoSocio : BaseActivity() {
                 //val cuotaPendienteString = spinnerCuotaPendiente.selectedItem.toString()
                 val cuotaFormateada = cuotaObjetoSeleccionado.cuotaMesAnoUI
                 val montoString = montoEditText.text.toString().trim()
-
+                //Para recibo
+                val fechaFormateada = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    val localDate = java.time.LocalDate.parse(fechaDeHoy) // parsea yyyy-MM-dd
+                    localDate.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                } else {
+                    val sdfEntrada = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    val sdfSalida = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    val date = sdfEntrada.parse(fechaDeHoy)
+                    sdfSalida.format(date!!)
+                }
                 //Se inicia la transacción
                 val db = dbHelper.writableDatabase
                 db.beginTransaction()
@@ -344,7 +353,7 @@ class RegistroPagoSocio : BaseActivity() {
                         db,
                         clienteId,
                         montoCuota,
-                        fechaDeHoy
+                        cuotaObjetoSeleccionado.FechaVencimiento
                     )
                     db.setTransactionSuccessful()
 
@@ -362,7 +371,7 @@ class RegistroPagoSocio : BaseActivity() {
                                 putExtra("formaPago", formaPagoUI)
                                 putExtra("cantCuotasTarjeta", cantCuotasTarjeta)
                                 putExtra("telefono", clienteEncontrado.Telefono)
-                                putExtra("ins", clienteEncontrado.fechaInscripcionUI)
+                                putExtra("ins", fechaFormateada)
                                 putExtra("direccion", clienteEncontrado.Direccion)
                             }
                             startActivity(intent)

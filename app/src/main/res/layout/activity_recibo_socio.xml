@@ -100,7 +100,7 @@
 
                         <TextView
                             style="@style/RowLabel"
-                            android:text="Fecha de insc:" />
+                            android:text="Fecha de pago:" />
 
                         <TextView
                             android:id="@+id/tvFechaInsc"

@@ -583,13 +583,13 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         db: SQLiteDatabase,
         idCliente: Int,
         monto: Double,
-        fechaDePago: String
+        fechaVencAnterior: String
     ) {
         try {
-            // Calcula la fecha de vencimiento = fechaDePago + 30 días
+            // Calcula la fecha de vencimiento = fechaVencAnterior + 30 días
             val parser = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US)
             val cal = java.util.Calendar.getInstance()
-            cal.time = parser.parse(fechaDePago)
+            cal.time = parser.parse(fechaVencAnterior)
             cal.add(java.util.Calendar.DAY_OF_YEAR, 30)
             val fechaVencimiento = parser.format(cal.time)
 
@@ -608,7 +608,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
             Log.d("DBHelper", "Siguiente cuota creada para cliente $idCliente con vencimiento $fechaVencimiento")
 
         } catch (e: java.text.ParseException) {
-            Log.e("DBHelper", "Error al parsear la fecha de pago $fechaDePago", e)
+            Log.e("DBHelper", "Error al parsear la fecha de vencimiento anterior $fechaVencAnterior", e)
             throw e
         } catch (e: Exception) {
             Log.e("DBHelper", "Error al crear la siguiente cuota", e)
@@ -616,12 +616,12 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         }
     }
 
+
     //Pago no socios
     fun insertarPagoActividad(
         idCliente: Int,
         idActividad: Int,
         fechaPago: String,
-        //modoPago: String,
         monto: Double,
         estado: String
     ) {
@@ -630,7 +630,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         values.put("idCliente", idCliente)
         values.put("idActividad", idActividad)
         values.put("FechaPago", fechaPago)
-        //values.put("ModoPago", modoPago)
         values.put("Monto", monto)
         values.put("Estado", estado)
         db.insert("pago_actividad", null, values)
