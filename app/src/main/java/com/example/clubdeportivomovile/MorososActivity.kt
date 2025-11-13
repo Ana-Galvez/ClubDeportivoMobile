@@ -36,18 +36,6 @@ class MorososActivity : BaseActivity() {
         layoutBuscador = findViewById(R.id.layout_buscador)
         tvSinMorosos = findViewById(R.id.tv_sin_morosos)
 
-        /*val listaMorosos = listOf<MorososClaseRV>(
-            MorososClaseRV("Juan Pérez", 1, "11111111", "$40.000", "1123111"),
-            MorososClaseRV("Pedro López", 2, "22222222", "$35.000", "1133222"),
-            MorososClaseRV("Ana García", 3, "33333333", "$25.000", "1144333"),
-            MorososClaseRV("Ana García", 3, "33333333", "$25.000", "1144333"),
-            MorososClaseRV("Ana García", 3, "33333333", "$25.000", "1144333"),
-            MorososClaseRV("Ana García", 3, "33333333", "$25.000", "1144333"),
-            MorososClaseRV("Ana García", 3, "33333333", "$25.000", "1144333"),
-            MorososClaseRV("Ana García", 3, "33333333", "$25.000", "1144333"),
-            MorososClaseRV("Mario Torres", 4, "44444444", "$50.000", "1155444")
-        )*/
-
         // Datos
         val dbHelper = DBHelper(this)
         listaMorosos = dbHelper.obtenerMorososDeHoy()
