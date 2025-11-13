@@ -112,7 +112,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
                     "IdCuota INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "idCliente INTEGER NOT NULL, " +
                     "Monto REAL NOT NULL, " +
-                    "ModoPago TEXT CHECK (ModoPago IN ('Efectivo','Tarjeta de crédito')), " +
+                    "ModoPago TEXT CHECK (ModoPago IN ('Efectivo','Tarjeta')), " +
                     "Estado TEXT NOT NULL CHECK (Estado IN ('Pagada','Pendiente')), " +
                     "FechaPago TEXT, " +
                     "FechaVencimiento TEXT NOT NULL, " +
