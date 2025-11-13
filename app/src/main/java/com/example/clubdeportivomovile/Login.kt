@@ -20,8 +20,9 @@ class Login : AppCompatActivity() {
     private lateinit var contraseñaEditText: EditText
     private lateinit var toggleImageView: ImageView
     private var isPasswordVisible = false
-
     private lateinit var checkBox: CheckBox
+
+    private val db by lazy { com.example.clubdeportivomovile.data.DBHelper(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

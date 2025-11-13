@@ -11,8 +11,9 @@ import com.example.clubdeportivomovile.Actividad
 import com.example.clubdeportivomovile.Cliente
 import com.example.clubdeportivomovile.Cuotas
 import com.example.clubdeportivomovile.PagoActividad
+import com.example.clubdeportivomovile.Moroso
 
-class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", null, 1) {
+class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", null, 2) {
 
     //Para eliminación en cascada
     override fun onConfigure(db: SQLiteDatabase) {
@@ -168,15 +169,15 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         // Cuota Pendiente en Efectivo
         db.execSQL(
             "INSERT INTO cuotas (idCliente, monto, ModoPago, Estado, FechaPago, FechaVencimiento, CantCuotas, UltDigitosTarj) " +
-                    "VALUES (3, 5000, 'Efectivo', 'Pendiente', '1900-01-01', '2024-03-10', 0, 0)"
+                    "VALUES (3, 5000, 'Efectivo', 'Pendiente', null, '2025-11-12', 0, 0)"
         )
         db.execSQL(
             "INSERT INTO cuotas (idCliente, monto, ModoPago, Estado, FechaPago, FechaVencimiento, CantCuotas, UltDigitosTarj) " +
-                    "VALUES (5, 8000, 'Efectivo', 'Pendiente', '1900-01-01', '2024-03-10', 0, 0)"
+                    "VALUES (4, 8000, 'Efectivo', 'Pendiente', null, '2025-11-12', 0, 0)"
         )
     }
 
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+   /* override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS clientes")
         db.execSQL("DROP TABLE IF EXISTS actividades")
         db.execSQL("DROP TABLE IF EXISTS usuarios")
@@ -186,7 +187,31 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         db.execSQL("DROP TABLE IF EXISTS cuotas")
         db.execSQL("DROP TABLE IF EXISTS pago_actividad")
         onCreate(db)
-    }
+    }*/
+   override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+       // Desactivar foreign keys durante el DROP
+       db.execSQL("PRAGMA foreign_keys=OFF")
+       db.beginTransaction()
+       try {
+           // Primero las tablas hijas (que dependen de otras)
+           db.execSQL("DROP TABLE IF EXISTS pago_actividad")
+           db.execSQL("DROP TABLE IF EXISTS cuotas")
+           db.execSQL("DROP TABLE IF EXISTS socios")
+           db.execSQL("DROP TABLE IF EXISTS nosocios")
+           db.execSQL("DROP TABLE IF EXISTS usuarios")
+           db.execSQL("DROP TABLE IF EXISTS roles")
+           db.execSQL("DROP TABLE IF EXISTS actividades")
+           db.execSQL("DROP TABLE IF EXISTS clientes")
+
+           db.setTransactionSuccessful()
+       } finally {
+           db.endTransaction()
+           db.execSQL("PRAGMA foreign_keys=ON")
+       }
+
+       onCreate(db)
+   }
+
 
     // Insertar datos que se obtienen desde los Form (Integración de la db)
     //REgistro
@@ -654,5 +679,65 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         return filasAfectadas > 0
     }
 
-    //TODO: Listado de clientes a los que se les vence la cuota (morosos)
+    fun obtenerMorososDeHoy(): MutableList<Moroso> {
+        val hoy = try {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                java.time.LocalDate.now().toString() // yyyy-MM-dd
+            } else {
+                val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US)
+                sdf.format(java.util.Date())
+            }
+        } catch (_: Exception) {
+            val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US)
+            sdf.format(java.util.Date())
+        }
+
+        val lista = mutableListOf<Moroso>()
+        val db = readableDatabase
+
+        val sql = """
+        SELECT  c.id,
+                c.Nombre,
+                c.Apellido,
+                c.DNI,
+                c.Telefono,
+                SUM(q.Monto) AS TotalAdeudado
+        FROM clientes c
+        JOIN cuotas q ON q.idCliente = c.id
+        WHERE q.Estado = 'Pendiente'
+          AND q.FechaVencimiento = ?
+        GROUP BY c.id, c.Nombre, c.Apellido, c.DNI, c.Telefono
+        HAVING TotalAdeudado > 0
+        ORDER BY c.Apellido COLLATE NOCASE ASC, c.Nombre COLLATE NOCASE ASC
+    """.trimIndent()
+
+        val cur = db.rawQuery(sql, arrayOf(hoy))
+        Log.d("DBHelper", "MorososDeHoy — hoy=$hoy, rows=${cur.count}")
+
+        if (cur.moveToFirst()) {
+            val idxId  = cur.getColumnIndexOrThrow("id")
+            val idxNom = cur.getColumnIndexOrThrow("Nombre")
+            val idxApe = cur.getColumnIndexOrThrow("Apellido")
+            val idxDni = cur.getColumnIndexOrThrow("DNI")
+            val idxTel = cur.getColumnIndexOrThrow("Telefono")
+            val idxTot = cur.getColumnIndexOrThrow("TotalAdeudado")
+
+            do {
+                val id = cur.getInt(idxId)
+                val nombre = "${cur.getString(idxNom)} ${cur.getString(idxApe)}".trim()
+                val dni = cur.getInt(idxDni)
+                val tel = cur.getString(idxTel) ?: "-"
+                val total = cur.getDouble(idxTot)
+
+                lista.add(Moroso(id, nombre, dni, tel, total))
+            } while (cur.moveToNext())
+        }
+
+        cur.close()
+        db.close()
+        return lista
+    }
+
+
+
 }

@@ -22,14 +22,16 @@
             style="@style/Titulo" />
 
         <!-- Buscador -->
+        <!-- debajo del título -->
         <LinearLayout
+            android:id="@+id/layout_buscador"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginHorizontal="40dp"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="60dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/bg_search"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
             android:paddingStart="10dp"
             android:paddingEnd="10dp">
 
@@ -38,8 +40,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@android:color/transparent"
                 android:hint="Buscar"
+                android:backgroundTint="@android:color/transparent"
                 android:inputType="text"
                 android:padding="0dp"
                 android:textColor="@color/textPrimary"
@@ -49,9 +51,26 @@
                 android:id="@+id/ivBuscar"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:contentDescription="Buscar"
-                android:src="@drawable/ic_search" />
+                android:src="@drawable/ic_search"
+                android:contentDescription="Buscar" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_sin_morosos"
+            android:layout_width="309dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:paddingBottom="16dp"
+            android:text="No hay morosos con vencimiento hoy."
+            android:textColor="@color/textPrimary"
+            android:textSize="18sp"
+            android:visibility="gone"/>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvListaMorosos"
@@ -61,39 +80,7 @@
             android:paddingHorizontal="24dp"
             android:paddingBottom="16dp"/>
 
-<!--         Lista (scroll)-->
-<!--        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="24dp"
-                android:paddingBottom="16dp">
-
-                &lt;!&ndash; Card &ndash;&gt;
-                <include layout="@layout/item_moroso" />
-
-                &lt;!&ndash; Card &ndash;&gt;
-                <include layout="@layout/item_moroso" />
-
-                &lt;!&ndash; Card &ndash;&gt;
-                <include layout="@layout/item_moroso" />
-
-                &lt;!&ndash; Card &ndash;&gt;
-                <include layout="@layout/item_moroso" />
-
-                &lt;!&ndash; Card &ndash;&gt;
-                <include layout="@layout/item_moroso" />
-
-                &lt;!&ndash; Card &ndash;&gt;
-                <include layout="@layout/item_moroso" />
-
-            </LinearLayout>
-        </ScrollView>-->
 
         <!-- Barra inferior -->
         <include layout="@layout/activity_barra" />
