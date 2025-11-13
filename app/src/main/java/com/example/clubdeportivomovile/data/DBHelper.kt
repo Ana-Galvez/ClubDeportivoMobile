@@ -207,9 +207,8 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
        onCreate(db)
    }
 
-
     // Insertar datos que se obtienen desde los Form (Integración de la db)
-    //Registro
+    //Registro + crear primera cuota
     fun insertarCliente(
         nombre: String,
         apellido: String,
@@ -776,5 +775,18 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         cursor.close()
         db.close()
         return existe
+    }
+
+    // Retorna el RolUsu del usuario si existe y está activo, sino -1
+    fun obtenerRolUsuario(usuario: String): Int {
+        val db = readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT RolUsu FROM usuarios WHERE Nombre = ? AND Activo = 1",
+            arrayOf(usuario)
+        )
+        val rol = if (cursor.moveToFirst()) cursor.getInt(cursor.getColumnIndexOrThrow("RolUsu")) else -1
+        cursor.close()
+        db.close()
+        return rol
     }
 }
