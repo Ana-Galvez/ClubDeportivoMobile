@@ -49,7 +49,7 @@ class Home : BaseActivity() {
         //Manejo del nombre del usuario
         val tvBienvenida : TextView = findViewById(R.id.tvBienvenida)
         val usuario = intent.getStringExtra("usuario") ?: "Usuario"
-        tvBienvenida.text = "Bienvenido $usuario"
+        tvBienvenida.text = "¡Bienvenido $usuario!"
 
         // Navegación de los botones
 
