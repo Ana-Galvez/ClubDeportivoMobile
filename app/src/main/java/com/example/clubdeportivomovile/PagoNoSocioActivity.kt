@@ -129,7 +129,7 @@ class PagoNoSocioActivity : BaseActivity() {
                 }
 
                 val actividadSeleccionada = listaDeActividadesDB[position - 1] // -1 por el placeholder
-                horarioEditText.setText(actividadSeleccionada.hora)
+                horarioEditText.setText("${actividadSeleccionada.diaSemana} ${actividadSeleccionada.hora}")
                 montoEditText.setText(actividadSeleccionada.monto.toString())
             }
 
