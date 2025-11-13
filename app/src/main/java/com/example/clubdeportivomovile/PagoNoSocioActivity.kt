@@ -1,5 +1,6 @@
 package com.example.clubdeportivomovile
 
+import androidx.appcompat.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,6 +13,10 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.clubdeportivomovile.data.DBHelper
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import android.util.Log
 
 class PagoNoSocioActivity : BaseActivity() {
 
@@ -189,23 +194,64 @@ class PagoNoSocioActivity : BaseActivity() {
         botonAceptar.setOnClickListener {
             val clienteEncontrado = validarFormulario(spinnerActividad, spinnerCliente)
             if (clienteEncontrado != null) {
+                val clienteId = clienteEncontrado.id
+                val actividadPosicion = spinnerActividad.selectedItemPosition
+                val actividadObjeto = listaDeActividadesDB[actividadPosicion - 1]
+                val actividadId = actividadObjeto.id
+                val montoDouble = actividadObjeto.monto
+                val fechaDeHoy = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    java.time.LocalDate.now().toString()
+
+                } else {
+                    val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    sdf.format(Date())
+                }
+                val estado = "Pagada"
+
+                //Intent
                 val clienteNombre = spinnerCliente.selectedItem.toString()
                 val actividadSeleccionada = spinnerActividad.selectedItem.toString()
                 val horario = horarioEditText.text.toString().trim()
-                val monto = montoEditText.text.toString().trim()
+                val montoString = montoEditText.text.toString().trim()
 
-                //Paso la info al comprobante
-                val intent = Intent(this, ReciboPagoNoSocioActivity::class.java).apply {
-                    putExtra("nombreCliente", clienteNombre)
-                    putExtra("actividad", actividadSeleccionada)
-                    putExtra("horario", horario)
-                    putExtra("monto", monto)
-                    putExtra("telefono", clienteEncontrado.Telefono)
-                    putExtra("ins", clienteEncontrado.fechaInscripcionUI)
-                    putExtra("direccion", clienteEncontrado.Direccion)
+                try{
+                    dbHelper.insertarPagoActividad(
+                        clienteId,
+                        actividadId,
+                        fechaDeHoy,
+                        montoDouble,
+                        estado
+                    )
+
+                    AlertDialog.Builder(this)
+                        .setTitle("Pago Registrado")
+                        .setMessage("El pago se ha registrado exitosamente.")
+                        .setPositiveButton("Aceptar") { dialog, _ ->
+                            val intent = Intent(this, ReciboPagoNoSocioActivity::class.java).apply {
+                                putExtra("nombreCliente", clienteNombre)
+                                putExtra("actividad", actividadSeleccionada)
+                                putExtra("horario", horario)
+                                putExtra("monto", montoString)
+                                putExtra("telefono", clienteEncontrado.Telefono)
+                                putExtra("ins", clienteEncontrado.fechaInscripcionUI)
+                                putExtra("direccion", clienteEncontrado.Direccion)
+                            }
+                            startActivity(intent)
+                            dialog.dismiss()
+                    }
+                    .setCancelable(false) // Evita que se cierre al tocar fuera
+                    .show()
+                } catch (e: Exception) {
+                    // 6. En caso de error en la DB, mostrar un Toast de error
+                    Log.e("PagoNoSocioActivity", "Error al insertar en la base de datos", e)
+                    AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage("No se pudo registrar el pago. Por favor, intente de nuevo.")
+                        .setPositiveButton("Cerrar") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
                 }
-
-                startActivity(intent)
             }
         }
 
