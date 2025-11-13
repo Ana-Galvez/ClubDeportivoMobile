@@ -129,7 +129,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
                     "idCliente INTEGER NOT NULL, " +
                     "idActividad INTEGER NOT NULL, " +
                     "FechaPago TEXT NOT NULL, " +
-                    "ModoPago TEXT NOT NULL CHECK (ModoPago IN ('Efectivo','Tarjeta')) DEFAULT 'Efectivo', " +
+                    //"ModoPago TEXT NOT NULL CHECK (ModoPago IN ('Efectivo','Tarjeta')) DEFAULT 'Efectivo', " +
                     "Monto REAL NOT NULL, " +
                     "Estado TEXT NOT NULL CHECK (Estado IN ('Pagada','Pendiente')) DEFAULT 'Pendiente', " +
                     "FOREIGN KEY (idCliente) REFERENCES clientes(id) ON DELETE CASCADE, " +
@@ -570,7 +570,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         idCliente: Int,
         idActividad: Int,
         fechaPago: String,
-        modoPago: String,
+        //modoPago: String,
         monto: Double,
         estado: String
     ) {
@@ -579,13 +579,13 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         values.put("idCliente", idCliente)
         values.put("idActividad", idActividad)
         values.put("FechaPago", fechaPago)
-        values.put("ModoPago", modoPago)
+        //values.put("ModoPago", modoPago)
         values.put("Monto", monto)
         values.put("Estado", estado)
         db.insert("pago_actividad", null, values)
     }
 
-    //Listado de pagos actividad
+/*    //Listado de pagos actividad
     fun obtenerPagoActividad(): List<PagoActividad> {
         val db = readableDatabase
         val lista = mutableListOf<PagoActividad>()
@@ -598,16 +598,16 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
                         cursor.getInt(1),
                         cursor.getInt(2),
                         cursor.getString(3),
-                        cursor.getString(4),
-                        cursor.getDouble(5),
-                        cursor.getString(6)
+                        cursor.getDouble(4),
+                        cursor.getString(5),
+                        //cursor.getString(6)
                     )
                 )
             } while (cursor.moveToNext())
         }
         cursor.close()
         return lista
-    }
+    }*/
 
 
     //Listado Actividades Registro Pago NO socio
