@@ -8,11 +8,14 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.clubdeportivomovile.data.DBHelper
+
 
 class Home : BaseActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var drawerContainer: android.view.View
+    val dbHelper = DBHelper(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +25,6 @@ class Home : BaseActivity() {
 
         drawerLayout = findViewById(R.id.drawer_layout)
         setupDrawerMenu(R.id.drawer_layout) ///********** agregue para fc del menu ---va el id como parametro
-
 
         drawerContainer = findViewById(R.id.drawerContainer)
 
@@ -67,9 +69,22 @@ class Home : BaseActivity() {
             dialog.show(supportFragmentManager, "SocioDialog")
         }
 
-        findViewById<LinearLayout>(R.id.btnSociosMorosos)?.setOnClickListener{
-            val intent= Intent(this, MorososActivity::class.java)
-            startActivity(intent)
+        // Restringuir el acceso
+        findViewById<LinearLayout>(R.id.btnSociosMorosos)?.setOnClickListener {
+            val dbHelper = DBHelper(this)
+            val usuarioActual = intent.getStringExtra("usuario") ?: ""
+            val rol = dbHelper.obtenerRolUsuario(usuarioActual)
+
+            if (rol == 120) {
+                val intent = Intent(this, MorososActivity::class.java)
+                startActivity(intent)
+            } else {
+                androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setTitle("Acceso restringido")
+                    .setMessage("Solo el personal autorizado puede acceder a esta sección.")
+                    .setPositiveButton("Aceptar", null)
+                    .show()
+            }
         }
     }
 }
