@@ -88,8 +88,8 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
             """
         INSERT INTO usuarios (Nombre, Pass, RolUsu, Activo) VALUES
             ('Ana', '123456', 120, 1),
-            ('Juan', '123456', 120, 0),
-            ('Maria', '654321', 121, 1);
+            ('Maria', '123456', 120, 0),
+            ('Jack', '654321', 121, 1);
         """.trimIndent()
         )
 
@@ -763,5 +763,18 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         cur.close()
         db.close()
         return lista
+    }
+
+    // Validar usuario y contraseña
+    fun validarUsuario(usuario: String, pass: String): Boolean {
+        val db = readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM usuarios WHERE Nombre = ? AND Pass = ? AND Activo = 1",
+            arrayOf(usuario, pass)
+        )
+        val existe = cursor.count > 0
+        cursor.close()
+        db.close()
+        return existe
     }
 }
