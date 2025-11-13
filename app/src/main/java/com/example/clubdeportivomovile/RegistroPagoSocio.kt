@@ -13,6 +13,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.clubdeportivomovile.data.DBHelper
+import androidx.appcompat.app.AlertDialog
+import android.util.Log
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class RegistroPagoSocio : BaseActivity() {
 
@@ -24,8 +29,8 @@ class RegistroPagoSocio : BaseActivity() {
     private lateinit var spinnerCliente: Spinner
     private lateinit var spinnerCuotaPendiente: Spinner
 
-    private lateinit var spinnerPago: Spinner
-    private lateinit var spinnerCuotasTarjeta: Spinner
+    //private lateinit var spinnerPago: Spinner
+    //private lateinit var spinnerCuotasTarjeta: Spinner
     private lateinit var etNumeroTarjeta: EditText
     private lateinit var montoEditText: EditText
     //private lateinit var tituloCuotasTarjeta: TextView
@@ -295,30 +300,92 @@ class RegistroPagoSocio : BaseActivity() {
         botonAceptar.setOnClickListener {
             val clienteEncontrado = validarFormulario()
             if (clienteEncontrado != null) {
-                val cuotaPendienteSeleccionada = spinnerCuotaPendiente.selectedItem.toString()
+
+                val clienteId = clienteEncontrado.id
                 val cuotaPosicion = spinnerCuotaPendiente.selectedItemPosition
                 val cuotaObjetoSeleccionado = listaCuotasPendientesDB[cuotaPosicion - 1]
-                val cuotaFormateada = cuotaObjetoSeleccionado.cuotaMesAnoUI
-                val formaPago = spinnerPago.selectedItem.toString()
-                etNumeroTarjeta.text.toString().trim()
+                val idCuotaAPagar = cuotaObjetoSeleccionado.IdCuota
+                val montoCuota = cuotaObjetoSeleccionado.Monto
+                val formaPagoUI = spinnerPago.selectedItem.toString()
                 val cantCuotasTarjeta = spinnerCuotasTarjeta.selectedItem.toString()
-                val clienteNombre = spinnerCliente.selectedItem.toString()
-                val monto = montoEditText.text.toString().trim()
-
-                //Paso la info al comprobante
-                val intent = Intent(this, ReciboSocioActivity::class.java).apply {
-                    putExtra("nombreCliente", clienteNombre)
-                    putExtra("cuotaPendiente", cuotaPendienteSeleccionada)
-                    putExtra("cuotaFormateada", cuotaFormateada)
-                    putExtra("monto", monto)
-                    putExtra("formaPago", formaPago)
-                    putExtra("cantCuotasTarjeta", cantCuotasTarjeta)
-                    putExtra("telefono", clienteEncontrado.Telefono)
-                    putExtra("ins", clienteEncontrado.fechaInscripcionUI)
-                    putExtra("direccion", clienteEncontrado.Direccion)
+                val numTarjeta = etNumeroTarjeta.text.toString().trim()
+                val ultDigitos = if (numTarjeta.length >= 4) numTarjeta.takeLast(4) else ""
+                val formaPagoDB = if (formaPagoUI == "Tarjeta de crédito") {
+                    "Tarjeta"
+                } else {
+                    "Efectivo"
+                }
+                val fechaDeHoy = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    java.time.LocalDate.now().toString()
+                } else {
+                    val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    sdf.format(Date())
                 }
 
-                startActivity(intent)
+                val clienteNombre = spinnerCliente.selectedItem.toString()
+                //val cuotaPendienteString = spinnerCuotaPendiente.selectedItem.toString()
+                val cuotaFormateada = cuotaObjetoSeleccionado.cuotaMesAnoUI
+                val montoString = montoEditText.text.toString().trim()
+
+                //Se inicia la transacción
+                val db = dbHelper.writableDatabase
+                db.beginTransaction()
+
+                try{
+                    dbHelper.actualizarCuotaPagada(
+                        db,
+                        idCuotaAPagar,
+                        fechaDeHoy,
+                        formaPagoDB,
+                        cantCuotasTarjeta,
+                        ultDigitos
+                    )
+                    dbHelper.crearSiguienteCuota(
+                        db,
+                        clienteId,
+                        montoCuota,
+                        fechaDeHoy
+                    )
+                    db.setTransactionSuccessful()
+
+                    AlertDialog.Builder(this)
+                        .setTitle("Pago Registrado")
+                        .setMessage("El pago se ha registrado exitosamente. Se generó la próxima cuota.")
+                        .setPositiveButton("Aceptar") { dialog, _ ->
+
+                            // --- 4. Navegar al Recibo ---
+                            val intent = Intent(this, ReciboSocioActivity::class.java).apply {
+                                putExtra("nombreCliente", clienteNombre)
+                                putExtra("cuotaPendiente", spinnerCuotaPendiente.selectedItem.toString()) // "Vto:..." para exportar
+                                putExtra("cuotaFormateada", cuotaFormateada) // "Cuota Mes..." para mostrar
+                                putExtra("monto", montoString)
+                                putExtra("formaPago", formaPagoUI)
+                                putExtra("cantCuotasTarjeta", cantCuotasTarjeta)
+                                putExtra("telefono", clienteEncontrado.Telefono)
+                                putExtra("ins", clienteEncontrado.fechaInscripcionUI)
+                                putExtra("direccion", clienteEncontrado.Direccion)
+                            }
+                            startActivity(intent)
+                            dialog.dismiss()
+                        }
+                        .setCancelable(false)
+                        .show()
+                }catch (e: Exception) {
+                    // --- 5. Mostrar Modal de Error ---
+                    Log.e("RegistroPagoSocio", "Error en la transacción de pago", e)
+                    AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage("No se pudo registrar el pago: ${e.message}")
+                        .setPositiveButton("Cerrar") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
+
+                }finally {
+                    // --- 6. Finalizar la Transacción y cerrar la DB ---
+                    db.endTransaction()
+                    db.close()
+                }
             }
         }
 
@@ -356,6 +423,4 @@ class RegistroPagoSocio : BaseActivity() {
         adapterCuotas.notifyDataSetChanged()
         spinnerCuotaPendiente.setSelection(0)
     }
-
-
 }

@@ -10,7 +10,6 @@ import android.util.Log
 import com.example.clubdeportivomovile.Actividad
 import com.example.clubdeportivomovile.Cliente
 import com.example.clubdeportivomovile.Cuotas
-import com.example.clubdeportivomovile.PagoActividad
 import com.example.clubdeportivomovile.Moroso
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", null, 2) {
@@ -113,7 +112,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
                     "IdCuota INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "idCliente INTEGER NOT NULL, " +
                     "Monto REAL NOT NULL, " +
-                    "ModoPago TEXT CHECK (ModoPago IN ('Efectivo','Tarjeta')), " +
+                    "ModoPago TEXT CHECK (ModoPago IN ('Efectivo','Tarjeta de crédito')), " +
                     "Estado TEXT NOT NULL CHECK (Estado IN ('Pagada','Pendiente')), " +
                     "FechaPago TEXT, " +
                     "FechaVencimiento TEXT NOT NULL, " +
@@ -157,6 +156,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
                 "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
                         "VALUES ('Nicolas', 'Mora', '1970-10-15', 20652325, 'M', 'Calle Sol 123', '03330001', '2022-01-10', 1, 1)"
                 )
+        db.execSQL(
+            "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
+                    "VALUES ('Mariana', 'Luque', '1993-10-15', 20659696, 'F', 'Calle Solari 123', '03339930', '2023-01-10', 1, 1)"
+        )
 
         db.execSQL("INSERT INTO socios (idCliente, FechaAltaSocio) VALUES (1, '2024-01-10')")
         db.execSQL("INSERT INTO socios (idCliente, FechaAltaSocio) VALUES (3, '2023-11-05')")
@@ -173,7 +176,11 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         )
         db.execSQL(
             "INSERT INTO cuotas (idCliente, monto, ModoPago, Estado, FechaPago, FechaVencimiento, CantCuotas, UltDigitosTarj) " +
-                    "VALUES (5, 8000, 'Efectivo', 'Pendiente', null, '2025-11-12', 0, 0)"
+                    "VALUES (5, 8000, 'Efectivo', 'Pendiente', null, '2025-11-13', 0, 0)"
+        )
+        db.execSQL(
+            "INSERT INTO cuotas (idCliente, monto, ModoPago, Estado, FechaPago, FechaVencimiento, CantCuotas, UltDigitosTarj) " +
+                    "VALUES (6, 8000, 'Efectivo', 'Pendiente', null, '2025-11-13', 0, 0)"
         )
     }
 
@@ -553,8 +560,75 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
     }
 
     //Registrar pago de socios
-    //TODO: Falta crear próxima cuota (vencimiento un mes después de la fecha de pago)
-    fun insertarCuota(
+    //Lo hace por medio de una transacción
+    fun actualizarCuotaPagada(
+        db: SQLiteDatabase,
+        idCuota: Int,
+        fechaPago: String,
+        modoPago: String,
+        cantCuotas: String,
+        ultDigitosTarj: String
+    ) {
+        val values = ContentValues()
+        values.put("Estado", "Pagada")
+        values.put("FechaPago", fechaPago)
+        values.put("ModoPago", modoPago)
+
+        // Convierte el string del spinner a entero para poder guardarlo
+        // Si no es un número (ej: "Seleccionar..."), guarda 0
+        val cuotasInt = cantCuotas.filter { it.isDigit() }.toIntOrNull() ?: 0
+        values.put("CantCuotas", cuotasInt)
+
+        // Si ultDigitosTarj está vacío, guarda 0
+        val digitosInt = ultDigitosTarj.toIntOrNull() ?: 0
+        values.put("UltDigitosTarj", digitosInt)
+
+        // Actualiza la fila
+        val filas = db.update("cuotas", values, "IdCuota = ?", arrayOf(idCuota.toString()))
+
+        if (filas == 0) {
+            throw Exception("Error: No se encontró la cuota $idCuota para actualizar.")
+        }
+        Log.d("DBHelper", "Cuota $idCuota actualizada a 'Pagada'.")
+    }
+
+    fun crearSiguienteCuota(
+        db: SQLiteDatabase,
+        idCliente: Int,
+        monto: Double,
+        fechaDePago: String
+    ) {
+        try {
+            // Calcula la fecha de vencimiento = fechaDePago + 30 días
+            val parser = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US)
+            val cal = java.util.Calendar.getInstance()
+            cal.time = parser.parse(fechaDePago)
+            cal.add(java.util.Calendar.DAY_OF_YEAR, 30)
+            val fechaVencimiento = parser.format(cal.time)
+
+            // Crear los valores de la nueva cuota
+            val values = ContentValues()
+            values.put("idCliente", idCliente)
+            values.put("Monto", monto)
+            values.put("Estado", "Pendiente")
+            values.putNull("ModoPago")
+            values.putNull("FechaPago")
+            values.put("FechaVencimiento", fechaVencimiento)
+            values.put("CantCuotas", 0)
+            values.put("UltDigitosTarj", 0)
+
+            db.insertOrThrow("cuotas", null, values)
+            Log.d("DBHelper", "Siguiente cuota creada para cliente $idCliente con vencimiento $fechaVencimiento")
+
+        } catch (e: java.text.ParseException) {
+            Log.e("DBHelper", "Error al parsear la fecha de pago $fechaDePago", e)
+            throw e
+        } catch (e: Exception) {
+            Log.e("DBHelper", "Error al crear la siguiente cuota", e)
+            throw e
+        }
+    }
+/*    fun insertarCuota(
         idCliente: Int,
         monto: Double,
         modoPago: String,
@@ -575,9 +649,9 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         values.put("CantCuotas", cantCuotas)
         values.put("UltDigitosTarj", ultDigitosTarj)
         db.insert("cuotas", null, values)
-    }
+    }*/
 
-    //Listado de cuotas
+/*    //Listado de cuotas
     fun obtenerCuotas(): List<Cuotas> {
         val db = readableDatabase
         val lista = mutableListOf<Cuotas>()
@@ -601,7 +675,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         }
         cursor.close()
         return lista
-    }
+    }*/
 
     //Pago no socios
     fun insertarPagoActividad(
