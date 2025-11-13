@@ -24,7 +24,6 @@ class PagoNoSocioActivity : BaseActivity() {
     private lateinit var dbHelper: DBHelper
     private var listaDeActividadesDB: List<Actividad> = listOf() // Va a guardar las actividades ingresadas en la DB
     private var listaNoSociosDB: List<Cliente> = listOf() // Guarda los NO SOCIOS de la DB
-    //private lateinit var spinnerCliente: Spinner
     private lateinit var spinnerActividad: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {

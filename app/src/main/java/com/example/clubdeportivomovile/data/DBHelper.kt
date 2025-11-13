@@ -49,12 +49,12 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         db.execSQL(
             """
         INSERT INTO actividades (Nombre, DiaSemana, Hora, Monto) VALUES
-            ('Natación', 'Lunes', '11:00:00', 5000.00),
-            ('Pilates', 'Lunes', '18:00:00', 8000.00),
-            ('Tenis', 'Miércoles', '18:00:00', 10000.00),
-            ('Musculación', 'Martes', '19:00:00', 5000.00),
-            ('Yoga', 'Lunes', '16:00:00', 5000.00),
-            ('Aerobic', 'Martes', '18:00:00', 5000.00)
+            ('Natación', 'Lunes', '11:00', 5000.00),
+            ('Pilates', 'Lunes', '18:00', 8000.00),
+            ('Tenis', 'Miércoles', '18:00', 10000.00),
+            ('Musculación', 'Martes', '19:00', 5000.00),
+            ('Yoga', 'Lunes', '16:00', 5000.00),
+            ('Aerobic', 'Martes', '18:00', 5000.00)
         """.trimIndent()
         )
 
@@ -128,7 +128,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
                     "idCliente INTEGER NOT NULL, " +
                     "idActividad INTEGER NOT NULL, " +
                     "FechaPago TEXT NOT NULL, " +
-                    //"ModoPago TEXT NOT NULL CHECK (ModoPago IN ('Efectivo','Tarjeta')) DEFAULT 'Efectivo', " +
                     "Monto REAL NOT NULL, " +
                     "Estado TEXT NOT NULL CHECK (Estado IN ('Pagada','Pendiente')) DEFAULT 'Pendiente', " +
                     "FOREIGN KEY (idCliente) REFERENCES clientes(id) ON DELETE CASCADE, " +
@@ -184,17 +183,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         )
     }
 
-   /* override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS clientes")
-        db.execSQL("DROP TABLE IF EXISTS actividades")
-        db.execSQL("DROP TABLE IF EXISTS usuarios")
-        db.execSQL("DROP TABLE IF EXISTS roles")
-        db.execSQL("DROP TABLE IF EXISTS socios")
-        db.execSQL("DROP TABLE IF EXISTS nosocios")
-        db.execSQL("DROP TABLE IF EXISTS cuotas")
-        db.execSQL("DROP TABLE IF EXISTS pago_actividad")
-        onCreate(db)
-    }*/
    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
        // Desactivar foreign keys durante el DROP
        db.execSQL("PRAGMA foreign_keys=OFF")
@@ -530,7 +518,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         if (cursor.moveToFirst()) {
             do {
                 try {
-                    // (IdCuota, idCliente, Monto, ModoPago, Estado, FechaPago, FechaVencimiento, CantCuotas, UltDigitosTarj)
 
                     val idCuota = cursor.getInt(cursor.getColumnIndexOrThrow("IdCuota"))
                     val idClienteDB = cursor.getInt(cursor.getColumnIndexOrThrow("idCliente"))
@@ -628,54 +615,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
             throw e
         }
     }
-/*    fun insertarCuota(
-        idCliente: Int,
-        monto: Double,
-        modoPago: String,
-        estado: String,
-        fechaPago: String,
-        fechaVencto: String,
-        cantCuotas: String,
-        ultDigitosTarj: String
-    ) {
-        val db = writableDatabase
-        val values = ContentValues()
-        values.put("idCliente", idCliente)
-        values.put("Monto", monto)
-        values.put("ModoPago", modoPago)
-        values.put("Estado", estado)
-        values.put("FechaPago", fechaPago)
-        values.put("FechaVencimiento", fechaVencto)
-        values.put("CantCuotas", cantCuotas)
-        values.put("UltDigitosTarj", ultDigitosTarj)
-        db.insert("cuotas", null, values)
-    }*/
-
-/*    //Listado de cuotas
-    fun obtenerCuotas(): List<Cuotas> {
-        val db = readableDatabase
-        val lista = mutableListOf<Cuotas>()
-        val cursor = db.rawQuery("SELECT * FROM cuotas", null)
-        if (cursor.moveToFirst()) {
-            do {
-                lista.add(
-                    Cuotas(
-                        cursor.getInt(0),
-                        cursor.getInt(1),
-                        cursor.getDouble(2),
-                        cursor.getString(3),
-                        cursor.getString(4),
-                        cursor.getString(5),
-                        cursor.getString(6),
-                        cursor.getInt(7),
-                        cursor.getInt(8)
-                    )
-                )
-            } while (cursor.moveToNext())
-        }
-        cursor.close()
-        return lista
-    }*/
 
     //Pago no socios
     fun insertarPagoActividad(
@@ -697,29 +636,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         db.insert("pago_actividad", null, values)
     }
 
-/*    //Listado de pagos actividad
-    fun obtenerPagoActividad(): List<PagoActividad> {
-        val db = readableDatabase
-        val lista = mutableListOf<PagoActividad>()
-        val cursor = db.rawQuery("SELECT * FROM pago_actividad", null)
-        if (cursor.moveToFirst()) {
-            do {
-                lista.add(
-                    PagoActividad(
-                        cursor.getInt(0),
-                        cursor.getInt(1),
-                        cursor.getInt(2),
-                        cursor.getString(3),
-                        cursor.getDouble(4),
-                        cursor.getString(5),
-                        //cursor.getString(6)
-                    )
-                )
-            } while (cursor.moveToNext())
-        }
-        cursor.close()
-        return lista
-    }*/
 
     //Listado Actividades Registro Pago NO socio
     @SuppressLint("Range")
