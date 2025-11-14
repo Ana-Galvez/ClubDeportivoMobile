@@ -25,6 +25,8 @@ class PagoNoSocioActivity : BaseActivity() {
     private var listaDeActividadesDB: List<Actividad> = listOf() // Va a guardar las actividades ingresadas en la DB
     private var listaNoSociosDB: List<Cliente> = listOf() // Guarda los NO SOCIOS de la DB
     private lateinit var spinnerActividad: Spinner
+    private var vieneConClienteSeleccionado = false
+    private var nombreClienteBloqueado: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,13 +61,18 @@ class PagoNoSocioActivity : BaseActivity() {
         val clienteSeleccionado = intent.getStringExtra("clienteSeleccionado")
 
         if (clienteSeleccionado != null) {
+            vieneConClienteSeleccionado = true
+            nombreClienteBloqueado = clienteSeleccionado
+
             val posicion = nombresClientesSpinner.indexOf(clienteSeleccionado)
-            if(posicion >=0){
+            if (posicion >= 0) {
                 spinnerCliente.setSelection(posicion)
                 spinnerCliente.isEnabled = false
-            }else {
-                spinnerCliente.setSelection(0) // Mostrar "Seleccionar cliente..."
+
             }
+        } else {
+            spinnerCliente.setSelection(0)
+            spinnerCliente.isEnabled = true
         }
 
         //actividades
@@ -266,9 +273,13 @@ class PagoNoSocioActivity : BaseActivity() {
 
         botonLimpiar.setOnClickListener {
             val rootLayout = findViewById<ViewGroup>(R.id.content_Layout)
+            if (vieneConClienteSeleccionado) {
+                limpiarFormulario(rootLayout, spinnerCliente)  // NO limpiar el cliente
+            }else{
             limpiarFormulario(rootLayout)
             spinnerCliente.setSelection(0)
             spinnerActividad.setSelection(0)
+        }
         }
 
         //activo botones barra
