@@ -67,8 +67,13 @@ class Login : AppCompatActivity() {
 
             // Login exitoso
             Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+            val sharedPref = getSharedPreferences("login_prefs", MODE_PRIVATE)
+            with(sharedPref.edit()) {
+                putString("usuario", usuario)
+                apply()
+            }
+
             val intent = Intent(this, Home::class.java)
-            intent.putExtra("usuario", usuario)
             startActivity(intent)
             finish()
         }

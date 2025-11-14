@@ -47,9 +47,11 @@ class Home : BaseActivity() {
         })
 
         //Manejo del nombre del usuario
-        val tvBienvenida : TextView = findViewById(R.id.tvBienvenida)
-        val usuario = intent.getStringExtra("usuario") ?: "Usuario"
+        val tvBienvenida: TextView = findViewById(R.id.tvBienvenida)
+        val sharedPref = getSharedPreferences("login_prefs", MODE_PRIVATE)
+        val usuario = sharedPref.getString("usuario", "Usuario")
         tvBienvenida.text = "¡Hola $usuario!"
+
 
         // Navegación de los botones
 
