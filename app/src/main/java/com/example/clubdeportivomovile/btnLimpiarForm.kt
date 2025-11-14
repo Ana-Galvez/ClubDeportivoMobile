@@ -1,11 +1,15 @@
 package com.example.clubdeportivomovile
 
+import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 
-fun limpiarFormulario(viewGroup: ViewGroup) {
+fun limpiarFormulario(viewGroup: ViewGroup, campoNoLimpiar: View? = null) {
     for (i in 0 until viewGroup.childCount) {
         val child = viewGroup.getChildAt(i)
+
+        if (child == campoNoLimpiar) continue
+
         when (child) {
             is EditText -> child.text.clear()
             is TextView -> {
@@ -18,7 +22,8 @@ fun limpiarFormulario(viewGroup: ViewGroup) {
             is Spinner -> child.setSelection(0)
             is AutoCompleteTextView -> child.setText("", false)
             is RadioGroup -> child.clearCheck()
-            is ViewGroup -> limpiarFormulario(child)
+            is ViewGroup -> limpiarFormulario(child, campoNoLimpiar)
         }
     }
 }
+
