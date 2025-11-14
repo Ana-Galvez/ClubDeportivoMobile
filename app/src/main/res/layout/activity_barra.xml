@@ -167,7 +167,4 @@
             android:fontFamily="sans-serif"
             android:layout_marginTop="2dp"/>
     </LinearLayout>
-
-
-
 </LinearLayout>

@@ -10,12 +10,11 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.clubdeportivomovile.data.DBHelper
 
-
 class Home : BaseActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var drawerContainer: android.view.View
-    val dbHelper = DBHelper(this)
+    private val dbHelper by lazy { DBHelper(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +24,6 @@ class Home : BaseActivity() {
 
         drawerLayout = findViewById(R.id.drawer_layout)
         setupDrawerMenu(R.id.drawer_layout) ///********** agregue para fc del menu ---va el id como parametro
-
         drawerContainer = findViewById(R.id.drawerContainer)
 
         val menuIcon: ImageView? = findViewById(R.id.img_menu_hamburguesa)
@@ -46,23 +44,20 @@ class Home : BaseActivity() {
             }
         })
 
-        //Manejo del nombre del usuario
+        // Mostrar nombre del usuario
         val tvBienvenida: TextView = findViewById(R.id.tvBienvenida)
         val sharedPref = getSharedPreferences("login_prefs", MODE_PRIVATE)
-        val usuario = sharedPref.getString("usuario", "Usuario")
-        tvBienvenida.text = "¡Hola $usuario!"
-
+        val usuarioActual = sharedPref.getString("usuario", "Usuario") ?: "Usuario"
+        tvBienvenida.text = "¡Hola $usuarioActual!"
 
         // Navegación de los botones
-
-        findViewById<LinearLayout>(R.id.btnRegistrarCliente)?.setOnClickListener{
+        findViewById<LinearLayout>(R.id.btnRegistrarCliente)?.setOnClickListener {
             val dialog = AptoFisico()
             dialog.show(supportFragmentManager, "AptoDialog")
-
         }
 
-        findViewById<LinearLayout>(R.id.btnListadoClientes)?.setOnClickListener{
-            val intent= Intent(this,ListadoDeClientes::class.java)
+        findViewById<LinearLayout>(R.id.btnListadoClientes)?.setOnClickListener {
+            val intent = Intent(this, ListadoDeClientes::class.java)
             startActivity(intent)
         }
 
@@ -71,10 +66,8 @@ class Home : BaseActivity() {
             dialog.show(supportFragmentManager, "SocioDialog")
         }
 
-        // Restringuir el acceso
+        // Restricción de acceso: solo Ana (rol 120)
         findViewById<LinearLayout>(R.id.btnSociosMorosos)?.setOnClickListener {
-            val dbHelper = DBHelper(this)
-            val usuarioActual = intent.getStringExtra("usuario") ?: ""
             val rol = dbHelper.obtenerRolUsuario(usuarioActual)
 
             if (rol == 120) {
