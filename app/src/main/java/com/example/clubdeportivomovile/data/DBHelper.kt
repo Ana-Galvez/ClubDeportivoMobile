@@ -77,6 +77,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
             "CREATE TABLE usuarios(" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "Nombre TEXT NOT NULL, " +
+                    "Apellido TEXT NOT NULL," +
                     "Pass TEXT NOT NULL, " +
                     "RolUsu INTEGER NOT NULL, " +
                     "Activo INTEGER NOT NULL," +
@@ -86,10 +87,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         // Ingreso los datos establecidos por el sistema
         db.execSQL(
             """
-        INSERT INTO usuarios (Nombre, Pass, RolUsu, Activo) VALUES
-            ('Ana', '123456', 120, 1),
-            ('Maria', '123456', 120, 0),
-            ('Jack', '654321', 121, 1);
+        INSERT INTO usuarios (Nombre, Apellido, Pass, RolUsu, Activo) VALUES
+            ('Ana', 'Ross', '123456', 120, 1),
+            ('Maria', 'Stella', '123456', 120, 0),
+            ('Jack', 'Marin', '654321', 121, 1);
         """.trimIndent()
         )
 
@@ -274,6 +275,19 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
             Log.e("DBHelper", "Error al crear la primera cuota del cliente con ID $idCliente : ${e.message}")
         }
     }
+
+    fun obtenerIdPorDni(dni: Int): Int {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT id FROM clientes WHERE DNI = ?", arrayOf(dni.toString()))
+        var id = -1
+        if (cursor.moveToFirst()) {
+            id = cursor.getInt(0)
+        }
+        cursor.close()
+        return id
+    }
+
+
 
     //Listado de clientes
     fun obtenerClientes(): List<Cliente> {

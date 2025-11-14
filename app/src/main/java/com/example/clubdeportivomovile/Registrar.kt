@@ -10,11 +10,13 @@ import android.widget.*
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.clubdeportivomovile.limpiarFormulario
 import android.app.DatePickerDialog
+import com.example.clubdeportivomovile.data.DBHelper
 import java.util.Calendar
 
 class Registrar : BaseActivity() {
     private lateinit var drawerLayout: DrawerLayout
 
+    private val db by lazy { DBHelper(this) }
     private fun validarFechaNacNoFutura(fecha: String): String? {
         // Devuelve un String con el mensaje de error, o null si está OK
         return try {
@@ -74,16 +76,16 @@ class Registrar : BaseActivity() {
             val mes = calendario.get(Calendar.MONTH)
             val dia = calendario.get(Calendar.DAY_OF_MONTH)
 
-        val datePicker = DatePickerDialog(
-            this,
-            { _, year, month, dayOfMonth ->
-                // Cuando el usuario selecciona la fecha:
-                val fechaSeleccionada = "%02d/%02d/%04d".format(dayOfMonth, month + 1, year)
-                tvFechaNac.text = fechaSeleccionada
-            },
-            anio, mes, dia
-        )
-        datePicker.show()
+            val datePicker = DatePickerDialog(
+                this,
+                { _, year, month, dayOfMonth ->
+                    // Cuando el usuario selecciona la fecha:
+                    val fechaSeleccionada = "%02d/%02d/%04d".format(dayOfMonth, month + 1, year)
+                    tvFechaNac.text = fechaSeleccionada
+                },
+                anio, mes, dia
+            )
+            datePicker.show()
         }
 
         botonAceptar.setOnClickListener {
@@ -118,10 +120,8 @@ class Registrar : BaseActivity() {
                     val nombreCompleto = "$nombre $apellido"
                     val dniInt = dni.toIntOrNull() ?: 0
                     val esSocio = if (rgSocio.checkedRadioButtonId == R.id.rbSocioSi) 1 else 0
-
-                    // Generar ID temporal (cambiarlo por base de datos)
-                    val idGenerado = (1000..9999).random()
-
+                    val rbGenero = findViewById<RadioButton>(generoSeleccionado)
+                    val generoTexto = rbGenero.text.toString()
                     val calendario = Calendar.getInstance()
                     val fechaInscripcion = "%02d/%02d/%04d".format(
                         calendario.get(Calendar.DAY_OF_MONTH),
@@ -129,11 +129,27 @@ class Registrar : BaseActivity() {
                         calendario.get(Calendar.YEAR)
                     )
 
+                    val db = DBHelper(this)
+                    db.insertarCliente(
+                        nombre,
+                        apellido,
+                        fechaNac,
+                        dniInt,
+                        generoTexto,
+                        direccion,
+                        telefono,
+                        fechaInscripcion,
+                        true,
+                        socioSeleccionado == R.id.rbSocioSi
+                    )
+
+                    val idClienteReal = db.obtenerIdPorDni(dniInt)
+
                     val intent = Intent(this, CarnetActivity::class.java).apply {
-                        putExtra("nombreCompleto", nombreCompleto)
-                        putExtra("id", idGenerado)
+                        putExtra("nombreCompleto", "$nombre $apellido")
+                        putExtra("id", idClienteReal)  // ID REAL, NO RANDOM
                         putExtra("dni", dniInt)
-                        putExtra("socio", esSocio)
+                        putExtra("socio", if (socioSeleccionado == R.id.rbSocioSi) 1 else 0)
                         putExtra("direccion", direccion)
                         putExtra("telefono", telefono)
                         putExtra("fechaInscripcion", fechaInscripcion)
