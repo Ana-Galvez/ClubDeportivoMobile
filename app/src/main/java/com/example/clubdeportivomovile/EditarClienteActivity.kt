@@ -154,6 +154,16 @@ class EditarClienteActivity : BaseActivity() {
             val generoSeleccionado = rbg.checkedRadioButtonId
             val socioSeleccionado = rgSocio.checkedRadioButtonId
 
+            //Verificación en DB si ya existe el DNI que se desea cambiar(caso raro, pero por si las dudas)
+            val dbHelper = DBHelper(this)
+            val dniEditado = dniString.toIntOrNull()
+            val idEncontrado = if (dniEditado != null) {
+                dbHelper.obtenerIdPorDni(dniEditado)
+            } else {
+                -1
+            }
+            val esDniDuplicado = (idEncontrado != -1) && (idEncontrado != id)
+
             // Verificar si hubo cambios
             val generoActual = when {
                 rbF.isChecked -> "F"
@@ -189,6 +199,8 @@ class EditarClienteActivity : BaseActivity() {
                 errorFecha != null -> Toast.makeText(this, errorFecha, Toast.LENGTH_SHORT).show()
                 dniString.isEmpty() -> Toast.makeText(this, "Ingrese el DNI", Toast.LENGTH_SHORT).show()
                 dniString.length < 7 -> Toast.makeText(this, "El DNI debe tener al menos 7 dígitos", Toast.LENGTH_SHORT).show()
+                dniEditado == null -> Toast.makeText(this, "El DNI debe ser un número válido", Toast.LENGTH_SHORT).show()
+                esDniDuplicado -> Toast.makeText(this, "El DNI ingresado ya pertenece a otro cliente", Toast.LENGTH_SHORT).show()
                 direccion.isEmpty() -> Toast.makeText(this, "Ingrese la dirección", Toast.LENGTH_SHORT).show()
                 telefono.isEmpty() -> Toast.makeText(this, "Ingrese el teléfono", Toast.LENGTH_SHORT).show()
                 !telefono.matches(Regex("^[0-9]{8,15}$")) -> Toast.makeText(this, "Teléfono inválido", Toast.LENGTH_SHORT).show()
@@ -196,10 +208,8 @@ class EditarClienteActivity : BaseActivity() {
                 socioSeleccionado == -1 -> Toast.makeText(this, "Seleccione tipo de socio", Toast.LENGTH_SHORT).show()
                 else -> {
                     //Envio datos a la DB
-                    val dniEditado = dniString.toIntOrNull()!!
                     val socioEditado = if (rbSocioSi.isChecked) 1 else 0
                     val aptoFisico = 1
-                    val dbHelper = DBHelper(this)
                     // Detecta cambio de NO socio → socio
                     val pasaANuevoSocio = !socioOriginal && socioActual
 
