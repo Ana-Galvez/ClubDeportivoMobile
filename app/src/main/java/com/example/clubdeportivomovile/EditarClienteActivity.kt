@@ -195,7 +195,6 @@ class EditarClienteActivity : BaseActivity() {
                 generoSeleccionado == -1 -> Toast.makeText(this, "Seleccione un género", Toast.LENGTH_SHORT).show()
                 socioSeleccionado == -1 -> Toast.makeText(this, "Seleccione tipo de socio", Toast.LENGTH_SHORT).show()
                 else -> {
-                    Toast.makeText(this, "Datos validados correctamente", Toast.LENGTH_SHORT).show()
                     //Envio datos a la DB
                     val dniEditado = dniString.toIntOrNull()!!
                     val socioEditado = if (rbSocioSi.isChecked) 1 else 0
@@ -216,6 +215,7 @@ class EditarClienteActivity : BaseActivity() {
                             return@setOnClickListener
                         }
                     }
+                    Toast.makeText(this, "Datos validados correctamente", Toast.LENGTH_SHORT).show()
                     val actualizado = dbHelper.actualizarCliente(
                         idCliente = id,
                         nombre = nombre,
