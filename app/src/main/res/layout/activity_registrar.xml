@@ -188,7 +188,7 @@
                             android:layoutDirection="rtl"
                             android:lines="2"
                             android:singleLine="false"
-                            android:text="Prefiero\nno decirlo"
+                            android:text="Prefiero no decirlo"
                             android:textColor="@color/textPrimary"
                             android:textSize="14sp" />
                     </RadioGroup>

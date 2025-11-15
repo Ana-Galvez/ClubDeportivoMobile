@@ -10,6 +10,7 @@ import android.widget.*
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.clubdeportivomovile.limpiarFormulario
 import android.app.DatePickerDialog
+import android.util.Log
 import com.example.clubdeportivomovile.data.DBHelper
 import java.util.Calendar
 
@@ -186,7 +187,7 @@ class Registrar : BaseActivity() {
                         putExtra("telefono", telefono)
                         putExtra("fechaInscripcion", fechaInscripcion)
                     }
-
+                    Log.d("Registro", "ID idClienteReal $idClienteReal")
                     startActivity(intent)
                 }
             }
