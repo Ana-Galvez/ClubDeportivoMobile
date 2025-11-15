@@ -201,6 +201,21 @@ class EditarClienteActivity : BaseActivity() {
                     val socioEditado = if (rbSocioSi.isChecked) 1 else 0
                     val aptoFisico = 1
                     val dbHelper = DBHelper(this)
+                    // Detecta cambio de NO socio → socio
+                    val pasaANuevoSocio = !socioOriginal && socioActual
+
+                    // Detecta cambio de socio a NO socio
+                    val pasaANoSocio = socioOriginal && !socioActual
+
+                    // Si quiere cambiar a NO socio pero tiene cuotas pendientes, no se puede
+                    if (pasaANoSocio) {
+                        val tieneDeudas = dbHelper.verificarCuotasPendientes(id)
+
+                        if (tieneDeudas) {
+                            Toast.makeText(this, "No puede pasar a NO socio: tiene cuotas pendientes", Toast.LENGTH_LONG).show()
+                            return@setOnClickListener
+                        }
+                    }
                     val actualizado = dbHelper.actualizarCliente(
                         idCliente = id,
                         nombre = nombre,
@@ -215,6 +230,12 @@ class EditarClienteActivity : BaseActivity() {
                         socio = socioEditado
                     )
                     if (actualizado) {
+                        if (pasaANuevoSocio) {
+                            val db = dbHelper.writableDatabase
+                            dbHelper.crearPrimerCuota(db, id.toLong(), monto = 8000.0)
+                            db.close()
+                            Toast.makeText(this, "Cliente ahora es socio. Primera cuota generada.", Toast.LENGTH_LONG).show()
+                        }
                         Toast.makeText(this, "Cliente actualizado correctamente", Toast.LENGTH_SHORT).show()
                         // Paso los datos al carnet
                         val intent = Intent(this, CarnetActivity::class.java)
