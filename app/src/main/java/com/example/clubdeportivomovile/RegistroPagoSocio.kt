@@ -282,7 +282,11 @@ class RegistroPagoSocio : BaseActivity() {
                     return null
                 }
                 if (numTarjeta.isEmpty()) {
-                    Toast.makeText(this, "Debe ingresar el número de tarjeta.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Debe ingresar los 16 números de la tarjeta .", Toast.LENGTH_SHORT).show()
+                    return null
+                }
+                if (numTarjeta.length < 16) {
+                    Toast.makeText(this, "Debe ingresar los 16 números de la tarjeta.", Toast.LENGTH_SHORT).show()
                     return null
                 }
             }
