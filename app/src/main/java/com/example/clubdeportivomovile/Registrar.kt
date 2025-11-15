@@ -128,6 +128,14 @@ class Registrar : BaseActivity() {
             val generoSeleccionado = rbg.checkedRadioButtonId
             val socioSeleccionado = rgSocio.checkedRadioButtonId
 
+            //Verificación si ya en la DB existe el DNI
+            val dniInt = dni.toIntOrNull() // Se convierte para hacer validación si ya existe el dni
+            val idExistente = if (dniInt != null) {
+                db.obtenerIdPorDni(dniInt)
+            } else {
+                -1
+            }
+
             val errorFecha = if (fechaNac.isNotEmpty() && fechaNac != "DD/MM/YYYY")
                 validarFechaNacNoFutura(fechaNac)
             else null
@@ -142,6 +150,8 @@ class Registrar : BaseActivity() {
                 errorEdad != null -> Toast.makeText(this, errorEdad, Toast.LENGTH_SHORT).show()
                 dni.isEmpty() -> Toast.makeText(this, "Ingrese el DNI", Toast.LENGTH_SHORT).show()
                 dni.length < 7 -> Toast.makeText(this, "El DNI debe tener al menos 7 dígitos", Toast.LENGTH_SHORT).show()
+                dniInt == null -> Toast.makeText(this, "El DNI debe ser un número válido", Toast.LENGTH_SHORT).show()
+                idExistente != -1 -> Toast.makeText(this, "Ya existe un cliente con ese DNI", Toast.LENGTH_SHORT).show()
                 direccion.isEmpty() -> Toast.makeText(this, "Ingrese la dirección", Toast.LENGTH_SHORT).show()
                 telefono.isEmpty() -> Toast.makeText(this, "Ingrese el teléfono", Toast.LENGTH_SHORT).show()
                 !telefono.matches(Regex("^[0-9]{8,15}$")) -> Toast.makeText(this, "Teléfono inválido", Toast.LENGTH_SHORT).show()
@@ -151,7 +161,6 @@ class Registrar : BaseActivity() {
                     Toast.makeText(this, "Datos validados correctamente", Toast.LENGTH_SHORT).show()
 
                     val nombreCompleto = "$nombre $apellido"
-                    val dniInt = dni.toIntOrNull() ?: 0
                     val esSocio = if (rgSocio.checkedRadioButtonId == R.id.rbSocioSi) 1 else 0
                     val rbGenero = findViewById<RadioButton>(generoSeleccionado)
                     val generoTexto = rbGenero.text.toString()
