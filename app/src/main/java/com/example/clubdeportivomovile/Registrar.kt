@@ -44,6 +44,35 @@ class Registrar : BaseActivity() {
         }
     }
 
+    // Validar edad mínima (+18)
+    private fun validarEdadMinima(fecha: String, edadMinima: Int): String? {
+        return try {
+            val partes = fecha.split("/")
+            if (partes.size != 3) return "Fecha de nacimiento inválida"
+
+            val dia = partes[0].toInt()
+            val mes = partes[1].toInt() - 1
+            val anio = partes[2].toInt()
+
+            val fechaNac = Calendar.getInstance().apply { set(anio, mes, dia) }
+            val hoy = Calendar.getInstance()
+
+            var edad = hoy.get(Calendar.YEAR) - fechaNac.get(Calendar.YEAR)
+
+            if (hoy.get(Calendar.MONTH) < fechaNac.get(Calendar.MONTH) ||
+                (hoy.get(Calendar.MONTH) == fechaNac.get(Calendar.MONTH) &&
+                        hoy.get(Calendar.DAY_OF_MONTH) < fechaNac.get(Calendar.DAY_OF_MONTH))
+            ) {
+                edad--
+            }
+
+            if (edad < edadMinima) "Debe ser mayor de $edadMinima años" else null
+
+        } catch (e: Exception) {
+            "Fecha de nacimiento inválida"
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrar)
@@ -102,11 +131,14 @@ class Registrar : BaseActivity() {
                 validarFechaNacNoFutura(fechaNac)
             else null
 
+            val errorEdad = validarEdadMinima(fechaNac, 18)
+
             when {
                 nombre.isEmpty() -> Toast.makeText(this, "Ingrese el nombre", Toast.LENGTH_SHORT).show()
                 apellido.isEmpty() -> Toast.makeText(this, "Ingrese el apellido", Toast.LENGTH_SHORT).show()
                 fechaNac.isEmpty() || fechaNac == "DD/MM/YYYY" -> Toast.makeText(this, "Seleccione la fecha de nacimiento", Toast.LENGTH_SHORT).show()
                 errorFecha != null -> Toast.makeText(this, errorFecha, Toast.LENGTH_SHORT).show()
+                errorEdad != null -> Toast.makeText(this, errorEdad, Toast.LENGTH_SHORT).show()
                 dni.isEmpty() -> Toast.makeText(this, "Ingrese el DNI", Toast.LENGTH_SHORT).show()
                 dni.length < 7 -> Toast.makeText(this, "El DNI debe tener al menos 7 dígitos", Toast.LENGTH_SHORT).show()
                 direccion.isEmpty() -> Toast.makeText(this, "Ingrese la dirección", Toast.LENGTH_SHORT).show()
