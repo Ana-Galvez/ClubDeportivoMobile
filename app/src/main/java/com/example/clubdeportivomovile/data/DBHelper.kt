@@ -142,7 +142,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
         )
         db.execSQL(
             "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
-                    "VALUES ('Lorena', 'Lolenita', '2000-11-20', 43654321, 'M', 'Av Siempreviva 742', '05550002', '2024-02-20', 1, 0)"
+                    "VALUES ('Lorena', 'Riorson', '2000-11-20', 43654321, 'M', 'Av Siempreviva 742', '05550002', '2024-02-20', 1, 0)"
         )
         db.execSQL(
             "INSERT INTO clientes (Nombre, Apellido, FechaNacimiento, DNI, Genero, Direccion, Telefono, FechaInscripcion, AptoFisico, Socio) " +
@@ -167,7 +167,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "SportifyClub.db", 
 
         db.execSQL(
             "INSERT INTO cuotas (idCliente, monto, ModoPago, Estado, FechaPago, FechaVencimiento, CantCuotas, UltDigitosTarj) " +
-                    "VALUES (1, 5000, 'Tarjeta', 'Pagada', '2024-03-01', '2024-03-10', 3, 4567)"
+                    "VALUES (1, 5000, 'Tarjeta', 'Pendiente', null, '2024-03-10', 3, 4567)"
         )
         // Cuota Pendiente en Efectivo
         db.execSQL(
