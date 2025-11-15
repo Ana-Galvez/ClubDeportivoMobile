@@ -37,7 +37,6 @@ abstract class BaseActivity : AppCompatActivity() {
         findViewById<LinearLayout>(R.id.llInicio)?.setOnClickListener {
             if (this !is Home) {
                 startActivity(Intent(this, Home::class.java))
-                finish()
             }
         }
         //nuevo
@@ -51,7 +50,6 @@ abstract class BaseActivity : AppCompatActivity() {
         findViewById<LinearLayout>(R.id.llClientes)?.setOnClickListener {
             if (this !is ListadoDeClientes) {
                 startActivity(Intent(this, ListadoDeClientes::class.java))
-                finish()
             }
         }
         //pagos
@@ -60,11 +58,10 @@ abstract class BaseActivity : AppCompatActivity() {
             dialog.show(supportFragmentManager, "SocioDialog")
         }
 
-        //Lista de morososo o vencimientos
+        //Lista de morosos o vencimientos
         findViewById<LinearLayout>(R.id.llMorosos)?.setOnClickListener {
             if (this !is MorososActivity) {
                 startActivity(Intent(this, MorososActivity::class.java))
-                finish()
             }
         }
 
@@ -79,23 +76,52 @@ abstract class BaseActivity : AppCompatActivity() {
         when (current) {
             "inicio" -> {
                 findViewById<ImageView>(R.id.ivInicio)?.setImageResource(R.drawable.img_inicio_blanco)
-                findViewById<TextView>(R.id.tvInicio)?.setTextColor(ContextCompat.getColor(this, R.color.white))
+                findViewById<TextView>(R.id.tvInicio)?.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
             }
+
             "nuevo" -> {
                 findViewById<ImageView>(R.id.ivNuevo)?.setImageResource(R.drawable.img_nuevo_blanco)
-                findViewById<TextView>(R.id.tvNuevo)?.setTextColor(ContextCompat.getColor(this, R.color.white))
+                findViewById<TextView>(R.id.tvNuevo)?.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
             }
+
             "clientes" -> {
                 findViewById<ImageView>(R.id.ivClientes)?.setImageResource(R.drawable.img_clientes_blanco)
-                findViewById<TextView>(R.id.tvClientes)?.setTextColor(ContextCompat.getColor(this, R.color.white))
+                findViewById<TextView>(R.id.tvClientes)?.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
             }
+
             "pagos" -> {
                 findViewById<ImageView>(R.id.ivPagos)?.setImageResource(R.drawable.img_pagos_blanco)
-                findViewById<TextView>(R.id.tvPagos)?.setTextColor(ContextCompat.getColor(this, R.color.white))
+                findViewById<TextView>(R.id.tvPagos)?.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
             }
+
             "morosos" -> {
                 findViewById<ImageView>(R.id.ivMorosos)?.setImageResource(R.drawable.img_morosos_blanco)
-                findViewById<TextView>(R.id.tvMorosos)?.setTextColor(ContextCompat.getColor(this, R.color.white))
+                findViewById<TextView>(R.id.tvMorosos)?.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
             }
         }
 
@@ -105,11 +131,6 @@ abstract class BaseActivity : AppCompatActivity() {
     // drawerId: nombre del Drawer de nuestra pantalla
     protected fun setupDrawerMenu(drawerId: Int) {
         val drawer = findViewById<DrawerLayout?>(drawerId)
-
-        // Inicio
-        //findViewById<TextView?>(R.id.txtInicio)?.setOnClickListener {
-        //    drawer?.closeDrawer(GravityCompat.START)
-        //}
 
         // App físico -> Sitio en Construcción
         findViewById<TextView?>(R.id.txtAppFisico)?.setOnClickListener {
